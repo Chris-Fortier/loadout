@@ -1,0 +1,22 @@
+.red {
+   background-color: red;
+}
+
+.green {
+   background-color: green;
+}
+
+.blue {
+   background-color: blue;
+}
+
+.cyan {
+   background-color: cyan;
+}
+
+.background-image {
+   /* https://css-tricks.com/perfect-full-page-background-image/ */
+   background: url("../img/mt-charleston.jpg") no-repeat center center fixed;
+   background-size: cover;
+   min-height: 100vh;
+}

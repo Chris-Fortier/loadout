@@ -9,9 +9,7 @@ export default function Header() {
             <Link to="/" className="btn btn-link ml-1">
                Loadout
             </Link>
-            <Link to="/" className="btn btn-link float-right">
-               Account
-            </Link>
+            <button className="btn btn-link float-right">Account</button>
          </div>
       </div>
    );

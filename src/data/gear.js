@@ -43,7 +43,14 @@ export const gear = [
          { name: "disposable rain gear", packed: true }, // disposable rain gear
          { name: "ziplock bags", packed: true }, // ziplock bags
          { name: "grocery bags", packed: true }, // grocery bags
-         { name: "first aid kit", packed: true }, // first aid kit
+         {
+            name: "first aid kit",
+            packed: false,
+            items: [
+               { name: "band-aids", packed: false },
+               { name: "moleskin", packed: true },
+            ],
+         }, // first aid kit
          { name: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool
          { name: "flashlight/lighter tool", packed: false }, // flashlight/lighter tool
          { name: "USB cable", packed: true }, // USB cable
@@ -195,5 +202,10 @@ export const gear = [
          { name: "mallet", packed: false }, // mallet
          { name: "water jugs", packed: false }, // water jugs
       ],
+   },
+
+   {
+      name: "Heavy jacket",
+      packed: false,
    },
 ];

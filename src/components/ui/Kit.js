@@ -33,7 +33,7 @@ export default class Kit extends React.Component {
 
    // renders a component for every item for a kit (give it the kit object as kitData)
    renderContainingItems(kitData) {
-      console.log("amount of items", kitData.items.length);
+      // console.log("amount of items", kitData.items.length);
 
       var displayedItems = []; // initialize a new list for displayed items
 
@@ -45,12 +45,17 @@ export default class Kit extends React.Component {
       }
 
       // hide packed items if desired
-      console.log("showPackedItems", this.state.showPackedItems);
+      // console.log("showPackedItems", this.state.showPackedItems);
       if (this.state.showPackedItems === false) {
-         console.log("hiding packed items in", kitData.name);
+         // console.log("hiding packed items in", kitData.name);
          displayedItems = displayedItems.filter(
             (item) => item.packed === false
          ); // keep only the unpacked items
+      }
+
+      // assign a rotating number to each item so I can give them alternating colors
+      for (let i in displayedItems) {
+         displayedItems[i].colorChoice = i % 2;
       }
 
       let output = [];
@@ -90,26 +95,31 @@ export default class Kit extends React.Component {
             </div>
          );
       }
-      for (let i in displayedItems) {
-         output.push(
-            <div className="col-12">
-               <div className="card">
-                  <div className="card-body">
-                     {displayedItems[i].name} Packed =
-                     {String(displayedItems[i].packed)}
-                  </div>
-               </div>
-            </div>
-         );
-      }
-      return output;
+
+      // render each sub item
+      output.push(
+         // <div className="card text-white bg-secondary mb-3">
+         //    <div className="card-header">
+         //       {displayedItems[i].name} Packed =
+         //       {String(displayedItems[i].packed)}
+         //    </div>
+         // </div>
+
+         displayedItems.map((kit) => {
+            // const { name, numItems, packedItems } = kit;
+            console.log("adding this kit", kit.name);
+            return <Kit key={kit.name} kitData={kit} />;
+         })
+      );
+
+      return <div className="card-body">{output}</div>;
    }
 
    // toggle the expanded state of the kit
    toggleExpanded() {
       // this.state.expanded = !this.state.expanded;
       this.setState({ expanded: !this.state.expanded });
-      console.log("toggling to", this.state.expanded);
+      // console.log("toggling to", this.state.expanded);
    }
 
    render() {
@@ -118,43 +128,84 @@ export default class Kit extends React.Component {
       // const props = this.props;
       const kitData = this.props.kitData;
 
+      let colorChoice = 2;
+
+      if (kitData.hasOwnProperty("colorChoice")) {
+         console.log(kitData.colorChoice);
+         colorChoice = kitData.colorChoice;
+      }
+
       // find the total number of items in this kit
-      const numItems = kitData.items.length;
+      if (kitData.hasOwnProperty("items")) {
+         const numItems = kitData.items.length;
 
-      // find the number of packed items by counting how many have packed set to true
-      const numPackedItems = kitData.items.reduce((numPacked, item) => {
-         if (item.packed) {
-            return (numPacked += 1);
-         } else {
-            return numPacked;
-         }
-      }, 0);
-      // console.log(
-      //    "found this many packed items in",
-      //    kitData.name,
-      //    numPackedItems
-      // );
+         // find the number of packed items by counting how many have packed set to true
+         const numPackedItems = kitData.items.reduce((numPacked, item) => {
+            if (item.packed) {
+               return (numPacked += 1);
+            } else {
+               return numPacked;
+            }
+         }, 0);
+         // console.log(
+         //    "found this many packed items in",
+         //    kitData.name,
+         //    numPackedItems
+         // );
 
-      return (
-         <div>
-            <div className="card">
-               <div className="card-body">
-                  <div className="row">
-                     <div
-                        className="col-8 btn btn-link"
-                        onClick={() => this.toggleExpanded()}
-                     >
-                        {kitData.name}
+         return (
+            <div
+               className={
+                  "card text-white mb-3 " + "color" + String(colorChoice)
+               }
+            >
+               <div
+                  className="card-header"
+                  onClick={() => this.toggleExpanded()}
+               >
+                  <div className="float-left">
+                     <div className="form-check form-check-inline">
+                        <input
+                           className="form-check-input"
+                           type="checkbox"
+                           id="packed-checkbox"
+                           value="option1"
+                           checked={kitData.packed}
+                        />
                      </div>
-                     <div className="col-4">
-                        {numPackedItems}/{numItems} Packed
-                     </div>
-                     {this.state.expanded &&
-                        this.renderContainingItems(kitData)}
+                     {kitData.name}
                   </div>
+                  <div className="float-right">
+                     {numPackedItems}/{numItems}
+                  </div>
+                  <div className="clearfix"></div>
+               </div>
+               {/* <div className="card-body"> */}
+               {this.state.expanded && this.renderContainingItems(kitData)}
+               {/* </div> */}
+            </div>
+         );
+      } else {
+         return (
+            <div
+               className={
+                  "card text-white mb-3 " + "color" + String(colorChoice)
+               }
+            >
+               <div className="card-header">
+                  <div class="form-check form-check-inline">
+                     <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="packed-checkbox"
+                        value="option1"
+                        checked={kitData.packed}
+                     />
+                  </div>
+                  {kitData.name}
                </div>
             </div>
-         </div>
-      );
+         );
+      }
    }
 }

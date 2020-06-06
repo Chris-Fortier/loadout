@@ -1,8 +1,8 @@
 export const gear = [
    {
       kitName: "Camera Bag",
-      numItems: 12,
-      packedItems: 4,
+      // numItems: 12,
+      // packedItems: 4,
       items: [
          {
             itemName: "Cannon 6D",
@@ -40,8 +40,8 @@ export const gear = [
    },
    {
       kitName: "Day Pack",
-      numItems: 37,
-      packedItems: 28,
+      // numItems: 37,
+      // packedItems: 28,
       items: [
          {
             itemName: "down jacket",
@@ -53,6 +53,41 @@ export const gear = [
          },
          {
             itemName: "GORP",
+            packed: false,
+         },
+      ],
+   },
+   {
+      kitName: "Cooler",
+      // numItems: 37,
+      // packedItems: 28,
+      items: [
+         {
+            itemName: "beer",
+            packed: false,
+         },
+         {
+            itemName: "bagged ice",
+            packed: false,
+         },
+         {
+            itemName: "frozen gallon of water",
+            packed: false,
+         },
+         {
+            itemName: "frozen pint bottles of water",
+            packed: false,
+         },
+         {
+            itemName: "jelly",
+            packed: false,
+         },
+         {
+            itemName: "mustard",
+            packed: false,
+         },
+         {
+            itemName: "relish",
             packed: false,
          },
       ],

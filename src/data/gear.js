@@ -1,6 +1,7 @@
 export const gear = [
    {
       name: "Camping On Person Stuff",
+      packed: false,
       items: [
          { name: "iPhone", packed: true },
          { name: "wallet", packed: true },
@@ -18,6 +19,7 @@ export const gear = [
 
    {
       name: "Camera Bag",
+      packed: false,
       items: [
          { name: "Cannon 6D", packed: true },
          { name: "extra battery", packed: false },
@@ -31,6 +33,7 @@ export const gear = [
    },
    {
       name: "Day Pack",
+      packed: false,
       items: [
          { name: "down jacket", packed: true }, // down jacket
          { name: "folding hiking pole", packed: true }, // folding hiking pole
@@ -57,6 +60,7 @@ export const gear = [
 
    {
       name: "Sleeping Stuff",
+      packed: false,
       items: [
          { name: "pillows", packed: false },
          { name: "sleeping bags", packed: false },
@@ -67,6 +71,7 @@ export const gear = [
 
    {
       name: "Camping Bin",
+      packed: false,
       items: [
          { name: "lighter fluid", packed: true }, // lighter fluid
          { name: "paper towels", packed: true }, // paper towels
@@ -85,6 +90,7 @@ export const gear = [
 
    {
       name: "Food Bin",
+      packed: false,
       items: [
          {
             name: "ground coffee",
@@ -109,6 +115,7 @@ export const gear = [
 
    {
       name: "Cooking Bin",
+      packed: false,
       items: [
          { name: "seasoning", packed: true }, // seasoning
          { name: "paper plates", packed: true }, // paper plates
@@ -136,6 +143,7 @@ export const gear = [
 
    {
       name: "Car Kit",
+      packed: true,
       items: [
          { name: "flashlight", packed: true },
          { name: "pint of water", packed: true },
@@ -145,6 +153,7 @@ export const gear = [
 
    {
       name: "Overnight Bag",
+      packed: false,
       items: [
          { name: "change of clothes", packed: false },
          { name: "sleepwear", packed: false },
@@ -154,6 +163,7 @@ export const gear = [
 
    {
       name: "Cooler",
+      packed: false,
       items: [
          { name: "beer", packed: false },
          { name: "bagged ice", packed: false },
@@ -173,6 +183,7 @@ export const gear = [
 
    {
       name: "Camping Trunk Stuff",
+      packed: false,
       items: [
          { name: "tarp", packed: false }, // tarp
          { name: "tent", packed: false }, // tent

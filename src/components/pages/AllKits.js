@@ -16,7 +16,7 @@ export default class AllKits extends React.Component {
       // define a component's initial state
       this.state = {
          // isFavoritesChecked: false,
-         allKits: orderBy(gear, "name", "desc"),
+         allKits: orderBy(gear, "name", "asc"),
          // displayedFuncs: orderBy(uiData, "order", "desc"),
          // orderBy: '["order", "desc"]',
       };

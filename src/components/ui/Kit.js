@@ -17,14 +17,36 @@ export default class Kit extends React.Component {
    // }
 
    render() {
-      // extra js and functions can go here
+      // extra js can go here
+
+      // const props = this.props;
+      const kitData = this.props.kitData;
+
+      // find the total number of items in this kit
+      const numItems = kitData.items.length;
+
+      // find the number of packed items by counting how many have packed set to true
+      const numPackedItems = kitData.items.reduce((numPacked, item) => {
+         if (item.packed) {
+            return (numPacked += 1);
+         } else {
+            return numPacked;
+         }
+      }, 0);
+      // console.log(
+      //    "found this many packed items in",
+      //    kitData.kitName,
+      //    numPackedItems
+      // );
 
       return (
-         <Link to="/kit-list" className="card red">
-            <div className="card-body green">
-               <div className="row blue">
-                  <div className="col-8 blue">Camera Bag</div>
-                  <div className="col-4 cyan">5/10</div>
+         <Link to="/kit-list" className="card">
+            <div className="card-body">
+               <div className="row">
+                  <div className="col-8">{kitData.kitName}</div>
+                  <div className="col-4">
+                     {numPackedItems}/{numItems} Packed
+                  </div>
                </div>
             </div>
          </Link>

@@ -30,44 +30,12 @@ export default class AllKits extends React.Component {
       return (
          <AppTemplate>
             <h4>My Kits</h4>
-            {/* <Link to="/kit-list">Camera Bag</Link>
-         <Link to="/kit-list">Day Pack</Link>
-         <Link to="/kit-list">Car Kit</Link> */}
 
-            <Link to="/kit-list" className="card red">
-               <div className="card-body green">
-                  <div className="row blue">
-                     <div className="col-8 blue">Camera Bag</div>
-                     <div className="col-4 cyan">5/10</div>
-                  </div>
-               </div>
-            </Link>
-
-            <Link to="/kit-list" className="card red">
-               <div className="card-body green">
-                  <div className="row blue">
-                     <div className="col-8 blue">Day Pack</div>
-                     <div className="col-4 cyan">24/33</div>
-                  </div>
-               </div>
-            </Link>
-
-            <Kit />
-
-            {/* {this.state.allKits.map((kit) => {
-               const { kitName, numItems, packedItems } = kit;
-               return (
-                  <Kit
-                  key={kitName}
-                  kitName={kitName}
-                  numItems={numItems}
-                  packedItems={packedItems}
-                  />
-               );
-            })} */}
-
+            {/* renders each kit */}
             {this.state.allKits.map((kit) => {
-               return <Kit key={kit.kitName} />;
+               // const { kitName, numItems, packedItems } = kit;
+               console.log(kit.kitName);
+               return <Kit key={kit.kitName} kitData={kit} />;
             })}
          </AppTemplate>
       );

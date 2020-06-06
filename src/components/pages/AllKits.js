@@ -16,7 +16,7 @@ export default class AllKits extends React.Component {
       // define a component's initial state
       this.state = {
          // isFavoritesChecked: false,
-         allKits: orderBy(gear, "kitName", "desc"),
+         allKits: orderBy(gear, "name", "desc"),
          // displayedFuncs: orderBy(uiData, "order", "desc"),
          // orderBy: '["order", "desc"]',
       };
@@ -33,9 +33,9 @@ export default class AllKits extends React.Component {
 
             {/* renders each kit */}
             {this.state.allKits.map((kit) => {
-               // const { kitName, numItems, packedItems } = kit;
-               console.log(kit.kitName);
-               return <Kit key={kit.kitName} kitData={kit} />;
+               // const { name, numItems, packedItems } = kit;
+               console.log(kit.name);
+               return <Kit key={kit.name} kitData={kit} />;
             })}
          </AppTemplate>
       );

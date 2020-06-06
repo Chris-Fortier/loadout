@@ -1,188 +1,188 @@
 export const gear = [
    {
-      kitName: "Camping On Person Stuff",
+      name: "Camping On Person Stuff",
       items: [
-         { itemName: "iPhone", packed: true },
-         { itemName: "wallet", packed: true },
-         { itemName: "keys", packed: false },
-         { itemName: "Garmin watch", packed: true },
-         { itemName: "lightning cable", packed: false },
-         { itemName: "Anker charger", packed: false },
-         { itemName: "ear buds and charger", packed: true },
-         { itemName: "hiking boots", packed: false },
-         { itemName: "sunglasses", packed: false },
-         { itemName: "chapstick", packed: true },
-         { itemName: "multitool", packed: false },
+         { name: "iPhone", packed: true },
+         { name: "wallet", packed: true },
+         { name: "keys", packed: false },
+         { name: "Garmin watch", packed: true },
+         { name: "lightning cable", packed: false },
+         { name: "Anker charger", packed: false },
+         { name: "ear buds and charger", packed: true },
+         { name: "hiking boots", packed: false },
+         { name: "sunglasses", packed: false },
+         { name: "chapstick", packed: true },
+         { name: "multitool", packed: false },
       ],
    },
 
    {
-      kitName: "Camera Bag",
+      name: "Camera Bag",
       items: [
-         { itemName: "Cannon 6D", packed: true },
-         { itemName: "extra battery", packed: false },
-         { itemName: "extra memory card", packed: false },
-         { itemName: "gray card", packed: true },
-         { itemName: "70-300mm lens", packed: true },
-         { itemName: "50mm lens", packed: true },
-         { itemName: "17-40mm lens", packed: true },
-         { itemName: "microfiber", packed: true },
+         { name: "Cannon 6D", packed: true },
+         { name: "extra battery", packed: false },
+         { name: "extra memory card", packed: false },
+         { name: "gray card", packed: true },
+         { name: "70-300mm lens", packed: true },
+         { name: "50mm lens", packed: true },
+         { name: "17-40mm lens", packed: true },
+         { name: "microfiber", packed: true },
       ],
    },
    {
-      kitName: "Day Pack",
+      name: "Day Pack",
       items: [
-         { itemName: "down jacket", packed: true }, // down jacket
-         { itemName: "folding hiking pole", packed: true }, // folding hiking pole
-         { itemName: "balaclava", packed: true }, // balaclava
-         { itemName: "knee braces", packed: true }, // knee braces
-         { itemName: "wide-brimmed hat", packed: false }, // wide-brimmed hat
-         { itemName: "disposable rain gear", packed: true }, // disposable rain gear
-         { itemName: "ziplock bags", packed: true }, // ziplock bags
-         { itemName: "grocery bags", packed: true }, // grocery bags
-         { itemName: "first aid kit", packed: true }, // first aid kit
-         { itemName: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool
-         { itemName: "flashlight/lighter tool", packed: false }, // flashlight/lighter tool
-         { itemName: "USB cable", packed: true }, // USB cable
-         { itemName: "Garmin watch cable", packed: true }, // Garmin watch cable
-         { itemName: "water bladder", packed: true }, // water bladder
-         { itemName: "hand-sanitizer", packed: true }, // hand-sanitizer
-         { itemName: "sunblock", packed: true }, // sunblock
-         { itemName: "surgical mask", packed: true }, // surgical mask
-         { itemName: "monocular", packed: true }, // monocular
-         { itemName: "camera", packed: true }, // camera
-         { itemName: "extra camera battery", packed: true }, // extra camera battery
-      ],
-   },
-
-   {
-      kitName: "Sleeping Stuff",
-      items: [
-         { itemName: "pillows", packed: false },
-         { itemName: "sleeping bags", packed: false },
-         { itemName: "sleeping mats", packed: false },
-         { itemName: "blanket", packed: false },
+         { name: "down jacket", packed: true }, // down jacket
+         { name: "folding hiking pole", packed: true }, // folding hiking pole
+         { name: "balaclava", packed: true }, // balaclava
+         { name: "knee braces", packed: true }, // knee braces
+         { name: "wide-brimmed hat", packed: false }, // wide-brimmed hat
+         { name: "disposable rain gear", packed: true }, // disposable rain gear
+         { name: "ziplock bags", packed: true }, // ziplock bags
+         { name: "grocery bags", packed: true }, // grocery bags
+         { name: "first aid kit", packed: true }, // first aid kit
+         { name: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool
+         { name: "flashlight/lighter tool", packed: false }, // flashlight/lighter tool
+         { name: "USB cable", packed: true }, // USB cable
+         { name: "Garmin watch cable", packed: true }, // Garmin watch cable
+         { name: "water bladder", packed: true }, // water bladder
+         { name: "hand-sanitizer", packed: true }, // hand-sanitizer
+         { name: "sunblock", packed: true }, // sunblock
+         { name: "surgical mask", packed: true }, // surgical mask
+         { name: "monocular", packed: true }, // monocular
+         { name: "camera", packed: true }, // camera
+         { name: "extra camera battery", packed: true }, // extra camera battery
       ],
    },
 
    {
-      kitName: "Camping Bin",
+      name: "Sleeping Stuff",
       items: [
-         { itemName: "lighter fluid", packed: true }, // lighter fluid
-         { itemName: "paper towels", packed: true }, // paper towels
-         { itemName: "drawstring garbage bags", packed: true }, // drawstring garbage bags
-         { itemName: "solar hanging light", packed: true }, // solar hanging light
-         { itemName: "lantern", packed: true }, // lantern
-         { itemName: "extra D batteries", packed: true }, // extra D batteries
-         { itemName: "umbrella", packed: false }, // umbrella
-         { itemName: "water bucket", packed: false }, // water bucket
-         { itemName: "disposable hand warmers", packed: true }, // disposable hand warmers
-         { itemName: "camp soap", packed: true }, // camp soap
-         { itemName: "grocery bags", packed: true }, // grocery bags
-         { itemName: "ziplock bags", packed: true }, // ziplock bags
+         { name: "pillows", packed: false },
+         { name: "sleeping bags", packed: false },
+         { name: "sleeping mats", packed: false },
+         { name: "blanket", packed: false },
       ],
    },
 
    {
-      kitName: "Food Bin",
+      name: "Camping Bin",
+      items: [
+         { name: "lighter fluid", packed: true }, // lighter fluid
+         { name: "paper towels", packed: true }, // paper towels
+         { name: "drawstring garbage bags", packed: true }, // drawstring garbage bags
+         { name: "solar hanging light", packed: true }, // solar hanging light
+         { name: "lantern", packed: true }, // lantern
+         { name: "extra D batteries", packed: true }, // extra D batteries
+         { name: "umbrella", packed: false }, // umbrella
+         { name: "water bucket", packed: false }, // water bucket
+         { name: "disposable hand warmers", packed: true }, // disposable hand warmers
+         { name: "camp soap", packed: true }, // camp soap
+         { name: "grocery bags", packed: true }, // grocery bags
+         { name: "ziplock bags", packed: true }, // ziplock bags
+      ],
+   },
+
+   {
+      name: "Food Bin",
       items: [
          {
-            itemName: "ground coffee",
+            name: "ground coffee",
             packed: false,
-            items: [{ itemName: "grind up 5 scoops", packed: false }],
+            items: [{ name: "grind up 5 scoops", packed: false }],
          }, // ground coffee
-         { itemName: "ramen bags", packed: true }, // ramen
-         { itemName: "peanut butter", packed: false }, // peanut butter
-         { itemName: "snacks for road", packed: false }, // snacks for road
-         { itemName: "marshmallows", packed: false }, // marshmallows
-         { itemName: "graham crackers", packed: false }, // graham crackers
-         { itemName: "canned tomatoes", packed: false }, // canned tomatoes
-         { itemName: "canned fish", packed: false }, // canned fish
-         { itemName: "canned chili", packed: true }, // canned chili
-         { itemName: "hot dog buns", packed: false }, // hot dog buns
-         { itemName: "bread", packed: false }, // bread
-         { itemName: "fruit", packed: false }, // fruit
-         { itemName: "GORP", packed: false }, // GORP
-         { itemName: "beef sticks/beef jerky", packed: false }, // beef sticks/beef jerky
+         { name: "ramen bags", packed: true }, // ramen
+         { name: "peanut butter", packed: false }, // peanut butter
+         { name: "snacks for road", packed: false }, // snacks for road
+         { name: "marshmallows", packed: false }, // marshmallows
+         { name: "graham crackers", packed: false }, // graham crackers
+         { name: "canned tomatoes", packed: false }, // canned tomatoes
+         { name: "canned fish", packed: false }, // canned fish
+         { name: "canned chili", packed: true }, // canned chili
+         { name: "hot dog buns", packed: false }, // hot dog buns
+         { name: "bread", packed: false }, // bread
+         { name: "fruit", packed: false }, // fruit
+         { name: "GORP", packed: false }, // GORP
+         { name: "beef sticks/beef jerky", packed: false }, // beef sticks/beef jerky
       ],
    },
 
    {
-      kitName: "Cooking Bin",
+      name: "Cooking Bin",
       items: [
-         { itemName: "seasoning", packed: true }, // seasoning
-         { itemName: "paper plates", packed: true }, // paper plates
-         { itemName: "foam cups", packed: true }, // foam cups
-         { itemName: "disposable silverware", packed: true }, // disposable silverware
-         { itemName: "drink cozys", packed: true }, // drink cozys
-         { itemName: "dish brush tool", packed: true }, // dish brush tool
-         { itemName: "cooking poles", packed: true }, // cooking poles
-         { itemName: "fire fan", packed: true }, // fire fan
-         { itemName: "aluminum foil", packed: false }, // aluminum foil
-         { itemName: "wooden spatula", packed: false }, // wooden spatula
-         { itemName: "tongs", packed: false }, // tongs
-         { itemName: "metal stirrer", packed: false }, // metal stirrer
-         { itemName: "can opener", packed: false }, // can opener
-         { itemName: "French press", packed: true }, // French press
-         { itemName: "pan", packed: true }, // pan
-         { itemName: "camping stove", packed: true }, // camping stove
-         { itemName: "stove fuel", packed: true }, // stove fuel
-         { itemName: "pot", packed: true }, // pot
-         { itemName: "pocket bellow", packed: true }, // pocket bellow
-         { itemName: "ove glove", packed: true }, // ove glove
-         { itemName: "lidded plastic containers", packed: true }, // lidded plastic containers
+         { name: "seasoning", packed: true }, // seasoning
+         { name: "paper plates", packed: true }, // paper plates
+         { name: "foam cups", packed: true }, // foam cups
+         { name: "disposable silverware", packed: true }, // disposable silverware
+         { name: "drink cozys", packed: true }, // drink cozys
+         { name: "dish brush tool", packed: true }, // dish brush tool
+         { name: "cooking poles", packed: true }, // cooking poles
+         { name: "fire fan", packed: true }, // fire fan
+         { name: "aluminum foil", packed: false }, // aluminum foil
+         { name: "wooden spatula", packed: false }, // wooden spatula
+         { name: "tongs", packed: false }, // tongs
+         { name: "metal stirrer", packed: false }, // metal stirrer
+         { name: "can opener", packed: false }, // can opener
+         { name: "French press", packed: true }, // French press
+         { name: "pan", packed: true }, // pan
+         { name: "camping stove", packed: true }, // camping stove
+         { name: "stove fuel", packed: true }, // stove fuel
+         { name: "pot", packed: true }, // pot
+         { name: "pocket bellow", packed: true }, // pocket bellow
+         { name: "ove glove", packed: true }, // ove glove
+         { name: "lidded plastic containers", packed: true }, // lidded plastic containers
       ],
    },
 
    {
-      kitName: "Car Kit",
+      name: "Car Kit",
       items: [
-         { itemName: "flashlight", packed: true },
-         { itemName: "pint of water", packed: true },
-         { itemName: "extra cables", packed: true },
+         { name: "flashlight", packed: true },
+         { name: "pint of water", packed: true },
+         { name: "extra cables", packed: true },
       ],
    },
 
    {
-      kitName: "Overnight Bag",
+      name: "Overnight Bag",
       items: [
-         { itemName: "change of clothes", packed: false },
-         { itemName: "sleepwear", packed: false },
-         { itemName: "personal kit", packed: false },
+         { name: "change of clothes", packed: false },
+         { name: "sleepwear", packed: false },
+         { name: "personal kit", packed: false },
       ],
    },
 
    {
-      kitName: "Cooler",
+      name: "Cooler",
       items: [
-         { itemName: "beer", packed: false },
-         { itemName: "bagged ice", packed: false },
-         { itemName: "frozen gallon of water", packed: false },
-         { itemName: "frozen pint bottles of water", packed: false },
-         { itemName: "jelly", packed: false },
-         { itemName: "mustard", packed: false },
-         { itemName: "relish", packed: false },
-         { itemName: "energy drinks for the road", packed: false },
-         { itemName: "eggs", packed: false },
-         { itemName: "Coke", packed: false },
-         { itemName: "bacon", packed: false },
-         { itemName: "hot dogs", packed: false },
-         { itemName: "chocolate", packed: false },
+         { name: "beer", packed: false },
+         { name: "bagged ice", packed: false },
+         { name: "frozen gallon of water", packed: false },
+         { name: "frozen pint bottles of water", packed: false },
+         { name: "jelly", packed: false },
+         { name: "mustard", packed: false },
+         { name: "relish", packed: false },
+         { name: "energy drinks for the road", packed: false },
+         { name: "eggs", packed: false },
+         { name: "Coke", packed: false },
+         { name: "bacon", packed: false },
+         { name: "hot dogs", packed: false },
+         { name: "chocolate", packed: false },
       ],
    },
 
    {
-      kitName: "Camping Trunk Stuff",
+      name: "Camping Trunk Stuff",
       items: [
-         { itemName: "tarp", packed: false }, // tarp
-         { itemName: "tent", packed: false }, // tent
-         { itemName: "water pint bottles", packed: false }, // water pint bottles
-         { itemName: "folding chairs", packed: false }, // folding chairs
-         { itemName: "firewood", packed: false }, // firewood
-         { itemName: "hatchet", packed: false }, // hatchet
-         { itemName: "saw", packed: false }, // saw
-         { itemName: "mallet", packed: false }, // mallet
-         { itemName: "water jugs", packed: false }, // water jugs
+         { name: "tarp", packed: false }, // tarp
+         { name: "tent", packed: false }, // tent
+         { name: "water pint bottles", packed: false }, // water pint bottles
+         { name: "folding chairs", packed: false }, // folding chairs
+         { name: "firewood", packed: false }, // firewood
+         { name: "hatchet", packed: false }, // hatchet
+         { name: "saw", packed: false }, // saw
+         { name: "mallet", packed: false }, // mallet
+         { name: "water jugs", packed: false }, // water jugs
       ],
    },
 ];

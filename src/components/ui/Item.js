@@ -23,7 +23,7 @@ export default class Item extends React.Component {
          <div to="/kit-list" className="card">
             <div className="card-body">
                <div className="row">
-                  <div className="col-8">{item.itemName}</div>
+                  <div className="col-8">{item.name}</div>
                </div>
             </div>
          </div>

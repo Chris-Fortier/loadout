@@ -23,7 +23,7 @@ export default class Kit extends React.Component {
             <div className="col-12">
                <div className="card">
                   <div className="card-body">
-                     {kitData.items[i].itemName} Packed =
+                     {kitData.items[i].name} Packed =
                      {String(kitData.items[i].packed)}
                   </div>
                </div>
@@ -59,7 +59,7 @@ export default class Kit extends React.Component {
       }, 0);
       // console.log(
       //    "found this many packed items in",
-      //    kitData.kitName,
+      //    kitData.name,
       //    numPackedItems
       // );
 
@@ -71,7 +71,7 @@ export default class Kit extends React.Component {
                      className="col-8 btn btn-link"
                      onClick={() => this.toggleExpanded()}
                   >
-                     {kitData.kitName}
+                     {kitData.name}
                   </div>
                   <div className="col-4">
                      {numPackedItems}/{numItems} Packed

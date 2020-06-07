@@ -54,7 +54,7 @@ export const gear = {
                //    { name: "ibuprofen", packed: false },
                // ],
             }, // first aid kit
-            { name: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool
+            { name: "multi-function whistle", packed: true }, // thermometer/compass/whistle tool
             { name: "flashlight/lighter tool", packed: false }, // flashlight/lighter tool
             { name: "USB cable", packed: true }, // USB cable
             { name: "Garmin watch cable", packed: true }, // Garmin watch cable

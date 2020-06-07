@@ -99,7 +99,7 @@ export default class Item extends React.Component {
                   className="custom-control-label"
                   htmlFor="packed-on-bottom-switch"
                >
-                  Move Packed to Bottom of List
+                  Move Packed to Bottom
                </label>
             </div>
          );
@@ -177,6 +177,13 @@ export default class Item extends React.Component {
                   </div>
                   <div className="clearfix"></div>
                </div>
+               {/* <div className="card-header">
+                  <div className="row">
+                     <div className="col-2">cb</div>
+                     <div className="col-8 border-left">item name</div>
+                     <div className="col-2">00/00</div>
+                  </div>
+               </div> */}
                {this.state.expanded &&
                   this.renderContainingItems(
                      itemData.items,

@@ -47,12 +47,12 @@ export const gear = {
             {
                name: "first aid kit",
                packed: false,
-               items: [
-                  { name: "band-aids", packed: false },
-                  { name: "moleskin", packed: true },
-                  { name: "antacid", packed: true },
-                  { name: "ibuprofen", packed: false },
-               ],
+               // items: [
+               //    { name: "band-aids", packed: false },
+               //    { name: "moleskin", packed: true },
+               //    { name: "antacid", packed: true },
+               //    { name: "ibuprofen", packed: false },
+               // ],
             }, // first aid kit
             { name: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool
             { name: "flashlight/lighter tool", packed: false }, // flashlight/lighter tool
@@ -207,9 +207,9 @@ export const gear = {
          ],
       },
 
-      {
-         name: "Heavy jacket",
-         packed: false,
-      },
+      // {
+      //    name: "Heavy jacket",
+      //    packed: false,
+      // },
    ],
 };

@@ -153,11 +153,7 @@ export default class Item extends React.Component {
          // );
 
          return (
-            <div
-               className={
-                  "card text-white mb-3 " + "color" + String(colorChoice)
-               }
-            >
+            <div className={"card text-white mb-3 color" + String(colorChoice)}>
                <div
                   className="card-header"
                   onClick={() => this.toggleExpanded()}
@@ -186,15 +182,11 @@ export default class Item extends React.Component {
          );
       } else {
          return (
-            <div
-               className={
-                  "card text-white mb-3 " + "color" + String(colorChoice)
-               }
-            >
+            <div className={"card text-white mb-3 color" + String(colorChoice)}>
                <div className="card-header">
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                      <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         id="packed-checkbox"
                         value="option1"

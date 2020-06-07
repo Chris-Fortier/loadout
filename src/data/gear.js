@@ -1,7 +1,7 @@
 export const gear = {
    items: [
       {
-         name: "Camping On Person Stuff",
+         name: "Camping On Person",
          packed: false,
          items: [
             { name: "iPhone", packed: true },

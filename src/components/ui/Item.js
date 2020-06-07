@@ -13,7 +13,7 @@ export default class Item extends React.Component {
       this.state = {
          expanded: false,
          showPackedItems: false,
-         putPackedOnBottom: true,
+         putPackedOnBottom: false,
       };
    }
 
@@ -58,27 +58,31 @@ export default class Item extends React.Component {
                      </label>
                   </div>
                   {/* need to make this switch only render if we are seeing packed items */}
-                  <div className="custom-control custom-switch">
-                     <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        id={
-                           "packed-on-bottom-switch" + this.props.itemData.name
-                        }
-                        checked={this.state.putPackedOnBottom}
-                        onChange={(e) => {
-                           this.togglePackedOnBottom(e);
-                        }}
-                     />
-                     <label
-                        className="custom-control-label"
-                        htmlFor={
-                           "packed-on-bottom-switch" + this.props.itemData.name
-                        }
-                     >
-                        Move Packed to Bottom
-                     </label>
-                  </div>
+                  {this.state.showPackedItems && (
+                     <div className="custom-control custom-switch">
+                        <input
+                           type="checkbox"
+                           className="custom-control-input"
+                           id={
+                              "packed-on-bottom-switch" +
+                              this.props.itemData.name
+                           }
+                           checked={this.state.putPackedOnBottom}
+                           onChange={(e) => {
+                              this.togglePackedOnBottom(e);
+                           }}
+                        />
+                        <label
+                           className="custom-control-label"
+                           htmlFor={
+                              "packed-on-bottom-switch" +
+                              this.props.itemData.name
+                           }
+                        >
+                           Move Packed to Bottom
+                        </label>
+                     </div>
+                  )}
                </div>
             </div>
             <div className="row">

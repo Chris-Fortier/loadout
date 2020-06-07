@@ -39,7 +39,7 @@ export default class Item extends React.Component {
                      <input
                         type="checkbox"
                         className="custom-control-input"
-                        id="show-packed-switch"
+                        id={"show-packed-switch" + this.props.itemData.name}
                         checked={this.state.showPackedItems}
                         onChange={(e) => {
                            this.toggleShowPacked(e);
@@ -50,7 +50,9 @@ export default class Item extends React.Component {
                      />
                      <label
                         className="custom-control-label"
-                        htmlFor="show-packed-switch"
+                        htmlFor={
+                           "show-packed-switch" + this.props.itemData.name
+                        }
                      >
                         Show Packed Items
                      </label>
@@ -60,7 +62,9 @@ export default class Item extends React.Component {
                      <input
                         type="checkbox"
                         className="custom-control-input"
-                        id="packed-on-bottom-switch"
+                        id={
+                           "packed-on-bottom-switch" + this.props.itemData.name
+                        }
                         checked={this.state.putPackedOnBottom}
                         onChange={(e) => {
                            this.togglePackedOnBottom(e);
@@ -68,7 +72,9 @@ export default class Item extends React.Component {
                      />
                      <label
                         className="custom-control-label"
-                        htmlFor="packed-on-bottom-switch"
+                        htmlFor={
+                           "packed-on-bottom-switch" + this.props.itemData.name
+                        }
                      >
                         Move Packed to Bottom
                      </label>

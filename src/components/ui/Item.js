@@ -12,7 +12,7 @@ export default class Item extends React.Component {
       // set default state values for each component
       this.state = {
          expanded: false,
-         showPackedItems: true,
+         showPackedItems: false,
          putPackedOnBottom: true,
       };
    }
@@ -54,7 +54,7 @@ export default class Item extends React.Component {
                            "show-packed-switch" + this.props.itemData.name
                         }
                      >
-                        Show Packed Items
+                        Show {} Packed Items
                      </label>
                   </div>
                   {/* need to make this switch only render if we are seeing packed items */}
@@ -126,7 +126,7 @@ export default class Item extends React.Component {
          displayedItems[i].colorChoice = colorsToUse[evenOdd];
       }
 
-      console.log("displayed items", parentColorChoice, displayedItems);
+      // console.log("displayed items", parentColorChoice, displayedItems);
 
       let output = [];
 

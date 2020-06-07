@@ -29,6 +29,52 @@ export default class Item extends React.Component {
       this.setState({ displayedItems: displayedItems });
    }
 
+   // render the buttons and switched that appear at the top of an expanded item (including the root item which is always expanded)
+   renderItemSubHeader() {
+      return (
+         <>
+            <div className="row">
+               <div className="col">
+                  <div className="custom-control custom-switch">
+                     <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id="show-packed-switch"
+                        checked={this.state.showPackedItems}
+                     />
+                     <label
+                        className="custom-control-label"
+                        htmlFor="show-packed-switch"
+                     >
+                        Show Packed Items
+                     </label>
+                  </div>
+                  {/* need to make this switch only render if we are seeing packed items */}
+                  <div className="custom-control custom-switch">
+                     <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id="packed-on-bottom-switch"
+                        checked={this.state.putPackedOnBottom}
+                     />
+                     <label
+                        className="custom-control-label"
+                        htmlFor="packed-on-bottom-switch"
+                     >
+                        Move Packed to Bottom
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col">
+                  <button className="btn">Unpack All</button>
+               </div>
+            </div>
+         </>
+      );
+   }
+
    // renders a component for every child item for a item (give it the item object as itemData)
    renderContainingItems(items, parentColorChoice = null) {
       var displayedItems = []; // initialize a new list for displayed items
@@ -70,40 +116,7 @@ export default class Item extends React.Component {
       let output = [];
 
       // add the controls at the top of the item
-      output.push(
-         <div className="custom-control custom-switch">
-            <input
-               type="checkbox"
-               className="custom-control-input"
-               id="show-packed-switch"
-               checked={this.state.showPackedItems}
-            />
-            <label
-               className="custom-control-label"
-               htmlFor="show-packed-switch"
-            >
-               Show Packed Items
-            </label>
-         </div>
-      );
-      if (this.state.showPackedItems) {
-         output.push(
-            <div className="custom-control custom-switch">
-               <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="packed-on-bottom-switch"
-                  checked={this.state.putPackedOnBottom}
-               />
-               <label
-                  className="custom-control-label"
-                  htmlFor="packed-on-bottom-switch"
-               >
-                  Move Packed to Bottom
-               </label>
-            </div>
-         );
-      }
+      output.push(this.renderItemSubHeader());
 
       // render each sub item
       output.push(
@@ -127,18 +140,30 @@ export default class Item extends React.Component {
       // this is to simplify code below
       const itemData = this.props.itemData;
 
-      if (this.props.hasOwnProperty("rootLevel")) {
-         console.log("root level");
-         return this.renderContainingItems(itemData.items);
-      }
+      // if (this.props.hasOwnProperty("rootLevel")) {
+      //    console.log("root level");
+      //    return this.renderContainingItems(itemData.items);
+      // }
 
       // get the color choice
-      if (itemData.hasOwnProperty("colorChoice") === false) {
-         itemData.colorChoice = 2;
+      // if (itemData.hasOwnProperty("colorChoice") === false) {
+      //    itemData.colorChoice = 2;
+      // }
+
+      // render this if this item is the root level item
+      if (this.props.hasOwnProperty("rootLevel")) {
+         return (
+            <>
+               {this.renderContainingItems(
+                  itemData.items,
+                  itemData.colorChoice
+               )}
+            </>
+         );
       }
 
       // render this if the item has subitems
-      if (itemData.hasOwnProperty("items")) {
+      else if (itemData.hasOwnProperty("items")) {
          const numItems = itemData.items.length;
 
          // find the number of packed items by counting how many have packed set to true

@@ -41,6 +41,12 @@ export default class Item extends React.Component {
                         className="custom-control-input"
                         id="show-packed-switch"
                         checked={this.state.showPackedItems}
+                        onChange={(e) => {
+                           this.toggleShowPacked(e);
+                        }}
+                        // onChange={(e) => {
+                        //    this.toggleShowPacked(e);
+                        // }}
                      />
                      <label
                         className="custom-control-label"
@@ -56,6 +62,9 @@ export default class Item extends React.Component {
                         className="custom-control-input"
                         id="packed-on-bottom-switch"
                         checked={this.state.putPackedOnBottom}
+                        onChange={(e) => {
+                           this.togglePackedOnBottom(e);
+                        }}
                      />
                      <label
                         className="custom-control-label"
@@ -132,6 +141,17 @@ export default class Item extends React.Component {
    // toggle the expanded state of the item
    toggleExpanded() {
       this.setState({ expanded: !this.state.expanded });
+   }
+
+   // toggle show packed items
+   toggleShowPacked() {
+      this.setState({ showPackedItems: !this.state.showPackedItems });
+      console.log("hi there", this.props.itemData);
+   }
+
+   // toggle put packed on bottom
+   togglePackedOnBottom() {
+      this.setState({ putPackedOnBottom: !this.state.putPackedOnBottom });
    }
 
    render() {

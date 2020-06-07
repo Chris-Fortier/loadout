@@ -49,6 +49,8 @@ export const gear = [
             items: [
                { name: "band-aids", packed: false },
                { name: "moleskin", packed: true },
+               { name: "antacid", packed: true },
+               { name: "ibuprofen", packed: false },
             ],
          }, // first aid kit
          { name: "thermometer/compass/whistle tool", packed: true }, // thermometer/compass/whistle tool

@@ -48,8 +48,19 @@ export default class Item extends React.Component {
       }
 
       // assign a rotating number to each item so I can give them alternating colors
+      // there are three colors used for items to ensure that two adjacent items are always a different color
+      // and their parent item is a different color
+      let colorsToUse = [];
+      if (itemData.colorChoice === 0) {
+         colorsToUse = [1, 2];
+      } else if (itemData.colorChoice === 1) {
+         colorsToUse = [0, 2];
+      } else if (itemData.colorChoice === 2) {
+         colorsToUse = [0, 1];
+      }
       for (let i in displayedItems) {
-         displayedItems[i].colorChoice = i % 2;
+         let evenOdd = i % 2;
+         displayedItems[i].colorChoice = colorsToUse[evenOdd];
       }
 
       let output = [];
@@ -111,10 +122,9 @@ export default class Item extends React.Component {
       // const props = this.props;
       const itemData = this.props.itemData;
 
-      let colorChoice = 2;
-
-      if (itemData.hasOwnProperty("colorChoice")) {
-         colorChoice = itemData.colorChoice;
+      // get the color choice
+      if (itemData.hasOwnProperty("colorChoice") === false) {
+         itemData.colorChoice = 2;
       }
 
       // find the total number of items in this item
@@ -131,7 +141,11 @@ export default class Item extends React.Component {
          }, 0);
 
          return (
-            <div className={"card text-white mb-3 color" + String(colorChoice)}>
+            <div
+               className={
+                  "card text-white mt-3 color" + String(itemData.colorChoice)
+               }
+            >
                <div
                   className="card-header"
                   onClick={() => this.toggleExpanded()}
@@ -158,7 +172,11 @@ export default class Item extends React.Component {
          );
       } else {
          return (
-            <div className={"card text-white mb-3 color" + String(colorChoice)}>
+            <div
+               className={
+                  "card text-white mt-3 color" + String(itemData.colorChoice)
+               }
+            >
                <div className="card-header">
                   <div className="form-check form-check-inline">
                      <input

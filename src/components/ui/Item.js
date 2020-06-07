@@ -30,10 +30,10 @@ export default class Item extends React.Component {
    }
 
    // renders a component for every child item for a item (give it the item object as itemData)
-   renderContainingItems(itemData) {
+   renderContainingItems(items, parentColorChoice = null) {
       var displayedItems = []; // initialize a new list for displayed items
 
-      displayedItems = orderBy(itemData.items, "name", "asc"); // sort the items by name
+      displayedItems = orderBy(items, "name", "asc"); // sort the items by name
 
       // sort the items by packed status if desired, with packed items on bottom
       if (this.state.putPackedOnBottom) {
@@ -51,17 +51,21 @@ export default class Item extends React.Component {
       // there are three colors used for items to ensure that two adjacent items are always a different color
       // and their parent item is a different color
       let colorsToUse = [];
-      if (itemData.colorChoice === 0) {
+      if (parentColorChoice === 0) {
          colorsToUse = [1, 2];
-      } else if (itemData.colorChoice === 1) {
+      } else if (parentColorChoice === 1) {
          colorsToUse = [0, 2];
-      } else if (itemData.colorChoice === 2) {
+      } else if (parentColorChoice === 2) {
          colorsToUse = [0, 1];
+      } else if (parentColorChoice === null) {
+         colorsToUse = [0, 1, 2];
       }
       for (let i in displayedItems) {
-         let evenOdd = i % 2;
+         let evenOdd = i % colorsToUse.length;
          displayedItems[i].colorChoice = colorsToUse[evenOdd];
       }
+
+      console.log("displayed items", parentColorChoice, displayedItems);
 
       let output = [];
 
@@ -108,6 +112,7 @@ export default class Item extends React.Component {
          })
       );
 
+      console.log("hello");
       return <div className="card-body">{output}</div>;
    }
 
@@ -119,15 +124,20 @@ export default class Item extends React.Component {
    render() {
       // extra js can go here
 
-      // const props = this.props;
+      // this is to simplify code below
       const itemData = this.props.itemData;
+
+      if (this.props.hasOwnProperty("rootLevel")) {
+         console.log("root level");
+         return this.renderContainingItems(itemData.items);
+      }
 
       // get the color choice
       if (itemData.hasOwnProperty("colorChoice") === false) {
          itemData.colorChoice = 2;
       }
 
-      // find the total number of items in this item
+      // render this if the item has subitems
       if (itemData.hasOwnProperty("items")) {
          const numItems = itemData.items.length;
 
@@ -167,7 +177,11 @@ export default class Item extends React.Component {
                   </div>
                   <div className="clearfix"></div>
                </div>
-               {this.state.expanded && this.renderContainingItems(itemData)}
+               {this.state.expanded &&
+                  this.renderContainingItems(
+                     itemData.items,
+                     itemData.colorChoice
+                  )}
             </div>
          );
       } else {

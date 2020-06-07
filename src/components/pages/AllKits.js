@@ -25,14 +25,20 @@ export default class AllKits extends React.Component {
    // methods happen here, such as what happens when you click on a button
 
    render() {
+      // console.log(Item.renderContainingItems());
       return (
          <AppTemplate>
             <h4>My Kits</h4>
 
             {/* renders each top-level item (kit) */}
-            {this.state.allKits.map((item) => {
+            {/* {this.state.allKits.map((item) => {
                return <Item key={item.name} itemData={item} />;
-            })}
+            })} */}
+            {/* put directly in a row as a quick hack to get it closer to the sides of the screen */}
+            <div className="row">
+               <Item key={"sdfs"} itemData={gear} rootLevel={true} />
+            </div>
+            {/* {Item.renderContainingItems(gear)} */}
          </AppTemplate>
       );
    }

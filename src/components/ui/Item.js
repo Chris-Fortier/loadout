@@ -14,8 +14,6 @@ export default class Item extends React.Component {
          expanded: false,
          showPackedItems: true,
          putPackedOnBottom: true,
-         // allSubItems: this.items,
-         // displayedItems: this.items,
       };
    }
 
@@ -33,8 +31,6 @@ export default class Item extends React.Component {
 
    // renders a component for every child item for a item (give it the item object as itemData)
    renderContainingItems(itemData) {
-      // console.log("amount of items", itemData.items.length);
-
       var displayedItems = []; // initialize a new list for displayed items
 
       displayedItems = orderBy(itemData.items, "name", "asc"); // sort the items by name
@@ -45,9 +41,7 @@ export default class Item extends React.Component {
       }
 
       // hide packed items if desired
-      // console.log("showPackedItems", this.state.showPackedItems);
       if (this.state.showPackedItems === false) {
-         // console.log("hiding packed items in", itemData.name);
          displayedItems = displayedItems.filter(
             (item) => item.packed === false
          ); // keep only the unpacked items
@@ -98,15 +92,7 @@ export default class Item extends React.Component {
 
       // render each sub item
       output.push(
-         // <div className="card text-white bg-secondary mb-3">
-         //    <div className="card-header">
-         //       {displayedItems[i].name} Packed =
-         //       {String(displayedItems[i].packed)}
-         //    </div>
-         // </div>
-
          displayedItems.map((item) => {
-            console.log("adding this item", item.name);
             return <Item key={item.name} itemData={item} />;
          })
       );
@@ -116,9 +102,7 @@ export default class Item extends React.Component {
 
    // toggle the expanded state of the item
    toggleExpanded() {
-      // this.state.expanded = !this.state.expanded;
       this.setState({ expanded: !this.state.expanded });
-      // console.log("toggling to", this.state.expanded);
    }
 
    render() {
@@ -130,7 +114,6 @@ export default class Item extends React.Component {
       let colorChoice = 2;
 
       if (itemData.hasOwnProperty("colorChoice")) {
-         console.log(itemData.colorChoice);
          colorChoice = itemData.colorChoice;
       }
 
@@ -146,11 +129,6 @@ export default class Item extends React.Component {
                return numPacked;
             }
          }, 0);
-         // console.log(
-         //    "found this many packed items in",
-         //    itemData.name,
-         //    numPackedItems
-         // );
 
          return (
             <div className={"card text-white mb-3 color" + String(colorChoice)}>
@@ -175,9 +153,7 @@ export default class Item extends React.Component {
                   </div>
                   <div className="clearfix"></div>
                </div>
-               {/* <div className="card-body"> */}
                {this.state.expanded && this.renderContainingItems(itemData)}
-               {/* </div> */}
             </div>
          );
       } else {

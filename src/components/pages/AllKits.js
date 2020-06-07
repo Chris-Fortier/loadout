@@ -2,7 +2,7 @@ import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { gear } from "../../data/gear";
-import Kit from "../ui/Kit";
+import Item from "../ui/Item";
 import orderBy from "lodash/orderBy";
 
 export default class AllKits extends React.Component {
@@ -29,9 +29,9 @@ export default class AllKits extends React.Component {
          <AppTemplate>
             <h4>My Kits</h4>
 
-            {/* renders each kit */}
-            {this.state.allKits.map((kit) => {
-               return <Kit key={kit.name} kitData={kit} />;
+            {/* renders each top-level item (kit) */}
+            {this.state.allKits.map((item) => {
+               return <Item key={item.name} itemData={item} />;
             })}
          </AppTemplate>
       );

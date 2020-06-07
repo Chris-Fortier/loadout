@@ -25,7 +25,7 @@ export default class Landing extends React.Component {
 
    renderLogIn() {
       return (
-         <div className="card">
+         <div className="card mb-3">
             <div className="card-body">
                <h5 className="card-title">Log In</h5>
                <form className="mb-0 needs-validation" noValidate>
@@ -70,7 +70,7 @@ export default class Landing extends React.Component {
                      id="new-account-button"
                      onClick={() => this.swithToNewAccountMode()}
                   >
-                     Make New Account
+                     Sign Up
                   </button>
                </form>
             </div>
@@ -80,7 +80,7 @@ export default class Landing extends React.Component {
 
    renderNewAccount() {
       return (
-         <div className="card">
+         <div className="card mb-3">
             <div className="card-body">
                <h5 className="card-title">Make New Account</h5>
                <form className="mb-0 needs-validation" noValidate>
@@ -128,7 +128,7 @@ export default class Landing extends React.Component {
                      id="login-button"
                      to="/all-kits"
                   >
-                     Make New Account
+                     Complete New Account
                   </Link>
                   <button
                      className="btn btn-secondary btn-sm btn-block"

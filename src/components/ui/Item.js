@@ -214,7 +214,7 @@ export default class Item extends React.Component {
                   <div className="float-left">
                      <div className="form-check form-check-inline">
                         <input
-                           className="form-check-input"
+                           className="form-check-input big-checkbox"
                            type="checkbox"
                            id="packed-checkbox"
                            value="option1"
@@ -230,9 +230,21 @@ export default class Item extends React.Component {
                </div>
                {/* <div className="card-header">
                   <div className="row">
-                     <div className="col-2">cb</div>
-                     <div className="col-8 border-left">item name</div>
-                     <div className="col-2">00/00</div>
+                     <div className="col-1 red">
+                        <div className="form-check form-check-inline">
+                           <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="packed-checkbox"
+                              value="option1"
+                              checked={itemData.packed}
+                           />
+                        </div>
+                     </div>
+                     <div className="col-8">{itemData.name}</div>
+                     <div className="col-3">
+                        {numPackedItems}/{numItems}
+                     </div>
                   </div>
                </div> */}
                {this.state.expanded &&
@@ -252,7 +264,7 @@ export default class Item extends React.Component {
                <div className="card-header">
                   <div className="form-check form-check-inline">
                      <input
-                        className="form-check-input"
+                        className="form-check-input big-checkbox"
                         type="checkbox"
                         id="packed-checkbox"
                         value="option1"

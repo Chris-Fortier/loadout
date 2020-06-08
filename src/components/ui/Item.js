@@ -38,7 +38,7 @@ export default class Item extends React.Component {
                   <div className="custom-control custom-switch">
                      <input
                         type="checkbox"
-                        className="custom-control-input"
+                        className="custom-control-input display-switch-label"
                         id={"show-packed-switch" + this.props.itemData.name}
                         checked={this.state.isShowingPacked}
                         onChange={(e) => {
@@ -49,7 +49,7 @@ export default class Item extends React.Component {
                         // }}
                      />
                      <label
-                        className="custom-control-label"
+                        className="custom-control-label display-switch-label"
                         htmlFor={
                            "show-packed-switch" + this.props.itemData.name
                         }
@@ -62,7 +62,7 @@ export default class Item extends React.Component {
                      <div className="custom-control custom-switch">
                         <input
                            type="checkbox"
-                           className="custom-control-input"
+                           className="custom-control-input display-switch-label"
                            id={
                               "packed-on-bottom-switch" +
                               this.props.itemData.name
@@ -73,7 +73,7 @@ export default class Item extends React.Component {
                            }}
                         />
                         <label
-                           className="custom-control-label"
+                           className="custom-control-label display-switch-label"
                            htmlFor={
                               "packed-on-bottom-switch" +
                               this.props.itemData.name
@@ -203,7 +203,7 @@ export default class Item extends React.Component {
          return (
             <div
                className={
-                  "card text-white mt-3 color" +
+                  "card text-white mt-3 item-card color" +
                   String(this.props.itemLevel % 3) // 3 is the number of color levels before it starts over
                }
             >
@@ -228,7 +228,7 @@ export default class Item extends React.Component {
                         </label>
                      </div>
                   </div>
-                  <div className="float-right text-dark">
+                  <div className="float-right packed-counter">
                      {numPackedItems} / {numItems}
                   </div>
                   <div className="clearfix"></div>
@@ -263,7 +263,7 @@ export default class Item extends React.Component {
          return (
             <div
                className={
-                  "card text-white mt-3 color" +
+                  "card text-white mt-3 item-card color" +
                   String(this.props.itemLevel % 3) // 3 is the number of color levels before it starts over
                }
             >

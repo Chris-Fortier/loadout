@@ -121,16 +121,20 @@ $emphasized-link-hover-darken-percentage: 15%;
 
 // Font Stuff
 
-// @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&family=Noto+Sans:wght@400;700&family=Noto+Serif&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&family=Noto+Sans:wght@400;700&family=Noto+Serif&display=swap"); // White Bear
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap"); // Loadout
 
-// $font-family-sans-serif: "Noto Sans", sans-serif, "Apple Color Emoji";
+// $font-family-sans-serif: "Noto Sans", sans-serif, "Apple Color Emoji"; // White Bear
+$font-family-sans-serif: "Teko", sans-serif; // Loadout
 // $font-family-serif: "Noto Serif", serif;
 // $font-family-brand: "Fira Sans";
-// $font-family-base: $font-family-sans-serif;
+// $font-family-base: $font-family-sans-serif; // White Bear
+$font-family-base: $font-family-sans-serif; // Loadout
 
 // $font-weight-normal: 400;
 // $font-weight-bold: 700;
 
+// $line-height-base: 1.5;
 // $line-height-base: 1.5;
 
 // $font-size-base: 1rem; // Assumes the browser default, typically `16px`

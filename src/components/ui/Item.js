@@ -11,23 +11,23 @@ export default class Item extends React.Component {
 
       // set default state values for each component
       this.state = {
-         expanded: false,
-         showPackedItems: false,
-         putPackedOnBottom: false,
+         isExpanded: false,
+         isShowingPacked: false,
+         isPackedOnBottom: false,
       };
    }
 
    // function that can toggle any true false state property
    // toggleState(propertyName) {
-   //    this.setState({ showPackedItems: !this.state[propertyName] });
+   //    this.setState({ isShowingPacked: !this.state[propertyName] });
    //    console.log("toggle", propertyName, this.state[propertyName]);
    // }
 
    // update the presented list of this items's child items based on this item's states
-   updatePresentedItems(e) {
-      const displayedItems = orderBy(this.allSubItems, "name", "asc");
-      this.setState({ displayedItems: displayedItems });
-   }
+   // updateDisplayedItems(e) {
+   //    const displayedItems = orderBy(this.allSubItems, "name", "asc");
+   //    this.setState({ displayedItems: displayedItems });
+   // }
 
    // render the buttons and switched that appear at the top of an expanded item (including the root item which is always expanded)
    renderItemSubHeader() {
@@ -40,7 +40,7 @@ export default class Item extends React.Component {
                         type="checkbox"
                         className="custom-control-input"
                         id={"show-packed-switch" + this.props.itemData.name}
-                        checked={this.state.showPackedItems}
+                        checked={this.state.isShowingPacked}
                         onChange={(e) => {
                            this.toggleShowPacked(e);
                         }}
@@ -58,7 +58,7 @@ export default class Item extends React.Component {
                      </label>
                   </div>
                   {/* need to make this switch only render if we are seeing packed items */}
-                  {this.state.showPackedItems && (
+                  {this.state.isShowingPacked && (
                      <div className="custom-control custom-switch">
                         <input
                            type="checkbox"
@@ -67,7 +67,7 @@ export default class Item extends React.Component {
                               "packed-on-bottom-switch" +
                               this.props.itemData.name
                            }
-                           checked={this.state.putPackedOnBottom}
+                           checked={this.state.isPackedOnBottom}
                            onChange={(e) => {
                               this.togglePackedOnBottom(e);
                            }}
@@ -96,19 +96,19 @@ export default class Item extends React.Component {
 
    // renders a component for every child item for a item (give it the item object as itemData)
    renderContainingItems(items, parentColorChoice = null) {
-      var displayedItems = []; // initialize a new list for displayed items
+      let displayedItems = []; // initialize a new list for displayed items
 
       displayedItems = orderBy(items, "name", "asc"); // sort the items by name
 
       // sort the items by packed status if desired, with packed items on bottom
-      if (this.state.putPackedOnBottom) {
-         displayedItems = orderBy(displayedItems, "packed", "asc");
+      if (this.state.isPackedOnBottom) {
+         displayedItems = orderBy(displayedItems, "isPacked", "asc");
       }
 
       // hide packed items if desired
-      if (this.state.showPackedItems === false) {
+      if (this.state.isShowingPacked === false) {
          displayedItems = displayedItems.filter(
-            (item) => item.packed === false
+            (item) => item.isPacked === false
          ); // keep only the unpacked items
       }
 
@@ -126,42 +126,42 @@ export default class Item extends React.Component {
          colorsToUse = [0, 1, 2];
       }
       for (let i in displayedItems) {
-         let evenOdd = i % colorsToUse.length;
+         const evenOdd = i % colorsToUse.length;
          displayedItems[i].colorChoice = colorsToUse[evenOdd];
       }
 
       // console.log("displayed items", parentColorChoice, displayedItems);
 
-      let output = [];
+      let outputPieces = [];
 
       // add the controls at the top of the item
-      output.push(this.renderItemSubHeader());
+      outputPieces.push(this.renderItemSubHeader());
 
       // render each sub item
-      output.push(
+      outputPieces.push(
          displayedItems.map((item) => {
             return <Item key={item.name} itemData={item} />;
          })
       );
 
       console.log("hello");
-      return <div className="card-body">{output}</div>;
+      return <div className="card-body">{outputPieces}</div>;
    }
 
    // toggle the expanded state of the item
    toggleExpanded() {
-      this.setState({ expanded: !this.state.expanded });
+      this.setState({ isExpanded: !this.state.isExpanded });
    }
 
    // toggle show packed items
    toggleShowPacked() {
-      this.setState({ showPackedItems: !this.state.showPackedItems });
+      this.setState({ isShowingPacked: !this.state.isShowingPacked });
       console.log("hi there", this.props.itemData);
    }
 
    // toggle put packed on bottom
    togglePackedOnBottom() {
-      this.setState({ putPackedOnBottom: !this.state.putPackedOnBottom });
+      this.setState({ isPackedOnBottom: !this.state.isPackedOnBottom });
    }
 
    render() {
@@ -198,7 +198,7 @@ export default class Item extends React.Component {
 
          // find the number of packed items by counting how many have packed set to true
          const numPackedItems = itemData.items.reduce((numPacked, item) => {
-            if (item.packed) {
+            if (item.isPacked) {
                return (numPacked += 1);
             } else {
                return numPacked;
@@ -222,7 +222,7 @@ export default class Item extends React.Component {
                            type="checkbox"
                            id="packed-checkbox"
                            value="option1"
-                           checked={itemData.packed}
+                           checked={itemData.isPacked}
                         />
                      </div>
                      {itemData.name}
@@ -251,7 +251,7 @@ export default class Item extends React.Component {
                      </div>
                   </div>
                </div> */}
-               {this.state.expanded &&
+               {this.state.isExpanded &&
                   this.renderContainingItems(
                      itemData.items,
                      itemData.colorChoice
@@ -272,7 +272,7 @@ export default class Item extends React.Component {
                         type="checkbox"
                         id="packed-checkbox"
                         value="option1"
-                        checked={itemData.packed}
+                        checked={itemData.isPacked}
                      />
                   </div>
                   {itemData.name}

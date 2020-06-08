@@ -15,15 +15,15 @@ export default class Landing extends React.Component {
       };
    }
 
-   swithToNewAccountMode() {
+   setNewAccountMode() {
       this.setState({ landingMode: "new-account" });
    }
 
-   swithToLogInMode() {
+   setLogInMode() {
       this.setState({ landingMode: "log-in" });
    }
 
-   renderLogIn() {
+   renderLogInCard() {
       return (
          <div className="card mb-3">
             <div className="card-body">
@@ -68,7 +68,7 @@ export default class Landing extends React.Component {
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
-                     onClick={() => this.swithToNewAccountMode()}
+                     onClick={() => this.setNewAccountMode()}
                   >
                      Sign Up
                   </button>
@@ -78,7 +78,7 @@ export default class Landing extends React.Component {
       );
    }
 
-   renderNewAccount() {
+   renderNewAccountCard() {
       return (
          <div className="card mb-3">
             <div className="card-body">
@@ -133,7 +133,7 @@ export default class Landing extends React.Component {
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
-                     onClick={() => this.swithToLogInMode()}
+                     onClick={() => this.setLogInMode()}
                   >
                      Already Have an Account
                   </button>
@@ -153,9 +153,10 @@ export default class Landing extends React.Component {
                         <h1 className="mt-5 text-white">Loadout</h1>
                      </div>
                      {/* render either the log-in or new account cards depending on landingMode */}
-                     {this.state.landingMode === "log-in" && this.renderLogIn()}
+                     {this.state.landingMode === "log-in" &&
+                        this.renderLogInCard()}
                      {this.state.landingMode === "new-account" &&
-                        this.renderNewAccount()}
+                        this.renderNewAccountCard()}
                   </div>
                </div>
             </div>

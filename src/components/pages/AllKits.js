@@ -36,7 +36,7 @@ export default class AllKits extends React.Component {
             })} */}
             {/* put directly in a row as a quick hack to get it closer to the sides of the screen */}
             <div className="row">
-               <Item key={"sdfs"} itemData={gear} rootLevel={true} />
+               <Item key={"sdfs"} itemData={gear} itemLevel={0} />
             </div>
             {/* {Item.renderContainingItems(gear)} */}
          </AppTemplate>

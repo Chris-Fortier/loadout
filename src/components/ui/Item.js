@@ -95,7 +95,7 @@ export default class Item extends React.Component {
    }
 
    // renders a component for every child item for a item (give it the item object as itemData)
-   renderContainingItems(items, parentColorChoice = null) {
+   renderContainingItems(items, parentItemLevel) {
       let displayedItems = []; // initialize a new list for displayed items
 
       displayedItems = orderBy(items, "name", "asc"); // sort the items by name
@@ -115,20 +115,20 @@ export default class Item extends React.Component {
       // assign a rotating number to each item so I can give them alternating colors
       // there are three colors used for items to ensure that two adjacent items are always a different color
       // and their parent item is a different color
-      let colorsToUse = [];
-      if (parentColorChoice === 0) {
-         colorsToUse = [1, 2];
-      } else if (parentColorChoice === 1) {
-         colorsToUse = [0, 2];
-      } else if (parentColorChoice === 2) {
-         colorsToUse = [0, 1];
-      } else if (parentColorChoice === null) {
-         colorsToUse = [0, 1, 2];
-      }
-      for (let i in displayedItems) {
-         const evenOdd = i % colorsToUse.length;
-         displayedItems[i].colorChoice = colorsToUse[evenOdd];
-      }
+      // let colorsToUse = [];
+      // if (parentColorChoice === 0) {
+      //    colorsToUse = [1, 2];
+      // } else if (parentColorChoice === 1) {
+      //    colorsToUse = [0, 2];
+      // } else if (parentColorChoice === 2) {
+      //    colorsToUse = [0, 1];
+      // } else if (parentColorChoice === null) {
+      //    colorsToUse = [0, 1, 2];
+      // }
+      // for (let i in displayedItems) {
+      // const evenOdd = i % colorsToUse.length;
+      // displayedItems[i].colorChoice = colorsToUse[evenOdd];
+      // }
 
       // console.log("displayed items", parentColorChoice, displayedItems);
 
@@ -140,11 +140,16 @@ export default class Item extends React.Component {
       // render each sub item
       outputPieces.push(
          displayedItems.map((item) => {
-            return <Item key={item.name} itemData={item} />;
+            return (
+               <Item
+                  key={item.name}
+                  itemData={item}
+                  itemLevel={parentItemLevel + 1}
+               />
+            );
          })
       );
 
-      console.log("hello");
       return <div className="card-body">{outputPieces}</div>;
    }
 
@@ -170,23 +175,13 @@ export default class Item extends React.Component {
       // this is to simplify code below
       const itemData = this.props.itemData;
 
-      // if (this.props.hasOwnProperty("rootLevel")) {
-      //    console.log("root level");
-      //    return this.renderContainingItems(itemData.items);
-      // }
-
-      // get the color choice
-      // if (itemData.hasOwnProperty("colorChoice") === false) {
-      //    itemData.colorChoice = 2;
-      // }
-
       // render this if this item is the root level item
-      if (this.props.hasOwnProperty("rootLevel")) {
+      if (this.props.itemLevel === 0) {
          return (
             <>
                {this.renderContainingItems(
                   itemData.items,
-                  itemData.colorChoice
+                  this.props.itemLevel
                )}
             </>
          );
@@ -208,7 +203,8 @@ export default class Item extends React.Component {
          return (
             <div
                className={
-                  "card text-white mt-3 color" + String(itemData.colorChoice)
+                  "card text-white mt-3 color" +
+                  String(this.props.itemLevel % 3) // 3 is the number of color levels before it starts over
                }
             >
                <div
@@ -223,12 +219,17 @@ export default class Item extends React.Component {
                            id="packed-checkbox"
                            value="option1"
                            checked={itemData.isPacked}
+                           // style={{
+                           //    width: "20px",
+                           //    height: "20px",
+                           //    marginTop: "10px",
+                           // }}
                         />
                      </div>
                      {itemData.name}
                   </div>
-                  <div className="float-right">
-                     {numPackedItems}/{numItems}
+                  <div className="float-right text-dark">
+                     {numPackedItems} / {numItems}
                   </div>
                   <div className="clearfix"></div>
                </div>
@@ -254,7 +255,7 @@ export default class Item extends React.Component {
                {this.state.isExpanded &&
                   this.renderContainingItems(
                      itemData.items,
-                     itemData.colorChoice
+                     this.props.itemLevel
                   )}
             </div>
          );
@@ -262,7 +263,8 @@ export default class Item extends React.Component {
          return (
             <div
                className={
-                  "card text-white mt-3 color" + String(itemData.colorChoice)
+                  "card text-white mt-3 color" +
+                  String(this.props.itemLevel % 3) // 3 is the number of color levels before it starts over
                }
             >
                <div className="card-header">

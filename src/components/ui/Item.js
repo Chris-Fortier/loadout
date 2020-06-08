@@ -212,21 +212,21 @@ export default class Item extends React.Component {
                   onClick={() => this.toggleExpanded()}
                >
                   <div className="float-left">
-                     <div className="form-check form-check-inline">
+                     <div className="custom-control custom-checkbox">
                         <input
-                           className="form-check-input big-checkbox"
+                           className="custom-control-input"
                            type="checkbox"
                            id="packed-checkbox"
                            value="option1"
                            checked={itemData.isPacked}
-                           // style={{
-                           //    width: "20px",
-                           //    height: "20px",
-                           //    marginTop: "10px",
-                           // }}
                         />
+                        <label
+                           className="custom-control-label text-white"
+                           htmlFor="packed-checkbox"
+                        >
+                           {itemData.name}
+                        </label>
                      </div>
-                     {itemData.name}
                   </div>
                   <div className="float-right text-dark">
                      {numPackedItems} / {numItems}
@@ -268,16 +268,23 @@ export default class Item extends React.Component {
                }
             >
                <div className="card-header">
-                  <div className="form-check form-check-inline">
-                     <input
-                        className="form-check-input big-checkbox"
-                        type="checkbox"
-                        id="packed-checkbox"
-                        value="option1"
-                        checked={itemData.isPacked}
-                     />
+                  <div className="float-left">
+                     <div className="custom-control custom-checkbox">
+                        <input
+                           className="custom-control-input"
+                           type="checkbox"
+                           id="packed-checkbox"
+                           value="option1"
+                           checked={itemData.isPacked}
+                        />
+                        <label
+                           className="custom-control-label text-white"
+                           htmlFor="packed-checkbox"
+                        >
+                           {itemData.name}
+                        </label>
+                     </div>
                   </div>
-                  {itemData.name}
                </div>
             </div>
          );

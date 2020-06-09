@@ -35,6 +35,10 @@
    background-color: #877348; // flat dark earth
 }
 
+.extend-to-bottom {
+   min-height: 100vh;
+}
+
 .card {
    // border: 1px solid rgba(0, 0, 0, 0.125); // Bootstrap default
    border: 2px solid rgba(0, 0, 0, 0.25); //  make more noticable
@@ -91,14 +95,8 @@
 // style text for the packed / total items numbers
 .packed-counter {
    font-weight: 500;
-   color: black;
+   color: rgba(0, 0, 0, 0.7);
 }
-
-// style text for item name
-// .item-name {
-//    font-weight: 400;
-//    color: white;
-// }
 
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
@@ -114,6 +112,8 @@
    // font-stretch: expanded;
    text-transform: capitalize; // makes first letter of each word uppercase
    // }
+
+   color: rgba(255, 255, 255, 0.7);
 
    // .card-body {
    //    padding: 8px;

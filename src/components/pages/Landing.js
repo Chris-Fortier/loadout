@@ -61,7 +61,7 @@ export default class Landing extends React.Component {
                   <Link
                      className="btn btn-primary btn-block my-3"
                      id="login-button"
-                     to="/all-kits"
+                     to="/kits"
                   >
                      Log in
                   </Link>
@@ -126,7 +126,7 @@ export default class Landing extends React.Component {
                   <Link
                      className="btn btn-primary btn-block my-3"
                      id="login-button"
-                     to="/all-kits"
+                     to="/kits"
                   >
                      Complete New Account
                   </Link>

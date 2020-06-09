@@ -12,9 +12,9 @@ function App() {
       <Router>
          <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/all-kits" component={AllKits} />
+            <Route exact path="/kits" component={AllKits} />
             {/* handle gets any arbitrary text put in the url */}
-            <Route exact path="/:handle" component={ItemList} />
+            <Route exact path="/kits-:handle" component={ItemList} />
             <Route component={NotFound} />
          </Switch>
       </Router>

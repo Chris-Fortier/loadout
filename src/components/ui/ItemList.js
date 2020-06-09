@@ -93,13 +93,21 @@ export default class ItemList extends React.Component {
    render() {
       // get the item data
       let itemData;
-      // console.log("this.props.itemData", this.props.itemData);
+      console.log("render");
+
+      // if itemData was not passed to this
       if (this.props.itemData === undefined) {
-         // console.log("doing undefined");
-         const urlItemIndex = parseInt(this.props.match.params.handle); // gets the item index from the url
-         // console.log("urlItemIndex", urlItemIndex);
-         // console.log("gear.items", gear.items);
-         itemData = gear.items[urlItemIndex];
+         // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
+
+         const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
+         console.log("itemIndexPath", itemIndexPath);
+         itemData = gear;
+         console.log(itemIndexPath);
+         for (let levelIndex in itemIndexPath) {
+            itemData = itemData.items[parseInt(itemIndexPath[levelIndex])];
+         }
+         // const urlItemIndex = parseInt(this.props.match.params.handle); // gets the item index from the url
+         // itemData = gear.items[urlItemIndex];
       } else {
          itemData = this.props.itemData; // set itemData to the prop that was sent
       }
@@ -108,7 +116,14 @@ export default class ItemList extends React.Component {
       return (
          <AppTemplate>
             <h4>{itemData.name}</h4>
-            <Link to="/all-kits">Back</Link>
+            <Link
+               to={window.location.pathname.substring(
+                  0,
+                  window.location.pathname.lastIndexOf("-")
+               )}
+            >
+               Back
+            </Link>
             <div className="row">
                <div className="col">
                   <div className="custom-control custom-switch">

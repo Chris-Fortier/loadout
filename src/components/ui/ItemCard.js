@@ -29,9 +29,10 @@ export default class ItemCard extends React.Component {
 
          // console.log("hello", toKebabCase(itemData.name));
 
+         // a used so I can make the link relative to the full path
          expander = (
             <Link
-               to={"/" + this.props.itemIndex}
+               to={window.location.pathname + "-" + this.props.itemIndex}
                className="float-right packed-counter"
             >
                {numPackedItems} / {numItems}

@@ -52,13 +52,13 @@ export default class ItemCard extends React.Component {
                   <input
                      className="custom-control-input"
                      type="checkbox"
-                     id="packed-checkbox"
+                     id={"packed-checkbox-" + itemData.index}
                      value="option1"
                      checked={itemData.isPacked}
                   />
                   <label
                      className="custom-control-label"
-                     htmlFor="packed-checkbox"
+                     htmlFor={"packed-checkbox-" + itemData.index}
                   >
                      {itemData.name}
                   </label>

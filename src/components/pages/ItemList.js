@@ -9,22 +9,6 @@ import ItemCard from "../ui/ItemCard"; // new single level component that only v
 import orderBy from "lodash/orderBy";
 
 export default class ItemList extends React.Component {
-   // constructor() {
-   //    super(); // boilerplate line that needs to be in the constructor
-
-   //    // initialize state inside the constructor via this.state = {key: value, key: value,};
-   //    // set default state values for each component
-   //    // define a component's initial state
-   //    this.state = {
-   //       // isFavoritesChecked: false,
-   //       allKits: orderBy(gear, "name", "asc"),
-   //       // displayedFuncs: orderBy(uiData, "order", "desc"),
-   //       // orderBy: '["order", "desc"]',
-   //    };
-
-   //    // this.methodName = this.methodName.bind(this) // example boilerplate to bind this for each method
-   // }
-
    constructor() {
       super(); // boilerplate
 
@@ -40,13 +24,17 @@ export default class ItemList extends React.Component {
    // toggle show packed items
    toggleShowPacked() {
       this.setState({ isShowingPacked: !this.state.isShowingPacked });
-      console.log("hi there", this.props.itemData);
    }
 
    // toggle put packed on bottom
    togglePackedOnBottom() {
       this.setState({ isPackedOnBottom: !this.state.isPackedOnBottom });
    }
+
+   // // toggle show packed items
+   // unpackAll() {
+   //    this.setState({ isPacked: !this.state.isPacked });
+   // }
 
    renderContainingItems(items, parentItemLevel) {
       // get indices for each item (used in their pages' urls)

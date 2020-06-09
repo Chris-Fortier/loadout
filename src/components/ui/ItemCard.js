@@ -6,6 +6,24 @@ import { Link } from "react-router-dom"; // a React element for linking
 // import { toKebabCase } from "../../utils/helpers";
 
 export default class ItemCard extends React.Component {
+   constructor(props) {
+      super(props); // boilerplate line that needs to be in the constructor
+
+      // initialize state inside the constructor via this.state = {key: value, key: value,};
+      // set default state values for each component
+      // define a component's initial state
+      this.state = {
+         isPacked: this.props.itemData.isPacked, // initialize the state of isPacked to the data of isPacked
+      };
+
+      // this.methodName = this.methodName.bind(this) // example boilerplate to bind this for each method
+   }
+
+   // toggle show packed items
+   toggleIsPacked() {
+      this.setState({ isPacked: !this.state.isPacked });
+   }
+
    render() {
       // extra js can go here
 
@@ -54,7 +72,10 @@ export default class ItemCard extends React.Component {
                      type="checkbox"
                      id={"packed-checkbox-" + itemData.index}
                      value="option1"
-                     checked={itemData.isPacked}
+                     checked={this.state.isPacked}
+                     onChange={(e) => {
+                        this.toggleIsPacked(e);
+                     }}
                   />
                   <label
                      className="custom-control-label"

@@ -1,4 +1,5 @@
 export const gear = {
+   name: "All Kits",
    items: [
       {
          name: "Camping On Person",
@@ -47,12 +48,12 @@ export const gear = {
             {
                name: "first aid kit",
                isPacked: false,
-               // items: [
-               //    { name: "band-aids", isPacked: false },
-               //    { name: "moleskin", isPacked: true },
-               //    { name: "antacid", isPacked: true },
-               //    { name: "ibuprofen", isPacked: false },
-               // ],
+               items: [
+                  { name: "band-aids", isPacked: false },
+                  { name: "moleskin", isPacked: true },
+                  { name: "antacid", isPacked: true },
+                  { name: "ibuprofen", isPacked: false },
+               ],
             }, // first aid kit
             { name: "multi-function whistle", isPacked: true }, // thermometer/compass/whistle tool
             { name: "flashlight/lighter tool", isPacked: false }, // flashlight/lighter tool
@@ -207,9 +208,9 @@ export const gear = {
          ],
       },
 
-      // {
-      //    name: "Heavy jacket",
-      //    isPacked: false,
-      // },
+      {
+         name: "Heavy jacket",
+         isPacked: false,
+      },
    ],
 };

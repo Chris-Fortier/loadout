@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/pages/Landing";
 import AllKits from "./components/pages/AllKits";
 import NotFound from "./components/pages/NotFound";
+import ItemList from "./components/ui/ItemList";
 
 function App() {
    // I think these declare different urls as differnt React components under the hood
@@ -12,6 +13,8 @@ function App() {
          <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/all-kits" component={AllKits} />
+            {/* handle gets any arbitrary text put in the url */}
+            <Route exact path="/:handle" component={ItemList} />
             <Route component={NotFound} />
          </Switch>
       </Router>

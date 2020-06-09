@@ -1,8 +1,11 @@
 import React from "react";
-import AppTemplate from "../ui/AppTemplate";
+// import AppTemplate from "../ui/AppTemplate";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { gear } from "../../data/gear";
-import Item from "../ui/Item";
+// import Item from "../ui/Item";
+// import SingleLevel from "../ui/SingleLevel"; // new single level component that only views one level at a time
+// import ItemCard from "../ui/ItemCard"; // new single level component that only views one level at a time
+import ItemList from "../ui/ItemList"; // new single level component that only views one level at a time
 import orderBy from "lodash/orderBy";
 
 export default class AllKits extends React.Component {
@@ -26,20 +29,6 @@ export default class AllKits extends React.Component {
 
    render() {
       // console.log(Item.renderContainingItems());
-      return (
-         <AppTemplate>
-            <h4>My Kits</h4>
-
-            {/* renders each top-level item (kit) */}
-            {/* {this.state.allKits.map((item) => {
-               return <Item key={item.name} itemData={item} />;
-            })} */}
-            {/* put directly in a row as a quick hack to get it closer to the sides of the screen */}
-            <div className="row">
-               <Item key={"sdfs"} itemData={gear} itemLevel={0} />
-            </div>
-            {/* {Item.renderContainingItems(gear)} */}
-         </AppTemplate>
-      );
+      return <ItemList key={"sdfs"} itemData={gear} />;
    }
 }

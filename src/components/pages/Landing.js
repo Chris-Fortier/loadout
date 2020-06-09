@@ -30,17 +30,17 @@ export default class Landing extends React.Component {
                <h5 className="card-title">Log In</h5>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
-                     {/* <label htmlFor="existing-username-input">
-            Username
+                     {/* <label htmlFor="existing-email-input">
+            email
          </label> */}
                      <input
                         className="form-control"
-                        id="existing-username-input"
-                        placeholder="username"
+                        id="existing-email-input"
+                        placeholder="Enter Your Email"
                         required
                      />
-                     <div className="text-danger" id="existing-username-error">
-                        username error
+                     <div className="text-danger" id="existing-email-error">
+                        email error
                      </div>
                   </div>
                   <div className="form-group">
@@ -51,7 +51,7 @@ export default class Landing extends React.Component {
                         type="password"
                         className="form-control"
                         id="existing-password-input"
-                        placeholder="password"
+                        placeholder="Enter Your Password"
                         required
                      />
                      <div className="text-danger" id="existing-password-error">
@@ -85,17 +85,17 @@ export default class Landing extends React.Component {
                <h5 className="card-title">Make New Account</h5>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
-                     {/* <label htmlFor="new-username-input">
-               Username
+                     {/* <label htmlFor="new-email-input">
+               email
             </label> */}
                      <input
                         className="form-control"
-                        id="new-username-input"
-                        placeholder="make a username"
+                        id="new-email-input"
+                        placeholder="Enter Your Email"
                         required
                      />
-                     <div className="text-danger" id="new-username-error">
-                        username error
+                     <div className="text-danger" id="new-email-error">
+                        email error
                      </div>
                   </div>
                   <div className="form-group">
@@ -106,21 +106,11 @@ export default class Landing extends React.Component {
                         type="password"
                         className="form-control"
                         id="new-password-input"
-                        placeholder="make a password"
+                        placeholder="Enter a Password"
                         required
                      />
                      <div className="text-danger" id="new-password-error">
                         password doesn't meet requirements
-                     </div>
-                     <input
-                        type="password"
-                        className="form-control"
-                        id="new-repeat-password-input"
-                        placeholder="repeat your password"
-                        required
-                     />
-                     <div className="text-danger" id="new-password-error">
-                        passwords don't match
                      </div>
                   </div>
                   <Link

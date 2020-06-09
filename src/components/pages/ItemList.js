@@ -125,7 +125,7 @@ export default class ItemList extends React.Component {
       return (
          <>
             <Header />
-            <div className={"extend-to-bottom color" + String(itemLevel % 3)}>
+            <div className={"item-list color" + String(itemLevel % 3)}>
                <div className="container">
                   <div className="row">
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -195,7 +195,9 @@ export default class ItemList extends React.Component {
                         </div>
                         <div className="row">
                            <div className="col">
-                              <button className="btn">Unpack All</button>
+                              <button className="btn action-button">
+                                 Unpack All
+                              </button>
                            </div>
                         </div>
                         <div className="row">

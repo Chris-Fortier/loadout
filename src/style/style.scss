@@ -35,8 +35,10 @@
    background-color: #877348; // flat dark earth
 }
 
-.extend-to-bottom {
-   min-height: 100vh;
+.item-list {
+   padding-top: 100px; // some space at top below the header
+   min-height: 100vh; // makes the background color (which is set in different class) extend to bottom of page
+   padding-top: 1rem;
 }
 
 .card {
@@ -85,11 +87,12 @@
 //    font-size: 75px;
 // }
 
-// style text for switch labels inside card body
+// style text for switch labels
 .display-switch-label {
    font-weight: 300;
    color: rgba(0, 0, 0, 0.5);
    text-transform: uppercase;
+   font-size: 1.25rem;
 }
 
 // style text for the packed / total items numbers
@@ -107,7 +110,7 @@
    // .card-header {
    // 12 12 20 20
    line-height: 1;
-   font-size: 24px;
+   font-size: 1.5rem;
    padding: 8px;
    // font-stretch: expanded;
    text-transform: capitalize; // makes first letter of each word uppercase
@@ -121,9 +124,9 @@
 }
 
 // puts breathing room after the last item card
-.item-card:last-of-type {
-   margin-bottom: 100px;
-}
+// .item-card:last-of-type {
+//    margin-bottom: 100px;
+// }
 
 // .btn {
 //    text-transform: uppercase;
@@ -141,10 +144,11 @@
 
    .btn-link {
       color: rgba(255, 255, 255, 0.7); //$header-text-color;
-      font-weight: 600;
+      font-weight: 500;
       text-transform: uppercase;
       padding: 4px 16px; // padding between each button
       line-height: 1;
+      font-size: 1.25rem;
    }
 }
 
@@ -155,7 +159,15 @@ h1 {
 
 // this is for the name of the item on that item's page we are looking at
 h4 {
-   padding-top: 1rem;
    font-size: 2rem;
    text-transform: capitalize; // makes first letter of each word uppercase
+}
+
+// for buttons that do something to the entire list
+.action-button {
+   background-color: rgba(0, 0, 0, 0.7);
+   padding: 0;
+   margin: 4px;
+   color: rgba(255, 255, 255, 0.7);
+   text-transform: uppercase;
 }

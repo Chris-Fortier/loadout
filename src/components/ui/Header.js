@@ -88,7 +88,7 @@ export default class Header extends React.Component {
 
    render() {
       return (
-         <>
+         <div className="page-header">
             <div className="row">
                <div className="col">
                   <button
@@ -107,7 +107,7 @@ export default class Header extends React.Component {
             </div>
             {this.state.rollout === "Loadout" && this.renderLoadoutRollout()}
             {this.state.rollout === "Account" && this.renderAccountRollout()}
-         </>
+         </div>
       );
    }
 }

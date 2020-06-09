@@ -40,70 +40,32 @@ export default class ItemCard extends React.Component {
          );
       }
 
-      //    return (
-      //       <div
-      //          className={
-      //             "card text-white mt-3 item-card color" +
-      //             String(this.props.itemLevel % 3) // 3 is the number of color levels before it starts over
-      //          }
-      //       >
-      //          <div
-      //             className="card-header"
-      //             onClick={() => this.toggleExpanded()}
-      //          >
-      //             <div className="float-left">
-      //                <div className="custom-control custom-checkbox">
-      //                   <input
-      //                      className="custom-control-input"
-      //                      type="checkbox"
-      //                      id="packed-checkbox"
-      //                      value="option1"
-      //                      checked={itemData.isPacked}
-      //                   />
-      //                   <label
-      //                      className="custom-control-label text-white"
-      //                      htmlFor="packed-checkbox"
-      //                   >
-      //                      {itemData.name}
-      //                   </label>
-      //                </div>
-      //             </div>
-      //             <div className="float-right packed-counter">
-      //                {numPackedItems} / {numItems}
-      //             </div>
-      //             <div className="clearfix"></div>
-      //          </div>
-      //          {this.state.isExpanded &&
-      //             this.renderContainingItems(
-      //                itemData.items,
-      //                this.props.itemLevel
-      //             )}
-      //       </div>
-      //    );
-      // }
-
       return (
-         <div className="card item-card">
-            <div className="card-header">
-               <div className="float-left">
-                  <div className="custom-control custom-checkbox">
-                     <input
-                        className="custom-control-input"
-                        type="checkbox"
-                        id="packed-checkbox"
-                        value="option1"
-                        checked={itemData.isPacked}
-                     />
-                     <label
-                        className="custom-control-label"
-                        htmlFor="packed-checkbox"
-                     >
-                        {itemData.name}
-                     </label>
-                  </div>
+         <div
+            className={
+               "card item-card color" + String(this.props.itemLevel % 3)
+            }
+         >
+            {/* <div className="card-header"> */}
+            <div className="float-left">
+               <div className="custom-control custom-checkbox">
+                  <input
+                     className="custom-control-input"
+                     type="checkbox"
+                     id="packed-checkbox"
+                     value="option1"
+                     checked={itemData.isPacked}
+                  />
+                  <label
+                     className="custom-control-label"
+                     htmlFor="packed-checkbox"
+                  >
+                     {itemData.name}
+                  </label>
+                  {expander}
                </div>
-               {expander}
             </div>
+            {/* </div> */}
          </div>
       );
    }

@@ -23,7 +23,6 @@
 
 // alternating colors for gear cards
 .color0 {
-   // background-color: rgb(124, 134, 89);
    background-color: #92969a; // urban gray
 }
 .color1 {
@@ -32,7 +31,6 @@
    background-color: #457462; // foliage green
 }
 .color2 {
-   // background-color: rgb(134, 119, 52);
    // background-color: #ddb77b; // coyote
    background-color: #877348; // flat dark earth
 }
@@ -79,13 +77,9 @@
    height: 20px;
 }
 
-h1 {
-   font-size: 75px;
-}
-
-h2 {
-   font-size: 75px;
-}
+// h2 {
+//    font-size: 75px;
+// }
 
 // style text for switch labels inside card body
 .display-switch-label {
@@ -109,25 +103,59 @@ h2 {
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
-   margin-top: 12px;
+   margin-bottom: 12px;
 
    // text style for item card headers
-   .card-header {
-      // 12 12 20 20
-      line-height: 1;
-      font-size: 24px;
-      padding: 8px;
-      // font-stretch: expanded;
-      text-transform: capitalize; // makes first letter of each word uppercase
-   }
+   // .card-header {
+   // 12 12 20 20
+   line-height: 1;
+   font-size: 24px;
+   padding: 8px;
+   // font-stretch: expanded;
+   text-transform: capitalize; // makes first letter of each word uppercase
+   // }
 
-   .card-body {
-      padding: 8px;
+   // .card-body {
+   //    padding: 8px;
+   // }
+}
+
+// puts breathing room after the last item card
+.item-card:last-of-type {
+   margin-bottom: 100px;
+}
+
+// .btn {
+//    text-transform: uppercase;
+//    font-weight: 700;
+//    color: rgba(0, 0, 0, 0.7);
+// }
+
+// style for the header on the top of the page
+.page-header {
+   background-color: $header-bg-color;
+
+   // padding for the entire header
+   padding-top: 16px;
+   padding-bottom: 8px;
+
+   .btn-link {
+      color: rgba(255, 255, 255, 0.7); //$header-text-color;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 4px 16px; // padding between each button
+      line-height: 1;
    }
 }
 
-.btn {
-   text-transform: uppercase;
-   font-weight: 700;
-   color: rgba(0, 0, 0, 0.7);
+// main title on landing page
+h1 {
+   font-size: 75px;
+}
+
+// this is for the name of the item on that item's page we are looking at
+h4 {
+   padding-top: 1rem;
+   font-size: 2rem;
+   text-transform: capitalize; // makes first letter of each word uppercase
 }

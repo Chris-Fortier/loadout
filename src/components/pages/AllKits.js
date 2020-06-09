@@ -29,6 +29,6 @@ export default class AllKits extends React.Component {
 
    render() {
       // console.log(Item.renderContainingItems());
-      return <ItemList key={"sdfs"} itemData={gear} />;
+      return <ItemList key={"sdfs"} itemData={gear} level={0} />;
    }
 }

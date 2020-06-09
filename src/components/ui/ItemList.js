@@ -83,6 +83,7 @@ export default class ItemList extends React.Component {
                itemData={item}
                itemLevel={parentItemLevel + 1}
                itemIndex={item.index}
+               parentName={item.name}
             />
          );
       });
@@ -92,96 +93,107 @@ export default class ItemList extends React.Component {
 
    render() {
       // get the item data
-      let itemData;
-      console.log("render");
+      let itemData; // initialize itemData
+      let parentName = null; // initialize the name of the parent
+      let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+      // console.log("render");
 
       // if itemData was not passed to this
-      if (this.props.itemData === undefined) {
-         // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
+      // if (this.props.itemData === undefined) {
+      // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
 
-         const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
-         console.log("itemIndexPath", itemIndexPath);
-         itemData = gear;
-         console.log(itemIndexPath);
-         for (let levelIndex in itemIndexPath) {
+      const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
+      // console.log("itemIndexPath", itemIndexPath);
+      itemData = gear;
+      for (let levelIndex in itemIndexPath) {
+         if (itemIndexPath[levelIndex] !== "") {
+            parentName = itemData.name;
             itemData = itemData.items[parseInt(itemIndexPath[levelIndex])];
+            itemLevel++;
          }
-         // const urlItemIndex = parseInt(this.props.match.params.handle); // gets the item index from the url
-         // itemData = gear.items[urlItemIndex];
-      } else {
-         itemData = this.props.itemData; // set itemData to the prop that was sent
       }
-      console.log("itemData", itemData);
+      // const urlItemIndex = parseInt(this.props.match.params.handle); // gets the item index from the url
+      // itemData = gear.items[urlItemIndex];
+      // } else {
+      //    itemData = this.props.itemData; // set itemData to the prop that was sent
+      // }
+      // console.log("itemData", itemData);
+
+      console.log("itemLevel", itemLevel);
 
       return (
          <AppTemplate>
-            <h4>{itemData.name}</h4>
-            <Link
-               to={window.location.pathname.substring(
-                  0,
-                  window.location.pathname.lastIndexOf("-")
+            <div className={"color" + String(itemLevel % 3)}>
+               {parentName !== null && (
+                  <Link
+                     to={window.location.pathname.substring(
+                        0,
+                        window.location.pathname.lastIndexOf("-")
+                     )}
+                  >
+                     Back to {parentName}
+                  </Link>
                )}
-            >
-               Back
-            </Link>
-            <div className="row">
-               <div className="col">
-                  <div className="custom-control custom-switch">
-                     <input
-                        type="checkbox"
-                        className="custom-control-input display-switch-label"
-                        id={"show-packed-switch" + itemData.name}
-                        checked={this.state.isShowingPacked}
-                        onChange={(e) => {
-                           this.toggleShowPacked(e);
-                        }}
-                        // onChange={(e) => {
-                        //    this.toggleShowPacked(e);
-                        // }}
-                     />
-                     <label
-                        className="custom-control-label display-switch-label"
-                        htmlFor={"show-packed-switch" + itemData.name}
-                     >
-                        Show {} Packed Items
-                     </label>
-                  </div>
-                  {/* need to make this switch only render if we are seeing packed items */}
-                  {this.state.isShowingPacked && (
+               <h4>{itemData.name}</h4>
+               {/* {this.props.hasOwnProperty("parentName") && this.props.parentName} */}
+               <div className="row">
+                  <div className="col">
                      <div className="custom-control custom-switch">
                         <input
                            type="checkbox"
                            className="custom-control-input display-switch-label"
-                           id={"packed-on-bottom-switch" + itemData.name}
-                           checked={this.state.isPackedOnBottom}
+                           id={"show-packed-switch" + itemData.name}
+                           checked={this.state.isShowingPacked}
                            onChange={(e) => {
-                              this.togglePackedOnBottom(e);
+                              this.toggleShowPacked(e);
                            }}
+                           // onChange={(e) => {
+                           //    this.toggleShowPacked(e);
+                           // }}
                         />
                         <label
                            className="custom-control-label display-switch-label"
-                           htmlFor={"packed-on-bottom-switch" + itemData.name}
+                           htmlFor={"show-packed-switch" + itemData.name}
                         >
-                           Move Packed to Bottom
+                           Show {} Packed Items
                         </label>
                      </div>
-                  )}
+                     {/* need to make this switch only render if we are seeing packed items */}
+                     {this.state.isShowingPacked && (
+                        <div className="custom-control custom-switch">
+                           <input
+                              type="checkbox"
+                              className="custom-control-input display-switch-label"
+                              id={"packed-on-bottom-switch" + itemData.name}
+                              checked={this.state.isPackedOnBottom}
+                              onChange={(e) => {
+                                 this.togglePackedOnBottom(e);
+                              }}
+                           />
+                           <label
+                              className="custom-control-label display-switch-label"
+                              htmlFor={
+                                 "packed-on-bottom-switch" + itemData.name
+                              }
+                           >
+                              Move Packed to Bottom
+                           </label>
+                        </div>
+                     )}
+                  </div>
                </div>
-            </div>
-            <div className="row">
-               <div className="col">
-                  <button className="btn">Unpack All</button>
+               <div className="row">
+                  <div className="col">
+                     <button className="btn">Unpack All</button>
+                  </div>
                </div>
-            </div>
-            <div className="row">
-               <div className="col">
-                  {/* {itemData.items.map((subItem) => {
+               <div className="row">
+                  <div className="col">
+                     {/* {itemData.items.map((subItem) => {
                      return <ItemCard key={"sdfs"} itemData={subItem} />;
                   })} */}
-                  {this.renderContainingItems(
-                     itemData.items,
-                     this.props.itemLevel
-                  )}
+                     {this.renderContainingItems(itemData.items, itemLevel)}
+                  </div>
                </div>
             </div>
          </AppTemplate>

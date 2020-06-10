@@ -73,43 +73,59 @@ export default class ItemList extends React.Component {
 
       let expander = null;
 
+      let checkBoxClassSuffix = "";
+      let expanderClassSuffix = "";
       // do this if this item has subitems
       if (itemData.hasOwnProperty("items")) {
          this.setItemNums(itemData); // find the number of items packed and total number of items
+
+         // this will make the checkboxes disabled for items that don't have all their containing items packed
+         if (itemData.numPackedItems < itemData.numItems) {
+            checkBoxClassSuffix = " faint";
+         } else {
+            expanderClassSuffix = " faint";
+         }
 
          // a used so I can make the link relative to the full path
          expander = (
             <Link
                to={window.location.pathname + "-" + itemData.index}
-               className="float-right packed-counter"
+               className={"float-right packed-counter" + expanderClassSuffix}
             >
-               {itemData.numPackedItems} / {itemData.numItems} >>
+               {itemData.numPackedItems} / {itemData.numItems} >
             </Link>
          );
       }
 
       return (
          <div className={"card item-card color" + String(itemData.level % 3)}>
-            <div className="float-left">
-               <div className="custom-control custom-checkbox">
-                  <input
-                     className="custom-control-input"
-                     type="checkbox"
-                     id={"packed-checkbox-" + itemData.index}
-                     value="option1"
-                     checked={itemData.isPacked}
-                     onChange={(e) => {
-                        this.toggleIsPacked(itemData);
-                     }}
-                  />
-                  <label
-                     className="custom-control-label"
-                     htmlFor={"packed-checkbox-" + itemData.index}
+            <div className="row">
+               <div className="col-1">
+                  {/* <div className="float-left"> */}
+                  <div
+                     className={
+                        "custom-control custom-checkbox" + checkBoxClassSuffix
+                     }
                   >
-                     {itemData.name}
-                  </label>
-                  {expander}
+                     <input
+                        className="custom-control-input"
+                        type="checkbox"
+                        id={"packed-checkbox-" + itemData.index}
+                        value="option1"
+                        checked={itemData.isPacked}
+                        onChange={(e) => {
+                           this.toggleIsPacked(itemData);
+                        }}
+                     />
+                     {/* for some reason if I don't have a label, the entire checkbox is not visible */}
+                     <label
+                        className="custom-control-label"
+                        htmlFor={"packed-checkbox-" + itemData.index}
+                     ></label>
+                  </div>
                </div>
+               <div className="col">{itemData.name}</div>
+               <div className="col-4 col-sm-4">{expander}</div>
             </div>
          </div>
       );
@@ -126,7 +142,8 @@ export default class ItemList extends React.Component {
 
       let displayedItems = []; // initialize a new list for displayed items
 
-      displayedItems = orderBy(items, "name", "asc"); // sort the items by name
+      // displayedItems = orderBy(items, "name", "asc"); // sort the items by name
+      displayedItems = items;
 
       // sort the items by packed status if desired, with packed items on bottom
       if (this.state.isPackedOnBottom) {

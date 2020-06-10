@@ -56,7 +56,7 @@ export const gear = {
                ],
             }, // first aid kit
             { name: "multi-function whistle", isPacked: true }, // thermometer/compass/whistle tool
-            { name: "flashlight/lighter tool", isPacked: false }, // flashlight/lighter tool
+            { name: "flashlight/ lighter tool", isPacked: false }, // flashlight/lighter tool
             { name: "USB cable", isPacked: true }, // USB cable
             { name: "Garmin watch cable", isPacked: true }, // Garmin watch cable
             { name: "water bladder", isPacked: true }, // water bladder
@@ -166,9 +166,9 @@ export const gear = {
          name: "Overnight Bag",
          isPacked: false,
          items: [
-            { name: "change of clothes", isPacked: false },
-            { name: "sleepwear", isPacked: false },
-            { name: "personal kit", isPacked: false },
+            { name: "change of clothes", isPacked: true },
+            { name: "sleepwear", isPacked: true },
+            { name: "personal kit", isPacked: true },
          ],
       },
 

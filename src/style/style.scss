@@ -127,6 +127,13 @@
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
    margin-bottom: 12px;
+
+   // padding inside the full page card
+   .card-header,
+   .card-body {
+      padding: 12px;
+      padding-bottom: 0px;
+   }
 }
 
 // no space after last item-card
@@ -181,13 +188,7 @@ h4 {
    text-transform: uppercase;
 }
 
-// padding inside the full page card
-.card-header,
-.card-body {
-   padding: 12px;
-   padding-bottom: 0px;
-}
-
+// for the button link that goes up a level
 .up-level {
    font-size: 1.25rem;
    color: rgba(0, 0, 0, 0.7);

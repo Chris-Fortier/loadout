@@ -17,7 +17,7 @@ export default class ItemList extends React.Component {
       // console.log("props", props);
 
       this.state = {
-         isShowingPacked: false,
+         isShowingPacked: true,
          isPackedOnBottom: false,
          // isPackeds: this.props.itemData.items.map((subitem) => {
          //    subitem.isPacked;
@@ -43,7 +43,7 @@ export default class ItemList extends React.Component {
       console.log("unpacking all");
       for (let i in itemData.items) {
          itemData.items[i].isPacked = false;
-         this.forceUpdate();
+         this.forceUpdate(); // forces re-render, hacky way
       }
    }
 
@@ -220,7 +220,8 @@ export default class ItemList extends React.Component {
          pageBgClasses = "item-list color" + String(itemLevel % 3);
       } else {
          pageBgClasses = "item-list color" + String((itemLevel - 1) % 3);
-         pageContentClasses = "card color" + String(itemLevel % 3);
+         pageContentClasses =
+            "card super-item-card color" + String(itemLevel % 3);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }
@@ -234,6 +235,7 @@ export default class ItemList extends React.Component {
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                         {parentName !== null && (
                            <Link
+                              className="up-level"
                               to={window.location.pathname.substring(
                                  0,
                                  window.location.pathname.lastIndexOf("-")

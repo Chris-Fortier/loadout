@@ -24,8 +24,8 @@ export const gear = {
          isPacked: false,
          items: [
             { name: "Cannon 6D", isPacked: true },
-            { name: "extra battery", isPacked: false },
-            { name: "extra memory card", isPacked: false },
+            { name: "extra battery", isPacked: true },
+            { name: "extra memory card", isPacked: true },
             { name: "gray card", isPacked: true },
             { name: "70-300mm lens", isPacked: true },
             { name: "50mm lens", isPacked: true },
@@ -90,8 +90,8 @@ export const gear = {
             { name: "solar hanging light", isPacked: true }, // solar hanging light
             { name: "lantern", isPacked: true }, // lantern
             { name: "extra D batteries", isPacked: true }, // extra D batteries
-            { name: "umbrella", isPacked: false }, // umbrella
-            { name: "water bucket", isPacked: false }, // water bucket
+            { name: "umbrella", isPacked: true }, // umbrella
+            { name: "water bucket", isPacked: true }, // water bucket
             { name: "disposable hand warmers", isPacked: true }, // disposable hand warmers
             { name: "camp soap", isPacked: true }, // camp soap
             { name: "grocery bags", isPacked: true }, // grocery bags

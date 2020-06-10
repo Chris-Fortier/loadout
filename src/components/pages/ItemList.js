@@ -43,10 +43,14 @@ export default class ItemList extends React.Component {
 
    // toggle show packed items
    toggleIsPacked(itemData) {
-      itemData.isPacked = !itemData.isPacked;
-      this.forceUpdate(); // forces re-render, hacky way
-      console.log("itemData.isPacked", itemData.isPacked);
-      console.log("this.props", this.props);
+      // this.setItemNums(itemData); // make sure the number of packed items this has is up to date
+      // console.log(itemData.numPackedItems);
+      if (itemData.numPackedItems === itemData.numItems) {
+         itemData.isPacked = !itemData.isPacked;
+         this.forceUpdate(); // forces re-render, hacky way
+         // console.log("itemData.isPacked", itemData.isPacked);
+         // console.log("this.props", this.props);
+      }
    }
 
    // this sets the packed number of items and the total number of items
@@ -63,6 +67,7 @@ export default class ItemList extends React.Component {
       }, 0);
    }
 
+   // renders a one line card represenation of an item
    renderItemCard(itemData) {
       // console.log("render item card with this", itemData);
 

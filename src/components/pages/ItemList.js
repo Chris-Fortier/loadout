@@ -3,6 +3,12 @@ import Header from "../ui/Header";
 import { Link } from "react-router-dom"; // a React element for linking
 import { gear } from "../../data/gear";
 import orderBy from "lodash/orderBy";
+import {
+   // IconEdit,
+   // IconAddCircle,
+   IconArrowThinLeftCircle,
+   IconArrowThinRightCircle,
+} from "../../icons/icons.js";
 
 export default class ItemList extends React.Component {
    constructor() {
@@ -13,6 +19,7 @@ export default class ItemList extends React.Component {
       this.state = {
          isShowingPacked: true,
          isPackedOnBottom: false,
+         isEditMode: false,
       };
    }
 
@@ -94,17 +101,9 @@ export default class ItemList extends React.Component {
                   className={"float-right packed-counter" + expanderClassSuffix}
                >
                   {itemData.numPackedItems} / {itemData.numItems}
-                  <svg
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24"
-                     class="icon w-8 ml-1 icon-arrow-thin-right-circle"
-                  >
-                     <circle cx="12" cy="12" r="10" class="primary" />
-                     <path
-                        class="secondary"
-                        d="M14.59 13H7a1 1 0 0 1 0-2h7.59l-2.3-2.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4l2.3-2.3z"
-                     />
-                  </svg>
+                  <div className="icon right">
+                     <IconArrowThinRightCircle />
+                  </div>
                </Link>
             </>
          );
@@ -143,6 +142,25 @@ export default class ItemList extends React.Component {
          </div>
       );
    }
+
+   // // renders a one line card represenation of an item
+   // renderItemCardEdit(itemData) {
+   //    return (
+   //       <div className={"card item-card color" + String(itemData.level % 3)}>
+   //          <div className="row">
+   //             <div className="col-1"></div>
+   //             <div className="col">
+   //                <input
+   //                   className="edit-name"
+   //                   id="exampleInputEmail1"
+   //                   value={itemData.name}
+   //                />
+   //             </div>
+   //             <div className="col-4 col-sm-4">^ / v</div>
+   //          </div>
+   //       </div>
+   //    );
+   // }
 
    renderContainingItems(itemData) {
       const items = itemData.items; // to simplify code below
@@ -231,25 +249,13 @@ export default class ItemList extends React.Component {
                                  window.location.pathname.lastIndexOf("-")
                               )}
                            >
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24"
-                                 class="icon mr-1 icon-arrow-thin-left-circle"
-                              >
-                                 <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    class="primary"
-                                 />
-                                 <path
-                                    class="secondary"
-                                    d="M9.41 11H17a1 1 0 0 1 0 2H9.41l2.3 2.3a1 1 0 1 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.42 1.4L9.4 11z"
-                                 />
-                              </svg>
+                              <span className="icon left">
+                                 <IconArrowThinLeftCircle />
+                              </span>
                               Back to {parentName}
                            </Link>
                         )}
+                        {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>
                            <div className={levelHeaderClasses}>
                               <div className="row">

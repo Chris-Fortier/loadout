@@ -234,8 +234,13 @@ h5 {
    opacity: 0.25;
 }
 
+// size and color of icons
 .icon {
    width: 20px;
+
+   .right {
+      float: right;
+   }
 
    .primary {
       fill: rgba(0, 0, 0, 0.25);
@@ -244,4 +249,23 @@ h5 {
    .secondary {
       fill: rgba(0, 0, 0, 0.75);
    }
+}
+
+// for icons at the left of the line
+.icon.left {
+   float: left;
+   margin-right: 4px;
+}
+
+// for icons at the right of the line
+.icon.right {
+   float: right;
+   margin-left: 4px;
+}
+
+.edit-name {
+   background-color: rgba(0, 0, 0, 0);
+   // padding: 0px;
+   margin-top: -10px;
+   margin-bottom: -10px;
 }

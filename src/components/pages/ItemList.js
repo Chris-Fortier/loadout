@@ -33,8 +33,12 @@ export default class ItemList extends React.Component {
       console.log("unpacking all");
       for (let i in itemData.items) {
          itemData.items[i].isPacked = false;
-         this.forceUpdate(); // forces re-render, hacky way
+         if (itemData.items[i].hasOwnProperty("items")) {
+            // unpack all this item's items and so on
+            this.unpackAll(itemData.items[i]);
+         }
       }
+      this.forceUpdate(); // forces re-render, hacky way
    }
 
    // toggle show packed items

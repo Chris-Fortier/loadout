@@ -27,7 +27,7 @@ export default class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5 className="card-title">Log In</h5>
+               <h5>Welcome Back</h5>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
                      {/* <label htmlFor="existing-email-input">
@@ -39,9 +39,9 @@ export default class Landing extends React.Component {
                         placeholder="Enter Your Email"
                         required
                      />
-                     <div className="text-danger" id="existing-email-error">
+                     <p className="text-danger" id="existing-email-error">
                         email error
-                     </div>
+                     </p>
                   </div>
                   <div className="form-group">
                      {/* <label htmlFor="existing-password-input">
@@ -54,23 +54,23 @@ export default class Landing extends React.Component {
                         placeholder="Enter Your Password"
                         required
                      />
-                     <div className="text-danger" id="existing-password-error">
+                     <p className="text-danger" id="existing-password-error">
                         password error
-                     </div>
+                     </p>
                   </div>
                   <Link
                      className="btn btn-primary btn-block my-3"
                      id="login-button"
                      to="/gear-"
                   >
-                     Log in
+                     Sign In
                   </Link>
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
                      onClick={() => this.setNewAccountMode()}
                   >
-                     Sign Up
+                     Make an Account
                   </button>
                </form>
             </div>
@@ -82,7 +82,7 @@ export default class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5 className="card-title">Make New Account</h5>
+               <h5>Make An Account</h5>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
                      {/* <label htmlFor="new-email-input">
@@ -94,9 +94,9 @@ export default class Landing extends React.Component {
                         placeholder="Enter Your Email"
                         required
                      />
-                     <div className="text-danger" id="new-email-error">
+                     <p className="text-danger" id="new-email-error">
                         email error
-                     </div>
+                     </p>
                   </div>
                   <div className="form-group">
                      {/* <label htmlFor="new-password-input">
@@ -109,23 +109,23 @@ export default class Landing extends React.Component {
                         placeholder="Enter a Password"
                         required
                      />
-                     <div className="text-danger" id="new-password-error">
+                     <p className="text-danger" id="new-password-error">
                         password doesn't meet requirements
-                     </div>
+                     </p>
                   </div>
                   <Link
                      className="btn btn-primary btn-block my-3"
                      id="login-button"
                      to="/gear-"
                   >
-                     Complete New Account
+                     Join
                   </Link>
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
                      onClick={() => this.setLogInMode()}
                   >
-                     Already Have an Account
+                     Already Have Account
                   </button>
                </form>
             </div>

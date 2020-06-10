@@ -61,6 +61,11 @@
 
 // style specific to the landing page
 .landing-page {
+   input,
+   p {
+      font-size: 1.25rem;
+   }
+
    h1 {
       text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.7);
    }
@@ -75,6 +80,20 @@
       // input {
       //    opacity: default;
       // }
+   }
+
+   .btn-primary {
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      font-size: 1.25rem;
+      font-weight: 600;
+   }
+
+   .btn-secondary {
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: capitalize;
+      font-size: 1.25rem;
+      font-weight: 300;
    }
 }
 
@@ -184,6 +203,13 @@ h4 {
    font-size: 2rem;
    text-transform: capitalize; // makes first letter of each word uppercase
    color: rgba(255, 255, 255, 0.8);
+}
+
+// this is for the titles of the landing page cards
+h5 {
+   font-size: 2rem;
+   text-transform: capitalize; // makes first letter of each word uppercase
+   color: rgba(0, 0, 0, 0.8);
 }
 
 // for buttons that do something to the entire list

@@ -123,10 +123,10 @@
    // }
 }
 
-// puts breathing room after the last item card
-// .item-card:last-of-type {
-//    margin-bottom: 100px;
-// }
+// no space after last item-card
+.item-card:last-of-type {
+   margin-bottom: 0;
+}
 
 // .btn {
 //    text-transform: uppercase;
@@ -170,4 +170,10 @@ h4 {
    margin: 4px;
    color: rgba(255, 255, 255, 0.7);
    text-transform: uppercase;
+}
+
+// padding inside the full page card
+.card-header,
+.card-body {
+   padding: 12px;
 }

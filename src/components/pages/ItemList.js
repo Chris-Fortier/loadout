@@ -97,7 +97,7 @@ export default class ItemList extends React.Component {
                to={window.location.pathname + "-" + itemData.index}
                className="float-right packed-counter"
             >
-               {itemData.numPackedItems} / {itemData.numItems}
+               {itemData.numPackedItems} / {itemData.numItems} >>
             </Link>
          );
       }
@@ -211,10 +211,24 @@ export default class ItemList extends React.Component {
 
       this.setItemNums(itemData); // count number of packed and total items inside this
 
+      // these are classes that are different if we are at the top level or a lower level
+      let pageBgClasses = "";
+      let pageContentClasses = "";
+      let levelHeaderClasses = "";
+      let levelBodyClasses = "";
+      if (itemData.level === 0) {
+         pageBgClasses = "item-list color" + String(itemLevel % 3);
+      } else {
+         pageBgClasses = "item-list color" + String((itemLevel - 1) % 3);
+         pageContentClasses = "card color" + String(itemLevel % 3);
+         levelHeaderClasses = "card-header";
+         levelBodyClasses = "card-body";
+      }
+
       return (
          <>
             <Header />
-            <div className={"item-list color" + String(itemLevel % 3)}>
+            <div className={pageBgClasses}>
                <div className="container">
                   <div className="row">
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -225,91 +239,101 @@ export default class ItemList extends React.Component {
                                  window.location.pathname.lastIndexOf("-")
                               )}
                            >
-                              Back to {parentName}
+                              &lt;&lt; Back to {parentName}
                            </Link>
                         )}
-                        <div className="row">
-                           <div className="col">
-                              <h4>{itemData.name}</h4>
-                           </div>
-                           <div className="col">
-                              <h4 className="float-right d-inline">
-                                 {itemData.numPackedItems} / {itemData.numItems}
-                              </h4>
-                           </div>
-                        </div>
-                        {/* {this.props.hasOwnProperty("parentName") && this.props.parentName} */}
-                        <div className="row">
-                           <div className="col">
-                              <div className="custom-control custom-switch">
-                                 <input
-                                    type="checkbox"
-                                    className="custom-control-input display-switch-label"
-                                    id={"show-packed-switch" + itemData.name}
-                                    checked={this.state.isShowingPacked}
-                                    onChange={(e) => {
-                                       this.toggleShowPacked(e);
-                                    }}
-                                    // onChange={(e) => {
-                                    //    this.toggleShowPacked(e);
-                                    // }}
-                                 />
-                                 <label
-                                    className="custom-control-label display-switch-label"
-                                    htmlFor={
-                                       "show-packed-switch" + itemData.name
-                                    }
-                                 >
-                                    Show {itemData.numPackedItems} Packed
-                                    Item(s)
-                                 </label>
-                              </div>
-                              {/* need to make this switch only render if we are seeing packed items */}
-                              {this.state.isShowingPacked && (
-                                 <div className="custom-control custom-switch">
-                                    <input
-                                       type="checkbox"
-                                       className="custom-control-input display-switch-label"
-                                       id={
-                                          "packed-on-bottom-switch" +
-                                          itemData.name
-                                       }
-                                       checked={this.state.isPackedOnBottom}
-                                       onChange={(e) => {
-                                          this.togglePackedOnBottom(e);
-                                       }}
-                                    />
-                                    <label
-                                       className="custom-control-label display-switch-label"
-                                       htmlFor={
-                                          "packed-on-bottom-switch" +
-                                          itemData.name
-                                       }
-                                    >
-                                       Move Packed to Bottom
-                                    </label>
+                        <div className={pageContentClasses}>
+                           <div className={levelHeaderClasses}>
+                              <div className="row">
+                                 <div className="col">
+                                    <h4>{itemData.name}</h4>
                                  </div>
-                              )}
+                                 <div className="col">
+                                    <h4 className="float-right d-inline">
+                                       {itemData.numPackedItems} /{" "}
+                                       {itemData.numItems}
+                                    </h4>
+                                 </div>
+                              </div>
+                              {/* {this.props.hasOwnProperty("parentName") && this.props.parentName} */}
+                              <div className="row">
+                                 <div className="col">
+                                    <div className="custom-control custom-switch">
+                                       <input
+                                          type="checkbox"
+                                          className="custom-control-input display-switch-label"
+                                          id={
+                                             "show-packed-switch" +
+                                             itemData.name
+                                          }
+                                          checked={this.state.isShowingPacked}
+                                          onChange={(e) => {
+                                             this.toggleShowPacked(e);
+                                          }}
+                                          // onChange={(e) => {
+                                          //    this.toggleShowPacked(e);
+                                          // }}
+                                       />
+                                       <label
+                                          className="custom-control-label display-switch-label"
+                                          htmlFor={
+                                             "show-packed-switch" +
+                                             itemData.name
+                                          }
+                                       >
+                                          Show {itemData.numPackedItems} Packed
+                                          Item(s)
+                                       </label>
+                                    </div>
+                                    {/* need to make this switch only render if we are seeing packed items */}
+                                    {this.state.isShowingPacked && (
+                                       <div className="custom-control custom-switch">
+                                          <input
+                                             type="checkbox"
+                                             className="custom-control-input display-switch-label"
+                                             id={
+                                                "packed-on-bottom-switch" +
+                                                itemData.name
+                                             }
+                                             checked={
+                                                this.state.isPackedOnBottom
+                                             }
+                                             onChange={(e) => {
+                                                this.togglePackedOnBottom(e);
+                                             }}
+                                          />
+                                          <label
+                                             className="custom-control-label display-switch-label"
+                                             htmlFor={
+                                                "packed-on-bottom-switch" +
+                                                itemData.name
+                                             }
+                                          >
+                                             Move Packed to Bottom
+                                          </label>
+                                       </div>
+                                    )}
+                                 </div>
+                              </div>
+                              <div className="row">
+                                 <div className="col">
+                                    <button
+                                       className="btn action-button"
+                                       onClick={(e) => {
+                                          this.unpackAll(itemData);
+                                       }}
+                                    >
+                                       Unpack All
+                                    </button>
+                                 </div>
+                              </div>
                            </div>
-                        </div>
-                        <div className="row">
-                           <div className="col">
-                              <button
-                                 className="btn action-button"
-                                 onClick={(e) => {
-                                    this.unpackAll(itemData);
-                                 }}
-                              >
-                                 Unpack All
-                              </button>
-                           </div>
-                        </div>
-                        <div className="row">
-                           <div className="col">
-                              {/* {itemData.items.map((subItem) => {
-                     return <ItemCard key={"sdfs"} itemData={subItem} />;
-                  })} */}
-                              {this.renderContainingItems(itemData)}
+                           <div className={levelBodyClasses}>
+                              <div className="row">
+                                 <div className="col">
+                                    {this.renderContainingItems(itemData)}
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>

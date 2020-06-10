@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"; // a React element for linking
 import { gear } from "../../data/gear";
 // import Item from "../ui/Item";
 // import SingleLevel from "../ui/SingleLevel"; // new single level component that only views one level at a time
-import ItemCard from "../ui/ItemCard"; // new single level component that only views one level at a time
+// import ItemCard from "../ui/ItemCard"; // new single level component that only views one level at a time
 import orderBy from "lodash/orderBy";
 
 export default class ItemList extends React.Component {
@@ -13,9 +13,16 @@ export default class ItemList extends React.Component {
       super(); // boilerplate
 
       // set default state values for each component
+
+      // console.log("props", props);
+
       this.state = {
          isShowingPacked: false,
          isPackedOnBottom: false,
+         // isPackeds: this.props.itemData.items.map((subitem) => {
+         //    subitem.isPacked;
+         // }), // make an array of the packed status of each subitem
+         subItems: [], // an array to store a copy of the items from data
       };
    }
 
@@ -31,15 +38,106 @@ export default class ItemList extends React.Component {
       this.setState({ isPackedOnBottom: !this.state.isPackedOnBottom });
    }
 
-   // // toggle show packed items
-   // unpackAll() {
-   //    this.setState({ isPacked: !this.state.isPacked });
-   // }
+   // toggle show packed items
+   unpackAll(itemData) {
+      console.log("unpacking all");
+      for (let i in itemData.items) {
+         itemData.items[i].isPacked = false;
+         this.forceUpdate();
+      }
+   }
 
-   renderContainingItems(items, parentItemLevel) {
-      // get indices for each item (used in their pages' urls)
+   // toggle show packed items
+   toggleIsPacked(itemData) {
+      // this.setState({ isPacked: !this.state.isPacked });
+      // console.log("e", e);
+      // console.log(this.props.itemData);
+      // itemData.isPacked = !itemData.isPacked;
+
+      itemData.isPacked = !itemData.isPacked;
+      this.forceUpdate(); // forces re-render, hacky way
+      console.log("itemData.isPacked", itemData.isPacked);
+      console.log("this.props", this.props);
+
+      // newIsPackeds = this.state.isPacked
+      // this.setState({isPackeds})
+   }
+
+   // this sets the packed number of items and the total number of items
+   setItemNums(itemData) {
+      itemData.numItems = itemData.items.length;
+
+      // find the number of packed items by counting how many have packed set to true
+      itemData.numPackedItems = itemData.items.reduce((numPacked, item) => {
+         if (item.isPacked) {
+            return (numPacked += 1);
+         } else {
+            return numPacked;
+         }
+      }, 0);
+   }
+
+   renderItemCard(itemData) {
+      // this is to simplify code below
+      // const itemData = this.props.itemData;
+
+      console.log("render item card with this", itemData);
+
+      let expander = null;
+
+      // do this if this item has subitems
+      if (itemData.hasOwnProperty("items")) {
+         this.setItemNums(itemData); // find the number of items packed and total number of items
+
+         // console.log("hello", toKebabCase(itemData.name));
+
+         // a used so I can make the link relative to the full path
+         expander = (
+            <Link
+               to={window.location.pathname + "-" + itemData.index}
+               className="float-right packed-counter"
+            >
+               {itemData.numPackedItems} / {itemData.numItems}
+            </Link>
+         );
+      }
+
+      return (
+         <div className={"card item-card color" + String(itemData.level % 3)}>
+            {/* <div className="card-header"> */}
+            <div className="float-left">
+               <div className="custom-control custom-checkbox">
+                  <input
+                     className="custom-control-input"
+                     type="checkbox"
+                     id={"packed-checkbox-" + itemData.index}
+                     value="option1"
+                     checked={itemData.isPacked}
+                     onChange={(e) => {
+                        this.toggleIsPacked(itemData);
+                     }}
+                  />
+                  <label
+                     className="custom-control-label"
+                     htmlFor={"packed-checkbox-" + itemData.index}
+                  >
+                     {itemData.name}
+                  </label>
+                  {expander}
+               </div>
+            </div>
+            {/* </div> */}
+         </div>
+      );
+   }
+
+   renderContainingItems(itemData) {
+      const items = itemData.items; // to simplify code below
+
+      // get indices and levels for each item
       for (let i in items) {
-         items[i].index = i;
+         items[i].index = i; // set an index (used in their pages' urls)
+         items[i].level = itemData.level + 1; // set the level to each child item to this level plus one
       }
       // console.log("items with indices", items);
 
@@ -62,18 +160,14 @@ export default class ItemList extends React.Component {
       // render each sub item
       return displayedItems.map((item) => {
          return (
-            // <Item
+            // <ItemCard
             //    key={item.name}
             //    itemData={item}
             //    itemLevel={parentItemLevel + 1}
+            //    itemIndex={item.index}
+            //    parentName={item.name}
             // />
-            <ItemCard
-               key={item.name}
-               itemData={item}
-               itemLevel={parentItemLevel + 1}
-               itemIndex={item.index}
-               parentName={item.name}
-            />
+            this.renderItemCard(item)
          );
       });
 
@@ -101,6 +195,11 @@ export default class ItemList extends React.Component {
             itemLevel++;
          }
       }
+
+      // place values into the itemData
+      itemData.parentName = parentName;
+      itemData.level = itemLevel;
+
       // const urlItemIndex = parseInt(this.props.match.params.handle); // gets the item index from the url
       // itemData = gear.items[urlItemIndex];
       // } else {
@@ -109,6 +208,8 @@ export default class ItemList extends React.Component {
       // console.log("itemData", itemData);
 
       console.log("itemLevel", itemLevel);
+
+      this.setItemNums(itemData); // count number of packed and total items inside this
 
       return (
          <>
@@ -127,7 +228,16 @@ export default class ItemList extends React.Component {
                               Back to {parentName}
                            </Link>
                         )}
-                        <h4>{itemData.name}</h4>
+                        <div className="row">
+                           <div className="col">
+                              <h4>{itemData.name}</h4>
+                           </div>
+                           <div className="col">
+                              <h4 className="float-right d-inline">
+                                 {itemData.numPackedItems} / {itemData.numItems}
+                              </h4>
+                           </div>
+                        </div>
                         {/* {this.props.hasOwnProperty("parentName") && this.props.parentName} */}
                         <div className="row">
                            <div className="col">
@@ -150,7 +260,8 @@ export default class ItemList extends React.Component {
                                        "show-packed-switch" + itemData.name
                                     }
                                  >
-                                    Show {} Packed Items
+                                    Show {itemData.numPackedItems} Packed
+                                    Item(s)
                                  </label>
                               </div>
                               {/* need to make this switch only render if we are seeing packed items */}
@@ -183,7 +294,12 @@ export default class ItemList extends React.Component {
                         </div>
                         <div className="row">
                            <div className="col">
-                              <button className="btn action-button">
+                              <button
+                                 className="btn action-button"
+                                 onClick={(e) => {
+                                    this.unpackAll(itemData);
+                                 }}
+                              >
                                  Unpack All
                               </button>
                            </div>
@@ -193,10 +309,7 @@ export default class ItemList extends React.Component {
                               {/* {itemData.items.map((subItem) => {
                      return <ItemCard key={"sdfs"} itemData={subItem} />;
                   })} */}
-                              {this.renderContainingItems(
-                                 itemData.items,
-                                 itemLevel
-                              )}
+                              {this.renderContainingItems(itemData)}
                            </div>
                         </div>
                      </div>

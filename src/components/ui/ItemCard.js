@@ -19,11 +19,6 @@ export default class ItemCard extends React.Component {
       // this.methodName = this.methodName.bind(this) // example boilerplate to bind this for each method
    }
 
-   // toggle show packed items
-   toggleIsPacked() {
-      this.setState({ isPacked: !this.state.isPacked });
-   }
-
    render() {
       // extra js can go here
 

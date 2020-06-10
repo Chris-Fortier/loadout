@@ -6,6 +6,8 @@ import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
    // IconAddCircle,
+   IconArrowThickUpCircle,
+   IconArrowThickDownCircle,
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
 } from "../../icons/icons.js";
@@ -35,6 +37,11 @@ export default class ItemList extends React.Component {
       this.setState({ isPackedOnBottom: !this.state.isPackedOnBottom });
    }
 
+   // toggle mode from pack to edit
+   toggleEditMode() {
+      this.setState({ isEditMode: !this.state.isEditMode });
+   }
+
    // toggle show packed items
    unpackAll(itemData) {
       console.log("unpacking all");
@@ -58,6 +65,14 @@ export default class ItemList extends React.Component {
          // console.log("itemData.isPacked", itemData.isPacked);
          // console.log("this.props", this.props);
       }
+   }
+
+   // functions related to a single item card
+   deleteThisItem(itemData) {
+      console.log("deleting item");
+      console.log(itemData);
+      // delete itemData;
+      this.forceUpdate();
    }
 
    // this sets the packed number of items and the total number of items
@@ -109,58 +124,70 @@ export default class ItemList extends React.Component {
          );
       }
 
+      // <div>
+      // <div className="float-left">x</div>
+      // <div className="float-left">{itemData.name}</div>
+      // <div className="float-right">12 / 12</div>
+      // </div>
+
       return (
          <div className={"card item-card color" + String(itemData.level % 3)}>
-            <div className="row">
-               <div className="col-1">
-                  {/* <div className="float-left"> */}
-                  <div
-                     className={
-                        "custom-control custom-checkbox" + checkBoxClassSuffix
-                     }
-                  >
-                     <input
-                        className="custom-control-input"
-                        type="checkbox"
-                        id={"packed-checkbox-" + itemData.index}
-                        value="option1"
-                        checked={itemData.isPacked}
-                        onChange={(e) => {
-                           this.toggleIsPacked(itemData);
-                        }}
-                     />
-                     {/* for some reason if I don't have a label, the entire checkbox is not visible */}
-                     <label
-                        className="custom-control-label"
-                        htmlFor={"packed-checkbox-" + itemData.index}
-                     ></label>
-                  </div>
+            {/* <div className="float-left"> */}
+            <div>
+               <div
+                  className={
+                     "float-left custom-control custom-checkbox" +
+                     checkBoxClassSuffix
+                  }
+               >
+                  <input
+                     className="custom-control-input"
+                     type="checkbox"
+                     id={"packed-checkbox-" + itemData.index}
+                     value="option1"
+                     checked={itemData.isPacked}
+                     onChange={(e) => {
+                        this.toggleIsPacked(itemData);
+                     }}
+                  />
+                  {/* for some reason if I don't have a label, the entire checkbox is not visible */}
+                  <label
+                     className="custom-control-label"
+                     htmlFor={"packed-checkbox-" + itemData.index}
+                  ></label>
                </div>
-               <div className="col">{itemData.name}</div>
-               <div className="col-4 col-sm-4">{expander}</div>
+               <div className="float-left">{itemData.name}</div>
+               <div className="float-right">{expander}</div>
             </div>
          </div>
       );
    }
 
-   // // renders a one line card represenation of an item
-   // renderItemCardEdit(itemData) {
-   //    return (
-   //       <div className={"card item-card color" + String(itemData.level % 3)}>
-   //          <div className="row">
-   //             <div className="col-1"></div>
-   //             <div className="col">
-   //                <input
-   //                   className="edit-name"
-   //                   id="exampleInputEmail1"
-   //                   value={itemData.name}
-   //                />
-   //             </div>
-   //             <div className="col-4 col-sm-4">^ / v</div>
-   //          </div>
-   //       </div>
-   //    );
-   // }
+   // renders a one line card represenation of an item
+   renderItemCardEdit(itemData) {
+      return (
+         <div className={"card item-card color" + String(itemData.level % 3)}>
+            <div>
+               <div className="icon left">
+                  <IconArrowThickDownCircle />
+               </div>
+               <div className="float-left">
+                  <input
+                     className="edit-name"
+                     id={"edit-name-input-" + itemData.name}
+                     value={itemData.name}
+                  />
+               </div>
+               <div className="icon right">
+                  <IconArrowThickDownCircle />
+               </div>
+               <div className="icon right">
+                  <IconArrowThickUpCircle />
+               </div>
+            </div>
+         </div>
+      );
+   }
 
    renderContainingItems(itemData) {
       const items = itemData.items; // to simplify code below
@@ -189,9 +216,18 @@ export default class ItemList extends React.Component {
       }
 
       // render each sub item
-      return displayedItems.map((item) => {
-         return this.renderItemCard(item);
-      });
+
+      if (this.state.isEditMode) {
+         // do edit mode version of item cards
+         return displayedItems.map((item) => {
+            return this.renderItemCardEdit(item);
+         });
+      } else {
+         // do packing mode version of item cards
+         return displayedItems.map((item) => {
+            return this.renderItemCard(item);
+         });
+      }
    }
 
    render() {
@@ -262,77 +298,92 @@ export default class ItemList extends React.Component {
                                  <div className="col">
                                     <h4>{itemData.name}</h4>
                                  </div>
-                                 <div className="col">
-                                    <h4 className="float-right d-inline">
-                                       {itemData.numPackedItems} /{" "}
-                                       {itemData.numItems}
-                                    </h4>
-                                 </div>
-                              </div>
-                              <div className="row">
-                                 <div className="col">
-                                    <div className="custom-control custom-switch">
-                                       <input
-                                          type="checkbox"
-                                          className="custom-control-input display-switch-label"
-                                          id={
-                                             "show-packed-switch" +
-                                             itemData.name
-                                          }
-                                          checked={this.state.isShowingPacked}
-                                          onChange={(e) => {
-                                             this.toggleShowPacked(e);
-                                          }}
-                                       />
-                                       <label
-                                          className="custom-control-label display-switch-label"
-                                          htmlFor={
-                                             "show-packed-switch" +
-                                             itemData.name
-                                          }
-                                       >
-                                          Show {itemData.numPackedItems} Packed
-                                          Item(s)
-                                       </label>
+                                 {this.state.isEditMode === false && (
+                                    <div className="col">
+                                       <h4 className="float-right">
+                                          {itemData.numPackedItems} /{" "}
+                                          {itemData.numItems}
+                                       </h4>
                                     </div>
-                                    {this.state.isShowingPacked && (
+                                 )}
+                              </div>
+                              {this.state.isEditMode === false && (
+                                 <div className="row">
+                                    <div className="col">
                                        <div className="custom-control custom-switch">
                                           <input
                                              type="checkbox"
                                              className="custom-control-input display-switch-label"
                                              id={
-                                                "packed-on-bottom-switch" +
+                                                "show-packed-switch" +
                                                 itemData.name
                                              }
                                              checked={
-                                                this.state.isPackedOnBottom
+                                                this.state.isShowingPacked
                                              }
                                              onChange={(e) => {
-                                                this.togglePackedOnBottom(e);
+                                                this.toggleShowPacked(e);
                                              }}
                                           />
                                           <label
                                              className="custom-control-label display-switch-label"
                                              htmlFor={
-                                                "packed-on-bottom-switch" +
+                                                "show-packed-switch" +
                                                 itemData.name
                                              }
                                           >
-                                             Move Packed to Bottom
+                                             Show {itemData.numPackedItems}{" "}
+                                             Packed Item(s)
                                           </label>
                                        </div>
-                                    )}
+                                       {this.state.isShowingPacked && (
+                                          <div className="custom-control custom-switch">
+                                             <input
+                                                type="checkbox"
+                                                className="custom-control-input display-switch-label"
+                                                id={
+                                                   "packed-on-bottom-switch" +
+                                                   itemData.name
+                                                }
+                                                checked={
+                                                   this.state.isPackedOnBottom
+                                                }
+                                                onChange={(e) => {
+                                                   this.togglePackedOnBottom(e);
+                                                }}
+                                             />
+                                             <label
+                                                className="custom-control-label display-switch-label"
+                                                htmlFor={
+                                                   "packed-on-bottom-switch" +
+                                                   itemData.name
+                                                }
+                                             >
+                                                Move Packed to Bottom
+                                             </label>
+                                          </div>
+                                       )}
+                                       <button
+                                          className="btn action-button"
+                                          onClick={(e) => {
+                                             this.unpackAll(itemData);
+                                          }}
+                                       >
+                                          Unpack All
+                                       </button>
+                                    </div>
                                  </div>
-                              </div>
+                              )}
+
                               <div className="row">
                                  <div className="col">
                                     <button
                                        className="btn action-button"
                                        onClick={(e) => {
-                                          this.unpackAll(itemData);
+                                          this.toggleEditMode(itemData);
                                        }}
                                     >
-                                       Unpack All
+                                       Edit Mode Toggle
                                     </button>
                                  </div>
                               </div>

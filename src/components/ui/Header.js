@@ -56,8 +56,13 @@ export default class Header extends React.Component {
             </div> */}
             <div className="row">
                <div className="col">
+                  <p className="float-right">name@gmail.com</p>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col">
                   <button className="btn btn-link float-right">
-                     username12345 Settings
+                     Account Settings
                   </button>
                </div>
             </div>

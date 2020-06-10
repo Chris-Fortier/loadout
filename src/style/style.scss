@@ -154,14 +154,21 @@
    // padding for the entire header
    padding-top: 16px;
    padding-bottom: 8px;
+   line-height: 1;
+   font-size: 1.25rem;
 
    .btn-link {
       color: rgba(255, 255, 255, 0.7); //$header-text-color;
       font-weight: 500;
       text-transform: uppercase;
       padding: 4px 16px; // padding between each button
-      line-height: 1;
-      font-size: 1.25rem;
+   }
+
+   // for the email address display
+   p {
+      color: rgba(255, 255, 255, 0.7); //$header-text-color;
+      font-weight: 300;
+      padding: 0 16px; // padding between each button
    }
 }
 

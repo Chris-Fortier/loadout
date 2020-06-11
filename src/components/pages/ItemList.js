@@ -300,7 +300,7 @@ export default class ItemList extends React.Component {
                                  </div>
                                  {this.state.isEditMode === false && (
                                     <div className="col">
-                                       <h4 className="float-right">
+                                       <h4 className="float-right packed-counter">
                                           {itemData.numPackedItems} /{" "}
                                           {itemData.numItems}
                                        </h4>

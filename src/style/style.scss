@@ -36,9 +36,23 @@
 }
 
 .item-list {
-   min-height: 100vh; // makes the background color (which is set in different class) extend to bottom of page
+   min-height: 100vh; // makes it extend to bottom of page
    padding-top: 1rem; // some space at top below the header
 }
+
+// .scroll-fix {
+//    // padding-left: calc(100vw - 100%);
+//    background-color: red;
+// }
+
+// body {
+//    overflow-x: hidden;
+//    overflow-y: overlay;
+// }
+
+// html {
+//    overflow-y: scroll;
+// }
 
 .card {
    // border: 1px solid rgba(0, 0, 0, 0.125); // Bootstrap default
@@ -243,13 +257,24 @@ h5 {
    opacity: 0.25;
 }
 
+$iconWidth: 30px;
+
 // size and color of icons
 .icon {
-   width: 20px;
+   width: $iconWidth;
 
-   .right {
-      float: right;
-   }
+   margin-top: -4px;
+   // margin-bottom: -100px;
+
+   // .right {
+   //    float: right;
+   //    margin-left: 4px;
+   // }
+
+   // .left {
+   //    float: left;
+   //    margin-right: 4px;
+   // }
 
    .primary {
       fill: rgba(0, 0, 0, 0.25);
@@ -260,10 +285,18 @@ h5 {
    }
 }
 
-// for icons at the left of the line
-.icon.left {
-   float: left;
-   margin-right: 4px;
+// assign this class to the div around an inline icon
+.icon-container {
+   width: $iconWidth;
+   display: inline-block;
+}
+
+// assign this class to the div around the text input assuming it has 3 icons on the same line
+.text-input-container {
+   width: calc(
+      100% - 90px
+   ); // the full width of the div minus the three icons left and right
+   display: inline-block;
 }
 
 // for icons at the right of the line
@@ -272,9 +305,16 @@ h5 {
    margin-left: 4px;
 }
 
+// for icons at the left of the line
+.icon.left {
+   float: left;
+   margin-right: 4px;
+}
+
 .edit-name {
-   background-color: rgba(0, 0, 0, 0);
-   // padding: 0px;
+   background-color: rgba(255, 255, 255, 0.5);
    margin-top: -10px;
    margin-bottom: -10px;
+   border: none;
+   width: 100%;
 }

@@ -8,8 +8,10 @@ import {
    // IconAddCircle,
    // IconArrowThickUpCircle,
    // IconArrowThickDownCircle,
+   // IconArchive,
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
+   IconClose,
    IconChevronDown,
    IconChevronUp,
 } from "../../icons/icons.js";
@@ -170,21 +172,35 @@ export default class ItemList extends React.Component {
       return (
          <div className={"card item-card color" + String(itemData.level % 3)}>
             <div>
-               <div className="icon left">
+               {/* <div className="icon left">
+                  <IconArchive />
+               </div>
+               <input
+                  className="edit-name"
+                  id={"edit-name-input-" + itemData.name}
+                  value={itemData.name}
+               />
+               <div className="icon right">
                   <IconChevronDown />
                </div>
-               <div className="float-left">
+               <div className="icon right">
+                  <IconChevronUp />
+               </div> */}
+               <div className="icon-container">
+                  <IconClose />
+               </div>
+               <div className="text-input-container">
                   <input
                      className="edit-name"
                      id={"edit-name-input-" + itemData.name}
                      value={itemData.name}
                   />
                </div>
-               <div className="icon right">
-                  <IconChevronDown />
-               </div>
-               <div className="icon right">
+               <div className="icon-container">
                   <IconChevronUp />
+               </div>
+               <div className="icon-container">
+                  <IconChevronDown />
                </div>
             </div>
          </div>
@@ -273,25 +289,27 @@ export default class ItemList extends React.Component {
       }
 
       return (
-         <>
+         <div>
             <Header />
             <div className={pageBgClasses}>
-               <div className="container">
+               <div className="container scroll-fix">
                   <div className="row">
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                         {parentName !== null && (
-                           <Link
-                              className="up-level"
-                              to={window.location.pathname.substring(
-                                 0,
-                                 window.location.pathname.lastIndexOf("-")
-                              )}
-                           >
-                              <span className="icon left">
-                                 <IconArrowThinLeftCircle />
-                              </span>
-                              Back to {parentName}
-                           </Link>
+                           <div>
+                              <Link
+                                 className="up-level"
+                                 to={window.location.pathname.substring(
+                                    0,
+                                    window.location.pathname.lastIndexOf("-")
+                                 )}
+                              >
+                                 <div className="icon left">
+                                    <IconArrowThinLeftCircle />
+                                 </div>
+                                 Back to {parentName}
+                              </Link>
+                           </div>
                         )}
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>
@@ -402,7 +420,7 @@ export default class ItemList extends React.Component {
                   </div>
                </div>
             </div>
-         </>
+         </div>
       );
    }
 }

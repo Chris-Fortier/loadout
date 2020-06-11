@@ -6,10 +6,12 @@ import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
    // IconAddCircle,
-   IconArrowThickUpCircle,
-   IconArrowThickDownCircle,
+   // IconArrowThickUpCircle,
+   // IconArrowThickDownCircle,
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
+   IconChevronDown,
+   IconChevronUp,
 } from "../../icons/icons.js";
 
 export default class ItemList extends React.Component {
@@ -169,7 +171,7 @@ export default class ItemList extends React.Component {
          <div className={"card item-card color" + String(itemData.level % 3)}>
             <div>
                <div className="icon left">
-                  <IconArrowThickDownCircle />
+                  <IconChevronDown />
                </div>
                <div className="float-left">
                   <input
@@ -179,10 +181,10 @@ export default class ItemList extends React.Component {
                   />
                </div>
                <div className="icon right">
-                  <IconArrowThickDownCircle />
+                  <IconChevronDown />
                </div>
                <div className="icon right">
-                  <IconArrowThickUpCircle />
+                  <IconChevronUp />
                </div>
             </div>
          </div>

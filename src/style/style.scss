@@ -36,9 +36,8 @@
 }
 
 .item-list {
-   padding-top: 100px; // some space at top below the header
    min-height: 100vh; // makes the background color (which is set in different class) extend to bottom of page
-   padding-top: 1rem;
+   padding-top: 1rem; // some space at top below the header
 }
 
 .card {
@@ -225,6 +224,13 @@ h5 {
    // margin: 4px;
    color: rgba(255, 255, 255, 0.7);
    text-transform: uppercase;
+}
+
+// hover state of the action buttons
+.action-button:hover {
+   // flip the colors
+   background-color: rgba(255, 255, 255, 0.7);
+   color: rgba(0, 0, 0, 0.7);
 }
 
 // for the button link that goes up a level

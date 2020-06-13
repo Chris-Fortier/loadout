@@ -343,7 +343,7 @@ export default class Landing extends React.Component {
          <div className="background-image">
             <div className="container-fluid landing-page">
                <div className="row">
-                  <div className="col-12 offset-sm-2 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+                  <div className="col-12 offset-sm-1 col-sm-10 col-md-6 col-lg-4 col-xl-3">
                      <div className="">
                         <h1 className="mt-5 text-white">Loadout</h1>
                      </div>

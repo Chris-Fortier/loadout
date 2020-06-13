@@ -262,3 +262,14 @@ $custom-control-indicator-checked-bg: $component-active-bg;
 
 $header-bg-color: $black;
 $header-text-color: $white;
+
+// BREAKPOINTS
+
+// changed sm from 576px because iPhone 5/SE landscape is 568 px and I want it to go to sm
+$grid-breakpoints: (
+   xs: 0,
+   sm: 480px,
+   md: 768px,
+   lg: 992px,
+   xl: 1200px,
+);

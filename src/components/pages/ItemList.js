@@ -12,8 +12,8 @@ import {
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
    IconClose,
-   IconChevronDown,
-   IconChevronUp,
+   // IconChevronDown,
+   // IconChevronUp,
 } from "../../icons/icons.js";
 
 export default class ItemList extends React.Component {

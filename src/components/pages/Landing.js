@@ -27,7 +27,7 @@ export default class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5>Welcome Back</h5>
+               <h5>Log In</h5>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
                      {/* <label htmlFor="existing-email-input">
@@ -63,14 +63,14 @@ export default class Landing extends React.Component {
                      id="login-button"
                      to="/gear-"
                   >
-                     Sign In
+                     Log In
                   </Link>
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
                      onClick={() => this.setNewAccountMode()}
                   >
-                     Make an Account
+                     Make a New Account
                   </button>
                </form>
             </div>
@@ -82,7 +82,8 @@ export default class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5>Make An Account</h5>
+               <h5>Sign Up</h5>
+               <p>Make a New Account</p>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
                      {/* <label htmlFor="new-email-input">
@@ -118,14 +119,14 @@ export default class Landing extends React.Component {
                      id="login-button"
                      to="/gear-"
                   >
-                     Join
+                     Sign Up
                   </Link>
                   <button
                      className="btn btn-secondary btn-sm btn-block"
                      id="new-account-button"
                      onClick={() => this.setLogInMode()}
                   >
-                     Already Have Account
+                     Use an Existing Account
                   </button>
                </form>
             </div>

@@ -24,7 +24,7 @@ export default class ItemList extends React.Component {
 
       this.state = {
          isShowingPacked: true,
-         isPackedOnBottom: false,
+         isPackedOnBottom: true,
          isEditMode: false,
       };
    }
@@ -128,19 +128,13 @@ export default class ItemList extends React.Component {
          );
       }
 
-      // <div>
-      // <div className="float-left">x</div>
-      // <div className="float-left">{itemData.name}</div>
-      // <div className="float-right">12 / 12</div>
-      // </div>
-
       return (
          <div className={"card item-card color" + String(itemData.level % 3)}>
             {/* <div className="float-left"> */}
-            <div>
+            <div className="d-flex">
                <div
                   className={
-                     "float-left custom-control custom-checkbox" +
+                     "float-left custom-control custom-checkbox icon-container" +
                      checkBoxClassSuffix
                   }
                >
@@ -160,8 +154,8 @@ export default class ItemList extends React.Component {
                      htmlFor={"packed-checkbox-" + itemData.index}
                   ></label>
                </div>
-               <div className="float-left">{itemData.name}</div>
-               <div className="float-right">{expander}</div>
+               <div className="flex-fill">{itemData.name}</div>
+               <div className="flex-fill">{expander}</div>
             </div>
          </div>
       );
@@ -171,37 +165,23 @@ export default class ItemList extends React.Component {
    renderItemCardEdit(itemData) {
       return (
          <div className={"card item-card color" + String(itemData.level % 3)}>
-            <div>
-               {/* <div className="icon left">
-                  <IconArchive />
-               </div>
-               <input
-                  className="edit-name"
-                  id={"edit-name-input-" + itemData.name}
-                  value={itemData.name}
-               />
-               <div className="icon right">
-                  <IconChevronDown />
-               </div>
-               <div className="icon right">
-                  <IconChevronUp />
-               </div> */}
+            <div className="d-flex">
                <div className="icon-container">
                   <IconClose />
                </div>
-               <div className="text-input-container">
+               <div className="flex-fill">
                   <input
                      className="edit-name"
                      id={"edit-name-input-" + itemData.name}
                      value={itemData.name}
                   />
                </div>
-               <div className="icon-container">
+               {/* <div className="icon-container">
                   <IconChevronUp />
                </div>
                <div className="icon-container">
                   <IconChevronDown />
-               </div>
+               </div> */}
             </div>
          </div>
       );
@@ -327,10 +307,10 @@ export default class ItemList extends React.Component {
                                     </div>
                                  )}
                               </div>
-                              {this.state.isEditMode === false && (
-                                 <div className="row">
-                                    <div className="col">
-                                       <div className="custom-control custom-switch">
+
+                              <div className="row">
+                                 <div className="col">
+                                    {/* <div className="custom-control custom-switch">
                                           <input
                                              type="checkbox"
                                              className="custom-control-input display-switch-label"
@@ -355,8 +335,9 @@ export default class ItemList extends React.Component {
                                              Show {itemData.numPackedItems}{" "}
                                              Packed Item(s)
                                           </label>
-                                       </div>
-                                       {this.state.isShowingPacked && (
+                                       </div> */}
+
+                                    {/* {this.state.isShowingPacked && (
                                           <div className="custom-control custom-switch">
                                              <input
                                                 type="checkbox"
@@ -382,7 +363,9 @@ export default class ItemList extends React.Component {
                                                 Move Packed to Bottom
                                              </label>
                                           </div>
-                                       )}
+                                       )} */}
+
+                                    {!this.state.isEditMode && (
                                        <button
                                           className="btn action-button"
                                           onClick={(e) => {
@@ -391,20 +374,29 @@ export default class ItemList extends React.Component {
                                        >
                                           Unpack All
                                        </button>
-                                    </div>
-                                 </div>
-                              )}
+                                    )}
 
-                              <div className="row">
-                                 <div className="col">
-                                    <button
-                                       className="btn action-button"
-                                       onClick={(e) => {
-                                          this.toggleEditMode(itemData);
-                                       }}
-                                    >
-                                       Edit Mode Toggle
-                                    </button>
+                                    <div className="custom-control custom-switch float-right">
+                                       <input
+                                          type="checkbox"
+                                          className="custom-control-input display-switch-label"
+                                          id={
+                                             "edit-mode-switch" + itemData.name
+                                          }
+                                          checked={this.state.isEditMode}
+                                          onChange={(e) => {
+                                             this.toggleEditMode(e);
+                                          }}
+                                       />
+                                       <label
+                                          className="custom-control-label display-switch-label"
+                                          htmlFor={
+                                             "edit-mode-switch" + itemData.name
+                                          }
+                                       >
+                                          Edit Mode
+                                       </label>
+                                    </div>
                                  </div>
                               </div>
                            </div>

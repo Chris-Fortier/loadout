@@ -48,6 +48,7 @@
 // body {
 //    overflow-x: hidden;
 //    overflow-y: overlay;
+//    // padding-right: calc(100vw - 100%);
 // }
 
 // html {
@@ -292,12 +293,12 @@ $iconWidth: 30px;
 }
 
 // assign this class to the div around the text input assuming it has 3 icons on the same line
-.text-input-container {
-   width: calc(
-      100% - 90px
-   ); // the full width of the div minus the three icons left and right
-   display: inline-block;
-}
+// .text-input-container {
+//    width: calc(
+//       100% - 90px
+//    ); // the full width of the div minus the three icons left and right
+//    display: inline-block;
+// }
 
 // for icons at the right of the line
 .icon.right {

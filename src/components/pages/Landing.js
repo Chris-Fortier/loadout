@@ -343,10 +343,16 @@ export default class Landing extends React.Component {
          <div className="background-image">
             <div className="container-fluid landing-page">
                <div className="row">
-                  <div className="col-12 offset-sm-1 col-sm-10 col-md-6 col-lg-4 col-xl-3">
-                     <div className="">
-                        <h1 className="mt-5 text-white">Loadout</h1>
-                     </div>
+                  <div
+                     style={{ width: "max(calc((100% - 320px)*.33),15px)" }}
+                  ></div>
+                  <div
+                     style={{
+                        width: "min(320px,(100% - 30px))",
+                        marginBottom: "50px",
+                     }}
+                  >
+                     <h1 className="mt-5 text-white">Loadout</h1>
                      {/* render either the log-in or new account cards depending on landingMode */}
                      {this.state.landingMode === "log-in" &&
                         this.renderLogInCard()}

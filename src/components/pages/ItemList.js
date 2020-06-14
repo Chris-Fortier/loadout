@@ -12,9 +12,10 @@ import {
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
    IconClose,
-   // IconChevronDown,
-   // IconChevronUp,
+   IconChevronDown,
+   IconChevronUp,
 } from "../../icons/icons.js";
+import { MOVE_UPDOWN } from "../../utils/helpers";
 
 export default class ItemList extends React.Component {
    constructor(props) {
@@ -245,12 +246,16 @@ export default class ItemList extends React.Component {
                      value={itemData.name}
                   />
                </div>
-               {/* <div className="icon-container">
-                  <IconChevronUp />
-               </div>
-               <div className="icon-container">
-                  <IconChevronDown />
-               </div> */}
+               {MOVE_UPDOWN && (
+                  <>
+                     <div className="icon-container">
+                        <IconChevronUp />
+                     </div>
+                     <div className="icon-container">
+                        <IconChevronDown />
+                     </div>
+                  </>
+               )}
             </div>
          </div>
       );

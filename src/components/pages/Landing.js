@@ -187,7 +187,7 @@ export default class Landing extends React.Component {
 
          // redirect the user
          // todo: make this its own function
-         this.props.history.push("/gear-");
+         this.props.history.push("/gear");
       }
    }
 
@@ -212,7 +212,7 @@ export default class Landing extends React.Component {
 
          // redirect the user
          // todo: make this its own function
-         this.props.history.push("/gear-");
+         this.props.history.push("/gear");
       }
    }
 

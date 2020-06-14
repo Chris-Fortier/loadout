@@ -17,8 +17,28 @@ import {
 } from "../../icons/icons.js";
 
 export default class ItemList extends React.Component {
-   constructor() {
-      super(); // boilerplate
+   constructor(props) {
+      super(props); // boilerplate
+
+      // get the item data
+      // let itemData; // initialize itemData
+      let parentName = null; // initialize the name of the parent
+      let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+      let itemData = gear;
+
+      // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
+      // const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
+      const itemIndexPath = []; // represents the path to the item in a list of index numbers
+      console.log("itemIndexPath", itemIndexPath);
+      for (let levelIndex in itemIndexPath) {
+         parentName = itemData.name;
+         itemData = itemData.items[itemIndexPath[levelIndex]];
+         itemLevel++;
+      }
+
+      // place values into the itemData
+      // itemData.parentName = parentName;
+      // itemData.level = itemLevel;
 
       // set default state values for each component
 
@@ -26,10 +46,34 @@ export default class ItemList extends React.Component {
          isShowingPacked: true,
          isPackedOnBottom: true,
          isEditMode: false,
+
+         itemData: itemData, // stores the item data of the item represented by this page
+         parentName: parentName,
+         level: itemLevel,
+         itemIndexPath: itemIndexPath,
       };
    }
 
    // methods happen here, such as what happens when you click on a button
+
+   // move page to a different item
+   movePageToDifferentItem(itemIndexPath) {
+      let parentName = null; // initialize the name of the parent
+      let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+      let itemData = gear;
+      for (let levelIndex in itemIndexPath) {
+         parentName = itemData.name;
+         itemData = itemData.items[parseInt(itemIndexPath[levelIndex])];
+         itemLevel++;
+      }
+
+      this.setState({
+         itemData: itemData,
+         parentName: parentName,
+         level: itemLevel,
+         itemIndexPath: itemIndexPath,
+      });
+   }
 
    // toggle show packed items
    toggleShowPacked() {
@@ -48,7 +92,7 @@ export default class ItemList extends React.Component {
 
    // toggle show packed items
    unpackAll(itemData) {
-      console.log("unpacking all");
+      console.log("unpacking", itemData.name);
       for (let i in itemData.items) {
          itemData.items[i].isPacked = false;
          if (itemData.items[i].hasOwnProperty("items")) {
@@ -56,18 +100,26 @@ export default class ItemList extends React.Component {
             this.unpackAll(itemData.items[i]);
          }
       }
-      this.forceUpdate(); // forces re-render, hacky way
+      this.setState({ itemData: itemData });
+      // this.forceUpdate(); // forces re-render, hacky way
    }
 
    // toggle show packed items
-   toggleIsPacked(itemData) {
+   toggleIsPacked(itemIndex) {
       // this.setItemNums(itemData); // make sure the number of packed items this has is up to date
       // console.log(itemData.numPackedItems);
-      if (itemData.numPackedItems === itemData.numItems) {
-         itemData.isPacked = !itemData.isPacked;
-         this.forceUpdate(); // forces re-render, hacky way
+      if (
+         this.state.itemData.items[itemIndex].numPackedItems ===
+         this.state.itemData.items[itemIndex].numItems
+      ) {
+         // itemData.isPacked = !itemData.isPacked;
+         // this.forceUpdate(); // forces re-render, hacky way
          // console.log("itemData.isPacked", itemData.isPacked);
          // console.log("this.props", this.props);
+         let itemData = this.state.itemData;
+         itemData.items[itemIndex].isPacked = !itemData.items[itemIndex]
+            .isPacked;
+         this.setState({ itemData: itemData });
       }
    }
 
@@ -76,7 +128,7 @@ export default class ItemList extends React.Component {
       console.log("deleting item");
       console.log(itemData);
       // delete itemData;
-      this.forceUpdate();
+      // this.forceUpdate();
    }
 
    // this sets the packed number of items and the total number of items
@@ -92,6 +144,10 @@ export default class ItemList extends React.Component {
          }
       }, 0);
    }
+
+   // linkTo(itemIndex) {
+   //    this.props.history.push(window.location.pathname + "-" + itemIndex);
+   // }
 
    // renders a one line card represenation of an item
    renderItemCard(itemData) {
@@ -116,7 +172,12 @@ export default class ItemList extends React.Component {
          expander = (
             <>
                <Link
-                  to={window.location.pathname + "-" + itemData.index}
+                  // to={window.location.pathname + "-" + itemData.index}
+                  onClick={(e) => {
+                     this.movePageToDifferentItem(
+                        this.state.itemIndexPath.concat([itemData.index])
+                     ); // move to current path with the subitem index added on
+                  }}
                   className={"float-right packed-counter" + expanderClassSuffix}
                >
                   {itemData.numPackedItems} / {itemData.numItems}
@@ -129,7 +190,11 @@ export default class ItemList extends React.Component {
       }
 
       return (
-         <div className={"card item-card color" + String(itemData.level % 3)}>
+         <div
+            className={
+               "card item-card color" + String((this.state.level + 1) % 3)
+            }
+         >
             {/* <div className="float-left"> */}
             <div className="d-flex">
                <div
@@ -145,7 +210,7 @@ export default class ItemList extends React.Component {
                      value="option1"
                      checked={itemData.isPacked}
                      onChange={(e) => {
-                        this.toggleIsPacked(itemData);
+                        this.toggleIsPacked(itemData.index);
                      }}
                   />
                   {/* for some reason if I don't have a label, the entire checkbox is not visible */}
@@ -164,7 +229,11 @@ export default class ItemList extends React.Component {
    // renders a one line card represenation of an item
    renderItemCardEdit(itemData) {
       return (
-         <div className={"card item-card color" + String(itemData.level % 3)}>
+         <div
+            className={
+               "card item-card color" + String((this.state.level + 1) % 3)
+            }
+         >
             <div className="d-flex">
                <div className="icon-container">
                   <IconClose />
@@ -229,41 +298,22 @@ export default class ItemList extends React.Component {
    }
 
    render() {
-      // get the item data
-      let itemData; // initialize itemData
-      let parentName = null; // initialize the name of the parent
-      let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+      console.log("itemData", this.state.itemData);
+      console.log("itemLevel", this.state.level);
 
-      // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
-      const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
-      itemData = gear;
-      for (let levelIndex in itemIndexPath) {
-         if (itemIndexPath[levelIndex] !== "") {
-            parentName = itemData.name;
-            itemData = itemData.items[parseInt(itemIndexPath[levelIndex])];
-            itemLevel++;
-         }
-      }
-
-      // place values into the itemData
-      itemData.parentName = parentName;
-      itemData.level = itemLevel;
-
-      console.log("itemLevel", itemLevel);
-
-      this.setItemNums(itemData); // count number of packed and total items inside this
+      this.setItemNums(this.state.itemData); // count number of packed and total items inside this
 
       // these are classes that are different if we are at the top level or a lower level
       let pageBgClasses = "";
       let pageContentClasses = "";
       let levelHeaderClasses = "";
       let levelBodyClasses = "";
-      if (itemData.level === 0) {
-         pageBgClasses = "item-list color" + String(itemLevel % 3);
+      if (this.state.level === 0) {
+         pageBgClasses = "item-list color" + String(this.state.level % 3);
       } else {
-         pageBgClasses = "item-list color" + String((itemLevel - 1) % 3);
+         pageBgClasses = "item-list color" + String((this.state.level - 1) % 3);
          pageContentClasses =
-            "card super-item-card color" + String(itemLevel % 3);
+            "card super-item-card color" + String(this.state.level % 3);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }
@@ -275,19 +325,20 @@ export default class ItemList extends React.Component {
                <div className="container scroll-fix">
                   <div className="row">
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                        {parentName !== null && (
+                        {this.state.parentName !== null && (
                            <div>
                               <Link
                                  className="up-level"
-                                 to={window.location.pathname.substring(
-                                    0,
-                                    window.location.pathname.lastIndexOf("-")
-                                 )}
+                                 onClick={(e) => {
+                                    this.movePageToDifferentItem(
+                                       this.state.itemIndexPath.slice(0, -1)
+                                    ); // move to current path with the last part removed to go up a level
+                                 }}
                               >
                                  <div className="icon left">
                                     <IconArrowThinLeftCircle />
                                  </div>
-                                 Back to {parentName}
+                                 Back to {this.state.parentName}
                               </Link>
                            </div>
                         )}
@@ -296,13 +347,13 @@ export default class ItemList extends React.Component {
                            <div className={levelHeaderClasses}>
                               <div className="row">
                                  <div className="col">
-                                    <h4>{itemData.name}</h4>
+                                    <h4>{this.state.itemData.name}</h4>
                                  </div>
                                  {this.state.isEditMode === false && (
                                     <div className="col">
                                        <h4 className="float-right packed-counter">
-                                          {itemData.numPackedItems} /{" "}
-                                          {itemData.numItems}
+                                          {this.state.itemData.numPackedItems} /{" "}
+                                          {this.state.itemData.numItems}
                                        </h4>
                                     </div>
                                  )}
@@ -316,7 +367,7 @@ export default class ItemList extends React.Component {
                                              className="custom-control-input display-switch-label"
                                              id={
                                                 "show-packed-switch" +
-                                                itemData.name
+                                                this.state.itemData.name
                                              }
                                              checked={
                                                 this.state.isShowingPacked
@@ -329,10 +380,10 @@ export default class ItemList extends React.Component {
                                              className="custom-control-label display-switch-label"
                                              htmlFor={
                                                 "show-packed-switch" +
-                                                itemData.name
+                                                this.state.itemData.name
                                              }
                                           >
-                                             Show {itemData.numPackedItems}{" "}
+                                             Show {this.state.itemData.numPackedItems}{" "}
                                              Packed Item(s)
                                           </label>
                                        </div> */}
@@ -344,7 +395,7 @@ export default class ItemList extends React.Component {
                                                 className="custom-control-input display-switch-label"
                                                 id={
                                                    "packed-on-bottom-switch" +
-                                                   itemData.name
+                                                   this.state.itemData.name
                                                 }
                                                 checked={
                                                    this.state.isPackedOnBottom
@@ -357,7 +408,7 @@ export default class ItemList extends React.Component {
                                                 className="custom-control-label display-switch-label"
                                                 htmlFor={
                                                    "packed-on-bottom-switch" +
-                                                   itemData.name
+                                                   this.state.itemData.name
                                                 }
                                              >
                                                 Move Packed to Bottom
@@ -369,7 +420,9 @@ export default class ItemList extends React.Component {
                                        <button
                                           className="btn action-button"
                                           onClick={(e) => {
-                                             this.unpackAll(itemData);
+                                             this.unpackAll(
+                                                this.state.itemData
+                                             );
                                           }}
                                        >
                                           Unpack All
@@ -381,7 +434,8 @@ export default class ItemList extends React.Component {
                                           type="checkbox"
                                           className="custom-control-input display-switch-label"
                                           id={
-                                             "edit-mode-switch" + itemData.name
+                                             "edit-mode-switch" +
+                                             this.state.itemData.name
                                           }
                                           checked={this.state.isEditMode}
                                           onChange={(e) => {
@@ -391,7 +445,8 @@ export default class ItemList extends React.Component {
                                        <label
                                           className="custom-control-label display-switch-label"
                                           htmlFor={
-                                             "edit-mode-switch" + itemData.name
+                                             "edit-mode-switch" +
+                                             this.state.itemData.name
                                           }
                                        >
                                           Edit Mode
@@ -403,7 +458,9 @@ export default class ItemList extends React.Component {
                            <div className={levelBodyClasses}>
                               <div className="row">
                                  <div className="col">
-                                    {this.renderContainingItems(itemData)}
+                                    {this.renderContainingItems(
+                                       this.state.itemData
+                                    )}
                                  </div>
                               </div>
                            </div>

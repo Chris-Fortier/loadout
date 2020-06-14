@@ -14,7 +14,8 @@ function App() {
             <Route exact path="/" component={Landing} />
             {/* <Route exact path="/kits" component={AllKits} /> */}
             {/* handle gets any arbitrary text put in the url */}
-            <Route exact path="/gear:handle" component={ItemList} />
+            {/* <Route exact path="/gear:handle" component={ItemList} /> */}
+            <Route exact path="/gear" component={ItemList} />
             <Route component={NotFound} />
          </Switch>
       </Router>

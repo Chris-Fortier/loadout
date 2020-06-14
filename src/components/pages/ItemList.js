@@ -124,14 +124,6 @@ export default class ItemList extends React.Component {
       }
    }
 
-   // functions related to a single item card
-   deleteThisItem(itemData) {
-      console.log("deleting item");
-      console.log(itemData);
-      // delete itemData;
-      // this.forceUpdate();
-   }
-
    // this sets the packed number of items and the total number of items
    setItemNums(itemData) {
       itemData.numItems = itemData.items.length;
@@ -227,6 +219,34 @@ export default class ItemList extends React.Component {
       );
    }
 
+   // updates the displayed name field of the item based on user input
+   setItemName(e) {
+      const splitId = e.target.id.split("-");
+      const indexToSet = parseInt(splitId[splitId.length - 1]);
+      let itemDataCopy = this.state.itemData; // copy itemsData from state to local
+      itemDataCopy.items[indexToSet].name = e.target.value; // change the desired item's name to match input
+      // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
+   }
+
+   // deletes an item
+   deleteItem(e) {
+      console.log("deleting an item");
+      console.log("e.target.id", e.target.id);
+      const splitId = e.target.id.split("-");
+      const indexToSet = parseInt(splitId[splitId.length - 1]);
+      console.log("indexToSet", indexToSet);
+      let itemDataCopy = this.state.itemData; // copy itemsData from state to local
+      // delete itemDataCopy.items[indexToSet]; // delete this item
+      console.log(itemDataCopy.items);
+      itemDataCopy.items.splice(indexToSet, 1); // delete this item
+      console.log(itemDataCopy.items);
+      // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
+      // this.forceUpdate();
+
+      // todo: this shows the wrong item as being deleted until you get out of edit mode
+      // maybe something to do with async
+   }
+
    // renders a one line card represenation of an item
    renderItemCardEdit(itemData) {
       return (
@@ -236,14 +256,19 @@ export default class ItemList extends React.Component {
             }
          >
             <div className="d-flex">
-               <div className="icon-container">
+               <button
+                  className="icon-container"
+                  onClick={(e) => this.deleteItem(e)}
+                  id={"delete-item-" + itemData.index}
+               >
                   <IconClose />
-               </div>
+               </button>
                <div className="flex-fill">
                   <input
                      className="edit-name"
-                     id={"edit-name-input-" + itemData.name}
-                     value={itemData.name}
+                     id={"edit-name-input-" + itemData.index}
+                     defaultValue={itemData.name}
+                     onChange={(e) => this.setItemName(e)}
                   />
                </div>
                {MOVE_UPDOWN && (

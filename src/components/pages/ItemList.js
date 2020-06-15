@@ -200,7 +200,6 @@ export default class ItemList extends React.Component {
    renderItemCard(item) {
       // console.log("render item card with this", item);
 
-      let expander = null;
       let counterIsFaint = true;
       let packedBoxIsFaint = false;
 
@@ -215,33 +214,6 @@ export default class ItemList extends React.Component {
             packedBoxIsFaint = true;
             // checkBoxClassSuffix = " faint";
          }
-
-         // a used so I can make the link relative to the full path
-         expander = (
-            <>
-               <span
-                  // to={window.location.pathname + "-" + item.index}
-                  onClick={(e) => {
-                     this.movePageToDifferentItem(
-                        this.state.itemIndexPath.concat([item.index])
-                     ); // move to current path with the subitem index added on
-                  }}
-                  // className={
-                  //    "float-right navigation-link packed-counter" +
-                  //    expanderClassSuffix
-                  // }
-                  className={classnames(
-                     "float-right navigation-link packed-counter",
-                     { faint: counterIsFaint }
-                  )}
-               >
-                  {item.numPackedChildren} / {item.numChildren}
-                  <span className="item-card-icon float-right">
-                     <IconArrowThinRightCircle />
-                  </span>
-               </span>
-            </>
-         );
       }
 
       return (
@@ -279,7 +251,27 @@ export default class ItemList extends React.Component {
                   ></label>
                </span>
                <span className="flex-fill item-card-text">{item.name}</span>
-               <span className="flex-fill item-card-text">{expander}</span>
+               {item.hasOwnProperty("items") && (
+                  <span className="flex-fill item-card-text">
+                     <span
+                        // to={window.location.pathname + "-" + item.index}
+                        onClick={(e) => {
+                           this.movePageToDifferentItem(
+                              this.state.itemIndexPath.concat([item.index])
+                           ); // move to current path with the subitem index added on
+                        }}
+                        className={classnames(
+                           "float-right navigation-link packed-counter",
+                           { faint: counterIsFaint }
+                        )}
+                     >
+                        {item.numPackedChildren} / {item.numChildren}
+                        <span className="item-card-icon float-right">
+                           <IconArrowThinRightCircle />
+                        </span>
+                     </span>
+                  </span>
+               )}
             </div>
          </div>
       );

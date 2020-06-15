@@ -112,6 +112,8 @@ export default class ItemList extends React.Component {
          level: itemLevel,
          itemIndexPath: itemIndexPath,
       });
+
+      this.setState({ isEditMode: false }); // get out of edit mode if the current item changes
    }
 
    // toggle show packed items

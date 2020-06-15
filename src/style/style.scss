@@ -150,6 +150,10 @@ body {
 
    padding: 0; // remove the padding inside the card as it will be controlled by the contents
 
+   line-height: 0.9; // this works well with this font if multiple lines are needed
+   font-size: 1.5rem;
+   text-transform: capitalize; // makes first letter of each word uppercase
+
    // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
 }
 
@@ -159,9 +163,8 @@ body {
    padding-top: 8px;
    padding-bottom: 6px;
 
-   line-height: 0.9; // this works well with this font if multiple lines are needed
-   font-size: 1.5rem;
-   text-transform: capitalize; // makes first letter of each word uppercase
+   // line-height: 0.9; // this works well with this font if multiple lines are needed
+   // font-size: 1.5rem;
 
    color: rgba(255, 255, 255, 0.8);
 }
@@ -171,9 +174,9 @@ body {
    padding-top: 1px;
    padding-bottom: 0px;
 
-   line-height: 0.9; // this works well with this font if multiple lines are needed
-   font-size: 1.5rem;
-   text-transform: capitalize; // makes first letter of each word uppercase
+   // line-height: 0.9; // this works well with this font if multiple lines are needed
+   // font-size: 1.5rem;
+   // text-transform: capitalize; // makes first letter of each word uppercase
 
    color: rgba(0, 0, 0, 0.8);
 

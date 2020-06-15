@@ -277,13 +277,26 @@ export default class ItemList extends React.Component {
       );
    }
 
-   // updates the displayed name field of the item based on user input
-   setItemName(e) {
+   // updates the displayed name field of one of the current item's subitems
+   setSubItemName(e) {
+      // console.log("setting an item name...");
+      // console.log("e", e);
+      // console.log("e.target", e.target);
+      // console.log("e.target.id", e.target.id);
+
+      // figure out which subitem we are editing the name of based on the id of the input
       const splitId = e.target.id.split("-");
       const indexToSet = parseInt(splitId[splitId.length - 1]);
+
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
       itemDataCopy.items[indexToSet].name = e.target.value; // change the desired item's name to match input
       // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
+   }
+
+   // sets the name of the current item (the item which the entire page is currently the focus of)
+   setCurrentItemName(e) {
+      let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
+      itemDataCopy.name = e.target.value; // change the desired item's name to match input
    }
 
    // deletes an item
@@ -330,7 +343,7 @@ export default class ItemList extends React.Component {
                      className="edit-name"
                      id={"edit-name-input-" + item.index}
                      defaultValue={item.name}
-                     onChange={(e) => this.setItemName(e)}
+                     onChange={(e) => this.setSubItemName(e)}
                   />
                </span>
                <button
@@ -454,18 +467,45 @@ export default class ItemList extends React.Component {
                         <div className={pageContentClasses}>
                            <div className={levelHeaderClasses}>
                               <div className="row">
-                                 <div className="col">
-                                    <h4>{this.state.currentItem.name}</h4>
-                                 </div>
-                                 {this.state.isEditMode === false && (
+                                 {!this.state.isEditMode && (
+                                    <>
+                                       <div className="col">
+                                          <h4>{this.state.currentItem.name}</h4>
+                                       </div>
+                                       <div className="col">
+                                          <h4 className="float-right packed-counter">
+                                             {
+                                                this.state.currentItem
+                                                   .numPackedChildren
+                                             }{" "}
+                                             /{" "}
+                                             {
+                                                this.state.currentItem
+                                                   .numChildren
+                                             }
+                                          </h4>
+                                       </div>
+                                    </>
+                                 )}
+                                 {this.state.isEditMode && (
                                     <div className="col">
-                                       <h4 className="float-right packed-counter">
-                                          {
-                                             this.state.currentItem
-                                                .numPackedChildren
-                                          }{" "}
-                                          / {this.state.currentItem.numChildren}
-                                       </h4>
+                                       <span className="flex-fill">
+                                          <h4>
+                                             <input
+                                                className="edit-name"
+                                                // id={
+                                                //    "edit-name-input-" +
+                                                //    this.state.currentItem.index
+                                                // }
+                                                defaultValue={
+                                                   this.state.currentItem.name
+                                                }
+                                                onChange={(e) =>
+                                                   this.setCurrentItemName(e)
+                                                }
+                                             />
+                                          </h4>
+                                       </span>
                                     </div>
                                  )}
                               </div>

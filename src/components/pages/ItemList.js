@@ -37,28 +37,57 @@ export default class ItemList extends React.Component {
    // methods happen here, such as what happens when you click on a button
 
    // this goes through all of an items descendants and sets derived variables and other stuff
-   fixSubItemData(item, level = null) {
+   processItemAndDescendants(item, level = null) {
       let nextLevel = level;
       if (level !== null) {
          item.level = level;
          nextLevel = level + 1;
       }
 
+      // if this item has subitems, fix the subitems
       if (item.hasOwnProperty("items")) {
          console.log("fixing data for the sub items of", item.name);
-         // if this item has subitems, fix the subitems
+
+         item.numChildren = item.items.length;
+         item.numDescendants = item.numChildren;
+         item.numPackedChildren = 0; // intialize this and count below
+         item.numPackedDescendants = 0; // intialize this and count below
+
          for (let i in item.items) {
             item.items[i].parentName = item.name;
             item.items[i].index = parseInt(i);
             // item.items[i].fixed = true;
-            this.fixSubItemData(item.items[i], nextLevel);
+            if (item.items[i].isPacked) {
+               item.numPackedChildren++; // count a packed child
+               item.numPackedDescendants++; // also count as a packed descendant
+            }
+            const descendantInfo = this.processItemAndDescendants(
+               item.items[i],
+               nextLevel
+            );
+
+            // add descendant info to this item's couters
+            item.numDescendants =
+               item.numDescendants + descendantInfo.numDescendants;
+            item.numPackedDescendants =
+               item.numPackedDescendants + descendantInfo.numPackedDescendants;
          }
+      } else {
+         item.numChildren = 0;
+         item.numDescendants = 0;
+         item.numPackedChildren = 0;
+         item.numPackedDescendants = 0;
       }
+
+      return {
+         numDescendants: item.numDescendants,
+         numPackedDescendants: item.numPackedDescendants,
+      };
    }
 
    // fixes all item data
-   fixAllItemData() {
-      this.fixSubItemData(this.state.rootItem, 0);
+   processAllItems() {
+      this.processItemAndDescendants(this.state.rootItem, 0);
    }
 
    // move page to a different item
@@ -123,10 +152,10 @@ export default class ItemList extends React.Component {
    // toggle show packed items
    toggleIsPacked(itemIndex) {
       // this.setItemNums(itemData); // make sure the number of packed items this has is up to date
-      // console.log(itemData.numPackedItems);
+      // console.log(itemData.numPackedChildren);
       if (
-         this.state.currentItem.items[itemIndex].numPackedItems ===
-         this.state.currentItem.items[itemIndex].numItems
+         this.state.currentItem.items[itemIndex].numPackedChildren ===
+         this.state.currentItem.items[itemIndex].numChildren
       ) {
          // itemData.isPacked = !itemData.isPacked;
          // this.forceUpdate(); // forces re-render, hacky way
@@ -139,19 +168,19 @@ export default class ItemList extends React.Component {
       }
    }
 
-   // this sets the packed number of items and the total number of items
-   setItemNums(item) {
-      item.numItems = item.items.length;
+   // // this sets the packed number of items and the total number of items
+   // setItemNums(item) {
+   //    item.numChildren = item.items.length;
 
-      // find the number of packed items by counting how many have packed set to true
-      item.numPackedItems = item.items.reduce((numPacked, item) => {
-         if (item.isPacked) {
-            return (numPacked += 1);
-         } else {
-            return numPacked;
-         }
-      }, 0);
-   }
+   //    // find the number of packed items by counting how many have packed set to true
+   //    item.numPackedChildren = item.items.reduce((numPacked, item) => {
+   //       if (item.isPacked) {
+   //          return (numPacked += 1);
+   //       } else {
+   //          return numPacked;
+   //       }
+   //    }, 0);
+   // }
 
    // linkTo(itemIndex) {
    //    this.props.history.push(window.location.pathname + "-" + itemIndex);
@@ -167,10 +196,10 @@ export default class ItemList extends React.Component {
       let expanderClassSuffix = "";
       // do this if this item has subitems
       if (item.hasOwnProperty("items")) {
-         this.setItemNums(item); // find the number of items packed and total number of items
+         // this.setItemNums(item); // find the number of items packed and total number of items
 
          // this will make the checkboxes disabled for items that don't have all their containing items packed
-         if (item.numPackedItems < item.numItems) {
+         if (item.numPackedChildren < item.numChildren) {
             checkBoxClassSuffix = " faint";
          } else {
             expanderClassSuffix = " faint";
@@ -191,7 +220,7 @@ export default class ItemList extends React.Component {
                      expanderClassSuffix
                   }
                >
-                  {item.numPackedItems} / {item.numItems}
+                  {item.numPackedChildren} / {item.numChildren}
                   <div className="icon right">
                      <IconArrowThinRightCircle />
                   </div>
@@ -352,10 +381,10 @@ export default class ItemList extends React.Component {
       console.log("Rendering page...");
       // console.log("currentItem", this.state.currentItem);
 
-      this.fixAllItemData();
+      this.processAllItems();
       console.log("this.state.currentItem.", this.state.currentItem.level);
 
-      this.setItemNums(this.state.currentItem); // count number of packed and total items inside this
+      // this.setItemNums(this.state.currentItem); // count number of packed and total items inside this
       // todo: can probably put this in the fix function
 
       // these are classes that are different if we are at the top level or a lower level
@@ -412,9 +441,9 @@ export default class ItemList extends React.Component {
                                        <h4 className="float-right packed-counter">
                                           {
                                              this.state.currentItem
-                                                .numPackedItems
+                                                .numPackedChildren
                                           }{" "}
-                                          / {this.state.currentItem.numItems}
+                                          / {this.state.currentItem.numChildren}
                                        </h4>
                                     </div>
                                  )}
@@ -444,7 +473,7 @@ export default class ItemList extends React.Component {
                                                 this.state.currentItem.name
                                              }
                                           >
-                                             Show {this.state.currentItem.numPackedItems}{" "}
+                                             Show {this.state.currentItem.numPackedChildren}{" "}
                                              Packed Item(s)
                                           </label>
                                        </div> */}

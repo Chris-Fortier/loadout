@@ -236,9 +236,9 @@ export default class ItemList extends React.Component {
                   )}
                >
                   {item.numPackedChildren} / {item.numChildren}
-                  <div className="icon right">
+                  <span className="item-card-icon float-right">
                      <IconArrowThinRightCircle />
-                  </div>
+                  </span>
                </span>
             </>
          );
@@ -253,7 +253,7 @@ export default class ItemList extends React.Component {
          >
             {/* <div className="float-left"> */}
             <div className="d-flex">
-               <div
+               <span
                   // className={
                   //    "float-left custom-control custom-checkbox icon-container" +
                   //    checkBoxClassSuffix
@@ -277,9 +277,9 @@ export default class ItemList extends React.Component {
                      className="custom-control-label"
                      htmlFor={"packed-checkbox-" + item.index}
                   ></label>
-               </div>
-               <div className="flex-fill">{item.name}</div>
-               <div className="flex-fill">{expander}</div>
+               </span>
+               <span className="flex-fill item-card-text">{item.name}</span>
+               <span className="flex-fill item-card-text">{expander}</span>
             </div>
          </div>
       );
@@ -323,14 +323,14 @@ export default class ItemList extends React.Component {
             }
          >
             <div className="d-flex">
-               <div className="flex-fill">
+               <span className="flex-fill">
                   <input
                      className="edit-name"
                      id={"edit-name-input-" + item.index}
                      defaultValue={item.name}
                      onChange={(e) => this.setItemName(e)}
                   />
-               </div>
+               </span>
                <button
                   className="icon icon-clickable"
                   onClick={(e) => this.deleteItem(e)}

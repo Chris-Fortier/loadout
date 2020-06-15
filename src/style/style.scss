@@ -146,26 +146,40 @@ body {
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
-   margin-bottom: 12px;
+   margin-bottom: 12px; // space between item cards
 
-   // text style for item card headers
-   // .card-header {
-   // 12 12 20 20
-   line-height: 1;
+   padding: 0; // remove the padding inside the card as it will be controlled by the contents
+
+   // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
+}
+
+// for text within an item card
+.item-card-text {
+   // this is to center the text vertically within the card
+   padding-top: 7px;
+   padding-bottom: 5px;
+
+   line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 1.5rem;
-   padding: 8px;
-   // font-stretch: expanded;
    text-transform: capitalize; // makes first letter of each word uppercase
-   // }
 
    color: rgba(255, 255, 255, 0.8);
+}
 
-   // .card-body {
-   //    padding: 8px;
-   // }
-   // input {
-   //    width: 100%;
-   // }
+.edit-name {
+   // padding-top: 7px; // this is to center the text vertically within the card
+   line-height: 0.9; // this works well with this font if multiple lines are needed
+   font-size: 1.5rem;
+   text-transform: capitalize; // makes first letter of each word uppercase
+
+   color: rgba(0, 0, 0, 0.8);
+
+   background-color: rgba(255, 255, 255, 0.5);
+   // margin-top: -10px;
+   // margin-bottom: -10px;
+   // margin: 0;
+   border: none;
+   width: 100%;
 }
 
 .super-item-card {
@@ -331,12 +345,21 @@ $iconWidth: 30px;
    margin-right: 4px;
 }
 
-.edit-name {
-   background-color: rgba(255, 255, 255, 0.5);
-   margin-top: -10px;
-   margin-bottom: -10px;
-   border: none;
-   width: 100%;
+.item-card-icon {
+   width: $iconWidth * 0.8;
+
+   // float: right;
+   margin-left: 4px;
+   margin-right: 4px;
+   margin-top: -3px;
+
+   .primary {
+      fill: rgba(0, 0, 0, 0.25);
+   }
+
+   .secondary {
+      fill: rgba(0, 0, 0, 0.75);
+   }
 }
 
 .navigation-link {

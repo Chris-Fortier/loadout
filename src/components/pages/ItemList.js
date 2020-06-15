@@ -267,7 +267,6 @@ export default class ItemList extends React.Component {
                      className="custom-control-input"
                      type="checkbox"
                      id={"packed-checkbox-" + item.index}
-                     value="option1"
                      checked={item.isPacked}
                      onChange={(e) => {
                         this.toggleIsPacked(item.index);

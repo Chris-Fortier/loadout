@@ -4,6 +4,13 @@ import { EMAIL_REGEX } from "../../utils/helpers";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
 import classnames from "classnames";
+import {
+   IconUserAdd,
+   // IconUserCheck,
+   // IconKey,
+   // IconHome,
+   // IconEdit,
+} from "../../icons/icons.js";
 
 // export default function Landing() {
 export default class Landing extends React.Component {
@@ -281,7 +288,12 @@ export default class Landing extends React.Component {
          <div className="card mb-3">
             <div className="card-body">
                <h5>Sign Up</h5>
-               <p>Make a New Account</p>
+               <p>
+                  <span className="icon-container">
+                     <IconUserAdd />
+                  </span>
+                  &nbsp;Make a New Account
+               </p>
                <form className="mb-0 needs-validation" noValidate>
                   <div className="form-group">
                      <input

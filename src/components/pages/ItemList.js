@@ -11,7 +11,7 @@ import {
    // IconArchive,
    IconArrowThinLeftCircle,
    IconArrowThinRightCircle,
-   IconClose,
+   IconTrash,
    IconChevronDown,
    IconChevronUp,
 } from "../../icons/icons.js";
@@ -324,13 +324,6 @@ export default class ItemList extends React.Component {
             }
          >
             <div className="d-flex">
-               <button
-                  className="icon-container"
-                  onClick={(e) => this.deleteItem(e)}
-                  id={"delete-item-" + item.index}
-               >
-                  <IconClose />
-               </button>
                <div className="flex-fill">
                   <input
                      className="edit-name"
@@ -339,6 +332,13 @@ export default class ItemList extends React.Component {
                      onChange={(e) => this.setItemName(e)}
                   />
                </div>
+               <button
+                  className="icon icon-clickable"
+                  onClick={(e) => this.deleteItem(e)}
+                  id={"delete-item-" + item.index}
+               >
+                  <IconTrash />
+               </button>
                {MOVE_UPDOWN && (
                   <>
                      <div className="icon-container">

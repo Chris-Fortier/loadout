@@ -301,6 +301,16 @@ $iconWidth: 30px;
    display: inline-block;
 }
 
+// assign this class to the div around an inline icon
+.icon-clickable {
+   width: $iconWidth;
+   display: inline-block;
+   border: none;
+   cursor: pointer;
+   background-color: transparent;
+   padding: 0;
+}
+
 // assign this class to the div around the text input assuming it has 3 icons on the same line
 // .text-input-container {
 //    width: calc(

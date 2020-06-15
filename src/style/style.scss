@@ -157,6 +157,16 @@ body {
    // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
 }
 
+// this used if the screen is wide enough for two "columns" of item cards
+// .item-card-double {
+//    display: inline-block;
+//    width: calc(50% - 6px);
+// }
+
+// .item-card-double:nth-child(odd) {
+//    margin-right: 12px;
+// }
+
 // for text within an item card
 .item-card-text {
    // this is to center the text vertically within the card
@@ -249,6 +259,7 @@ h4 {
    font-size: 2rem;
    text-transform: capitalize; // makes first letter of each word uppercase
    color: rgba(255, 255, 255, 0.8);
+   line-height: 0.9; // makes the title tighter if it used multiple lines
 }
 
 // this is for the titles of the landing page cards
@@ -369,4 +380,20 @@ $iconWidth: 30px;
 
 .navigation-link:hover {
    text-decoration: underline;
+}
+
+// switches to two-"column" mode
+@media (min-width: 556px) {
+   // .item-card {
+   //    background-color: red;
+   // }
+
+   .item-card {
+      display: inline-block;
+      width: calc(50% - 6px);
+   }
+
+   .item-card:nth-child(odd) {
+      margin-right: 12px;
+   }
 }

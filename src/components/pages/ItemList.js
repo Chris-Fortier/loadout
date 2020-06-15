@@ -465,6 +465,14 @@ export default class ItemList extends React.Component {
                                  </span>
                               </div>
                            )}
+                        {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
+                        {this.state.currentItem.level !== 0 &&
+                           this.state.isEditMode && (
+                              <div className="up-level">
+                                 <br />
+                              </div>
+                           )}
+
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>
                            <div className={levelHeaderClasses}>

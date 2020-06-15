@@ -287,17 +287,27 @@ export default class ItemList extends React.Component {
    }
 
    // deletes an item
-   deleteItem(e) {
+   deleteItem(indexToDelete) {
       console.log("deleting an item");
-      console.log("e.target.id", e.target.id);
-      const splitId = e.target.id.split("-");
-      const indexToSet = parseInt(splitId[splitId.length - 1]);
-      console.log("indexToSet", indexToSet);
+      // console.log("e", e);
+      // console.log("e.target", e.target);
+      // console.log("e.target.id", e.target.id);
+      // const splitId = e.target.id.split("-");
+      // const indexToDelete = parseInt(splitId[splitId.length - 1]);
+      console.log(
+         "item we are deleting",
+         indexToDelete,
+         this.state.currentItem.items[indexToDelete].name
+      );
+      // console.log(
+      //    "this is called",
+      //    this.state.currentItem.items[indexToDelete].name
+      // );
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      // delete itemDataCopy.items[indexToSet]; // delete this item
-      console.log(itemDataCopy.items);
-      itemDataCopy.items.splice(indexToSet, 1); // delete this item
-      console.log(itemDataCopy.items);
+      // delete itemDataCopy.items[indexToDelete]; // delete this item
+      // console.log("items before delete", itemDataCopy.items);
+      itemDataCopy.items.splice(indexToDelete, 1); // delete this item
+      // console.log("items after delete", itemDataCopy.items);
       // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
       this.forceUpdate();
 
@@ -325,8 +335,8 @@ export default class ItemList extends React.Component {
                </span>
                <button
                   className="icon-clickable item-card-icon"
-                  onClick={(e) => this.deleteItem(e)}
                   id={"delete-item-" + item.index}
+                  onClick={() => this.deleteItem(item.index)}
                >
                   <IconTrash />
                </button>

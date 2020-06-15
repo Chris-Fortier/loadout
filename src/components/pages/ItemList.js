@@ -21,27 +21,7 @@ export default class ItemList extends React.Component {
    constructor(props) {
       super(props); // boilerplate
 
-      // get the item data
-      // let itemData; // initialize itemData
-      // let parentName = null; // initialize the name of the parent
-      // let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
-      // let itemData = gear;
-
-      // get the item based on the url index path (e.g. 3/2/4 would be item index 4 of item index 2 inside item index 3)
-      // const itemIndexPath = this.props.match.params.handle.split("-"); // represents the path to the item in a list of index numbers
-      // const itemIndexPath = []; // represents the path to the item in a list of index numbers
-      // console.log("itemIndexPath", itemIndexPath);
-      // for (let levelIndex in itemIndexPath) {
-      //    parentName = itemData.name;
-      //    itemData = itemData.items[itemIndexPath[levelIndex]];
-      //    itemLevel++;
-      // }
-
-      // place values into the itemData
-      // itemData.parentName = parentName;
-      // itemData.level = itemLevel;
-
-      // set default state values for each component
+      // set default state values
 
       this.state = {
          isShowingPacked: true,
@@ -50,8 +30,6 @@ export default class ItemList extends React.Component {
 
          rootItem: gear, // stores all the item data from the abolsute root
          currentItem: gear, // stores the item data where the item of this page is at the root level
-         // parentName: null,
-         // level: 0,
          itemIndexPath: [],
       };
    }
@@ -117,19 +95,30 @@ export default class ItemList extends React.Component {
       this.setState({ isEditMode: !this.state.isEditMode });
    }
 
-   unpackAll(item) {
-      // the item parameter is the item that we are unpacking all the children of
+   // this unpacks all a given item's children and all their descendants
+   unpackDescendants(item) {
       console.log("unpacking", item.name);
       for (let i in item.items) {
          item.items[i].isPacked = false;
          if (item.items[i].hasOwnProperty("items")) {
             // unpack all this item's items and so on
-            this.unpackAll(item.items[i]);
+            this.unpackDescendants(item.items[i]);
          }
       }
       this.setState({ currentItem: item });
-      // this.forceUpdate(); // forces re-render, hacky way
    }
+
+   // this unpacks all a given item's children
+   unpackChildren(item) {
+      // the item parameter is the item that we are unpacking all the children of
+      console.log("unpacking", item.name);
+      for (let i in item.items) {
+         item.items[i].isPacked = false;
+      }
+      this.setState({ currentItem: item });
+   }
+
+   rolloutUnpackConfirmation() {}
 
    // toggle show packed items
    toggleIsPacked(itemIndex) {
@@ -492,7 +481,7 @@ export default class ItemList extends React.Component {
                                        <button
                                           className="btn action-button"
                                           onClick={(e) => {
-                                             this.unpackAll(
+                                             this.unpackDescendants(
                                                 this.state.currentItem
                                              );
                                           }}

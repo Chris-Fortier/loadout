@@ -114,6 +114,8 @@ export default class ItemList extends React.Component {
       });
 
       this.setState({ isEditMode: false }); // get out of edit mode if the current item changes
+
+      window.scrollTo(0, 0); // sets focus to the top of the page
    }
 
    // toggle show packed items

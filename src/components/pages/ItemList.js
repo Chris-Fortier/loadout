@@ -431,23 +431,24 @@ export default class ItemList extends React.Component {
                <div className="container scroll-fix">
                   <div className="row">
                      <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                        {this.state.parentName !== null && (
-                           <div>
-                              <span
-                                 className="up-level navigation-link"
-                                 onClick={(e) => {
-                                    this.movePageToDifferentItem(
-                                       this.state.itemIndexPath.slice(0, -1)
-                                    ); // move to current path with the last part removed to go up a level
-                                 }}
-                              >
-                                 <div className="icon left">
-                                    <IconArrowThinLeftCircle />
-                                 </div>
-                                 Back to {this.state.parentName}
-                              </span>
-                           </div>
-                        )}
+                        {this.state.currentItem.level !== 0 &&
+                           !this.state.isEditMode && (
+                              <div>
+                                 <span
+                                    className="up-level navigation-link"
+                                    onClick={(e) => {
+                                       this.movePageToDifferentItem(
+                                          this.state.itemIndexPath.slice(0, -1)
+                                       ); // move to current path with the last part removed to go up a level
+                                    }}
+                                 >
+                                    <div className="icon left">
+                                       <IconArrowThinLeftCircle />
+                                    </div>
+                                    Back to {this.state.currentItem.parentName}
+                                 </span>
+                              </div>
+                           )}
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>
                            <div className={levelHeaderClasses}>

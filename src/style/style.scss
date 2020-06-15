@@ -156,8 +156,8 @@ body {
 // for text within an item card
 .item-card-text {
    // this is to center the text vertically within the card
-   padding-top: 7px;
-   padding-bottom: 5px;
+   padding-top: 8px;
+   padding-bottom: 6px;
 
    line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 1.5rem;
@@ -167,7 +167,10 @@ body {
 }
 
 .edit-name {
-   // padding-top: 7px; // this is to center the text vertically within the card
+   // this is to center the text vertically within the card
+   padding-top: 1px;
+   padding-bottom: 0px;
+
    line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 1.5rem;
    text-transform: capitalize; // makes first letter of each word uppercase
@@ -288,17 +291,6 @@ $iconWidth: 30px;
    width: $iconWidth;
 
    margin-top: -4px;
-   // margin-bottom: -100px;
-
-   // .right {
-   //    float: right;
-   //    margin-left: 4px;
-   // }
-
-   // .left {
-   //    float: left;
-   //    margin-right: 4px;
-   // }
 
    .primary {
       fill: rgba(0, 0, 0, 0.25);
@@ -310,9 +302,12 @@ $iconWidth: 30px;
 }
 
 // assign this class to the div around an inline icon
-.icon-container {
+.packed-checkbox-container {
    width: $iconWidth;
-   display: inline-block;
+   // display: inline-block;
+   margin-left: 10px;
+   margin-right: -5px;
+   margin-top: 5px;
 }
 
 // assign this class to the div around an inline icon

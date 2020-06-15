@@ -231,7 +231,7 @@ export default class ItemList extends React.Component {
                   //    checkBoxClassSuffix
                   // }
                   className={classnames(
-                     "float-left custom-control custom-checkbox icon-container",
+                     "float-left custom-control custom-checkbox packed-checkbox-container",
                      { faint: packedBoxIsFaint }
                   )}
                >
@@ -324,7 +324,7 @@ export default class ItemList extends React.Component {
                   />
                </span>
                <button
-                  className="icon icon-clickable"
+                  className="icon-clickable item-card-icon"
                   onClick={(e) => this.deleteItem(e)}
                   id={"delete-item-" + item.index}
                >

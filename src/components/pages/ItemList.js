@@ -72,6 +72,11 @@ export default class ItemList extends React.Component {
             item.numPackedDescendants =
                item.numPackedDescendants + descendantInfo.numPackedDescendants;
          }
+
+         // if any descendant is unpacked, this should be unpacked also
+         if (item.numPackedDescendants < item.numDescendants) {
+            item.isPacked = false;
+         }
       } else {
          item.numChildren = 0;
          item.numDescendants = 0;
@@ -507,16 +512,24 @@ export default class ItemList extends React.Component {
                                        )} */}
 
                                     {!this.state.isEditMode && (
-                                       <button
-                                          className="btn action-button"
-                                          onClick={(e) => {
-                                             this.unpackDescendants(
-                                                this.state.currentItem
-                                             );
-                                          }}
-                                       >
-                                          Unpack All
-                                       </button>
+                                       <>
+                                          <button
+                                             className="btn action-button"
+                                             onClick={(e) => {
+                                                this.unpackDescendants(
+                                                   this.state.currentItem
+                                                );
+                                             }}
+                                          >
+                                             Unpack All
+                                          </button>
+                                          {/* Are you sure you want to unpack &nbsp;
+                                          {
+                                             this.state.currentItem
+                                                .numPackedDescendants
+                                          }
+                                          &nbsp; total subitems? */}
+                                       </>
                                     )}
 
                                     <div className="custom-control custom-switch float-right">

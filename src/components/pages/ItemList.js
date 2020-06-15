@@ -16,6 +16,7 @@ import {
    IconChevronUp,
 } from "../../icons/icons.js";
 import { MOVE_UPDOWN } from "../../utils/helpers";
+import classnames from "classnames";
 
 export default class ItemList extends React.Component {
    constructor(props) {
@@ -200,18 +201,19 @@ export default class ItemList extends React.Component {
       // console.log("render item card with this", item);
 
       let expander = null;
+      let counterIsFaint = true;
+      let packedBoxIsFaint = false;
 
-      let checkBoxClassSuffix = "";
-      let expanderClassSuffix = "";
+      // let checkBoxClassSuffix = "";
       // do this if this item has subitems
       if (item.hasOwnProperty("items")) {
          // this.setItemNums(item); // find the number of items packed and total number of items
 
          // this will make the checkboxes disabled for items that don't have all their containing items packed
          if (item.numPackedChildren < item.numChildren) {
-            checkBoxClassSuffix = " faint";
-         } else {
-            expanderClassSuffix = " faint";
+            counterIsFaint = false;
+            packedBoxIsFaint = true;
+            // checkBoxClassSuffix = " faint";
          }
 
          // a used so I can make the link relative to the full path
@@ -224,10 +226,14 @@ export default class ItemList extends React.Component {
                         this.state.itemIndexPath.concat([item.index])
                      ); // move to current path with the subitem index added on
                   }}
-                  className={
-                     "float-right navigation-link packed-counter" +
-                     expanderClassSuffix
-                  }
+                  // className={
+                  //    "float-right navigation-link packed-counter" +
+                  //    expanderClassSuffix
+                  // }
+                  className={classnames(
+                     "float-right navigation-link packed-counter",
+                     { faint: counterIsFaint }
+                  )}
                >
                   {item.numPackedChildren} / {item.numChildren}
                   <div className="icon right">
@@ -248,10 +254,14 @@ export default class ItemList extends React.Component {
             {/* <div className="float-left"> */}
             <div className="d-flex">
                <div
-                  className={
-                     "float-left custom-control custom-checkbox icon-container" +
-                     checkBoxClassSuffix
-                  }
+                  // className={
+                  //    "float-left custom-control custom-checkbox icon-container" +
+                  //    checkBoxClassSuffix
+                  // }
+                  className={classnames(
+                     "float-left custom-control custom-checkbox icon-container",
+                     { faint: packedBoxIsFaint }
+                  )}
                >
                   <input
                      className="custom-control-input"

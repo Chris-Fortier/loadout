@@ -291,12 +291,14 @@ export default class ItemList extends React.Component {
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
       itemDataCopy.items[indexToSet].name = e.target.value; // change the desired item's name to match input
       // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
+      this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
    }
 
    // sets the name of the current item (the item which the entire page is currently the focus of)
    setCurrentItemName(e) {
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
       itemDataCopy.name = e.target.value; // change the desired item's name to match input
+      this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
    }
 
    // deletes an item
@@ -342,7 +344,7 @@ export default class ItemList extends React.Component {
                   <input
                      className="edit-name"
                      id={"edit-name-input-" + item.index}
-                     defaultValue={item.name}
+                     value={item.name}
                      onChange={(e) => this.setSubItemName(e)}
                   />
                </span>
@@ -497,7 +499,7 @@ export default class ItemList extends React.Component {
                                                 //    "edit-name-input-" +
                                                 //    this.state.currentItem.index
                                                 // }
-                                                defaultValue={
+                                                value={
                                                    this.state.currentItem.name
                                                 }
                                                 onChange={(e) =>

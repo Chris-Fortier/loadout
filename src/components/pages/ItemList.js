@@ -28,6 +28,7 @@ export default class ItemList extends React.Component {
          isShowingPacked: true,
          isPackedOnBottom: true,
          isEditMode: false,
+         isShowingUnpackConfirmation: false,
 
          rootItem: gear, // stores all the item data from the abolsute root
          currentItem: gear, // stores the item data where the item of this page is at the root level
@@ -96,6 +97,112 @@ export default class ItemList extends React.Component {
       this.processItemAndDescendants(this.state.rootItem, 0);
    }
 
+   // roll out a dialog
+   rolloutUnpackConfirmation() {
+      let itemsText = "";
+      if (this.state.currentItem.numPackedChildren > 1) {
+         itemsText = this.state.currentItem.numPackedChildren + " items";
+      } else if (this.state.currentItem.numPackedChildren === 1) {
+         itemsText = "1 item";
+      }
+
+      const numSubItems =
+         this.state.currentItem.numPackedDescendants -
+         this.state.currentItem.numPackedChildren;
+
+      let subItemsText = "";
+      if (numSubItems > 1) {
+         subItemsText = numSubItems + " subitems";
+      } else if (numSubItems === 1) {
+         subItemsText = "1 subitem";
+      }
+
+      // set up the text of the unpack children button if there are packed children
+      let unpackChildrenText = "";
+      if (itemsText !== "") {
+         unpackChildrenText = "unpack " + itemsText;
+      }
+
+      // set up the text of the unpack descendants button if there are packed descendants
+      let unpackDescendantsText = "";
+      if (itemsText !== "" && subItemsText !== "") {
+         unpackDescendantsText = "unpack " + itemsText + " and " + subItemsText;
+      } else if (subItemsText !== "") {
+         unpackDescendantsText = "unpack " + subItemsText;
+      }
+
+      return (
+         <div>
+            <button
+               className="text-button muted"
+               onClick={(e) => {
+                  this.hideUnpackConfirmation();
+               }}
+            >
+               Cancel Unpack
+            </button>
+            {unpackChildrenText !== "" && (
+               <button
+                  className="text-button"
+                  onClick={(e) => {
+                     this.confirmUnpackChildren();
+                  }}
+               >
+                  {unpackChildrenText}
+               </button>
+            )}
+
+            {unpackDescendantsText !== "" && (
+               <>
+                  &nbsp;
+                  <button
+                     className="text-button"
+                     onClick={(e) => {
+                        this.confirmUnpackDescendants();
+                     }}
+                  >
+                     {unpackDescendantsText}
+                  </button>
+               </>
+            )}
+         </div>
+      );
+   }
+
+   // clickUnpackButton() {
+   //    if (
+   //       this.state.currentItem.numPackedDescendants >
+   //       this.state.currentItem.numPackedChildren
+   //    ) {
+   //       // console.log(
+   //       //    "Are you sure you want to unpack all of these descendants?"
+   //       // );
+   //       this.showUnpackConfirmation();
+   //    } else {
+   //       this.unpackChildren(this.state.currentItem);
+   //    }
+   // }
+
+   confirmUnpackDescendants() {
+      this.unpackDescendants(this.state.currentItem); // unpack all descendants of the current item
+      this.hideUnpackConfirmation(); // close the message
+   }
+
+   confirmUnpackChildren() {
+      this.unpackChildren(this.state.currentItem); // unpack all descendants of the current item
+      this.hideUnpackConfirmation(); // close the message
+   }
+
+   // show the unpack all confirmation
+   showUnpackConfirmation() {
+      this.setState({ isShowingUnpackConfirmation: true });
+   }
+
+   // hide the unpack all confirmation
+   hideUnpackConfirmation() {
+      this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
+   }
+
    // move page to a different item
    movePageToDifferentItem(itemIndexPath) {
       let parentName = null; // initialize the name of the parent
@@ -132,6 +239,7 @@ export default class ItemList extends React.Component {
    // toggle mode from pack to edit
    toggleEditMode() {
       this.setState({ isEditMode: !this.state.isEditMode });
+      this.hideUnpackConfirmation();
    }
 
    // this unpacks all a given item's children and all their descendants
@@ -157,8 +265,6 @@ export default class ItemList extends React.Component {
       this.setState({ currentItem: item });
    }
 
-   rolloutUnpackConfirmation() {}
-
    // toggle show packed items
    toggleIsPacked(itemIndex) {
       // this.setItemNums(itemData); // make sure the number of packed items this has is up to date
@@ -176,6 +282,8 @@ export default class ItemList extends React.Component {
             .isPacked;
          this.setState({ currentItem: currentItem });
       }
+
+      this.hideUnpackConfirmation();
    }
 
    // // this sets the packed number of items and the total number of items
@@ -579,16 +687,27 @@ export default class ItemList extends React.Component {
 
                                     {!this.state.isEditMode && (
                                        <>
-                                          <button
-                                             className="btn action-button"
-                                             onClick={(e) => {
-                                                this.unpackDescendants(
-                                                   this.state.currentItem
-                                                );
-                                             }}
-                                          >
-                                             Unpack All
-                                          </button>
+                                          {this.state.currentItem
+                                             .numPackedDescendants > 0 &&
+                                             !this.state
+                                                .isShowingUnpackConfirmation && (
+                                                <button
+                                                   className="text-button muted"
+                                                   // onClick={(e) => {
+                                                   //    this.unpackDescendants(
+                                                   //       this.state.currentItem
+                                                   //    );
+                                                   // }}
+                                                   onClick={() => {
+                                                      this.showUnpackConfirmation();
+                                                   }}
+                                                >
+                                                   Unpack
+                                                </button>
+                                             )}
+                                          {this.state
+                                             .isShowingUnpackConfirmation &&
+                                             this.rolloutUnpackConfirmation()}
                                           {/* Are you sure you want to unpack &nbsp;
                                           {
                                              this.state.currentItem

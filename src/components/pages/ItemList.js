@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../ui/Header";
 // import { Link } from "react-router-dom"; // a React element for linking
-import { gear } from "../../data/gear";
+import { gear } from "../../mock-data/gear";
 import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
@@ -17,10 +17,27 @@ import {
 } from "../../icons/icons.js";
 import { MOVE_UPDOWN } from "../../utils/helpers";
 import classnames from "classnames";
+import axios from "axios";
 
 export default class ItemList extends React.Component {
    constructor(props) {
       super(props); // boilerplate
+
+      axios
+         .get("https://run.mocky.io/v3/b3a668d8-3a38-4566-8075-37cad4c23228")
+         // to delete old: https://designer.mocky.io/manage/delete/a687e680-5eba-48bb-bb20-20334e41fca0/42MbJfe7uUOu2b6t44QLw64Z4aADO5yDRXKR
+         // to delete new: https://designer.mocky.io/manage/delete/b3a668d8-3a38-4566-8075-37cad4c23228/M4IzJ5AuNJYSAxkTVdTPUGj8rzW07nT545V6
+         .then(function (response) {
+            // handle success
+            console.log(response);
+         })
+         .catch(function (error) {
+            // handle error
+            console.log(error);
+         });
+      // .finally(function () {
+      //   // always executed
+      // });
 
       // set default state values
 

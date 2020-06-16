@@ -1,0 +1,216 @@
+{
+   "name": "All Kits",
+   "items": [
+      {
+         "name": "Camping On Person",
+         "isPacked": false,
+         "items": [
+            { "name": "iPhone", "isPacked": true },
+            { "name": "wallet", "isPacked": true },
+            { "name": "keys", "isPacked": false },
+            { "name": "Garmin watch", "isPacked": true },
+            { "name": "lightning cable", "isPacked": false },
+            { "name": "Anker charger", "isPacked": false },
+            { "name": "ear buds and charger", "isPacked": true },
+            { "name": "hiking boots", "isPacked": false },
+            { "name": "sunglasses", "isPacked": false },
+            { "name": "chapstick", "isPacked": true },
+            { "name": "multitool", "isPacked": false }
+         ]
+      },
+
+      {
+         "name": "Camera Bag",
+         "isPacked": false,
+         "items": [
+            { "name": "Cannon 6D", "isPacked": true },
+            { "name": "extra battery", "isPacked": true },
+            { "name": "extra memory card", "isPacked": true },
+            { "name": "gray card", "isPacked": true },
+            { "name": "70-300mm lens", "isPacked": true },
+            { "name": "50mm lens", "isPacked": true },
+            { "name": "17-40mm lens", "isPacked": true },
+            { "name": "microfiber", "isPacked": true }
+         ]
+      },
+      {
+         "name": "Day Pack",
+         "isPacked": false,
+         "items": [
+            { "name": "down jacket", "isPacked": true },
+            { "name": "folding hiking pole", "isPacked": true },
+            { "name": "balaclava", "isPacked": true },
+            { "name": "knee braces", "isPacked": true },
+            { "name": "wide-brimmed hat", "isPacked": false },
+            { "name": "disposable rain gear", "isPacked": true },
+            { "name": "ziplock bags", "isPacked": true },
+            { "name": "grocery bags", "isPacked": true },
+            {
+               "name": "first aid kit",
+               "isPacked": false,
+               "items": [
+                  { "name": "band-aids", "isPacked": false },
+                  { "name": "moleskin", "isPacked": true },
+                  { "name": "antacid", "isPacked": true },
+                  { "name": "ibuprofen", "isPacked": false }
+               ]
+            },
+            { "name": "multi-function whistle", "isPacked": true },
+            { "name": "flashlight/ lighter tool", "isPacked": false },
+            { "name": "USB cable", "isPacked": true },
+            { "name": "Garmin watch cable", "isPacked": true },
+            { "name": "water bladder", "isPacked": true },
+            { "name": "hand-sanitizer", "isPacked": true },
+            { "name": "sunblock", "isPacked": true },
+            { "name": "surgical mask", "isPacked": true },
+            { "name": "monocular", "isPacked": true },
+            { "name": "camera", "isPacked": true },
+            { "name": "extra camera battery", "isPacked": true }
+         ]
+      },
+
+      {
+         "name": "Sleeping Stuff",
+         "isPacked": false,
+         "items": [
+            { "name": "pillows", "isPacked": false },
+            { "name": "sleeping bags", "isPacked": false },
+            { "name": "sleeping mats", "isPacked": false },
+            { "name": "blanket", "isPacked": false }
+         ]
+      },
+
+      {
+         "name": "Camping Bin",
+         "isPacked": false,
+         "items": [
+            { "name": "lighter fluid", "isPacked": true },
+            { "name": "paper towels", "isPacked": true },
+            { "name": "drawstring garbage bags", "isPacked": true },
+            { "name": "solar hanging light", "isPacked": true },
+            { "name": "lantern", "isPacked": true },
+            { "name": "extra D batteries", "isPacked": true },
+            { "name": "umbrella", "isPacked": true },
+            { "name": "water bucket", "isPacked": true },
+            { "name": "disposable hand warmers", "isPacked": true },
+            { "name": "camp soap", "isPacked": true },
+            { "name": "grocery bags", "isPacked": true },
+            { "name": "ziplock bags", "isPacked": true }
+         ]
+      },
+
+      {
+         "name": "Food Bin",
+         "isPacked": false,
+         "items": [
+            {
+               "name": "ground coffee",
+               "isPacked": false,
+               "items": [{ "name": "grind up 5 scoops", "isPacked": false }]
+            },
+            { "name": "ramen bags", "isPacked": true },
+            { "name": "peanut butter", "isPacked": false },
+            { "name": "snacks for road", "isPacked": false },
+            { "name": "marshmallows", "isPacked": false },
+            { "name": "graham crackers", "isPacked": false },
+            { "name": "canned tomatoes", "isPacked": false },
+            { "name": "canned fish", "isPacked": false },
+            { "name": "canned chili", "isPacked": true },
+            { "name": "hot dog buns", "isPacked": false },
+            { "name": "bread", "isPacked": false },
+            { "name": "fruit", "isPacked": false },
+            { "name": "GORP", "isPacked": false },
+            { "name": "beef sticks/beef jerky", "isPacked": false }
+         ]
+      },
+
+      {
+         "name": "Cooking Bin",
+         "isPacked": false,
+         "items": [
+            { "name": "seasoning", "isPacked": true },
+            { "name": "paper plates", "isPacked": true },
+            { "name": "foam cups", "isPacked": true },
+            { "name": "disposable silverware", "isPacked": true },
+            { "name": "drink cozys", "isPacked": true },
+            { "name": "dish brush tool", "isPacked": true },
+            { "name": "cooking poles", "isPacked": true },
+            { "name": "fire fan", "isPacked": true },
+            { "name": "aluminum foil", "isPacked": false },
+            { "name": "wooden spatula", "isPacked": false },
+            { "name": "tongs", "isPacked": false },
+            { "name": "metal stirrer", "isPacked": false },
+            { "name": "can opener", "isPacked": false },
+            { "name": "French press", "isPacked": true },
+            { "name": "pan", "isPacked": true },
+            { "name": "camping stove", "isPacked": true },
+            { "name": "stove fuel", "isPacked": true },
+            { "name": "pot", "isPacked": true },
+            { "name": "pocket bellow", "isPacked": true },
+            { "name": "ove glove", "isPacked": true },
+            { "name": "lidded plastic containers", "isPacked": true }
+         ]
+      },
+
+      {
+         "name": "Car Kit",
+         "isPacked": true,
+         "items": [
+            { "name": "flashlight", "isPacked": true },
+            { "name": "pint of water", "isPacked": true },
+            { "name": "extra cables", "isPacked": true }
+         ]
+      },
+
+      {
+         "name": "Overnight Bag",
+         "isPacked": false,
+         "items": [
+            { "name": "change of clothes", "isPacked": true },
+            { "name": "sleepwear", "isPacked": true },
+            { "name": "personal kit", "isPacked": true }
+         ]
+      },
+
+      {
+         "name": "Cooler",
+         "isPacked": false,
+         "items": [
+            { "name": "beer", "isPacked": false },
+            { "name": "bagged ice", "isPacked": false },
+            { "name": "frozen gallon of water", "isPacked": false },
+            { "name": "frozen pint bottles of water", "isPacked": false },
+            { "name": "jelly", "isPacked": false },
+            { "name": "mustard", "isPacked": false },
+            { "name": "relish", "isPacked": false },
+            { "name": "energy drinks for the road", "isPacked": false },
+            { "name": "eggs", "isPacked": false },
+            { "name": "Coke", "isPacked": false },
+            { "name": "bacon", "isPacked": false },
+            { "name": "hot dogs", "isPacked": false },
+            { "name": "chocolate", "isPacked": false }
+         ]
+      },
+
+      {
+         "name": "Camping Trunk Stuff",
+         "isPacked": false,
+         "items": [
+            { "name": "tarp", "isPacked": false },
+            { "name": "tent", "isPacked": false },
+            { "name": "water pint bottles", "isPacked": false },
+            { "name": "folding chairs", "isPacked": false },
+            { "name": "firewood", "isPacked": false },
+            { "name": "hatchet", "isPacked": false },
+            { "name": "saw", "isPacked": false },
+            { "name": "mallet", "isPacked": false },
+            { "name": "water jugs", "isPacked": false }
+         ]
+      },
+
+      {
+         "name": "Heavy jacket",
+         "isPacked": false
+      }
+   ]
+}

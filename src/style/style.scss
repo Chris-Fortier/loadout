@@ -148,7 +148,10 @@ body {
    border-radius: 0.375rem; // make more noticable
    margin-bottom: 12px; // space between item cards
 
-   padding: 0; // remove the padding inside the card as it will be controlled by the contents
+   padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
+   padding-bottom: 0; // remove the padding inside the card as it will be controlled by the contents
+   padding-left: 6px; // still want padding on the sides
+   padding-right: 6px; // still want padding on the sides
 
    line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 1.5rem;
@@ -330,7 +333,7 @@ $iconWidth: 30px;
 .packed-checkbox-container {
    width: $iconWidth;
    // display: inline-block;
-   margin-left: 10px;
+   // margin-left: 10px;
    margin-right: -5px;
    margin-top: 5px;
 }
@@ -369,8 +372,8 @@ $iconWidth: 30px;
    width: $iconWidth * 0.8;
 
    // float: right;
-   margin-left: 4px;
-   margin-right: 4px;
+   // margin-left: 4px;
+   // margin-right: 4px;
    margin-top: -3px;
 
    .primary {
@@ -391,6 +394,13 @@ $iconWidth: 30px;
 
 .navigation-link:hover {
    text-decoration: underline;
+}
+
+// makes it extend 2-column to edge on landscape iPhone 5/SE or a little larger screens
+@media (min-width: 480px) {
+   .container {
+      max-width: 620px;
+   }
 }
 
 // switches to two-"column" mode

@@ -47,6 +47,10 @@ export default class ItemList extends React.Component {
          isEditMode: false,
          isShowingUnpackConfirmation: false,
 
+         // this controls
+         subItemDisplayMode: "numUnpackedDescendants",
+         // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants"
+
          rootItem: gear, // stores all the item data from the abolsute root
          currentItem: gear, // stores the item data where the item of this page is at the root level
          itemIndexPath: [],
@@ -101,6 +105,26 @@ export default class ItemList extends React.Component {
          item.numDescendants = 0;
          item.numPackedChildren = 0;
          item.numPackedDescendants = 0;
+      }
+
+      // get the number of unpacked descedants, could be useful in sorting by which items need the most "work"
+      item.numUnpackedDescendants =
+         item.numDescendants - item.numPackedDescendants;
+
+      // generate the text that would be displayed to summarize the packed status of the contents of this item
+      if (
+         this.state.subItemDisplayMode === "packedChildrenOutOfTotalChildren"
+      ) {
+         item.contentSummaryText =
+            item.numPackedChildren + " / " + item.numChildren;
+      } else if (this.state.subItemDisplayMode === "numUnpackedDescendants") {
+         if (item.numUnpackedDescendants > 0) {
+            item.contentSummaryText = item.numUnpackedDescendants + " left";
+         } else if (!item.isPacked) {
+            item.contentSummaryText = "ready";
+         } else {
+            item.contentSummaryText = "packed";
+         }
       }
 
       return {
@@ -378,8 +402,11 @@ export default class ItemList extends React.Component {
                <span className="flex-fill item-card-text">{item.name}</span>
                {item.hasOwnProperty("items") && (
                   <span className="flex-fill item-card-text">
+                     <span className="item-card-icon float-right">
+                        <IconArrowThinRightCircle />
+                     </span>
+                     <span className="float-right">&nbsp;</span>
                      <span
-                        // to={window.location.pathname + "-" + item.index}
                         onClick={(e) => {
                            this.movePageToDifferentItem(
                               this.state.itemIndexPath.concat([item.index])
@@ -390,10 +417,7 @@ export default class ItemList extends React.Component {
                            { faint: counterIsFaint }
                         )}
                      >
-                        {item.numPackedChildren} / {item.numChildren}
-                        <span className="item-card-icon float-right">
-                           <IconArrowThinRightCircle />
-                        </span>
+                        {item.contentSummaryText}
                      </span>
                   </span>
                )}
@@ -510,6 +534,9 @@ export default class ItemList extends React.Component {
       // displayedItems = orderBy(items, "name", "asc"); // sort the items by name
       displayedItems = items;
 
+      // order by which items have the most unpacked subitems
+      displayedItems = orderBy(displayedItems, "numUnpackedDescendants", "asc");
+
       // sort the items by packed status if desired, with packed items on bottom
       if (this.state.isPackedOnBottom) {
          displayedItems = orderBy(displayedItems, "isPacked", "asc");
@@ -611,12 +638,7 @@ export default class ItemList extends React.Component {
                                           <h4 className="float-right packed-counter">
                                              {
                                                 this.state.currentItem
-                                                   .numPackedChildren
-                                             }{" "}
-                                             /{" "}
-                                             {
-                                                this.state.currentItem
-                                                   .numChildren
+                                                   .contentSummaryText
                                              }
                                           </h4>
                                        </div>
@@ -628,10 +650,6 @@ export default class ItemList extends React.Component {
                                           <h4>
                                              <input
                                                 className="edit-name"
-                                                // id={
-                                                //    "edit-name-input-" +
-                                                //    this.state.currentItem.index
-                                                // }
                                                 value={
                                                    this.state.currentItem.name
                                                 }

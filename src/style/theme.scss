@@ -265,11 +265,20 @@ $header-text-color: $white;
 
 // BREAKPOINTS
 
-// changed sm from 576px because iPhone 5/SE landscape is 568 px and I want it to go to sm
-$grid-breakpoints: (
-   xs: 0,
-   sm: 480px,
-   md: 768px,
-   lg: 992px,
-   xl: 1200px,
-);
+$item-card-min-width: 263px; // minimum width of the item cards before the layout changes
+// 263px is how wide a 2-column card would be on iPhone 5/SE lanscape with the margins
+$item-card-max-width: 350px; // maximum width of the item cards before the layout changes
+$item-card-spacing: 12px; // space between the item cards
+
+// // changed sm from 576px because iPhone 5/SE landscape is 568 px and I want it to go to sm
+// $grid-breakpoints: (
+//    // xs single column edge to edge fluid cards
+//       xs: 0,
+//    // sm single column fixed width with fluid margins
+//       sm: $item-card-max-width + 15 * 2,
+//    // md double column edge to edge fluid cards
+//       md: $item-card-min-width * 2 + $item-card-spacing + 15 * 2,
+//    // lg double column fixed width with fluid margins
+//       lg: 992px,
+//    xl: 1200px
+// );

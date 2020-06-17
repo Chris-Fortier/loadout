@@ -140,7 +140,7 @@ body {
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
-   margin-bottom: 12px; // space between item cards
+   margin-bottom: $item-card-spacing; // space between item cards
 
    padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
    padding-bottom: 0; // remove the padding inside the card as it will be controlled by the contents
@@ -161,7 +161,7 @@ body {
 // }
 
 // .item-card-double:nth-child(odd) {
-//    margin-right: 12px;
+//    margin-right: $item-card-spacing;
 // }
 
 // for text within an item card
@@ -204,12 +204,12 @@ body {
 .super-item-card {
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
-   margin-bottom: 12px;
+   margin-bottom: $item-card-spacing;
 
    // padding inside the full page card
    .card-header,
    .card-body {
-      padding: 12px;
+      padding: $item-card-spacing;
       padding-bottom: 0px;
    }
 }
@@ -396,25 +396,30 @@ $iconWidth: 30px;
    text-decoration: underline;
 }
 
-// makes it extend 2-column to edge on landscape iPhone 5/SE or a little larger screens
-@media (min-width: 480px) {
-   .container {
-      max-width: 620px;
+// smallest size is single column edge to edge fluid cards
+
+// sm single column fixed width with fluid margins
+@media (min-width: $item-card-max-width + 15 * 2) {
+   .container-fluid.item-cards-container {
+      max-width: $item-card-max-width + 15 * 2;
    }
 }
 
-// switches to two-"column" mode
-@media (min-width: 556px) {
-   // .item-card {
-   //    background-color: red;
-   // }
+// md and larger double column edge to edge fluid cards, then after a certain point double column fixed width with fluid margins
+@media (min-width: $item-card-min-width * 2 + $item-card-spacing + 15 * 2) {
+   // set the maximum width of the container to be two maximum widthed cards plus the 15px margins and space between them
+   .container-fluid.item-cards-container {
+      max-width: $item-card-max-width * 2 + $item-card-spacing + 15 * 2;
+   }
 
+   // set the width of each item card
    .item-card {
-      display: inline-block;
+      display: inline-block; // make it so multiple cards appear on the same row
       width: calc(50% - 6px);
    }
 
+   // puts a margin between the two item cards on the same "row"
    .item-card:nth-child(odd) {
-      margin-right: 12px;
+      margin-right: $item-card-spacing;
    }
 }

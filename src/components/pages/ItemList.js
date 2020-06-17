@@ -518,9 +518,9 @@ export default class ItemList extends React.Component {
          <div>
             <Header />
             <div className={pageBgClasses}>
-               <div className="container scroll-fix">
+               <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
-                     <div className="col-12 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                     <div className="col">
                         {this.state.currentItem.level !== 0 &&
                            !this.state.isEditMode && (
                               <div>

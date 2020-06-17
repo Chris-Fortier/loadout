@@ -289,7 +289,7 @@ export default class Landing extends React.Component {
             <div className="card-body">
                <h5>Sign Up</h5>
                <p>
-                  <span className="icon-container">
+                  <span className="icon left">
                      <IconUserAdd />
                   </span>
                   &nbsp;Make a New Account

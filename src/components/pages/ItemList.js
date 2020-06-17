@@ -47,7 +47,6 @@ export default class ItemList extends React.Component {
          isEditMode: false,
          isShowingUnpackConfirmation: false,
 
-         // this controls
          subItemDisplayMode: "numUnpackedDescendants",
          // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants"
 
@@ -210,20 +209,6 @@ export default class ItemList extends React.Component {
       );
    }
 
-   // clickUnpackButton() {
-   //    if (
-   //       this.state.currentItem.numPackedDescendants >
-   //       this.state.currentItem.numPackedChildren
-   //    ) {
-   //       // console.log(
-   //       //    "Are you sure you want to unpack all of these descendants?"
-   //       // );
-   //       this.showUnpackConfirmation();
-   //    } else {
-   //       this.unpackChildren(this.state.currentItem);
-   //    }
-   // }
-
    confirmUnpackDescendants() {
       this.unpackDescendants(this.state.currentItem); // unpack all descendants of the current item
       this.hideUnpackConfirmation(); // close the message
@@ -308,16 +293,10 @@ export default class ItemList extends React.Component {
 
    // toggle show packed items
    toggleIsPacked(itemIndex) {
-      // this.setItemNums(itemData); // make sure the number of packed items this has is up to date
-      // console.log(itemData.numPackedChildren);
       if (
          this.state.currentItem.items[itemIndex].numPackedChildren ===
          this.state.currentItem.items[itemIndex].numChildren
       ) {
-         // itemData.isPacked = !itemData.isPacked;
-         // this.forceUpdate(); // forces re-render, hacky way
-         // console.log("itemData.isPacked", itemData.isPacked);
-         // console.log("this.props", this.props);
          let currentItem = this.state.currentItem;
          currentItem.items[itemIndex].isPacked = !currentItem.items[itemIndex]
             .isPacked;
@@ -327,24 +306,6 @@ export default class ItemList extends React.Component {
       this.hideUnpackConfirmation();
    }
 
-   // // this sets the packed number of items and the total number of items
-   // setItemNums(item) {
-   //    item.numChildren = item.items.length;
-
-   //    // find the number of packed items by counting how many have packed set to true
-   //    item.numPackedChildren = item.items.reduce((numPacked, item) => {
-   //       if (item.isPacked) {
-   //          return (numPacked += 1);
-   //       } else {
-   //          return numPacked;
-   //       }
-   //    }, 0);
-   // }
-
-   // linkTo(itemIndex) {
-   //    this.props.history.push(window.location.pathname + "-" + itemIndex);
-   // }
-
    // renders a one line card represenation of an item
    renderItemCard(item) {
       // console.log("render item card with this", item);
@@ -352,16 +313,12 @@ export default class ItemList extends React.Component {
       let counterIsFaint = true;
       let packedBoxIsFaint = false;
 
-      // let checkBoxClassSuffix = "";
       // do this if this item has subitems
       if (item.hasOwnProperty("items")) {
-         // this.setItemNums(item); // find the number of items packed and total number of items
-
          // this will make the checkboxes disabled for items that don't have all their containing items packed
          if (item.numPackedChildren < item.numChildren) {
             counterIsFaint = false;
             packedBoxIsFaint = true;
-            // checkBoxClassSuffix = " faint";
          }
       }
 
@@ -375,10 +332,6 @@ export default class ItemList extends React.Component {
             {/* <div className="float-left"> */}
             <div className="d-flex">
                <span
-                  // className={
-                  //    "float-left custom-control custom-checkbox icon-container" +
-                  //    checkBoxClassSuffix
-                  // }
                   className={classnames(
                      "float-left custom-control custom-checkbox packed-checkbox-container",
                      { faint: packedBoxIsFaint }
@@ -428,11 +381,6 @@ export default class ItemList extends React.Component {
 
    // updates the displayed name field of one of the current item's subitems
    setSubItemName(e) {
-      // console.log("setting an item name...");
-      // console.log("e", e);
-      // console.log("e.target", e.target);
-      // console.log("e.target.id", e.target.id);
-
       // figure out which subitem we are editing the name of based on the id of the input
       const splitId = e.target.id.split("-");
       const indexToSet = parseInt(splitId[splitId.length - 1]);
@@ -453,30 +401,14 @@ export default class ItemList extends React.Component {
    // deletes an item
    deleteItem(indexToDelete) {
       console.log("deleting an item");
-      // console.log("e", e);
-      // console.log("e.target", e.target);
-      // console.log("e.target.id", e.target.id);
-      // const splitId = e.target.id.split("-");
-      // const indexToDelete = parseInt(splitId[splitId.length - 1]);
       console.log(
          "item we are deleting",
          indexToDelete,
          this.state.currentItem.items[indexToDelete].name
       );
-      // console.log(
-      //    "this is called",
-      //    this.state.currentItem.items[indexToDelete].name
-      // );
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      // delete itemDataCopy.items[indexToDelete]; // delete this item
-      // console.log("items before delete", itemDataCopy.items);
       itemDataCopy.items.splice(indexToDelete, 1); // delete this item
-      // console.log("items after delete", itemDataCopy.items);
-      // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
       this.forceUpdate();
-
-      // todo: this shows the wrong item as being deleted until you get out of edit mode
-      // maybe something to do with async
    }
 
    // renders a one line card represenation of an item
@@ -522,13 +454,6 @@ export default class ItemList extends React.Component {
    renderContainingItems(parentItem) {
       const items = parentItem.items; // to simplify code below
 
-      // get indices and levels for each item
-      // for (let i in items) {
-      //    items[i].index = i; // set an index (used in their pages' urls)
-      //    items[i].level = parentItem.level + 1; // set the level to each child item to this level plus one
-      // }
-      // todo: this might be redundant
-
       let displayedItems = []; // initialize a new list for displayed items
 
       // displayedItems = orderBy(items, "name", "asc"); // sort the items by name
@@ -570,9 +495,6 @@ export default class ItemList extends React.Component {
 
       this.processAllItems();
       console.log("this.state.currentItem.", this.state.currentItem.level);
-
-      // this.setItemNums(this.state.currentItem); // count number of packed and total items inside this
-      // todo: can probably put this in the fix function
 
       // these are classes that are different if we are at the top level or a lower level
       let pageBgClasses = "";
@@ -728,11 +650,6 @@ export default class ItemList extends React.Component {
                                                 .isShowingUnpackConfirmation && (
                                                 <button
                                                    className="text-button muted"
-                                                   // onClick={(e) => {
-                                                   //    this.unpackDescendants(
-                                                   //       this.state.currentItem
-                                                   //    );
-                                                   // }}
                                                    onClick={() => {
                                                       this.showUnpackConfirmation();
                                                    }}
@@ -743,12 +660,6 @@ export default class ItemList extends React.Component {
                                           {this.state
                                              .isShowingUnpackConfirmation &&
                                              this.rolloutUnpackConfirmation()}
-                                          {/* Are you sure you want to unpack &nbsp;
-                                          {
-                                             this.state.currentItem
-                                                .numPackedDescendants
-                                          }
-                                          &nbsp; total subitems? */}
                                        </>
                                     )}
 

@@ -137,12 +137,6 @@ body {
    font-size: 1.25rem;
 }
 
-// style text for the packed / total items numbers
-.packed-counter {
-   font-weight: 500;
-   color: rgba(0, 0, 0, 0.7);
-}
-
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
    border-radius: 0.375rem; // make more noticable
@@ -180,6 +174,12 @@ body {
    // font-size: 1.5rem;
 
    color: rgba(255, 255, 255, 0.8);
+}
+
+// style text for the packed / total items numbers
+.packed-counter {
+   // font-weight: 500;
+   color: rgba(0, 0, 0, 0.7);
 }
 
 .edit-name {
@@ -386,7 +386,7 @@ $iconWidth: 30px;
 }
 
 .navigation-link {
-   padding: 0;
+   // padding: 0;
    background-color: transparent;
    border: 0px solid transparent;
    cursor: pointer;

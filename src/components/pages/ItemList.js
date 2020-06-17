@@ -354,22 +354,22 @@ export default class ItemList extends React.Component {
                </span>
                <span className="flex-fill item-card-text">{item.name}</span>
                {item.hasOwnProperty("items") && (
-                  <span className="flex-fill item-card-text">
+                  <span
+                     onClick={(e) => {
+                        this.movePageToDifferentItem(
+                           this.state.itemIndexPath.concat([item.index])
+                        ); // move to current path with the subitem index added on
+                     }}
+                     className={classnames(
+                        "flex-fill item-card-text navigation-link packed-counter",
+                        { faint: counterIsFaint }
+                     )}
+                  >
                      <span className="item-card-icon float-right">
                         <IconArrowThinRightCircle />
                      </span>
                      <span className="float-right">&nbsp;</span>
-                     <span
-                        onClick={(e) => {
-                           this.movePageToDifferentItem(
-                              this.state.itemIndexPath.concat([item.index])
-                           ); // move to current path with the subitem index added on
-                        }}
-                        className={classnames(
-                           "float-right navigation-link packed-counter",
-                           { faint: counterIsFaint }
-                        )}
-                     >
+                     <span className="float-right">
                         {item.contentSummaryText}
                      </span>
                   </span>

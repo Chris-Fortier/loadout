@@ -195,6 +195,7 @@ export default class Landing extends React.Component {
          // redirect the user
          // todo: make this its own function
          this.props.history.push("/gear");
+         window.scrollTo(0, 0); // sets focus to the top of the page
       }
    }
 
@@ -220,6 +221,7 @@ export default class Landing extends React.Component {
          // redirect the user
          // todo: make this its own function
          this.props.history.push("/gear");
+         window.scrollTo(0, 0); // sets focus to the top of the page
       }
    }
 

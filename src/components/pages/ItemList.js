@@ -18,26 +18,37 @@ import {
 import { MOVE_UPDOWN, MAX_ITEM_NAME_LENGTH } from "../../utils/helpers";
 import classnames from "classnames";
 import axios from "axios";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
-export default class ItemList extends React.Component {
+class ItemList extends React.Component {
    constructor(props) {
       super(props); // boilerplate
 
-      axios
-         .get(
-            "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
-         )
-         .then(function (response) {
-            // handle success
-            console.log(response);
-         })
-         .catch(function (error) {
-            // handle error
-            console.log(error);
-         });
-      // .finally(function () {
-      //   // always executed
-      // });
+      console.log("props.currentLoadout", props.currentLoadout);
+
+      if (props.currentLoadout.gear.length === 0) {
+         axios
+            .get(
+               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
+            )
+            .then((res) => {
+               // handle success
+               // res is shorthand for response
+               console.log(res);
+               props.dispatch({
+                  type: actions.STORE_CURRENT_LOADOUT,
+                  payload: res.data,
+               }); // dispatching an action
+               // res.data is the data from the response
+            })
+            .catch((error) => {
+               // handle error
+               console.log(error);
+            }); // .finally(function () {
+         //   // always executed
+         // });
+      }
 
       // set default state values
 
@@ -718,3 +729,12 @@ export default class ItemList extends React.Component {
       );
    }
 }
+
+// maps the store to props
+function mapStateToProps(state) {
+   return {
+      currentLoadout: state.currentLoadout,
+   };
+}
+
+export default connect(mapStateToProps)(ItemList); // this is "currying"

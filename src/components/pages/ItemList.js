@@ -15,7 +15,7 @@ import {
    IconChevronDown,
    IconChevronUp,
 } from "../../icons/icons.js";
-import { MOVE_UPDOWN } from "../../utils/helpers";
+import { MOVE_UPDOWN, MAX_ITEM_NAME_LENGTH } from "../../utils/helpers";
 import classnames from "classnames";
 import axios from "axios";
 
@@ -406,6 +406,15 @@ export default class ItemList extends React.Component {
          indexToDelete,
          this.state.currentItem.items[indexToDelete].name
       );
+      if (this.state.currentItem.items[indexToDelete].numDescendants > 0) {
+         console.log(
+            "Are you sure you want to delete " +
+               this.state.currentItem.items[indexToDelete].name +
+               " and its " +
+               this.state.currentItem.items[indexToDelete].numDescendants +
+               " subitems?"
+         );
+      }
       let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
       itemDataCopy.items.splice(indexToDelete, 1); // delete this item
       this.forceUpdate();
@@ -427,6 +436,7 @@ export default class ItemList extends React.Component {
                      id={"edit-name-input-" + item.index}
                      value={item.name}
                      onChange={(e) => this.setSubItemName(e)}
+                     maxLength={MAX_ITEM_NAME_LENGTH}
                   />
                </span>
                <button
@@ -578,6 +588,7 @@ export default class ItemList extends React.Component {
                                                 onChange={(e) =>
                                                    this.setCurrentItemName(e)
                                                 }
+                                                maxLength={MAX_ITEM_NAME_LENGTH}
                                              />
                                           </h4>
                                        </span>

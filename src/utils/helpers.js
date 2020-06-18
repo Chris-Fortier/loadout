@@ -57,6 +57,7 @@ function checkIsOver(num, limit) {
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // app master preferences
+const MAX_ITEM_NAME_LENGTH = 30; // the maximum length of characters for an item name
 const MOVE_UPDOWN = false; // whether or not to have up and down buttons in edit mode
 
 export {
@@ -66,5 +67,6 @@ export {
    toKebabCase,
    checkIsOver,
    EMAIL_REGEX,
+   MAX_ITEM_NAME_LENGTH,
    MOVE_UPDOWN,
 };

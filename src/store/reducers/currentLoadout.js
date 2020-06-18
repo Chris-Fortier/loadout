@@ -22,6 +22,10 @@ export default function currentLoadout(currentLoadout = {}, action) {
       //    newCurrentLoadout.cards = [];
       //    newCurrentLoadout.index = 0;
       //    return newCurrentLoadout;
+      case actions.CHANGE_ITEM_INDEX_PATH:
+         console.log("FIRED CHANGE_ITEM_INDEX_PATH");
+         newCurrentLoadout.itemIndexPath = action.payload;
+         return newCurrentLoadout;
       default:
          return currentLoadout;
    }

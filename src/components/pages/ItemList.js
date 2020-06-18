@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../ui/Header";
 // import { Link } from "react-router-dom"; // a React element for linking
-import { gear } from "../../mock-data/gear";
+// import { gear } from "../../mock-data/gear";
 import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
@@ -61,10 +61,39 @@ class ItemList extends React.Component {
          subItemDisplayMode: "numUnpackedDescendants",
          // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants"
 
-         rootItem: gear, // stores all the item data from the abolsute root
-         currentItem: gear, // stores the item data where the item of this page is at the root level
-         itemIndexPath: [],
+         // rootItem: gear, // stores all the item data from the abolsute root
+         // currentItem: gear, // stores the item data where the item of this page is at the root level
+         // itemIndexPath: [],
+
+         currentItem: null, // put a null here so it won't render anything until the data is received
       };
+   }
+
+   // this is a "lifecycle" method like render(), we don't need to call it manually
+   componentDidMount() {
+      console.log("componentDidMount()...");
+      axios
+         .get(
+            "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
+         )
+         .then((res) => {
+            // handle success
+            // res is shorthand for response
+            console.log("res", res);
+            // props.dispatch({
+            //    type: actions.STORE_CURRENT_LOADOUT,
+            //    payload: res.data,
+            // }); // dispatching an action
+            this.setState({ currentItem: res.data, rootItem: res.data });
+            // res.data is the data from the response
+         })
+         .catch((error) => {
+            // handle error
+            console.log(error);
+         }); // .finally(function () {
+      //   // always executed
+      // });
+      // this.setState({ currentItem: this.props.currentLoadout.gear });
    }
 
    // methods happen here, such as what happens when you click on a button
@@ -145,6 +174,9 @@ class ItemList extends React.Component {
 
    // fixes all item data
    processAllItems() {
+      console.log("processing all items");
+      console.log("this.props", this.props);
+      console.log("this.state.rootItem", this.state.rootItem);
       this.processItemAndDescendants(this.state.rootItem, 0);
    }
 
@@ -240,23 +272,44 @@ class ItemList extends React.Component {
       this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
    }
 
-   // move page to a different item
-   movePageToDifferentItem(itemIndexPath) {
-      let parentName = null; // initialize the name of the parent
-      let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+   // set the current item in state based on an itemIndexPath
+   setCurrentItem(itemIndexPath) {
+      console.log("setCurrentItem()...");
+      console.log(
+         "setCurrentItem() this.props.currentLoadout.itemIndexPath",
+         this.props.currentLoadout.itemIndexPath
+      );
+      // const itemIndexPath = this.props.currentLoadout.itemIndexPath;
+      console.log("setCurrentItem() itemIndexPath", itemIndexPath);
+      // let parentName = null; // initialize the name of the parent
+      // let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
       let currentItem = this.state.rootItem;
       for (let levelIndex in itemIndexPath) {
-         parentName = currentItem.name;
+         // parentName = currentItem.name;
          currentItem = currentItem.items[parseInt(itemIndexPath[levelIndex])];
-         itemLevel++;
+         // itemLevel++;
       }
+
+      console.log("setCurrentItem() currentItem", currentItem);
 
       this.setState({
          currentItem: currentItem,
-         parentName: parentName,
-         level: itemLevel,
-         itemIndexPath: itemIndexPath,
+         // parentName: parentName,
+         // level: itemLevel,
+         // itemIndexPath: itemIndexPath,
       });
+      this.processAllItems();
+      console.log("this.state after setCurrentItem()", this.state);
+   }
+
+   // move page to a different item
+   movePageToDifferentItem(itemIndexPath) {
+      this.props.dispatch({
+         type: actions.CHANGE_ITEM_INDEX_PATH,
+         payload: itemIndexPath,
+      });
+
+      this.setCurrentItem(itemIndexPath);
 
       this.setState({ isEditMode: false }); // get out of edit mode if the current item changes
 
@@ -368,7 +421,9 @@ class ItemList extends React.Component {
                   <span
                      onClick={(e) => {
                         this.movePageToDifferentItem(
-                           this.state.itemIndexPath.concat([item.index])
+                           this.props.currentLoadout.itemIndexPath.concat([
+                              item.index,
+                           ])
                         ); // move to current path with the subitem index added on
                      }}
                      className={classnames(
@@ -475,6 +530,8 @@ class ItemList extends React.Component {
    renderContainingItems(parentItem) {
       const items = parentItem.items; // to simplify code below
 
+      console.log("Rendering containing items of", parentItem.name);
+
       let displayedItems = []; // initialize a new list for displayed items
 
       // displayedItems = orderBy(items, "name", "asc"); // sort the items by name
@@ -512,25 +569,31 @@ class ItemList extends React.Component {
 
    render() {
       console.log("Rendering page...");
-      // console.log("currentItem", this.state.currentItem);
 
+      console.log("this.state.currentItem", this.state.currentItem);
+      if (this.state.currentItem === null) {
+         return <></>;
+      }
+
+      // console.log("this.props", this.props);
       this.processAllItems();
-      console.log("this.state.currentItem.", this.state.currentItem.level);
 
       // these are classes that are different if we are at the top level or a lower level
       let pageBgClasses = "";
       let pageContentClasses = "";
       let levelHeaderClasses = "";
       let levelBodyClasses = "";
-      if (this.state.currentItem.level === 0) {
-         pageBgClasses =
-            "item-list color" + String(this.state.currentItem.level % 3);
+
+      // get the current item
+      const currentItem = this.state.currentItem; // old value
+      // const currentItem = this.props.currentLoadout.gear; // redux value
+
+      const level = currentItem.level;
+      if (level === 0) {
+         pageBgClasses = "item-list color" + String(level % 3);
       } else {
-         pageBgClasses =
-            "item-list color" + String((this.state.currentItem.level - 1) % 3);
-         pageContentClasses =
-            "card super-item-card color" +
-            String(this.state.currentItem.level % 3);
+         pageBgClasses = "item-list color" + String((level - 1) % 3);
+         pageContentClasses = "card super-item-card color" + String(level % 3);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }
@@ -542,31 +605,32 @@ class ItemList extends React.Component {
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
-                        {this.state.currentItem.level !== 0 &&
-                           !this.state.isEditMode && (
-                              <div>
-                                 <span
-                                    className="up-level navigation-link"
-                                    onClick={(e) => {
-                                       this.movePageToDifferentItem(
-                                          this.state.itemIndexPath.slice(0, -1)
-                                       ); // move to current path with the last part removed to go up a level
-                                    }}
-                                 >
-                                    <div className="icon left">
-                                       <IconArrowThinLeftCircle />
-                                    </div>
-                                    Back to {this.state.currentItem.parentName}
-                                 </span>
-                              </div>
-                           )}
+                        {level !== 0 && !this.state.isEditMode && (
+                           <div>
+                              <span
+                                 className="up-level navigation-link"
+                                 onClick={(e) => {
+                                    this.movePageToDifferentItem(
+                                       this.props.currentLoadout.itemIndexPath.slice(
+                                          0,
+                                          -1
+                                       )
+                                    ); // move to current path with the last part removed to go up a level
+                                 }}
+                              >
+                                 <div className="icon left">
+                                    <IconArrowThinLeftCircle />
+                                 </div>
+                                 Back to {currentItem.parentName}
+                              </span>
+                           </div>
+                        )}
                         {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
-                        {this.state.currentItem.level !== 0 &&
-                           this.state.isEditMode && (
-                              <div className="up-level">
-                                 <br />
-                              </div>
-                           )}
+                        {level !== 0 && this.state.isEditMode && (
+                           <div className="up-level">
+                              <br />
+                           </div>
+                        )}
 
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>
@@ -575,14 +639,11 @@ class ItemList extends React.Component {
                                  {!this.state.isEditMode && (
                                     <>
                                        <div className="col">
-                                          <h4>{this.state.currentItem.name}</h4>
+                                          <h4>{currentItem.name}</h4>
                                        </div>
                                        <div className="col">
                                           <h4 className="float-right packed-counter">
-                                             {
-                                                this.state.currentItem
-                                                   .contentSummaryText
-                                             }
+                                             {currentItem.contentSummaryText}
                                           </h4>
                                        </div>
                                     </>
@@ -593,9 +654,7 @@ class ItemList extends React.Component {
                                           <h4>
                                              <input
                                                 className="edit-name"
-                                                value={
-                                                   this.state.currentItem.name
-                                                }
+                                                value={currentItem.name}
                                                 onChange={(e) =>
                                                    this.setCurrentItemName(e)
                                                 }
@@ -615,7 +674,7 @@ class ItemList extends React.Component {
                                              className="custom-control-input display-switch-label"
                                              id={
                                                 "show-packed-switch" +
-                                                this.state.currentItem.name
+                                                currentItem.name
                                              }
                                              checked={
                                                 this.state.isShowingPacked
@@ -628,10 +687,10 @@ class ItemList extends React.Component {
                                              className="custom-control-label display-switch-label"
                                              htmlFor={
                                                 "show-packed-switch" +
-                                                this.state.currentItem.name
+                                                currentItem.name
                                              }
                                           >
-                                             Show {this.state.currentItem.numPackedChildren}{" "}
+                                             Show {currentItem.numPackedChildren}{" "}
                                              Packed Item(s)
                                           </label>
                                        </div> */}
@@ -643,7 +702,7 @@ class ItemList extends React.Component {
                                                 className="custom-control-input display-switch-label"
                                                 id={
                                                    "packed-on-bottom-switch" +
-                                                   this.state.currentItem.name
+                                                   currentItem.name
                                                 }
                                                 checked={
                                                    this.state.isPackedOnBottom
@@ -656,7 +715,7 @@ class ItemList extends React.Component {
                                                 className="custom-control-label display-switch-label"
                                                 htmlFor={
                                                    "packed-on-bottom-switch" +
-                                                   this.state.currentItem.name
+                                                   currentItem.name
                                                 }
                                              >
                                                 Move Packed to Bottom
@@ -666,8 +725,8 @@ class ItemList extends React.Component {
 
                                     {!this.state.isEditMode && (
                                        <>
-                                          {this.state.currentItem
-                                             .numPackedDescendants > 0 &&
+                                          {currentItem.numPackedDescendants >
+                                             0 &&
                                              !this.state
                                                 .isShowingUnpackConfirmation && (
                                                 <button
@@ -691,7 +750,7 @@ class ItemList extends React.Component {
                                           className="custom-control-input display-switch-label"
                                           id={
                                              "edit-mode-switch" +
-                                             this.state.currentItem.name
+                                             currentItem.name
                                           }
                                           checked={this.state.isEditMode}
                                           onChange={(e) => {
@@ -702,7 +761,7 @@ class ItemList extends React.Component {
                                           className="custom-control-label display-switch-label"
                                           htmlFor={
                                              "edit-mode-switch" +
-                                             this.state.currentItem.name
+                                             currentItem.name
                                           }
                                        >
                                           Edit Mode
@@ -714,9 +773,7 @@ class ItemList extends React.Component {
                            <div className={levelBodyClasses}>
                               <div className="row">
                                  <div className="col">
-                                    {this.renderContainingItems(
-                                       this.state.currentItem
-                                    )}
+                                    {this.renderContainingItems(currentItem)}
                                  </div>
                               </div>
                            </div>

@@ -90,6 +90,38 @@ $theme-colors: map-merge(
    $theme-colors
 );
 
+
+// loadout colors
+
+$level-colors: (
+   0: #608ba0,
+   1: #56967b,
+   2: #629757,
+   3: #838949,
+   4: #a07660,
+);
+
+$parent-colors: (
+   0: lighten(map-get($level-colors, 0 ),10%),
+   1: lighten(map-get($level-colors, 1 ),10%),
+   2: lighten(map-get($level-colors, 2 ),10%),
+   3: lighten(map-get($level-colors, 3 ),10%),
+   4: lighten(map-get($level-colors, 4 ),10%),
+);
+
+$child-colors: (
+   // 0: lighten(map-get($level-colors, 0 ),10%),
+   // 1: #3c7c61,
+   // 2: #487d3d,
+   // 3: #696f2f,
+   // 4: #865c46,
+   0: darken(map-get($level-colors, 0 ),10%),
+   1: darken(map-get($level-colors, 1 ),10%),
+   2: darken(map-get($level-colors, 2 ),10%),
+   3: darken(map-get($level-colors, 3 ),10%),
+   4: darken(map-get($level-colors, 4 ),10%),
+);
+
 // SPACING
 
 $spacer: 1rem; // 16px in most browsers

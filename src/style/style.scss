@@ -23,17 +23,38 @@
 
 // alternating colors for gear cards
 .color0 {
-   background-color: #92969a; // urban gray
+   // background-color: #92969a; // urban gray
+   background-color: map-get($level-colors, 0)
 }
 .color1 {
    // background-color: rgb(82, 134, 52);
    // background-color: #3b715b; // foliage green
-   background-color: #457462; // foliage green
+   // background-color: #457462; // foliage green
+   background-color: map-get($level-colors, 1)
 }
 .color2 {
    // background-color: #ddb77b; // coyote
-   background-color: #877348; // flat dark earth
+   // background-color: #877348; // flat dark earth
+   background-color: map-get($level-colors, 2)
+
 }
+
+.color3 {background-color: map-get($level-colors, 3)}
+.color4 {background-color: map-get($level-colors, 4)}
+
+.parent-color-0 {background-color: map-get($parent-colors, 0)}
+.parent-color-1 {background-color: map-get($parent-colors, 1)}
+.parent-color-2 {background-color: map-get($parent-colors, 2)}
+.parent-color-3 {background-color: map-get($parent-colors, 3)}
+.parent-color-4 {background-color: map-get($parent-colors, 4)}
+
+.child-color-0 {background-color: map-get($child-colors, 0)}
+.child-color-1 {background-color: map-get($child-colors, 1)}
+.child-color-2 {background-color: map-get($child-colors, 2)}
+.child-color-3 {background-color: map-get($child-colors, 3)}
+.child-color-4 {background-color: map-get($child-colors, 4)}
+
+
 
 .item-list {
    min-height: 100vh; // makes it extend to bottom of page

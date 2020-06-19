@@ -15,7 +15,7 @@ import {
    IconChevronDown,
    IconChevronUp,
 } from "../../icons/icons.js";
-import { MOVE_UPDOWN, MAX_ITEM_NAME_LENGTH } from "../../utils/helpers";
+import { MOVE_UPDOWN, MAX_ITEM_NAME_LENGTH, LEVEL_COLORS } from "../../utils/helpers";
 import classnames from "classnames";
 import axios from "axios";
 import { connect } from "react-redux";
@@ -389,8 +389,8 @@ class ItemList extends React.Component {
       return (
          <div
             className={
-               "card item-card color" +
-               String((this.state.currentItem.level + 1) % 3)
+               "card item-card child-color-" +
+               String((this.state.currentItem.level + 1) % LEVEL_COLORS)
             }
          >
             {/* <div className="float-left"> */}
@@ -491,8 +491,8 @@ class ItemList extends React.Component {
       return (
          <div
             className={
-               "card item-card color" +
-               String((this.state.currentItem.level + 1) % 3)
+               "card item-card child-color-" +
+               String((this.state.currentItem.level + 1) % LEVEL_COLORS)
             }
          >
             <div className="d-flex">
@@ -590,10 +590,10 @@ class ItemList extends React.Component {
 
       const level = currentItem.level;
       if (level === 0) {
-         pageBgClasses = "item-list color" + String(level % 3);
+         pageBgClasses = "item-list parent-color-" + String(level % LEVEL_COLORS);
       } else {
-         pageBgClasses = "item-list color" + String((level - 1) % 3);
-         pageContentClasses = "card super-item-card color" + String(level % 3);
+         pageBgClasses = "item-list parent-color-" + String((level - 1) % LEVEL_COLORS);
+         pageContentClasses = "card super-item-card color" + String(level % LEVEL_COLORS);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }

@@ -19,7 +19,7 @@ class Header extends React.Component {
       console.log("logOutCurrentUser()...");
       this.props.dispatch({
          type: actions.UPDATE_CURRENT_USER,
-         payload: { hello: "hi" },
+         payload: {},
       });
    }
 

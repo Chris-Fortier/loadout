@@ -165,7 +165,14 @@
                   {
                      "name": "band-aids",
                      "id": "b8a3f524-f2e2-490c-8bce-ffbb3ea846ff",
-                     "isPacked": false
+                     "isPacked": false,
+                     "items": [
+                        {
+                           "name": "test",
+                           "id": "5e445ea5-003a-411e-bb40-f46d8a4ba950",
+                           "isPacked": false
+                        }
+                     ]
                   },
                   {
                      "name": "moleskin",

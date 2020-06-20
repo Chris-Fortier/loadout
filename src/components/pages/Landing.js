@@ -220,6 +220,33 @@ class Landing extends React.Component {
       }
    }
 
+   // bypasses log in and goes straight to app
+   bypassLogIn() {
+
+      console.log("created user object for POST: ");
+      // Mimic API response:
+      axios
+         .get(
+            "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/user.json"
+         )
+         .then((res) => {
+            const currentUser = res.data;
+            console.log(currentUser);
+            this.props.dispatch({
+               type: actions.UPDATE_CURRENT_USER,
+               payload: res.data,
+            });
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+
+      // redirect the user
+      // todo: make this its own function
+      this.props.history.push("/gear");
+      window.scrollTo(0, 0); // sets focus to the top of the page
+   }
+   
    // tests if the email and password are valid and if so creates the user
    async validateAndCreateUser() {
       console.log("validateAndCreateUser...");
@@ -312,6 +339,12 @@ class Landing extends React.Component {
                      onClick={() => this.validateLogInAttempt()}
                   >
                      Log In
+                  </button>
+                  <button
+                     className="btn btn-primary btn-block my-3"
+                     onClick={() => this.bypassLogIn()}
+                  >
+                     Bypass
                   </button>
                   <button
                      className="btn btn-secondary btn-sm btn-block"

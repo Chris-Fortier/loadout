@@ -94,33 +94,20 @@ $theme-colors: map-merge(
 // loadout colors
 
 $level-colors: (
-   0: #608ba0,
-   1: #56967b,
-   2: #629757,
-   3: #838949,
-   4: #a07660,
+   // 0: #86b0c6,
+   // 1: #6aa060,
+   // 2: #698545,
+   // 3: #786738,
+   // 4: #7a4e3a,
+   0: #79b9b9,
+   1: #63a363,
+   2: #608949,
+   3: #687030,
+   4: #6d572d,
 );
 
-$parent-colors: (
-   0: lighten(map-get($level-colors, 0 ),10%),
-   1: lighten(map-get($level-colors, 1 ),10%),
-   2: lighten(map-get($level-colors, 2 ),10%),
-   3: lighten(map-get($level-colors, 3 ),10%),
-   4: lighten(map-get($level-colors, 4 ),10%),
-);
-
-$child-colors: (
-   // 0: lighten(map-get($level-colors, 0 ),10%),
-   // 1: #3c7c61,
-   // 2: #487d3d,
-   // 3: #696f2f,
-   // 4: #865c46,
-   0: darken(map-get($level-colors, 0 ),10%),
-   1: darken(map-get($level-colors, 1 ),10%),
-   2: darken(map-get($level-colors, 2 ),10%),
-   3: darken(map-get($level-colors, 3 ),10%),
-   4: darken(map-get($level-colors, 4 ),10%),
-);
+$darker-stuff: rgba(0, 0, 0, 0.7); // make this a darker version of whatever color is behind it
+$lighter-stuff: rgba(255, 255, 255, 0.7); // this this a lighter version of whatever color is behind it
 
 // SPACING
 

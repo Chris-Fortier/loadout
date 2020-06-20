@@ -389,7 +389,7 @@ class ItemList extends React.Component {
       return (
          <div
             className={
-               "card item-card child-color-" +
+               "card item-card level-color-" +
                String((this.state.currentItem.level + 1) % LEVEL_COLORS)
             }
          >
@@ -491,7 +491,7 @@ class ItemList extends React.Component {
       return (
          <div
             className={
-               "card item-card child-color-" +
+               "card item-card level-color-" +
                String((this.state.currentItem.level + 1) % LEVEL_COLORS)
             }
          >
@@ -590,10 +590,10 @@ class ItemList extends React.Component {
 
       const level = currentItem.level;
       if (level === 0) {
-         pageBgClasses = "item-list parent-color-" + String(level % LEVEL_COLORS);
+         pageBgClasses = "item-list level-color-" + String(level % LEVEL_COLORS);
       } else {
-         pageBgClasses = "item-list parent-color-" + String((level - 1) % LEVEL_COLORS);
-         pageContentClasses = "card super-item-card color" + String(level % LEVEL_COLORS);
+         pageBgClasses = "item-list level-color-" + String((level - 1) % LEVEL_COLORS);
+         pageContentClasses = "card super-item-card level-color-" + String(level % LEVEL_COLORS);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }

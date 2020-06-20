@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom"; // a React element for linking
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
 // export default function Header() {
-export default class Header extends React.Component {
+class Header extends React.Component {
    constructor() {
       super(); // boilerplate
 
@@ -10,6 +12,15 @@ export default class Header extends React.Component {
       this.state = {
          rollout: "none", // which rollout is active, either "Loadout", "Account" or "none"
       };
+   }
+
+   // log out of the current user
+   logOutCurrentUser() {
+      console.log("logOutCurrentUser()...");
+      this.props.dispatch({
+         type: actions.UPDATE_CURRENT_USER,
+         payload: { hello: "hi" },
+      });
    }
 
    toggleLoadoutRollout() {
@@ -68,7 +79,11 @@ export default class Header extends React.Component {
             </div>
             <div className="row">
                <div className="col">
-                  <Link to="/" className="btn btn-link float-right">
+                  <Link
+                     to="/"
+                     className="btn btn-link float-right"
+                     onClick={() => this.logOutCurrentUser()}
+                  >
                      Log Out
                   </Link>
                </div>
@@ -116,3 +131,12 @@ export default class Header extends React.Component {
       );
    }
 }
+
+// maps the store to props
+function mapStateToProps(state) {
+   return {
+      // put all the things in state we need access to in this component
+   };
+}
+
+export default connect(mapStateToProps)(Header);

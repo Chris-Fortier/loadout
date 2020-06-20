@@ -11,9 +11,13 @@ import {
    // IconHome,
    // IconEdit,
 } from "../../icons/icons.js";
+import { withRouter } from "react-router-dom"; // a React element for linking
+import axios from "axios";
+import actions from "../../store/actions";
+import { connect } from "react-redux";
 
 // export default function Landing() {
-export default class Landing extends React.Component {
+class Landing extends React.Component {
    constructor() {
       super(); // boilerplate line that needs to be in the constructor
 
@@ -184,13 +188,30 @@ export default class Landing extends React.Component {
          !this.state.hasExistingEmailError &&
          !this.state.hasExistingPasswordError
       ) {
-         // const user = {
-         //    id: getUuid(),
-         //    email: emailInput,
-         //    password: hash(passwordInput),
-         //    createdAt: Date.now(),
-         // };
-         // console.log("created a new user object", user);
+         const user = {
+            id: getUuid(),
+            email: emailInput,
+            password: hash(passwordInput),
+            createdAt: Date.now(),
+         };
+
+         console.log("created user object for POST: ", user);
+         // Mimic API response:
+         axios
+            .get(
+               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/user.json"
+            )
+            .then((res) => {
+               const currentUser = res.data;
+               console.log(currentUser);
+               this.props.dispatch({
+                  type: actions.UPDATE_CURRENT_USER,
+                  payload: res.data,
+               });
+            })
+            .catch((error) => {
+               console.log(error);
+            });
 
          // redirect the user
          // todo: make this its own function
@@ -217,6 +238,25 @@ export default class Landing extends React.Component {
             createdAt: Date.now(),
          };
          console.log("created a new user object", user);
+
+         console.log("created user object for POST: ", user);
+
+         // Mimic API response:
+         axios
+            .get(
+               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/user.json"
+            )
+            .then((res) => {
+               const currentUser = res.data;
+               console.log(currentUser);
+               this.props.dispatch({
+                  type: actions.UPDATE_CURRENT_USER,
+                  payload: res.data,
+               });
+            })
+            .catch((error) => {
+               console.log(error);
+            });
 
          // redirect the user
          // todo: make this its own function
@@ -379,3 +419,10 @@ export default class Landing extends React.Component {
       );
    }
 }
+
+// maps the store to props
+function mapStateToProps(state) {
+   return {};
+}
+
+export default withRouter(connect(mapStateToProps)(Landing)); // this is "currying"

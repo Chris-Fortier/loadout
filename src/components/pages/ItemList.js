@@ -390,10 +390,10 @@ class ItemList extends React.Component {
       const level = currentItem.level;
       if (level === 0) {
          pageBgClasses =
-            "item-list level-color-" + String(level % LEVEL_COLORS);
+            "item-list parent-color-0"; // + String(level % LEVEL_COLORS);
       } else {
          pageBgClasses =
-            "item-list level-color-" + String((level - 1) % LEVEL_COLORS);
+            "item-list parent-color-0"; // + String((level - 1) % LEVEL_COLORS);
          pageContentClasses =
             "card super-item-card level-color-" + String(level % LEVEL_COLORS);
          levelHeaderClasses = "card-header";

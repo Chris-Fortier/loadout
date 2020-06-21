@@ -53,7 +53,7 @@ class ItemCard extends React.Component {
       return (
          <div
             className={
-               "card item-card level-color-" + String(item.level % LEVEL_COLORS)
+               "card item-card child-color-" + String(item.level % LEVEL_COLORS)
             }
          >
             {/* <div className="float-left"> */}

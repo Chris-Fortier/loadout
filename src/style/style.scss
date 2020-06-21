@@ -21,7 +21,7 @@
    min-height: 100vh;
 }
 
-// alternating colors for gear cards
+// colors for gear cards
 .level-color-0 {
    background-color: map-get($level-colors, 0);
 }
@@ -37,6 +37,19 @@
 .level-color-4 {
    background-color: map-get($level-colors, 4);
 }
+
+
+.parent-color-0 {background-color: map-get($parent-colors, 0)}
+.parent-color-1 {background-color: map-get($parent-colors, 1)}
+.parent-color-2 {background-color: map-get($parent-colors, 2)}
+.parent-color-3 {background-color: map-get($parent-colors, 3)}
+.parent-color-4 {background-color: map-get($parent-colors, 4)}
+
+.child-color-0 {background-color: map-get($child-colors, 0)}
+.child-color-1 {background-color: map-get($child-colors, 1)}
+.child-color-2 {background-color: map-get($child-colors, 2)}
+.child-color-3 {background-color: map-get($child-colors, 3)}
+.child-color-4 {background-color: map-get($child-colors, 4)}
 
 .item-list {
    min-height: 100vh; // makes it extend to bottom of page

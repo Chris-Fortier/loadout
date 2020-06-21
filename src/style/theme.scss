@@ -94,16 +94,60 @@ $theme-colors: map-merge(
 // loadout colors
 
 $level-colors: (
-   // 0: #86b0c6,
-   // 1: #6aa060,
-   // 2: #698545,
-   // 3: #786738,
-   // 4: #7a4e3a,
-   0: #79b9b9,
-   1: #63a363,
-   2: #608949,
-   3: #687030,
-   4: #6d572d,
+   // 25% saturation
+   // 0: #6686a6,
+   // 1: #58986d,
+   // 2: #798d4d,
+   // 3: #937e53,
+   // 4: #ad6d6d,
+
+   // 15% saturation
+   // 0: #718497,
+   // 1: #688e74,
+   // 2: #7c8862,
+   // 3: #8b7f65,
+   // 4: #9b7575,
+
+   // all gray
+   // 0: gray,
+   // 1: gray,
+   // 2: gray,
+   // 3: gray,
+   // 4: gray,
+
+   // blue-teal straight to brown
+   0: #5c7a99,
+   1: #6b7a8a,
+   2: #7a7a7b,
+   3: #8a7a6b,
+   4: #997a5c,
+
+   // blue-teal to green to brown
+   // 0: #6b859e,
+   // 1: #629563,
+   // 2: #748d5a,
+   // 3: #898356,
+   // 4: #947b61,
+   );
+
+$level-change: 15%; // how much each level changes in brightness
+// 10-15% work well
+
+
+$parent-colors: (
+   0: lighten(map-get($level-colors, 0 ),$level-change),
+   1: lighten(map-get($level-colors, 1 ),$level-change),
+   2: lighten(map-get($level-colors, 2 ),$level-change),
+   3: lighten(map-get($level-colors, 3 ),$level-change),
+   4: lighten(map-get($level-colors, 4 ),$level-change),
+);
+
+$child-colors: (
+   0: darken(map-get($level-colors, 0 ),$level-change),
+   1: darken(map-get($level-colors, 1 ),$level-change),
+   2: darken(map-get($level-colors, 2 ),$level-change),
+   3: darken(map-get($level-colors, 3 ),$level-change),
+   4: darken(map-get($level-colors, 4 ),$level-change),
 );
 
 $darker-stuff: rgba(0, 0, 0, 0.7); // make this a darker version of whatever color is behind it

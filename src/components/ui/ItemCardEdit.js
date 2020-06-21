@@ -39,7 +39,7 @@ class ItemCardEdit extends React.Component {
       return (
          <div
             className={
-               "card item-card level-color-" +
+               "card item-card child-color-" +
                String((this.props.item.level + 1) % LEVEL_COLORS)
             }
          >

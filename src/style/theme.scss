@@ -116,10 +116,17 @@ $level-colors: (
    // 4: gray,
 
    // blue-teal straight to brown
-   0: #5c7a99,
-   1: #6b7a8a,
-   2: #7a7a7b,
-   3: #8a7a6b,
+   // 0: #5c7a99,
+   // 1: #6b7a8a,
+   // 2: #7a7a7b,
+   // 3: #8a7a6b,
+   // 4: #997a5c,
+
+   // blue-teal straight to brown 2 (more even luminance)
+   0: #6886a5,
+   1: #748393,
+   2: #808081,
+   3: #8d7d6e,
    4: #997a5c,
 
    // blue-teal to green to brown
@@ -130,7 +137,7 @@ $level-colors: (
    // 4: #947b61,
    );
 
-$level-change: 15%; // how much each level changes in brightness
+$level-change: 12%; // how much each level changes in brightness
 // 10-15% work well
 
 

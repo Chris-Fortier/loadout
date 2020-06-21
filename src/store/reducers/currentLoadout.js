@@ -26,6 +26,11 @@ export default function currentLoadout(currentLoadout = {}, action) {
          console.log("FIRED CHANGE_ITEM_INDEX_PATH");
          newCurrentLoadout.itemIndexPath = action.payload;
          return newCurrentLoadout;
+      case actions.CLEAR_CURRENT_LOADOUT:
+         console.log("FIRED CLEAR_LOADOUT");
+         newCurrentLoadout.gear = [];
+         newCurrentLoadout.itemIndexPath = [];
+         return newCurrentLoadout;
       default:
          return currentLoadout;
    }

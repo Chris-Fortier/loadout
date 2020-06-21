@@ -22,12 +22,21 @@
 }
 
 // alternating colors for gear cards
-.level-color-0 {background-color: map-get($level-colors, 0)}
-.level-color-1 {background-color: map-get($level-colors, 1)}
-.level-color-2 {background-color: map-get($level-colors, 2)}
-.level-color-3 {background-color: map-get($level-colors, 3)}
-.level-color-4 {background-color: map-get($level-colors, 4)}
-
+.level-color-0 {
+   background-color: map-get($level-colors, 0);
+}
+.level-color-1 {
+   background-color: map-get($level-colors, 1);
+}
+.level-color-2 {
+   background-color: map-get($level-colors, 2);
+}
+.level-color-3 {
+   background-color: map-get($level-colors, 3);
+}
+.level-color-4 {
+   background-color: map-get($level-colors, 4);
+}
 
 .item-list {
    min-height: 100vh; // makes it extend to bottom of page
@@ -146,6 +155,8 @@ body {
    text-transform: capitalize; // makes first letter of each word uppercase
 
    // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
+
+   // background-color: gray; // troubleshooting default color
 }
 
 // this used if the screen is wide enough for two "columns" of item cards

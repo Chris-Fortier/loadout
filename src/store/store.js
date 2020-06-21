@@ -6,7 +6,7 @@ const initialState = {
    currentUser: {},
    currentLoadout: {
       gear: [],
-      itemIndexPath: [],
+      itemIndexPath: [], // the default path of what item we are looking at ([2, 8, 0] is a good test)
    },
 
    // // from ItemList state

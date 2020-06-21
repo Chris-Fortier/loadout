@@ -10,16 +10,22 @@ import {
    // IconArrowThickDownCircle,
    // IconArchive,
    IconArrowThinLeftCircle,
-   IconArrowThinRightCircle,
-   IconTrash,
-   IconChevronDown,
-   IconChevronUp,
+   // IconArrowThinRightCircle,
+   // IconTrash,
+   // IconChevronDown,
+   // IconChevronUp,
 } from "../../icons/icons.js";
-import { MOVE_UPDOWN, MAX_ITEM_NAME_LENGTH, LEVEL_COLORS } from "../../utils/helpers";
-import classnames from "classnames";
+import {
+   // MOVE_UPDOWN,
+   MAX_ITEM_NAME_LENGTH,
+   LEVEL_COLORS,
+} from "../../utils/helpers";
+// import classnames from "classnames";
 import axios from "axios";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
+import ItemCard from "../ui/ItemCard";
+import ItemCardEdit from "../ui/ItemCardEdit";
 
 class ItemList extends React.Component {
    constructor(props) {
@@ -40,6 +46,7 @@ class ItemList extends React.Component {
                   type: actions.STORE_CURRENT_LOADOUT,
                   payload: res.data,
                }); // dispatching an action
+               this.processAllItems(); // initial processing of items that creates derived properties
                // res.data is the data from the response
             })
             .catch((error) => {
@@ -65,36 +72,49 @@ class ItemList extends React.Component {
          // currentItem: gear, // stores the item data where the item of this page is at the root level
          // itemIndexPath: [],
 
-         currentItem: null, // put a null here so it won't render anything until the data is received
+         // currentItem: null, // put a null here so it won't render anything until the data is received
       };
    }
 
    // this is a "lifecycle" method like render(), we don't need to call it manually
-   componentDidMount() {
-      console.log("componentDidMount()...");
-      axios
-         .get(
-            "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
-         )
-         .then((res) => {
-            // handle success
-            // res is shorthand for response
-            console.log("res", res);
-            // props.dispatch({
-            //    type: actions.STORE_CURRENT_LOADOUT,
-            //    payload: res.data,
-            // }); // dispatching an action
-            this.setState({ currentItem: res.data, rootItem: res.data });
-            // res.data is the data from the response
-         })
-         .catch((error) => {
-            // handle error
-            console.log(error);
-         }); // .finally(function () {
-      //   // always executed
-      // });
-      // this.setState({ currentItem: this.props.currentLoadout.gear });
-   }
+   // componentDidMount() {
+   //    console.log("componentDidMount()...");
+   //    // axios
+   //    //    .get(
+   //    //       "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
+   //    //    )
+   //    //    .then((res) => {
+   //    //       // handle success
+   //    //       // res is shorthand for response
+   //    //       console.log("res", res);
+   //    //       // props.dispatch({
+   //    //       //    type: actions.STORE_CURRENT_LOADOUT,
+   //    //       //    payload: res.data,
+   //    //       // }); // dispatching an action
+   //    //       this.setState({ currentItem: res.data, rootItem: res.data });
+   //    //       // res.data is the data from the response
+   //    //    })
+   //    //    .catch((error) => {
+   //    //       // handle error
+   //    //       console.log(error);
+   //    //    }); // .finally(function () {
+   //    // //   // always executed
+   //    // // });
+   //    this.setState({
+   //       currentItem: [],
+   //       rootItem: [],
+   //    });
+
+   //    // this.processAllItems();
+
+   //    // // try to change the data in store
+   //    // const currentLoadout = this.props.currentLoadout.gear;
+   //    // currentLoadout.hello = "hello";
+   //    // this.props.dispatch({
+   //    //    type: actions.STORE_CURRENT_LOADOUT,
+   //    //    payload: currentLoadout,
+   //    // });
+   // }
 
    // methods happen here, such as what happens when you click on a button
 
@@ -174,24 +194,46 @@ class ItemList extends React.Component {
 
    // fixes all item data
    processAllItems() {
-      console.log("processing all items");
-      console.log("this.props", this.props);
-      console.log("this.state.rootItem", this.state.rootItem);
-      this.processItemAndDescendants(this.state.rootItem, 0);
+      // console.log("processing all items");
+      // console.log("this.props", this.props);
+      // console.log("this.state.rootItem", this.state.rootItem);
+      const rootItem = this.props.currentLoadout.gear;
+      this.processItemAndDescendants(rootItem, 0);
+
+      // put the processed data back into the store
+      this.props.dispatch({
+         type: actions.STORE_CURRENT_LOADOUT,
+         payload: rootItem,
+      });
+
+      this.forceUpdate();
    }
+
+   // modifyTheStore() {
+   //    const currentItem = this.props.currentLoadout.gear;
+   //    for (let i in currentItem.items) {
+   //       currentItem.items[i].name += "hello";
+   //    }
+   //    // console.log("modifyTheStore()...", this.props.currentLoadout.gear);
+   //    this.props.dispatch({
+   //       type: actions.STORE_CURRENT_LOADOUT,
+   //       payload: currentItem,
+   //    });
+   // }
 
    // roll out a dialog
    rolloutUnpackConfirmation() {
+      const currentItem = this.getItemFromStore(); // get the current item from store based on the store's itemIndexPath
+
       let itemsText = "";
-      if (this.state.currentItem.numPackedChildren > 1) {
-         itemsText = this.state.currentItem.numPackedChildren + " items";
-      } else if (this.state.currentItem.numPackedChildren === 1) {
+      if (currentItem.numPackedChildren > 1) {
+         itemsText = currentItem.numPackedChildren + " items";
+      } else if (currentItem.numPackedChildren === 1) {
          itemsText = "1 item";
       }
 
       const numSubItems =
-         this.state.currentItem.numPackedDescendants -
-         this.state.currentItem.numPackedChildren;
+         currentItem.numPackedDescendants - currentItem.numPackedChildren;
 
       let subItemsText = "";
       if (numSubItems > 1) {
@@ -253,12 +295,12 @@ class ItemList extends React.Component {
    }
 
    confirmUnpackDescendants() {
-      this.unpackDescendants(this.state.currentItem); // unpack all descendants of the current item
+      this.unpackDescendants(this.getItemFromStore()); // unpack all descendants of the current item
       this.hideUnpackConfirmation(); // close the message
    }
 
    confirmUnpackChildren() {
-      this.unpackChildren(this.state.currentItem); // unpack all descendants of the current item
+      this.unpackChildren(this.getItemFromStore()); // unpack all descendants of the current item
       this.hideUnpackConfirmation(); // close the message
    }
 
@@ -272,46 +314,64 @@ class ItemList extends React.Component {
       this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
    }
 
-   // set the current item in state based on an itemIndexPath
-   setCurrentItem(itemIndexPath) {
-      console.log("setCurrentItem()...");
-      console.log(
-         "setCurrentItem() this.props.currentLoadout.itemIndexPath",
-         this.props.currentLoadout.itemIndexPath
-      );
-      // const itemIndexPath = this.props.currentLoadout.itemIndexPath;
-      console.log("setCurrentItem() itemIndexPath", itemIndexPath);
-      // let parentName = null; // initialize the name of the parent
-      // let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
-      let currentItem = this.state.rootItem;
+   // // set the current item in state based on an itemIndexPath
+   // setCurrentItem(itemIndexPath) {
+   //    console.log("setCurrentItem()...");
+   //    console.log(
+   //       "setCurrentItem() this.props.currentLoadout.itemIndexPath",
+   //       this.props.currentLoadout.itemIndexPath
+   //    );
+   //    // const itemIndexPath = this.props.currentLoadout.itemIndexPath;
+   //    console.log("setCurrentItem() itemIndexPath", itemIndexPath);
+   //    // let parentName = null; // initialize the name of the parent
+   //    // let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
+   //    let currentItem = this.state.rootItem;
+   //    for (let levelIndex in itemIndexPath) {
+   //       // parentName = currentItem.name;
+   //       currentItem = currentItem.items[parseInt(itemIndexPath[levelIndex])];
+   //       // itemLevel++;
+   //    }
+
+   //    console.log("setCurrentItem() currentItem", currentItem);
+
+   //    this.setState({
+   //       currentItem: currentItem,
+   //       // parentName: parentName,
+   //       // level: itemLevel,
+   //       // itemIndexPath: itemIndexPath,
+   //    });
+   //    this.processAllItems();
+   //    console.log("this.state after setCurrentItem()", this.state);
+   // }
+
+   // return the current item from state based on an itemIndexPath
+   getItemFromStore() {
+      const itemIndexPath = this.props.currentLoadout.itemIndexPath;
+      console.log("getItemFromStore()...");
+      console.log("itemIndexPath", itemIndexPath);
+      let currentItem = this.props.currentLoadout.gear; // start at the top of the heirarchy
+
+      // for each part of the itemIndexPath
       for (let levelIndex in itemIndexPath) {
-         // parentName = currentItem.name;
          currentItem = currentItem.items[parseInt(itemIndexPath[levelIndex])];
-         // itemLevel++;
       }
 
-      console.log("setCurrentItem() currentItem", currentItem);
+      currentItem.level = itemIndexPath.length; // put the level of the current item in the current item
 
-      this.setState({
-         currentItem: currentItem,
-         // parentName: parentName,
-         // level: itemLevel,
-         // itemIndexPath: itemIndexPath,
-      });
-      this.processAllItems();
-      console.log("this.state after setCurrentItem()", this.state);
+      return currentItem;
    }
 
    // move page to a different item
    movePageToDifferentItem(itemIndexPath) {
+      console.log("movePageToDifferentItem()...itemIndexPath:", itemIndexPath);
       this.props.dispatch({
          type: actions.CHANGE_ITEM_INDEX_PATH,
          payload: itemIndexPath,
       });
 
-      this.setCurrentItem(itemIndexPath);
+      // this.setCurrentItem(itemIndexPath);
 
-      this.setState({ isEditMode: false }); // get out of edit mode if the current item changes
+      this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
 
       window.scrollTo(0, 0); // sets focus to the top of the page
    }
@@ -334,197 +394,41 @@ class ItemList extends React.Component {
 
    // this unpacks all a given item's children and all their descendants
    unpackDescendants(item) {
-      console.log("unpacking", item.name);
-      for (let i in item.items) {
-         item.items[i].isPacked = false;
-         if (item.items[i].hasOwnProperty("items")) {
-            // unpack all this item's items and so on
-            this.unpackDescendants(item.items[i]);
-         }
-      }
-      this.setState({ currentItem: item });
+      console.log("Unpacking the descendants of " + item.name);
+      // console.log("unpacking", item.name);
+      // for (let i in item.items) {
+      //    item.items[i].isPacked = false;
+      //    if (item.items[i].hasOwnProperty("items")) {
+      //       // unpack all this item's items and so on
+      //       this.unpackDescendants(item.items[i]);
+      //    }
+      // }
+      // this.setState({ currentItem: item });
    }
 
    // this unpacks all a given item's children
    unpackChildren(item) {
+      console.log("Unpacking the children of " + item.name);
       // the item parameter is the item that we are unpacking all the children of
-      console.log("unpacking", item.name);
-      for (let i in item.items) {
-         item.items[i].isPacked = false;
-      }
-      this.setState({ currentItem: item });
-   }
-
-   // toggle show packed items
-   toggleIsPacked(itemIndex) {
-      if (
-         this.state.currentItem.items[itemIndex].numPackedChildren ===
-         this.state.currentItem.items[itemIndex].numChildren
-      ) {
-         let currentItem = this.state.currentItem;
-         currentItem.items[itemIndex].isPacked = !currentItem.items[itemIndex]
-            .isPacked;
-         this.setState({ currentItem: currentItem });
-      }
-
-      this.hideUnpackConfirmation();
+      // console.log("unpacking", item.name);
+      // for (let i in item.items) {
+      //    item.items[i].isPacked = false;
+      // }
+      // this.setState({ currentItem: item });
    }
 
    // renders a one line card represenation of an item
-   renderItemCard(item) {
-      // console.log("render item card with this", item);
-
-      let counterIsFaint = true;
-      let packedBoxIsFaint = false;
-
-      // do this if this item has subitems
-      if (item.hasOwnProperty("items")) {
-         // this will make the checkboxes disabled for items that don't have all their containing items packed
-         if (item.numPackedChildren < item.numChildren) {
-            counterIsFaint = false;
-            packedBoxIsFaint = true;
-         }
-      }
-
-      return (
-         <div
-            className={
-               "card item-card level-color-" +
-               String((this.state.currentItem.level + 1) % LEVEL_COLORS)
-            }
-         >
-            {/* <div className="float-left"> */}
-            <div className="d-flex">
-               <span
-                  className={classnames(
-                     "float-left custom-control custom-checkbox packed-checkbox-container",
-                     { faint: packedBoxIsFaint }
-                  )}
-               >
-                  <input
-                     className="custom-control-input"
-                     type="checkbox"
-                     id={"packed-checkbox-" + item.index}
-                     checked={item.isPacked}
-                     onChange={(e) => {
-                        this.toggleIsPacked(item.index);
-                     }}
-                  />
-                  {/* for some reason if I don't have a label, the entire checkbox is not visible */}
-                  <label
-                     className="custom-control-label"
-                     htmlFor={"packed-checkbox-" + item.index}
-                  ></label>
-               </span>
-               <span className="flex-fill item-card-text">{item.name}</span>
-               {item.hasOwnProperty("items") && (
-                  <span
-                     onClick={(e) => {
-                        this.movePageToDifferentItem(
-                           this.props.currentLoadout.itemIndexPath.concat([
-                              item.index,
-                           ])
-                        ); // move to current path with the subitem index added on
-                     }}
-                     className={classnames(
-                        "flex-fill item-card-text navigation-link packed-counter",
-                        { faint: counterIsFaint }
-                     )}
-                  >
-                     <span className="item-card-icon float-right">
-                        <IconArrowThinRightCircle />
-                     </span>
-                     <span className="float-right">&nbsp;</span>
-                     <span className="float-right">
-                        {item.contentSummaryText}
-                     </span>
-                  </span>
-               )}
-            </div>
-         </div>
-      );
-   }
-
-   // updates the displayed name field of one of the current item's subitems
-   setSubItemName(e) {
-      // figure out which subitem we are editing the name of based on the id of the input
-      const splitId = e.target.id.split("-");
-      const indexToSet = parseInt(splitId[splitId.length - 1]);
-
-      let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      itemDataCopy.items[indexToSet].name = e.target.value; // change the desired item's name to match input
-      // this.setState({ itemData: itemDataCopy }); // seems like it works even without this line
-      this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
-   }
+   // renderItemCard(item) {
+   //    return <ItemCard item={item} key={item.id} />;
+   // }
 
    // sets the name of the current item (the item which the entire page is currently the focus of)
    setCurrentItemName(e) {
-      let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      itemDataCopy.name = e.target.value; // change the desired item's name to match input
-      this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
-   }
-
-   // deletes an item
-   deleteItem(indexToDelete) {
-      console.log("deleting an item");
-      console.log(
-         "item we are deleting",
-         indexToDelete,
-         this.state.currentItem.items[indexToDelete].name
-      );
-      if (this.state.currentItem.items[indexToDelete].numDescendants > 0) {
-         console.log(
-            "Are you sure you want to delete " +
-               this.state.currentItem.items[indexToDelete].name +
-               " and its " +
-               this.state.currentItem.items[indexToDelete].numDescendants +
-               " subitems?"
-         );
-      }
-      let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      itemDataCopy.items.splice(indexToDelete, 1); // delete this item
-      this.forceUpdate();
-   }
-
-   // renders a one line card represenation of an item
-   renderItemCardEdit(item) {
-      return (
-         <div
-            className={
-               "card item-card level-color-" +
-               String((this.state.currentItem.level + 1) % LEVEL_COLORS)
-            }
-         >
-            <div className="d-flex">
-               <span className="flex-fill">
-                  <input
-                     className="edit-name"
-                     id={"edit-name-input-" + item.index}
-                     value={item.name}
-                     onChange={(e) => this.setSubItemName(e)}
-                     maxLength={MAX_ITEM_NAME_LENGTH}
-                  />
-               </span>
-               <button
-                  className="icon-clickable item-card-icon"
-                  id={"delete-item-" + item.index}
-                  onClick={() => this.deleteItem(item.index)}
-               >
-                  <IconTrash />
-               </button>
-               {MOVE_UPDOWN && (
-                  <>
-                     <div className="icon-container">
-                        <IconChevronUp />
-                     </div>
-                     <div className="icon-container">
-                        <IconChevronDown />
-                     </div>
-                  </>
-               )}
-            </div>
-         </div>
-      );
+      const currentItem = this.getItemFromStore();
+      console.log("rename " + currentItem.name + " to " + e.target.value);
+      // let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
+      // itemDataCopy.name = e.target.value; // change the desired item's name to match input
+      // this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
    }
 
    renderContainingItems(parentItem) {
@@ -556,27 +460,27 @@ class ItemList extends React.Component {
 
       if (this.state.isEditMode) {
          // do edit mode version of item cards
-         return displayedItems.map((item) => {
-            return this.renderItemCardEdit(item);
-         });
+         return displayedItems.map((item) => (
+            <ItemCardEdit item={item} key={item.id} />
+         ));
       } else {
          // do packing mode version of item cards
-         return displayedItems.map((item) => {
-            return this.renderItemCard(item);
-         });
+         return displayedItems.map((item) => (
+            <ItemCard item={item} key={item.id} />
+         ));
       }
    }
 
    render() {
       console.log("Rendering page...");
 
-      console.log("this.state.currentItem", this.state.currentItem);
-      if (this.state.currentItem === null) {
-         return <></>;
-      }
+      // console.log("this.state.currentItem", this.state.currentItem);
+      // if (this.state.currentItem === null) {
+      //    return <></>;
+      // }
 
       // console.log("this.props", this.props);
-      this.processAllItems();
+      // this.processAllItems();
 
       // these are classes that are different if we are at the top level or a lower level
       let pageBgClasses = "";
@@ -585,15 +489,22 @@ class ItemList extends React.Component {
       let levelBodyClasses = "";
 
       // get the current item
-      const currentItem = this.state.currentItem; // old value
+      // const currentItem = this.state.currentItem; // old value
       // const currentItem = this.props.currentLoadout.gear; // redux value
+      const currentItem = this.getItemFromStore(); // get the current item from store based on the store's itemIndexPath
+      console.log("currentItem.level", currentItem.level);
+
+      // this.props.item = currentItem; // set the props of item for this component to the current item
 
       const level = currentItem.level;
       if (level === 0) {
-         pageBgClasses = "item-list level-color-" + String(level % LEVEL_COLORS);
+         pageBgClasses =
+            "item-list level-color-" + String(level % LEVEL_COLORS);
       } else {
-         pageBgClasses = "item-list level-color-" + String((level - 1) % LEVEL_COLORS);
-         pageContentClasses = "card super-item-card level-color-" + String(level % LEVEL_COLORS);
+         pageBgClasses =
+            "item-list level-color-" + String((level - 1) % LEVEL_COLORS);
+         pageContentClasses =
+            "card super-item-card level-color-" + String(level % LEVEL_COLORS);
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }
@@ -605,6 +516,9 @@ class ItemList extends React.Component {
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
+                        {/* <button onClick={() => this.processAllItems()}>
+                           processAllItems
+                        </button> */}
                         {level !== 0 && !this.state.isEditMode && (
                            <div>
                               <span
@@ -654,7 +568,7 @@ class ItemList extends React.Component {
                                           <h4>
                                              <input
                                                 className="edit-name"
-                                                value={currentItem.name}
+                                                defaultValue={currentItem.name}
                                                 onChange={(e) =>
                                                    this.setCurrentItemName(e)
                                                 }
@@ -668,61 +582,6 @@ class ItemList extends React.Component {
 
                               <div className="row">
                                  <div className="col">
-                                    {/* <div className="custom-control custom-switch">
-                                          <input
-                                             type="checkbox"
-                                             className="custom-control-input display-switch-label"
-                                             id={
-                                                "show-packed-switch" +
-                                                currentItem.name
-                                             }
-                                             checked={
-                                                this.state.isShowingPacked
-                                             }
-                                             onChange={(e) => {
-                                                this.toggleShowPacked(e);
-                                             }}
-                                          />
-                                          <label
-                                             className="custom-control-label display-switch-label"
-                                             htmlFor={
-                                                "show-packed-switch" +
-                                                currentItem.name
-                                             }
-                                          >
-                                             Show {currentItem.numPackedChildren}{" "}
-                                             Packed Item(s)
-                                          </label>
-                                       </div> */}
-
-                                    {/* {this.state.isShowingPacked && (
-                                          <div className="custom-control custom-switch">
-                                             <input
-                                                type="checkbox"
-                                                className="custom-control-input display-switch-label"
-                                                id={
-                                                   "packed-on-bottom-switch" +
-                                                   currentItem.name
-                                                }
-                                                checked={
-                                                   this.state.isPackedOnBottom
-                                                }
-                                                onChange={(e) => {
-                                                   this.togglePackedOnBottom(e);
-                                                }}
-                                             />
-                                             <label
-                                                className="custom-control-label display-switch-label"
-                                                htmlFor={
-                                                   "packed-on-bottom-switch" +
-                                                   currentItem.name
-                                                }
-                                             >
-                                                Move Packed to Bottom
-                                             </label>
-                                          </div>
-                                       )} */}
-
                                     {!this.state.isEditMode && (
                                        <>
                                           {currentItem.numPackedDescendants >

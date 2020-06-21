@@ -21,6 +21,11 @@ class Header extends React.Component {
          type: actions.UPDATE_CURRENT_USER,
          payload: {},
       });
+      // also remove the store of the loadout
+      this.props.dispatch({
+         type: actions.CLEAR_CURRENT_LOADOUT,
+         payload: {},
+      });
    }
 
    toggleLoadoutRollout() {

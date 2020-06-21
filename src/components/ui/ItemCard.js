@@ -7,20 +7,6 @@ import classnames from "classnames";
 import { IconArrowThinRightCircle } from "../../icons/icons.js";
 
 class ItemCard extends React.Component {
-   // render() {
-   //    return <>{this.props.item.name}</>;
-   // }
-   // storeEditableCard() {
-   //    console.log("STORING EDITABLE CARD");
-   //    this.props.dispatch({
-   //       type: actions.STORE_EDITABLE_CARD,
-   //       payload: {
-   //          card: this.props.card, // current card
-   //          prevRoute: "/all-cards",
-   //       },
-   //    });
-   // }
-
    // move page to a different item
    movePageToDifferentItem(itemIndexPath) {
       this.props.dispatch({

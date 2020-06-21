@@ -1,7 +1,5 @@
 import React from "react";
 import Header from "../ui/Header";
-// import { Link } from "react-router-dom"; // a React element for linking
-// import { gear } from "../../mock-data/gear";
 import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
@@ -52,9 +50,7 @@ class ItemList extends React.Component {
             .catch((error) => {
                // handle error
                console.log(error);
-            }); // .finally(function () {
-         //   // always executed
-         // });
+            });
       }
 
       // set default state values
@@ -67,58 +63,12 @@ class ItemList extends React.Component {
 
          subItemDisplayMode: "numUnpackedDescendants",
          // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants"
-
-         // rootItem: gear, // stores all the item data from the abolsute root
-         // currentItem: gear, // stores the item data where the item of this page is at the root level
-         // itemIndexPath: [],
-
-         // currentItem: null, // put a null here so it won't render anything until the data is received
       };
    }
 
-   // this is a "lifecycle" method like render(), we don't need to call it manually
-   // componentDidMount() {
-   //    console.log("componentDidMount()...");
-   //    // axios
-   //    //    .get(
-   //    //       "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
-   //    //    )
-   //    //    .then((res) => {
-   //    //       // handle success
-   //    //       // res is shorthand for response
-   //    //       console.log("res", res);
-   //    //       // props.dispatch({
-   //    //       //    type: actions.STORE_CURRENT_LOADOUT,
-   //    //       //    payload: res.data,
-   //    //       // }); // dispatching an action
-   //    //       this.setState({ currentItem: res.data, rootItem: res.data });
-   //    //       // res.data is the data from the response
-   //    //    })
-   //    //    .catch((error) => {
-   //    //       // handle error
-   //    //       console.log(error);
-   //    //    }); // .finally(function () {
-   //    // //   // always executed
-   //    // // });
-   //    this.setState({
-   //       currentItem: [],
-   //       rootItem: [],
-   //    });
-
-   //    // this.processAllItems();
-
-   //    // // try to change the data in store
-   //    // const currentLoadout = this.props.currentLoadout.gear;
-   //    // currentLoadout.hello = "hello";
-   //    // this.props.dispatch({
-   //    //    type: actions.STORE_CURRENT_LOADOUT,
-   //    //    payload: currentLoadout,
-   //    // });
-   // }
-
    // methods happen here, such as what happens when you click on a button
 
-   // this goes through all of an items descendants and sets derived variables and other stuff
+   // this goes through all of an item's descendants and sets derived variables and other stuff
    processItemAndDescendants(item, level = null) {
       let nextLevel = level;
       if (level !== null) {
@@ -192,11 +142,9 @@ class ItemList extends React.Component {
       };
    }
 
-   // fixes all item data
+   // processing all item data and put the result back into the store
    processAllItems() {
       // console.log("processing all items");
-      // console.log("this.props", this.props);
-      // console.log("this.state.rootItem", this.state.rootItem);
       const rootItem = this.props.currentLoadout.gear;
       this.processItemAndDescendants(rootItem, 0);
 
@@ -209,19 +157,7 @@ class ItemList extends React.Component {
       this.forceUpdate();
    }
 
-   // modifyTheStore() {
-   //    const currentItem = this.props.currentLoadout.gear;
-   //    for (let i in currentItem.items) {
-   //       currentItem.items[i].name += "hello";
-   //    }
-   //    // console.log("modifyTheStore()...", this.props.currentLoadout.gear);
-   //    this.props.dispatch({
-   //       type: actions.STORE_CURRENT_LOADOUT,
-   //       payload: currentItem,
-   //    });
-   // }
-
-   // roll out a dialog
+   // roll out a dialog for unpacking an item's contents
    rolloutUnpackConfirmation() {
       const currentItem = this.getItemFromStore(); // get the current item from store based on the store's itemIndexPath
 
@@ -314,36 +250,6 @@ class ItemList extends React.Component {
       this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
    }
 
-   // // set the current item in state based on an itemIndexPath
-   // setCurrentItem(itemIndexPath) {
-   //    console.log("setCurrentItem()...");
-   //    console.log(
-   //       "setCurrentItem() this.props.currentLoadout.itemIndexPath",
-   //       this.props.currentLoadout.itemIndexPath
-   //    );
-   //    // const itemIndexPath = this.props.currentLoadout.itemIndexPath;
-   //    console.log("setCurrentItem() itemIndexPath", itemIndexPath);
-   //    // let parentName = null; // initialize the name of the parent
-   //    // let itemLevel = 0; // initialize the value that stores how many levels deep this page's item's level is
-   //    let currentItem = this.state.rootItem;
-   //    for (let levelIndex in itemIndexPath) {
-   //       // parentName = currentItem.name;
-   //       currentItem = currentItem.items[parseInt(itemIndexPath[levelIndex])];
-   //       // itemLevel++;
-   //    }
-
-   //    console.log("setCurrentItem() currentItem", currentItem);
-
-   //    this.setState({
-   //       currentItem: currentItem,
-   //       // parentName: parentName,
-   //       // level: itemLevel,
-   //       // itemIndexPath: itemIndexPath,
-   //    });
-   //    this.processAllItems();
-   //    console.log("this.state after setCurrentItem()", this.state);
-   // }
-
    // return the current item from state based on an itemIndexPath
    getItemFromStore() {
       const itemIndexPath = this.props.currentLoadout.itemIndexPath;
@@ -368,8 +274,6 @@ class ItemList extends React.Component {
          type: actions.CHANGE_ITEM_INDEX_PATH,
          payload: itemIndexPath,
       });
-
-      // this.setCurrentItem(itemIndexPath);
 
       this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
 
@@ -416,11 +320,6 @@ class ItemList extends React.Component {
       // }
       // this.setState({ currentItem: item });
    }
-
-   // renders a one line card represenation of an item
-   // renderItemCard(item) {
-   //    return <ItemCard item={item} key={item.id} />;
-   // }
 
    // sets the name of the current item (the item which the entire page is currently the focus of)
    setCurrentItemName(e) {
@@ -474,14 +373,6 @@ class ItemList extends React.Component {
    render() {
       console.log("Rendering page...");
 
-      // console.log("this.state.currentItem", this.state.currentItem);
-      // if (this.state.currentItem === null) {
-      //    return <></>;
-      // }
-
-      // console.log("this.props", this.props);
-      // this.processAllItems();
-
       // these are classes that are different if we are at the top level or a lower level
       let pageBgClasses = "";
       let pageContentClasses = "";
@@ -516,9 +407,6 @@ class ItemList extends React.Component {
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
-                        {/* <button onClick={() => this.processAllItems()}>
-                           processAllItems
-                        </button> */}
                         {level !== 0 && !this.state.isEditMode && (
                            <div>
                               <span

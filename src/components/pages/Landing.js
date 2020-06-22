@@ -222,7 +222,6 @@ class Landing extends React.Component {
 
    // bypasses log in and goes straight to app
    bypassLogIn() {
-
       console.log("created user object for POST: ");
       // Mimic API response:
       axios
@@ -246,7 +245,7 @@ class Landing extends React.Component {
       this.props.history.push("/gear");
       window.scrollTo(0, 0); // sets focus to the top of the page
    }
-   
+
    // tests if the email and password are valid and if so creates the user
    async validateAndCreateUser() {
       console.log("validateAndCreateUser...");
@@ -340,18 +339,34 @@ class Landing extends React.Component {
                   >
                      Log In
                   </button>
-                  <button
+                  {/* <button
                      className="btn btn-primary btn-block my-3"
                      onClick={() => this.bypassLogIn()}
                   >
                      Bypass
-                  </button>
-                  <button
+                  </button> */}
+                  {/* <button
                      className="btn btn-secondary btn-sm btn-block"
                      onClick={() => this.setNewAccountMode()}
                   >
                      Make a New Account
-                  </button>
+                  </button> */}
+                  <div class="btn-group d-flex" role="group">
+                     <button
+                        type="button"
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => this.setNewAccountMode()}
+                     >
+                        Make a new account
+                     </button>
+                     <button
+                        type="button"
+                        className="btn btn-secondary btn-sm tab-separator"
+                        onClick={() => this.bypassLogIn()}
+                     >
+                        Bypass
+                     </button>
+                  </div>
                </form>
             </div>
          </div>

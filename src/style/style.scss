@@ -1,3 +1,7 @@
+html {
+   font-size: 20px; // Teko is a smaller looking font so setting the base size as 20px
+}
+
 .red {
    background-color: red;
 }
@@ -72,7 +76,7 @@
 
 .item-list {
    min-height: 100vh; // makes it extend to bottom of page
-   padding-top: 1rem; // some space at top below the header
+   padding-top: 16px; // some space at top below the header
 }
 
 // .scroll-fix {
@@ -119,10 +123,10 @@ body {
 
 // style specific to the landing page
 .landing-page {
-   input,
-   p {
-      font-size: 1.25rem;
-   }
+   // input,
+   // p {
+   //    font-size: 1.25rem;
+   // }
 
    h1 {
       text-shadow: 3px 3px 2px $darker-stuff;
@@ -143,14 +147,14 @@ body {
    .btn-primary {
       color: $lighter-stuff;
       text-transform: uppercase;
-      font-size: 1.25rem;
+      // font-size: 1.25rem;
       font-weight: 600;
    }
 
    .btn-secondary {
       color: $lighter-stuff;
       text-transform: capitalize;
-      font-size: 1.25rem;
+      // font-size: 1.25rem;
       font-weight: 300;
    }
 }
@@ -169,12 +173,12 @@ body {
    font-weight: 300;
    color: rgba(0, 0, 0, 0.5);
    text-transform: uppercase;
-   font-size: 1.25rem;
+   // font-size: 1.25rem;
 }
 
 .item-card {
    // border-radius: 0.25rem; // Bootstrap default
-   border-radius: 0.375rem; // make more noticable
+   border-radius: 6px; // make more noticable
    margin-bottom: $item-card-spacing; // space between item cards
 
    padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
@@ -183,7 +187,7 @@ body {
    padding-right: 6px; // still want padding on the sides
 
    line-height: 0.9; // this works well with this font if multiple lines are needed
-   font-size: 1.5rem;
+   font-size: 24px;
    text-transform: capitalize; // makes first letter of each word uppercase
 
    // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
@@ -208,7 +212,7 @@ body {
    padding-bottom: 6px;
 
    // line-height: 0.9; // this works well with this font if multiple lines are needed
-   // font-size: 1.5rem;
+   // font-size: 1.2rem;
 
    color: rgba(255, 255, 255, 0.8);
 }
@@ -225,7 +229,7 @@ body {
    padding-bottom: 0px;
 
    // line-height: 0.9; // this works well with this font if multiple lines are needed
-   // font-size: 1.5rem;
+   // font-size: 1.2rem;
    // text-transform: capitalize; // makes first letter of each word uppercase
 
    color: rgba(0, 0, 0, 0.8);
@@ -240,7 +244,7 @@ body {
 
 .super-item-card {
    // border-radius: 0.25rem; // Bootstrap default
-   border-radius: 0.375rem; // make more noticable
+   border-radius: 6px; // make more noticable
    margin-bottom: $item-card-spacing;
 
    // padding inside the full page card
@@ -276,7 +280,7 @@ body {
       text-transform: uppercase;
       padding: 4px 16px; // padding between each button
       line-height: 1;
-      font-size: 1.25rem;
+      // font-size: 1.25rem;
    }
 
    // for the email address display
@@ -285,7 +289,7 @@ body {
       font-weight: 300;
       padding: 0 16px; // padding between each button
       line-height: 1;
-      font-size: 1.25rem;
+      // font-size: 1.25rem;
    }
 }
 
@@ -296,7 +300,7 @@ h1 {
 
 // this is for the name of the item on that item's page we are looking at
 h4 {
-   font-size: 2rem;
+   font-size: 32px;
    text-transform: capitalize; // makes first letter of each word uppercase
    color: rgba(255, 255, 255, 0.8);
    line-height: 0.9; // makes the title tighter if it used multiple lines
@@ -304,7 +308,7 @@ h4 {
 
 // this is for the titles of the landing page cards
 h5 {
-   font-size: 2rem;
+   font-size: 32px;
    text-transform: capitalize; // makes first letter of each word uppercase
    color: $darker-stuff;
 }
@@ -312,7 +316,7 @@ h5 {
 // for buttons that do something to the entire list
 .text-button {
    background-color: $darker-stuff;
-   border-radius: 0.375rem;
+   border-radius: 6px;
    border: none;
    padding-top: 5px; // this is to center it vertically
    padding-bottom: 0;
@@ -323,7 +327,7 @@ h5 {
    // margin: 4px;
    color: $lighter-stuff;
 
-   font-size: 1.25rem;
+   // font-size: 1.25rem;
    text-transform: uppercase;
    font-weight: 500;
 }
@@ -341,7 +345,7 @@ h5 {
 
 // for the button link that goes up a level
 .up-level {
-   font-size: 1.5rem;
+   font-size: 24px;
    color: $darker-stuff;
 }
 
@@ -431,6 +435,35 @@ $iconWidth: 30px;
 
 .navigation-link:hover {
    text-decoration: underline;
+}
+
+.rollout-button {
+   border: 1px solid rgba(0, 0, 0, 0.5);
+   cursor: pointer;
+}
+
+.rollout-button:hover {
+   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.action-button {
+   background-color: rgb(0, 0, 0);
+   opacity: 0.5;
+   color: white;
+   font-weight: 500;
+   cursor: pointer;
+}
+
+.action-button:hover {
+   // background-color: rgba(0, 0, 0, 0.4);
+   opacity: 0.6;
+}
+
+// used for labels on forms and headers on tables
+.form-label {
+   text-transform: uppercase;
+   font-weight: 300;
+   color: rgba(0, 0, 0, 0.5);
 }
 
 // .my-button {

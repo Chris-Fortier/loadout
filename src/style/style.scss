@@ -451,6 +451,10 @@ $iconWidth: 30px;
    border-left: 1px $gray-800 solid;
 }
 
+.hidden {
+   visibility: hidden;
+}
+
 // smallest size is single column edge to edge fluid cards
 
 // sm single column fixed width with fluid margins

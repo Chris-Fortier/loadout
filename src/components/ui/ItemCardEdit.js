@@ -36,27 +36,28 @@ class ItemCardEdit extends React.Component {
    }
 
    render() {
+      const item = this.props.item; // this is to simplify code below
+
       return (
          <div
             className={
-               "card item-card child-color-" +
-               String((this.props.item.level + 1) % LEVEL_COLORS)
+               "card item-card child-color-" + String(item.level % LEVEL_COLORS)
             }
          >
             <div className="d-flex">
                <span className="flex-fill">
                   <input
                      className="edit-name"
-                     id={"edit-name-input-" + this.props.item.index}
-                     defaultValue={this.props.item.name}
+                     id={"edit-name-input-" + item.index}
+                     defaultValue={item.name}
                      onChange={(e) => this.renameItem(e)}
                      maxLength={MAX_ITEM_NAME_LENGTH}
                   />
                </span>
                <button
                   className="icon-clickable item-card-icon"
-                  id={"delete-item-" + this.props.item.index}
-                  onClick={() => this.deleteItem(this.props.item.index)}
+                  id={"delete-item-" + item.index}
+                  onClick={() => this.deleteItem(item.index)}
                >
                   <IconTrash />
                </button>

@@ -54,7 +54,7 @@ class LoadoutList extends React.Component {
                               <div className="row">
                                  <>
                                     <div className="col">
-                                       <h4>Loadouts</h4>
+                                       <h4>List of Loadouts</h4>
                                     </div>
                                  </>
                               </div>

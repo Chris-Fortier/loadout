@@ -20,7 +20,7 @@ import {
    MAX_ITEM_NAME_LENGTH,
    LEVEL_COLORS,
 } from "../../utils/helpers";
-// import classnames from "classnames";
+import classnames from "classnames";
 import axios from "axios";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
@@ -418,10 +418,13 @@ class ItemList extends React.Component {
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
-                        {level !== 0 && !this.state.isEditMode && (
+                        {level !== 0 && (
                            <div>
                               <span
-                                 className="up-level navigation-link"
+                                 className={classnames({
+                                    "up-level navigation-link": true,
+                                    hidden: this.state.isEditMode,
+                                 })}
                                  onClick={(e) => {
                                     this.movePageToDifferentItem(
                                        this.props.currentLoadout.itemIndexPath.slice(
@@ -438,10 +441,13 @@ class ItemList extends React.Component {
                               </span>
                            </div>
                         )}
-                        {level === 0 && !this.state.isEditMode && (
+                        {level === 0 && (
                            <div>
                               <Link
-                                 className="up-level navigation-link"
+                                 className={classnames({
+                                    "up-level navigation-link": true,
+                                    hidden: this.state.isEditMode,
+                                 })}
                                  onClick={() => {
                                     this.exitLoadout();
                                  }}
@@ -450,17 +456,17 @@ class ItemList extends React.Component {
                                  <div className="icon left">
                                     <IconArrowThinLeftCircle />
                                  </div>
-                                 Back to Loadouts
+                                 Back to List of Loadouts
                               </Link>
                            </div>
                         )}
 
                         {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
-                        {level !== 0 && this.state.isEditMode && (
+                        {/* {level !== 0 && this.state.isEditMode && (
                            <div className="up-level">
                               <br />
                            </div>
-                        )}
+                        )} */}
 
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div className={pageContentClasses}>

@@ -3,6 +3,7 @@ import Header from "../ui/Header";
 import orderBy from "lodash/orderBy";
 import {
    // IconEdit,
+   // IconCog,
    // IconAddCircle,
    // IconArrowThickUpCircle,
    // IconArrowThickDownCircle,
@@ -12,6 +13,7 @@ import {
    // IconTrash,
    // IconChevronDown,
    // IconChevronUp,
+   IconUserCouple,
 } from "../../icons/icons.js";
 import {
    // MOVE_UPDOWN,
@@ -24,6 +26,7 @@ import { connect } from "react-redux";
 import actions from "../../store/actions";
 import ItemCard from "../ui/ItemCard";
 import ItemCardEdit from "../ui/ItemCardEdit";
+import { Link } from "react-router-dom"; // a React element for linking
 
 class ItemList extends React.Component {
    constructor(props) {
@@ -267,6 +270,16 @@ class ItemList extends React.Component {
       return currentItem;
    }
 
+   // goes back to the loadouts page
+   exitLoadout() {
+      console.log("exitLoadout()...");
+      // remove the store of the loadout
+      this.props.dispatch({
+         type: actions.CLEAR_CURRENT_LOADOUT,
+         payload: {},
+      });
+   }
+
    // move page to a different item
    movePageToDifferentItem(itemIndexPath) {
       console.log("movePageToDifferentItem()...itemIndexPath:", itemIndexPath);
@@ -389,11 +402,9 @@ class ItemList extends React.Component {
 
       const level = currentItem.level;
       if (level === 0) {
-         pageBgClasses =
-            "item-list parent-color-0"; // + String(level % LEVEL_COLORS);
+         pageBgClasses = "item-list parent-color-0"; // + String(level % LEVEL_COLORS);
       } else {
-         pageBgClasses =
-            "item-list parent-color-0"; // + String((level - 1) % LEVEL_COLORS);
+         pageBgClasses = "item-list parent-color-0"; // + String((level - 1) % LEVEL_COLORS);
          pageContentClasses =
             "card super-item-card level-color-" + String(level % LEVEL_COLORS);
          levelHeaderClasses = "card-header";
@@ -427,6 +438,23 @@ class ItemList extends React.Component {
                               </span>
                            </div>
                         )}
+                        {level === 0 && !this.state.isEditMode && (
+                           <div>
+                              <Link
+                                 className="up-level navigation-link"
+                                 onClick={() => {
+                                    this.exitLoadout();
+                                 }}
+                                 to="/loadout-list"
+                              >
+                                 <div className="icon left">
+                                    <IconArrowThinLeftCircle />
+                                 </div>
+                                 Back to Loadouts
+                              </Link>
+                           </div>
+                        )}
+
                         {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
                         {level !== 0 && this.state.isEditMode && (
                            <div className="up-level">
@@ -489,6 +517,18 @@ class ItemList extends React.Component {
                                              .isShowingUnpackConfirmation &&
                                              this.rolloutUnpackConfirmation()}
                                        </>
+                                    )}
+
+                                    {this.state.isEditMode && (
+                                       <Link
+                                          className="up-level navigation-link"
+                                          to="/loadout-sharing"
+                                       >
+                                          <div className="icon left">
+                                             <IconUserCouple />
+                                          </div>
+                                          Loadout Sharing Settings
+                                       </Link>
                                     )}
 
                                     <div className="custom-control custom-switch float-right">

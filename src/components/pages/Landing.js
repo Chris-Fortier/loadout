@@ -215,7 +215,7 @@ class Landing extends React.Component {
 
          // redirect the user
          // todo: make this its own function
-         this.props.history.push("/gear");
+         this.props.history.push("/loadout-list");
          window.scrollTo(0, 0); // sets focus to the top of the page
       }
    }
@@ -242,7 +242,7 @@ class Landing extends React.Component {
 
       // redirect the user
       // todo: make this its own function
-      this.props.history.push("/gear");
+      this.props.history.push("/loadout-list");
       window.scrollTo(0, 0); // sets focus to the top of the page
    }
 
@@ -286,7 +286,7 @@ class Landing extends React.Component {
 
          // redirect the user
          // todo: make this its own function
-         this.props.history.push("/gear");
+         this.props.history.push("/loadout-list");
          window.scrollTo(0, 0); // sets focus to the top of the page
       }
    }
@@ -333,7 +333,6 @@ class Landing extends React.Component {
                   </div>
                   <button
                      className="btn btn-primary btn-block my-3"
-                     to="/gear-"
                      type="button"
                      onClick={() => this.validateLogInAttempt()}
                   >

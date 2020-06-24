@@ -1,13 +1,9 @@
 // this tracks every item of gear, the item is is inside and wheter or not it is packed
 const gear = [
    {
-      name: "All Kits",
-      id: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
-   },
-   {
       name: "On Person",
       id: "e1ad5d4d-3a9f-47b5-b190-61e0a261daf0",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -79,7 +75,7 @@ const gear = [
    {
       name: "Camera Bag",
       id: "9bc39f5f-4b10-4783-b387-a943e0b2a617",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -133,7 +129,7 @@ const gear = [
    {
       name: "Day Pack",
       id: "41b9bde9-4731-44d2-b471-d46d21aca680",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -290,7 +286,7 @@ const gear = [
    {
       name: "Sleeping Stuff",
       id: "3daed025-a1a2-4cf7-b98b-1164405b0fd2",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -321,7 +317,7 @@ const gear = [
    {
       name: "Camping Bin",
       id: "37ac4506-4bd6-47f5-ad8e-a7a2b1d2d327",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -399,7 +395,7 @@ const gear = [
    {
       name: "Food Bin",
       id: "22a35a73-1b0c-4fd7-b4e3-bb5a35c927cc",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -496,7 +492,7 @@ const gear = [
    {
       name: "Cooking Bin",
       id: "1ddda7b1-287d-4c23-b8de-6034a8772363",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -629,7 +625,7 @@ const gear = [
    {
       name: "Car Kit",
       id: "b74f8b63-9a32-4155-911e-c71a67180c75",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: true,
    },
    {
@@ -654,7 +650,7 @@ const gear = [
    {
       name: "Overnight Bag",
       id: "e109827f-4bfa-4384-9ac9-979776d2512b",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -679,7 +675,7 @@ const gear = [
    {
       name: "Cooler",
       id: "861f2cd0-de08-49ce-93b7-0e8082eeb996",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -764,7 +760,7 @@ const gear = [
    {
       name: "Camping Trunk Stuff",
       id: "fb0cc10d-82de-40d9-86f8-34e182d8247d",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
       isPacked: false,
    },
    {
@@ -821,11 +817,40 @@ const gear = [
       parentId: "fb0cc10d-82de-40d9-86f8-34e182d8247d",
       isPacked: false,
    },
-
    {
       name: "Heavy jacket",
       id: "1df9ff4c-5d1a-4f91-9322-3adeebc9ff29",
-      parentId: "3a4b8fba-8570-4a96-b9cf-1bfdc49b170d",
+      parentId: "42655170-7e10-4431-8d98-c2774f6414a4",
+      isPacked: false,
+   },
+   {
+      name: "Laptop Bag",
+      id: "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+      parentId: "e0364b00-f7fc-469c-ab82-8de3487bcc0b", // parent is the loadout
+      isPacked: false,
+   },
+   {
+      name: "MacBook Pro",
+      id: "02e2af25-3989-40a6-847c-0fe95fa978a9",
+      parentId: "42dbc71c-5d87-4c7e-980e-46c107ba2635", // laptop bag
+      isPacked: false,
+   },
+   {
+      name: "Wireless Keyboard",
+      id: "2c57a159-ec44-4c69-b82f-fde23477608e",
+      parentId: "42dbc71c-5d87-4c7e-980e-46c107ba2635", // laptop bag
+      isPacked: false,
+   },
+   {
+      name: "Wireless Mouse",
+      id: "",
+      parentId: "42dbc71c-5d87-4c7e-980e-46c107ba2635", // laptop bag
+      isPacked: false,
+   },
+   {
+      name: "USB/Monitor Hub",
+      id: "",
+      parentId: "42dbc71c-5d87-4c7e-980e-46c107ba2635", // laptop bag
       isPacked: false,
    },
 ];

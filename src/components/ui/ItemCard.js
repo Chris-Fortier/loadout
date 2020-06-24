@@ -17,7 +17,7 @@ class ItemCard extends React.Component {
       // this.setCurrentItem(itemIndexPath);
 
       // this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
-      // this.props.history.push("/gear");
+      // this.props.history.push("/loadout");
 
       window.scrollTo(0, 0); // sets focus to the top of the page
    }

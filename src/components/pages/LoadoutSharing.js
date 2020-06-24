@@ -50,7 +50,7 @@ class LoadoutSharing extends React.Component {
                                                    scope="col"
                                                    className="display-switch-label"
                                                 >
-                                                   Email
+                                                   Shared with Email
                                                 </th>
                                                 <th
                                                    scope="col"

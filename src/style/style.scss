@@ -2,6 +2,10 @@ html {
    font-size: 20px; // Teko is a smaller looking font so setting the base size as 20px
 }
 
+.card-body {
+   padding: 1rem; // override the default of 1.25rem
+}
+
 .red {
    background-color: red;
 }
@@ -101,6 +105,7 @@ body {
    // height: 100%;
    min-height: 100vh; // changed this
    overflow-x: hidden;
+   line-height: 1.25rem;
 }
 
 .card {
@@ -193,6 +198,9 @@ body {
    // height: 42px; // this is a good fixed size, but if the title spills over multiple lines, it runs off the card
 
    // background-color: gray; // troubleshooting default color
+
+   // box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.23);
+   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
 }
 
 // this used if the screen is wide enough for two "columns" of item cards
@@ -301,6 +309,7 @@ body {
 // main title on landing page
 h1 {
    font-size: 75px;
+   line-height: 0.9; // makes the title tighter if it used multiple lines
 }
 
 // this is for the name of the item on that item's page we are looking at
@@ -316,6 +325,7 @@ h5 {
    font-size: 32px;
    text-transform: capitalize; // makes first letter of each word uppercase
    color: $darker-stuff;
+   line-height: 0.9; // makes the title tighter if it used multiple lines
 }
 
 // for buttons that do something to the entire list
@@ -431,37 +441,80 @@ $iconWidth: 30px;
    }
 }
 
+.card-section {
+   border: 2px solid;
+   background: none;
+   padding: 6px;
+}
+
+// common to all my buttons
+.button {
+   margin-top: 6px; // for space between block buttons
+   padding-top: 0.25rem+0.15rem;
+   padding-bottom: 0.25rem;
+   padding-left: 0.25rem;
+   padding-right: 0.25rem;
+}
+.button:first-child {
+   margin-top: 0;
+}
+.button:not(.disabled) {
+   cursor: pointer;
+   // color: red;
+}
+
 .navigation-link {
    // padding: 0;
    background-color: transparent;
    border: 0px solid transparent;
-   cursor: pointer;
+   padding-left: 0;
 }
 
-.navigation-link:hover {
+.navigation-link:hover:not(.disabled) {
    text-decoration: underline;
 }
 
 .rollout-button {
-   border: 1px solid rgba(0, 0, 0, 0.5);
-   cursor: pointer;
+   border: 1px solid rgba(0, 0, 0, 0.7);
+   width: 100%;
+   background: none;
+   color: rgba(0, 0, 0, 0.7);
+   text-align: center;
 }
 
-.rollout-button:hover {
-   background-color: rgba(0, 0, 0, 0.1);
+.rollout-button:hover:not(.disabled) {
+   background-color: rgba(0, 0, 0, 0.125);
 }
 
-.action-button {
-   background-color: rgb(0, 0, 0);
-   opacity: 0.5;
+.rollout-button:active:not(.disabled) {
+   background-color: rgba(0, 0, 0, 0.25);
+}
+
+.primary-action-button {
+   background-color: #404040;
+   opacity: 0.7;
    color: white;
    font-weight: 500;
-   cursor: pointer;
+   width: 100%;
+   border: 1px solid transparent;
+   text-align: center;
 }
 
-.action-button:hover {
-   // background-color: rgba(0, 0, 0, 0.4);
-   opacity: 0.6;
+.primary-action-button:hover:not(.disabled) {
+   background-color: #212121;
+   color: #dedede;
+}
+
+.primary-action-button:active:not(.disabled) {
+   background-color: rgb(0, 0, 0);
+   color: #bfbfbf;
+}
+
+// button modifiers
+.disabled {
+   opacity: 0.3;
+   pointer-events: fill !important;
+   cursor: not-allowed;
 }
 
 // used for labels on forms and headers on tables

@@ -103,7 +103,9 @@ export default function StyleTester() {
                   </div>
                   <div className="navigation-link">.navigation-link</div>
                   <div className="rollout-button">.rollout-button</div>
-                  <div className="action-button">.action-button</div>
+                  <div className="primary-action-button">
+                     .primary-action-button
+                  </div>
                   <div className="form-label">.form-label</div>
                </div>
             </div>

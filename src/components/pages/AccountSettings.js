@@ -1,19 +1,19 @@
 import React from "react";
-// import { Link } from "react-router-dom"; // a React element for linking
-import { EMAIL_REGEX } from "../../utils/helpers";
-import { v4 as getUuid } from "uuid";
-import hash from "object-hash";
-import classnames from "classnames";
-import {
-   IconUserAdd,
-   // IconUserCheck,
-   // IconKey,
-   // IconHome,
-   // IconEdit,
-} from "../../icons/icons.js";
+import { Link } from "react-router-dom"; // a React element for linking
+// import { EMAIL_REGEX } from "../../utils/helpers";
+// import { v4 as getUuid } from "uuid";
+// import hash from "object-hash";
+// import classnames from "classnames";
+// import {
+//    IconUserAdd,
+//    // IconUserCheck,
+//    // IconKey,
+//    // IconHome,
+//    // IconEdit,
+// } from "../../icons/icons.js";
 import { withRouter } from "react-router-dom"; // a React element for linking
-import axios from "axios";
-import actions from "../../store/actions";
+// import axios from "axios";
+// import actions from "../../store/actions";
 import { connect } from "react-redux";
 
 class AccountSettings extends React.Component {
@@ -63,99 +63,102 @@ class AccountSettings extends React.Component {
                      <div className="card mb-3">
                         <div className="card-body">
                            <h5>chris@gmail.com</h5>
-                           <form className="mb-0 needs-validation" noValidate>
-                              <div className="form-group">
-                                 <input
-                                    id="existing-email-input"
-                                    placeholder="Enter Your Email"
-                                    required
-                                    type="email"
-                                    className={classnames({
-                                       "form-control": true,
-                                       "is-invalid": this.state
-                                          .hasExistingEmailError,
-                                    })}
-                                 />
-                                 {this.state.hasExistingEmailError && (
-                                    <div className="text-danger">
-                                       {this.state.existingEmailError}
-                                    </div>
-                                 )}
-                              </div>
-                              <div className="form-group">
-                                 <input
-                                    type="password"
-                                    id="existing-password-input"
-                                    placeholder="Enter Your Password"
-                                    required
-                                    className={classnames({
-                                       "form-control": true,
-                                       "is-invalid": this.state
-                                          .hasExistingPasswordError,
-                                    })}
-                                 />
-                                 {this.state.hasExistingPasswordError && (
-                                    <div
-                                       className="text-danger"
-                                       id="password-error"
-                                    >
-                                       {this.state.existingPasswordError}
-                                    </div>
-                                 )}
-                              </div>
-                              <button
-                                 className="btn btn-primary btn-block my-3"
-                                 type="button"
-                                 onClick={() => this.validateLogInAttempt()}
-                              >
-                                 Log In
-                              </button>
-                              <div class="btn-group d-flex" role="group">
-                                 <button
-                                    type="button"
-                                    className="btn btn-secondary btn-sm"
-                                    onClick={() => this.setNewAccountMode()}
-                                 >
-                                    Make a new account
-                                 </button>
-                                 <button
-                                    type="button"
-                                    className="btn btn-secondary btn-sm tab-separator"
-                                    onClick={() => this.bypassLogIn()}
-                                 >
-                                    Bypass
-                                 </button>
-                              </div>
-                           </form>
-                           <button className="rollout-button">
-                              Delete Your Account
-                           </button>
-                           <p>
-                              Deleting this account will delete all your
-                              loadouts that are not shared with anyone else.
-                           </p>
                            <div className="card-section">
-                              <div
+                              <span
                                  className="button navigation-link"
                                  onClick={() => this.toggleEmailRollout()}
                               >
                                  Change Your Email
-                              </div>
+                              </span>
                               {this.state.hasEmailRollout && (
                                  <>
-                                    <p>Enter your new email address.</p>
-                                    <input value="chris@gmail.com" />
+                                    <label
+                                       className="my-input-label form-label"
+                                       for="new-email"
+                                    >
+                                       Enter your new email address
+                                    </label>
+                                    <input
+                                       type="email"
+                                       className="my-input"
+                                       value="chris@gmail.com"
+                                       id="new-email"
+                                    />
+                                    <label
+                                       className="my-input-label form-label"
+                                       for="password-for-email-change"
+                                    >
+                                       Enter your password
+                                    </label>
+                                    <input
+                                       type="password"
+                                       className="my-input"
+                                       id="password-for-email-change"
+                                    />
                                     <div className="button primary-action-button">
                                        Confirm Email Change
+                                    </div>
+                                    <div
+                                       className="button navigation-link"
+                                       onClick={() => this.toggleEmailRollout()}
+                                    >
+                                       Cancel
                                     </div>
                                  </>
                               )}
                            </div>
-                           <div
-                              className="button rollout-button"
-                              onClick={() => this.toggleDeleteRollout()}
-                           >
-                              Delete Your Account
+                           <div className="card-section">
+                              <span
+                                 className="button navigation-link"
+                                 onClick={() => this.togglePasswordRollout()}
+                              >
+                                 Change Your Password
+                              </span>
+                              {this.state.hasPasswordRollout && (
+                                 <>
+                                    <label
+                                       for="old-password"
+                                       className="my-input-label form-label"
+                                    >
+                                       Enter your old password
+                                    </label>
+                                    <input
+                                       type="password"
+                                       className="my-input"
+                                       id="old-password"
+                                    />
+                                    <label
+                                       for="new-password"
+                                       className="my-input-label form-label"
+                                    >
+                                       Enter your new password
+                                    </label>
+                                    <input
+                                       type="password"
+                                       className="my-input"
+                                       id="new-password"
+                                    />
+                                    <div className="button primary-action-button">
+                                       Confirm Password Change
+                                    </div>
+                                    <div
+                                       className="button navigation-link"
+                                       onClick={() =>
+                                          this.togglePasswordRollout()
+                                       }
+                                    >
+                                       Cancel
+                                    </div>
+                                 </>
+                              )}
+                           </div>
+                           <div className="card-section">
+                              <span
+                                 className="button navigation-link"
+                                 onClick={() => this.toggleDeleteRollout()}
+                              >
+                                 Delete Your Account
+                              </span>
                               {this.state.hasDeleteRollout && (
                                  <>
                                     <p>
@@ -163,25 +166,29 @@ class AccountSettings extends React.Component {
                                        all the loadouts that are not shared with
                                        anyone else.
                                     </p>
-                                    <div className="button primary-action-button">
+                                    <div className="button danger-action-button">
                                        Confirm Account Delete
+                                    </div>
+                                    <div
+                                       className="button navigation-link"
+                                       onClick={() =>
+                                          this.toggleDeleteRollout()
+                                       }
+                                    >
+                                       Cancel
                                     </div>
                                  </>
                               )}
                            </div>
-                           <div className="button rollout-button disabled">
-                              Delete Your Account
-                           </div>
-                           <div className="button navigation-link">
+                           {/* <div className="button"> */}
+                           <Link
+                              className="button navigation-link"
+                              to="/loadout-list"
+                           >
                               Back to Loadouts
-                           </div>
-                           <div className="button navigation-link disabled">
-                              Back to Loadouts
-                           </div>
+                           </Link>
+                           {/* </div> */}
                            <div className="button primary-action-button">
-                              Log Out
-                           </div>
-                           <div className="button primary-action-button disabled">
                               Log Out
                            </div>
                         </div>

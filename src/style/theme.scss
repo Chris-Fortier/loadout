@@ -353,3 +353,13 @@ $item-card-spacing: 12px; // space between the item cards
 //       lg: 992px,
 //    xl: 1200px
 // );
+
+// shadows
+
+$item-card-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
+$button-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
+$inner-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.23);
+
+$space-between-button-rows: 9px;
+$space-between-sections: 16px;
+$card-section-padding: 9px;

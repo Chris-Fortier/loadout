@@ -77,9 +77,12 @@ class Header extends React.Component {
             </div>
             <div className="row">
                <div className="col">
-                  <button className="btn btn-link float-right">
+                  <Link
+                     className="btn btn-link float-right"
+                     to="/account-settings"
+                  >
                      Account Settings
-                  </button>
+                  </Link>
                </div>
             </div>
             <div className="row">

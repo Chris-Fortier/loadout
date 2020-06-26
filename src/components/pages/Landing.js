@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom"; // a React element for linking
+import { Link } from "react-router-dom"; // a React element for linking
 import { EMAIL_REGEX } from "../../utils/helpers";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
@@ -295,78 +295,58 @@ class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5>Log In</h5>
-               <form className="mb-0 needs-validation" noValidate>
-                  <div className="form-group">
-                     <input
-                        id="existing-email-input"
-                        placeholder="Enter Your Email"
-                        required
-                        type="email"
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasExistingEmailError,
-                        })}
-                     />
-                     {this.state.hasExistingEmailError && (
-                        <div className="text-danger">
-                           {this.state.existingEmailError}
-                        </div>
-                     )}
+               <h5>log in</h5>
+               <input
+                  id="existing-email-input"
+                  placeholder="Enter Your Email"
+                  required
+                  type="email"
+                  className={classnames({
+                     "my-input": true,
+                     "input-invalid": this.state.hasExistingPasswordError,
+                  })}
+               />
+               {this.state.hasExistingEmailError && (
+                  <div className="text-danger">
+                     {this.state.existingEmailError}
                   </div>
-                  <div className="form-group">
-                     <input
-                        type="password"
-                        id="existing-password-input"
-                        placeholder="Enter Your Password"
-                        required
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasExistingPasswordError,
-                        })}
-                     />
-                     {this.state.hasExistingPasswordError && (
-                        <div className="text-danger" id="password-error">
-                           {this.state.existingPasswordError}
-                        </div>
-                     )}
+               )}
+               <input
+                  type="password"
+                  id="existing-password-input"
+                  placeholder="Enter Your Password"
+                  required
+                  className={classnames({
+                     "my-input": true,
+                     "input-invalid": this.state.hasExistingPasswordError,
+                  })}
+               />
+               {this.state.hasExistingPasswordError && (
+                  <div className="text-danger" id="password-error">
+                     {this.state.existingPasswordError}
                   </div>
-                  <button
-                     className="btn btn-primary btn-block my-3"
-                     type="button"
-                     onClick={() => this.validateLogInAttempt()}
-                  >
-                     Log In
-                  </button>
-                  {/* <button
-                     className="btn btn-primary btn-block my-3"
-                     onClick={() => this.bypassLogIn()}
-                  >
-                     Bypass
-                  </button> */}
-                  {/* <button
-                     className="btn btn-secondary btn-sm btn-block"
-                     onClick={() => this.setNewAccountMode()}
-                  >
-                     Make a New Account
-                  </button> */}
-                  <div class="btn-group d-flex" role="group">
-                     <button
-                        type="button"
-                        className="btn btn-secondary btn-sm"
-                        onClick={() => this.setNewAccountMode()}
-                     >
-                        Make a new account
-                     </button>
-                     <button
-                        type="button"
-                        className="btn btn-secondary btn-sm tab-separator"
-                        onClick={() => this.bypassLogIn()}
-                     >
-                        Bypass
-                     </button>
-                  </div>
-               </form>
+               )}
+               <div
+                  className="button primary-action-button"
+                  onClick={() => this.validateLogInAttempt()}
+               >
+                  log in
+               </div>
+               <div
+                  className="button navigation-link"
+                  onClick={() => this.setNewAccountMode()}
+               >
+                  <span className="icon left">
+                     <IconUserAdd />
+                  </span>
+                  &nbsp;Make a New Account
+               </div>
+               <div
+                  className="button navigation-link float-right"
+                  onClick={() => this.bypassLogIn()}
+               >
+                  bypass log in
+               </div>
             </div>
          </div>
       );
@@ -376,64 +356,60 @@ class Landing extends React.Component {
       return (
          <div className="card mb-3">
             <div className="card-body">
-               <h5>Sign Up</h5>
-               <p>
+               <h5>
                   <span className="icon left">
                      <IconUserAdd />
                   </span>
-                  &nbsp;Make a New Account
-               </p>
-               <form className="mb-0 needs-validation" noValidate>
-                  <div className="form-group">
-                     <input
-                        id="new-email-input"
-                        placeholder="Enter Your Email"
-                        required
-                        type="email"
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasNewEmailError,
-                        })}
-                     />
-                     {this.state.hasNewEmailError && (
-                        <div className="text-danger" id="email-error">
-                           {this.state.newEmailError}
-                        </div>
-                     )}
+                  Sign Up
+               </h5>
+               {/* <p>
+                  <span className="icon left">
+                     <IconUserAdd />
+                  </span>
+                  Make a New Account
+               </p> */}
+               <input
+                  id="new-email-input"
+                  placeholder="Enter Your Email"
+                  required
+                  type="email"
+                  className={classnames({
+                     "my-input": true,
+                     "input-invalid": this.state.hasNewEmailError,
+                  })}
+               />
+               {this.state.hasNewEmailError && (
+                  <div className="text-danger" id="email-error">
+                     {this.state.newEmailError}
                   </div>
-                  <div className="form-group">
-                     <input
-                        type="password"
-                        id="new-password-input"
-                        placeholder="Enter a Password"
-                        required
-                        className={classnames({
-                           "form-control": true,
-                           "is-invalid": this.state.hasNewPasswordError,
-                        })}
-                     />
-                     {this.state.hasNewPasswordError && (
-                        <div className="text-danger" id="password-error">
-                           {this.state.newPasswordError}
-                        </div>
-                     )}
+               )}
+               <input
+                  type="password"
+                  id="new-password-input"
+                  placeholder="Enter Your Password"
+                  required
+                  className={classnames({
+                     "my-input": true,
+                     "input-invalid": this.state.hasNewPasswordError,
+                  })}
+               />
+               {this.state.hasNewPasswordError && (
+                  <div className="text-danger" id="password-error">
+                     {this.state.newPasswordError}
                   </div>
-                  <button
-                     className="btn btn-primary btn-block my-3"
-                     id="login-button"
-                     type="button"
-                     onClick={() => this.validateAndCreateUser()}
-                  >
-                     Sign Up
-                  </button>
-                  <button
-                     className="btn btn-secondary btn-sm btn-block"
-                     id="new-account-button"
-                     onClick={() => this.setLogInMode()}
-                  >
-                     Use an Existing Account
-                  </button>
-               </form>
+               )}
+               <div
+                  className="button primary-action-button"
+                  onClick={() => this.validateAndCreateUser()}
+               >
+                  sign up
+               </div>
+               <div
+                  className="button navigation-link"
+                  onClick={() => this.setLogInMode()}
+               >
+                  Use an Existing Account
+               </div>
             </div>
          </div>
       );

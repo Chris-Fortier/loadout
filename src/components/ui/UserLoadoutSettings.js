@@ -51,7 +51,7 @@ class UserLoadoutSettings extends React.Component {
             </td>
             <td>
                <button
-                  className="icon-clickable item-card-icon"
+                  className="icon-clickable icon"
                   id={"delete-shared-user-" + 1}
                >
                   <IconTrash />

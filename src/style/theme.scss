@@ -354,6 +354,8 @@ $item-card-spacing: 12px; // space between the item cards
 //    xl: 1200px
 // );
 
+// common rules
+
 // shadows
 
 $item-card-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
@@ -363,3 +365,4 @@ $inner-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.23);
 $space-between-button-rows: 9px;
 $space-between-sections: 16px;
 $card-section-padding: 9px;
+$outline-style: 1px solid rgba(0, 0, 0, 0.5);

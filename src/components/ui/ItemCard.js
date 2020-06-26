@@ -60,7 +60,7 @@ class ItemCard extends React.Component {
             <div className="d-flex">
                <span
                   className={classnames(
-                     "float-left custom-control custom-checkbox packed-checkbox-container",
+                     "custom-control custom-checkbox packed-checkbox-container",
                      { faint: packedBoxIsFaint }
                   )}
                >
@@ -73,7 +73,6 @@ class ItemCard extends React.Component {
                         this.toggleIsPacked(item.index);
                      }}
                   />
-                  {/* for some reason if I don't have a label, the entire checkbox is not visible */}
                   <label
                      className="custom-control-label"
                      htmlFor={"packed-checkbox-" + item.index}
@@ -90,16 +89,13 @@ class ItemCard extends React.Component {
                         ); // move to current path with the subitem index added on
                      }}
                      className={classnames(
-                        "flex-fill item-card-text navigation-link packed-counter",
-                        { faint: counterIsFaint }
+                        "item-card-text button navigation-link packed-counter",
+                        { disabled: counterIsFaint }
                      )}
                   >
-                     <span className="item-card-icon float-right">
+                     {item.contentSummaryText}
+                     <span className="icon right">
                         <IconArrowThinRightCircle />
-                     </span>
-                     <span className="float-right">&nbsp;</span>
-                     <span className="float-right">
-                        {item.contentSummaryText}
                      </span>
                   </span>
                )}

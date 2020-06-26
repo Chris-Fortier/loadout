@@ -201,6 +201,11 @@ body {
 
    // box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.23);
    box-shadow: $item-card-shadow;
+
+   // remove margin when a button is inside of an item card
+   .button {
+      margin: 0;
+   }
 }
 
 // this used if the screen is wide enough for two "columns" of item cards
@@ -372,9 +377,9 @@ $iconWidth: 30px;
 
 // size and color of icons
 .icon {
-   width: $iconWidth;
+   width: 1em; //$iconWidth;
 
-   margin-top: -4px;
+   // margin-top: -4px;
 
    .primary {
       fill: rgba(0, 0, 0, 0.25);
@@ -396,7 +401,7 @@ $iconWidth: 30px;
 
 // assign this class to the div around an inline icon
 .icon-clickable {
-   width: $iconWidth;
+   // width: $iconWidth;
    display: inline-block;
    border: none;
    cursor: pointer;
@@ -424,27 +429,27 @@ $iconWidth: 30px;
    margin-right: 4px;
 }
 
-.item-card-icon {
-   width: $iconWidth * 0.8;
+// .item-card-icon {
+//    width: $iconWidth * 0.8;
 
-   // float: right;
-   // margin-left: 4px;
-   // margin-right: 4px;
-   margin-top: -3px;
+//    // float: right;
+//    // margin-left: 4px;
+//    // margin-right: 4px;
+//    margin-top: -3px;
 
-   .primary {
-      fill: rgba(0, 0, 0, 0.25);
-   }
+//    .primary {
+//       fill: rgba(0, 0, 0, 0.25);
+//    }
 
-   .secondary {
-      fill: rgba(0, 0, 0, 0.75);
-   }
-}
+//    .secondary {
+//       fill: rgba(0, 0, 0, 0.75);
+//    }
+// }
 
 .card-section {
    margin-top: $space-between-sections; // for space between card sections and buttons
    margin-bottom: $space-between-sections; // for space between card sections and buttons
-   border: 1px solid rgba(0, 0, 0, 0.5);
+   border: $outline-style;
    background: none;
    padding: $card-section-padding;
    box-shadow: $inner-shadow;
@@ -459,15 +464,34 @@ $iconWidth: 30px;
 }
 
 .my-input {
+   margin-top: $space-between-button-rows; // for space between card sections and buttons
+   margin-bottom: $space-between-button-rows; // for space between card sections and buttons
    background-color: rgba(255, 255, 255, 0.75);
    width: 100%;
    padding: 6px;
    box-shadow: $inner-shadow;
+   border: $outline-style;
+}
+.my-input:first-child {
+   margin-top: 0;
+}
+.my-input:last-child {
+   margin-bottom: 0;
 }
 
 .my-input-label {
    margin-top: 0.5rem;
    margin-bottom: 0;
+}
+
+// for an invalid input
+.input-invalid {
+   // background-color: rgba(255, 191, 191, 0.75);
+   color: rgb(191, 0, 0);
+   border-color: rgb(191, 0, 0);
+}
+.input-invalid::placeholder {
+   color: rgba(191, 0, 0, 0.5);
 }
 
 // common to all my buttons
@@ -493,6 +517,7 @@ $iconWidth: 30px;
    border: 0px solid transparent;
    padding-left: 0;
    color: rgba(0, 0, 0, 0.7);
+   text-transform: capitalize;
 }
 
 .navigation-link:hover:not(.disabled) {

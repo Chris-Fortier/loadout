@@ -19,6 +19,7 @@ import {
    // MOVE_UPDOWN,
    MAX_ITEM_NAME_LENGTH,
    LEVEL_COLORS,
+   UI_APPEARANCE,
 } from "../../utils/helpers";
 import classnames from "classnames";
 import axios from "axios";
@@ -396,10 +397,10 @@ class ItemList extends React.Component {
       console.log("Rendering page...");
 
       // these are classes that are different if we are at the top level or a lower level
-      let pageBgClasses = "";
-      let pageContentClasses = "";
-      let levelHeaderClasses = "";
-      let levelBodyClasses = "";
+      // let pageBgClasses = "";
+      // let pageContentClasses = "";
+      // let levelHeaderClasses = "";
+      // let levelBodyClasses = "";
 
       // get the current item
       // const currentItem = this.state.currentItem; // old value
@@ -410,70 +411,52 @@ class ItemList extends React.Component {
       // this.props.item = currentItem; // set the props of item for this component to the current item
 
       const level = currentItem.level;
-      if (level === 0) {
-         pageBgClasses = "item-list parent-bg-color"; // + String(level % LEVEL_COLORS);
-      } else {
-         pageBgClasses = "item-list parent-bg-color"; // + String((level - 1) % LEVEL_COLORS);
-         pageContentClasses = "card super-item-card this-bg-color";
-         levelHeaderClasses = "card-header";
-         levelBodyClasses = "card-body";
-      }
+      // if (level !== 0) {
+      //    // pageContentClasses = "card super-item-card this-bg-light";
+      //    levelHeaderClasses = "card-header";
+      //    levelBodyClasses = "card-body";
+      // }
 
       return (
          <div>
             <Header />
-            <div className={pageBgClasses}>
+            <div
+               className={classnames(
+                  "item-list",
+                  UI_APPEARANCE === "light" && "parent-bg-light",
+                  UI_APPEARANCE === "dark" && "parent-bg-dark"
+               )}
+            >
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
-                        {level !== 0 && (
-                           <div>
-                              <span
-                                 className={classnames(
-                                    "up-level button navigation-link level-text-color-" +
+                        <div>
+                           <span
+                              className={classnames(
+                                 "up-level button navigation-link",
+                                 (UI_APPEARANCE === "light" ||
+                                    UI_APPEARANCE === "dark") &&
+                                    "level-text-color-" +
                                        String((level - 1) % LEVEL_COLORS),
-                                    {
-                                       hidden: this.state.isEditMode,
-                                    }
-                                 )}
-                                 onClick={(e) => {
-                                    this.movePageToDifferentItem(
-                                       this.props.currentLoadout.itemIndexPath.slice(
-                                          0,
-                                          -1
-                                       )
-                                    ); // move to current path with the last part removed to go up a level
-                                 }}
-                              >
-                                 <div className="icon left">
-                                    <IconArrowThinLeftCircle />
-                                 </div>
-                                 Back to {currentItem.parentName}
-                              </span>
-                           </div>
-                        )}
-                        {level === 0 && (
-                           <div>
-                              <Link
-                                 className={classnames(
-                                    "up-level button navigation-link level-text-color-" +
-                                       String(LEVEL_COLORS - 1),
-                                    {
-                                       hidden: this.state.isEditMode,
-                                    }
-                                 )}
-                                 onClick={() => {
-                                    this.exitLoadout();
-                                 }}
-                                 to="/loadout"
-                              >
-                                 <div className="icon left">
-                                    <IconArrowThinLeftCircle />
-                                 </div>
-                                 Back to List of Loadouts
-                              </Link>
-                           </div>
-                        )}
+                                 {
+                                    hidden: this.state.isEditMode,
+                                 }
+                              )}
+                              onClick={(e) => {
+                                 this.movePageToDifferentItem(
+                                    this.props.currentLoadout.itemIndexPath.slice(
+                                       0,
+                                       -1
+                                    )
+                                 ); // move to current path with the last part removed to go up a level
+                              }}
+                           >
+                              <div className="icon left">
+                                 <IconArrowThinLeftCircle />
+                              </div>
+                              Back to {currentItem.parentName}
+                           </span>
+                        </div>
 
                         {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
                         {/* {level !== 0 && this.state.isEditMode && (
@@ -483,29 +466,47 @@ class ItemList extends React.Component {
                         )} */}
 
                         {/* <img src={iconEdit} className="icon" /> */}
-                        <div className={pageContentClasses}>
-                           <div className={levelHeaderClasses}>
+                        <div
+                           className={classnames(
+                              level !== 0 && "card super-item-card",
+                              level !== 0 &&
+                                 UI_APPEARANCE === "light" &&
+                                 "this-bg-light",
+                              level !== 0 &&
+                                 UI_APPEARANCE === "dark" &&
+                                 "this-bg-dark"
+                           )}
+                        >
+                           <div className={level !== 0 && "card-header"}>
                               <div className="row">
                                  {!this.state.isEditMode && (
                                     <>
                                        <div className="col">
                                           <h4
-                                             className={
-                                                "level-text-color-" +
-                                                String(level % LEVEL_COLORS)
-                                             }
+                                             className={classnames(
+                                                (UI_APPEARANCE === "light" ||
+                                                   UI_APPEARANCE === "dark") &&
+                                                   "level-text-color-" +
+                                                      String(
+                                                         level % LEVEL_COLORS
+                                                      )
+                                             )}
                                           >
                                              {currentItem.name}
                                           </h4>
                                        </div>
                                        <div className="col">
                                           <h4
-                                             className={
-                                                "float-right level-text-color-" +
-                                                String(
-                                                   (level + 1) % LEVEL_COLORS
-                                                )
-                                             }
+                                             className={classnames(
+                                                "float-right",
+                                                (UI_APPEARANCE === "light" ||
+                                                   UI_APPEARANCE === "dark") &&
+                                                   "level-text-color-" +
+                                                      String(
+                                                         (level + 1) %
+                                                            LEVEL_COLORS
+                                                      )
+                                             )}
                                           >
                                              {currentItem.contentSummaryText}
                                           </h4>
@@ -591,7 +592,7 @@ class ItemList extends React.Component {
                                  </div>
                               </div>
                            </div>
-                           <div className={levelBodyClasses}>
+                           <div className={level !== 0 && "card-body"}>
                               <div className="row">
                                  <div className="col">
                                     {this.renderContainingItems(currentItem)}

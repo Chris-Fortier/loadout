@@ -2,7 +2,7 @@ import React from "react";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { connect } from "react-redux";
 import actions from "../../store/actions";
-import { LEVEL_COLORS } from "../../utils/helpers";
+import { LEVEL_COLORS, UI_APPEARANCE } from "../../utils/helpers";
 import classnames from "classnames";
 import { IconArrowThinRightCircle } from "../../icons/icons.js";
 import {
@@ -58,7 +58,13 @@ class ItemCard extends React.Component {
       }
 
       return (
-         <div className={"card item-card child-bg-color"}>
+         <div
+            className={classnames(
+               "card item-card",
+               UI_APPEARANCE === "light" && "child-bg-light",
+               UI_APPEARANCE === "dark" && "child-bg-dark"
+            )}
+         >
             {/* <div className="float-left"> */}
             <div className="d-flex">
                {/* <span
@@ -84,8 +90,9 @@ class ItemCard extends React.Component {
 
                <span
                   className={classnames(
-                     "icon item-card-icon item-icon-colors-" +
-                        String(item.level % LEVEL_COLORS),
+                     "icon item-card-icon",
+                     (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
+                        "item-icon-colors-" + String(item.level % LEVEL_COLORS),
                      {
                         clickable: item.numPackedChildren === item.numChildren,
                         disabled: item.numPackedChildren < item.numChildren,
@@ -104,10 +111,11 @@ class ItemCard extends React.Component {
                </span>
 
                <span
-                  className={
-                     "flex-fill item-card-text level-text-color-" +
-                     String(item.level % LEVEL_COLORS)
-                  }
+                  className={classnames(
+                     "flex-fill item-card-text",
+                     (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
+                        "level-text-color-" + String(item.level % LEVEL_COLORS)
+                  )}
                >
                   <span
                      className={classnames({
@@ -130,8 +138,11 @@ class ItemCard extends React.Component {
                               ); // move to current path with the subitem index added on
                         }}
                         className={classnames(
-                           "button navigation-link item-card-text level-text-color-" +
-                              String((item.level + 1) % LEVEL_COLORS),
+                           "button navigation-link item-card-text",
+                           (UI_APPEARANCE === "light" ||
+                              UI_APPEARANCE === "dark") &&
+                              "level-text-color-" +
+                                 String((item.level + 1) % LEVEL_COLORS),
                            { disabled: item.isPacked }
                         )}
                      >
@@ -140,8 +151,11 @@ class ItemCard extends React.Component {
 
                      <span
                         className={classnames(
-                           "icon item-card-icon item-icon-colors-" +
-                              String(item.level % LEVEL_COLORS),
+                           "icon item-card-icon",
+                           (UI_APPEARANCE === "light" ||
+                              UI_APPEARANCE === "dark") &&
+                              "item-icon-colors-" +
+                                 String(item.level % LEVEL_COLORS),
                            {
                               clickable: !item.isPacked,
                               disabled: item.isPacked,

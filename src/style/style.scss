@@ -29,8 +29,11 @@ html {
    min-height: 100vh;
 }
 
-.this-bg-color {
-   background-color: $this-bg-color;
+.this-bg-light {
+   background-color: $this-bg-light;
+}
+.this-bg-dark {
+   background-color: $this-bg-dark;
 }
 
 // colors for gear cards
@@ -50,8 +53,11 @@ html {
 //    background-color: map-get($level-colors, 4);
 // }
 
-.parent-bg-color {
-   background-color: $parent-bg-color;
+.parent-bg-light {
+   background-color: $parent-bg-light;
+}
+.parent-bg-dark {
+   background-color: $parent-bg-dark;
 }
 
 // .parent-color-0 {
@@ -70,8 +76,11 @@ html {
 //    background-color: map-get($parent-colors, 4);
 // }
 
-.child-bg-color {
-   background-color: $child-bg-color;
+.child-bg-light {
+   background-color: $child-bg-light;
+}
+.child-bg-dark {
+   background-color: $child-bg-dark;
 }
 
 .item-icon-colors-0 {

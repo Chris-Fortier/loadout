@@ -168,6 +168,14 @@ class ItemCard extends React.Component {
                               disabled: item.isPacked,
                            }
                         )}
+                        onClick={(e) => {
+                           !item.isPacked &&
+                              this.movePageToDifferentItem(
+                                 this.props.currentLoadout.itemIndexPath.concat(
+                                    [item.index]
+                                 )
+                              ); // move to current path with the subitem index added on
+                        }}
                      >
                         {item.isPacked && <ChildrenPackedIcon />}
                         {!item.isPacked &&

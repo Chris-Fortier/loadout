@@ -81,36 +81,27 @@ class ItemCard extends React.Component {
                      htmlFor={"packed-checkbox-" + item.index}
                   ></label>
                </span> */}
-               {item.isPacked && (
-                  <span
-                     className={
-                        "icon clickable item-card-icon item-icon-colors-" +
-                        String(item.level % LEVEL_COLORS)
+
+               <span
+                  className={classnames(
+                     "icon item-card-icon item-icon-colors-" +
+                        String(item.level % LEVEL_COLORS),
+                     {
+                        clickable: item.numPackedChildren === item.numChildren,
+                        disabled: item.numPackedChildren < item.numChildren,
                      }
-                  >
-                     <PackedIcon />
-                  </span>
-               )}
-               {!item.isPacked && item.numPackedChildren >= item.numChildren && (
-                  <span
-                     className={
-                        "icon clickable item-card-icon item-icon-colors-" +
-                        String(item.level % LEVEL_COLORS)
-                     }
-                  >
-                     <ReadyToPackIcon />
-                  </span>
-               )}
-               {!item.isPacked && item.numPackedChildren < item.numChildren && (
-                  <span
-                     className={
-                        "icon icon-disabled item-card-icon item-icon-colors-" +
-                        String(item.level % LEVEL_COLORS)
-                     }
-                  >
-                     <NotReadyToPackIcon />
-                  </span>
-               )}
+                  )}
+               >
+                  {item.isPacked && <PackedIcon />}
+                  {!item.isPacked &&
+                     item.numPackedChildren >= item.numChildren && (
+                        <ReadyToPackIcon />
+                     )}
+                  {!item.isPacked &&
+                     item.numPackedChildren < item.numChildren && (
+                        <NotReadyToPackIcon />
+                     )}
+               </span>
 
                <span
                   className={
@@ -118,7 +109,14 @@ class ItemCard extends React.Component {
                      String(item.level % LEVEL_COLORS)
                   }
                >
-                  <span className="clickable">&nbsp;&nbsp;{item.name}</span>
+                  <span
+                     className={classnames({
+                        clickable: item.numPackedChildren === item.numChildren,
+                        disabled: item.numPackedChildren < item.numChildren,
+                     })}
+                  >
+                     &nbsp;&nbsp;{item.name}
+                  </span>
                </span>
                {item.hasOwnProperty("items") && (
                   <>
@@ -140,55 +138,26 @@ class ItemCard extends React.Component {
                         {item.contentSummaryText}&nbsp;&nbsp;
                      </span>
 
-                     {/* <span className="icon right">
-                        <IconArrowThinRightCircle />
-                     </span> */}
-                     {item.isPacked && (
-                        <span
-                           className={
-                              "icon disabled item-card-icon item-icon-colors-" +
-                              String(item.level % LEVEL_COLORS)
+                     <span
+                        className={classnames(
+                           "icon item-card-icon item-icon-colors-" +
+                              String(item.level % LEVEL_COLORS),
+                           {
+                              clickable: !item.isPacked,
+                              disabled: item.isPacked,
                            }
-                        >
-                           <ChildrenPackedIcon />
-                        </span>
-                     )}
-                     {!item.isPacked &&
-                        item.numPackedChildren >= item.numChildren && (
-                           <span
-                              onClick={(e) => {
-                                 this.movePageToDifferentItem(
-                                    this.props.currentLoadout.itemIndexPath.concat(
-                                       [item.index]
-                                    )
-                                 ); // move to current path with the subitem index added on
-                              }}
-                              className={
-                                 "icon clickable item-card-icon item-icon-colors-" +
-                                 String(item.level % LEVEL_COLORS)
-                              }
-                           >
+                        )}
+                     >
+                        {item.isPacked && <ChildrenPackedIcon />}
+                        {!item.isPacked &&
+                           item.numPackedChildren >= item.numChildren && (
                               <ChildrenPackedIcon />
-                           </span>
-                        )}
-                     {!item.isPacked &&
-                        item.numPackedChildren < item.numChildren && (
-                           <span
-                              onClick={(e) => {
-                                 this.movePageToDifferentItem(
-                                    this.props.currentLoadout.itemIndexPath.concat(
-                                       [item.index]
-                                    )
-                                 ); // move to current path with the subitem index added on
-                              }}
-                              className={
-                                 "icon clickable item-card-icon item-icon-colors-" +
-                                 String(item.level % LEVEL_COLORS)
-                              }
-                           >
+                           )}
+                        {!item.isPacked &&
+                           item.numPackedChildren < item.numChildren && (
                               <ChildrenUnpackedIcon />
-                           </span>
-                        )}
+                           )}
+                     </span>
                   </>
                )}
             </div>

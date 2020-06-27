@@ -863,8 +863,12 @@
       },
       {
          "name": "Day at Punchcode",
+         "id": "e0364b00-f7fc-469c-ab82-8de3487bcc0b",
          "items": [
-            { "name": "Lunch Bag" },
+            {
+               "name": "Lunch Bag",
+               "id": "885ab2a1-989f-450e-abaa-a2add23da58b"
+            },
             {
                "name": "Laptop Bag",
                "id": "42dbc71c-5d87-4c7e-980e-46c107ba2635",

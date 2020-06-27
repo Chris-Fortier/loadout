@@ -64,8 +64,8 @@ class ItemList extends React.Component {
          isEditMode: false,
          isShowingUnpackConfirmation: false,
 
-         subItemDisplayMode: "numUnpackedDescendants",
-         // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants"
+         subItemDisplayMode: "numUnpackedChildren",
+         // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants" or "numUnpackedChildren"
       };
    }
 
@@ -122,6 +122,7 @@ class ItemList extends React.Component {
       // get the number of unpacked descedants, could be useful in sorting by which items need the most "work"
       item.numUnpackedDescendants =
          item.numDescendants - item.numPackedDescendants;
+      item.numUnpackedChildren = item.numChildren - item.numPackedChildren;
 
       // generate the text that would be displayed to summarize the packed status of the contents of this item
       if (
@@ -135,7 +136,15 @@ class ItemList extends React.Component {
          } else if (!item.isPacked) {
             item.contentSummaryText = "ready";
          } else {
-            item.contentSummaryText = "packed";
+            item.contentSummaryText = "";
+         }
+      } else if (this.state.subItemDisplayMode === "numUnpackedChildren") {
+         if (item.numUnpackedChildren > 0) {
+            item.contentSummaryText = item.numUnpackedChildren + " left";
+         } else if (!item.isPacked) {
+            item.contentSummaryText = "ready";
+         } else {
+            item.contentSummaryText = "";
          }
       }
 
@@ -402,11 +411,10 @@ class ItemList extends React.Component {
 
       const level = currentItem.level;
       if (level === 0) {
-         pageBgClasses = "item-list parent-color-0"; // + String(level % LEVEL_COLORS);
+         pageBgClasses = "item-list parent-bg-color"; // + String(level % LEVEL_COLORS);
       } else {
-         pageBgClasses = "item-list parent-color-0"; // + String((level - 1) % LEVEL_COLORS);
-         pageContentClasses =
-            "card super-item-card level-color-" + String(level % LEVEL_COLORS);
+         pageBgClasses = "item-list parent-bg-color"; // + String((level - 1) % LEVEL_COLORS);
+         pageContentClasses = "card super-item-card this-bg-color";
          levelHeaderClasses = "card-header";
          levelBodyClasses = "card-body";
       }
@@ -421,10 +429,13 @@ class ItemList extends React.Component {
                         {level !== 0 && (
                            <div>
                               <span
-                                 className={classnames({
-                                    "up-level navigation-link": true,
-                                    hidden: this.state.isEditMode,
-                                 })}
+                                 className={classnames(
+                                    "up-level button navigation-link level-text-color-" +
+                                       String((level - 1) % LEVEL_COLORS),
+                                    {
+                                       hidden: this.state.isEditMode,
+                                    }
+                                 )}
                                  onClick={(e) => {
                                     this.movePageToDifferentItem(
                                        this.props.currentLoadout.itemIndexPath.slice(
@@ -444,10 +455,13 @@ class ItemList extends React.Component {
                         {level === 0 && (
                            <div>
                               <Link
-                                 className={classnames({
-                                    "up-level navigation-link": true,
-                                    hidden: this.state.isEditMode,
-                                 })}
+                                 className={classnames(
+                                    "up-level button navigation-link level-text-color-" +
+                                       String(LEVEL_COLORS - 1),
+                                    {
+                                       hidden: this.state.isEditMode,
+                                    }
+                                 )}
                                  onClick={() => {
                                     this.exitLoadout();
                                  }}
@@ -475,10 +489,24 @@ class ItemList extends React.Component {
                                  {!this.state.isEditMode && (
                                     <>
                                        <div className="col">
-                                          <h4>{currentItem.name}</h4>
+                                          <h4
+                                             className={
+                                                "level-text-color-" +
+                                                String(level % LEVEL_COLORS)
+                                             }
+                                          >
+                                             {currentItem.name}
+                                          </h4>
                                        </div>
                                        <div className="col">
-                                          <h4 className="float-right packed-counter">
+                                          <h4
+                                             className={
+                                                "float-right level-text-color-" +
+                                                String(
+                                                   (level + 1) % LEVEL_COLORS
+                                                )
+                                             }
+                                          >
                                              {currentItem.contentSummaryText}
                                           </h4>
                                        </div>

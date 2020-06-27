@@ -4,7 +4,7 @@ import React from "react";
 
 function PackedIcon() {
    return (
-      <svg viewBox="0 2 24 28">
+      <svg viewBox="0 4 24 24">
          <path
             className="parent-item"
             d="M 6,10 V 22 H 18 V 10 l -2,2 v 8 H 8 v -8 z"
@@ -24,7 +24,7 @@ function PackedIcon() {
 
 function ReadyToPackIcon() {
    return (
-      <svg viewBox="0 2 24 28">
+      <svg viewBox="0 4 24 24">
          <path
             className="parent-item"
             d="M 6,10 V 22 H 18 V 10 l -2,2 v 8 H 8 v -8 z"

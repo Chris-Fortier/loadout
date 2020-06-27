@@ -58,11 +58,7 @@ class ItemCard extends React.Component {
       }
 
       return (
-         <div
-            className={
-               "card item-card child-color-" + String(item.level % LEVEL_COLORS)
-            }
-         >
+         <div className={"card item-card child-bg-color"}>
             {/* <div className="float-left"> */}
             <div className="d-flex">
                {/* <span
@@ -86,57 +82,110 @@ class ItemCard extends React.Component {
                   ></label>
                </span> */}
                {item.isPacked && (
-                  <span className="icon icon-clickable item-card-icon">
+                  <span
+                     className={
+                        "icon icon-clickable item-card-icon item-icon-colors-" +
+                        String(item.level % LEVEL_COLORS)
+                     }
+                  >
                      <PackedIcon />
                   </span>
                )}
                {!item.isPacked && item.numPackedChildren >= item.numChildren && (
-                  <span className="icon icon-clickable item-card-icon">
+                  <span
+                     className={
+                        "icon icon-clickable item-card-icon item-icon-colors-" +
+                        String(item.level % LEVEL_COLORS)
+                     }
+                  >
                      <ReadyToPackIcon />
                   </span>
                )}
                {!item.isPacked && item.numPackedChildren < item.numChildren && (
-                  <span className="icon icon-disabled item-card-icon">
+                  <span
+                     className={
+                        "icon icon-disabled item-card-icon item-icon-colors-" +
+                        String(item.level % LEVEL_COLORS)
+                     }
+                  >
                      <NotReadyToPackIcon />
                   </span>
                )}
                &nbsp;
-               <span className="flex-fill item-card-text">{item.name}</span>
+               <span
+                  className={
+                     "flex-fill item-card-text level-text-color-" +
+                     String(item.level % LEVEL_COLORS)
+                  }
+               >
+                  {item.name}
+               </span>
                {item.hasOwnProperty("items") && (
                   <>
                      <span
                         onClick={(e) => {
-                           this.movePageToDifferentItem(
-                              this.props.currentLoadout.itemIndexPath.concat([
-                                 item.index,
-                              ])
-                           ); // move to current path with the subitem index added on
+                           !item.isPacked &&
+                              this.movePageToDifferentItem(
+                                 this.props.currentLoadout.itemIndexPath.concat(
+                                    [item.index]
+                                 )
+                              ); // move to current path with the subitem index added on
                         }}
                         className={classnames(
-                           "item-card-text button navigation-link packed-counter",
-                           { disabled: counterIsFaint }
+                           "button navigation-link item-card-text level-text-color-" +
+                              String((item.level + 1) % LEVEL_COLORS),
+                           { disabled: item.isPacked }
                         )}
                      >
-                        {item.contentSummaryText}
+                        {item.contentSummaryText}&nbsp;
                      </span>
-                     &nbsp;
+
                      {/* <span className="icon right">
                         <IconArrowThinRightCircle />
                      </span> */}
                      {item.isPacked && (
-                        <span className="icon icon-disabled item-card-icon">
+                        <span
+                           className={
+                              "icon disabled item-card-icon item-icon-colors-" +
+                              String(item.level % LEVEL_COLORS)
+                           }
+                        >
                            <ChildrenPackedIcon />
                         </span>
                      )}
                      {!item.isPacked &&
                         item.numPackedChildren >= item.numChildren && (
-                           <span className="icon icon-clickable item-card-icon">
+                           <span
+                              onClick={(e) => {
+                                 this.movePageToDifferentItem(
+                                    this.props.currentLoadout.itemIndexPath.concat(
+                                       [item.index]
+                                    )
+                                 ); // move to current path with the subitem index added on
+                              }}
+                              className={
+                                 "icon icon-clickable item-card-icon item-icon-colors-" +
+                                 String(item.level % LEVEL_COLORS)
+                              }
+                           >
                               <ChildrenPackedIcon />
                            </span>
                         )}
                      {!item.isPacked &&
                         item.numPackedChildren < item.numChildren && (
-                           <span className="icon icon-clickable item-card-icon">
+                           <span
+                              onClick={(e) => {
+                                 this.movePageToDifferentItem(
+                                    this.props.currentLoadout.itemIndexPath.concat(
+                                       [item.index]
+                                    )
+                                 ); // move to current path with the subitem index added on
+                              }}
+                              className={
+                                 "icon icon-clickable item-card-icon item-icon-colors-" +
+                                 String(item.level % LEVEL_COLORS)
+                              }
+                           >
                               <ChildrenUnpackedIcon />
                            </span>
                         )}

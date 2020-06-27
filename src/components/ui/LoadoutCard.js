@@ -12,9 +12,11 @@ class LoadoutCard extends React.Component {
       const loadout = this.props.loadout; // this is to simplify code below
 
       return (
-         <Link className={"card item-card child-color-0"} to="/loadout">
+         <Link className={"card item-card child-bg-color"} to="/loadout">
             <div className="d-flex">
-               <span className="flex-fill item-card-text">{loadout.name}</span>
+               <span className="flex-fill level-text-color-1">
+                  {loadout.name}
+               </span>
             </div>
          </Link>
       );

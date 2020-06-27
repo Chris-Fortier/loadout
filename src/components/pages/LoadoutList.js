@@ -45,7 +45,7 @@ class LoadoutList extends React.Component {
       return (
          <div>
             <Header />
-            <div className="item-list parent-color-0">
+            <div className="item-list parent-bg-color">
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">

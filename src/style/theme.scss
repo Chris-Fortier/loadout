@@ -172,6 +172,30 @@ $lighter-stuff: rgba(
    0.7
 ); // this this a lighter version of whatever color is behind it
 
+// dark mode
+// $level-text-colors: (
+//    0: #3372b3,
+//    1: #128992,
+//    2: #558101,
+//    3: #7a6f01,
+//    4: #9a591a,
+// );
+// $parent-bg-color: #333333;
+// $this-bg-color: #292929;
+// $child-bg-color: #1e1e1e;
+
+// light mode
+$level-text-colors: (
+   0: #1a599a,
+   1: #016d75,
+   2: #416201,
+   3: #5c5301,
+   4: #814001,
+);
+$parent-bg-color: #cccccc;
+$this-bg-color: #b2b2b2;
+$child-bg-color: #999999;
+
 // SPACING
 
 $spacer: 1rem; // 16px in most browsers

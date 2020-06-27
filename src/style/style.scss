@@ -29,103 +29,126 @@ html {
    min-height: 100vh;
 }
 
+.this-bg-color {
+   background-color: $this-bg-color;
+}
+
 // colors for gear cards
-.level-color-0 {
-   background-color: map-get($level-colors, 0);
-}
-.level-color-1 {
-   background-color: map-get($level-colors, 1);
-}
-.level-color-2 {
-   background-color: map-get($level-colors, 2);
-}
-.level-color-3 {
-   background-color: map-get($level-colors, 3);
-}
-.level-color-4 {
-   background-color: map-get($level-colors, 4);
+// .level-color-0 {
+//    background-color: map-get($level-colors, 0);
+// }
+// .level-color-1 {
+//    background-color: map-get($level-colors, 1);
+// }
+// .level-color-2 {
+//    background-color: map-get($level-colors, 2);
+// }
+// .level-color-3 {
+//    background-color: map-get($level-colors, 3);
+// }
+// .level-color-4 {
+//    background-color: map-get($level-colors, 4);
+// }
+
+.parent-bg-color {
+   background-color: $parent-bg-color;
 }
 
-.parent-color-0 {
-   background-color: map-get($parent-colors, 0);
-}
-.parent-color-1 {
-   background-color: map-get($parent-colors, 1);
-}
-.parent-color-2 {
-   background-color: map-get($parent-colors, 2);
-}
-.parent-color-3 {
-   background-color: map-get($parent-colors, 3);
-}
-.parent-color-4 {
-   background-color: map-get($parent-colors, 4);
+// .parent-color-0 {
+//    background-color: map-get($parent-colors, 0);
+// }
+// .parent-color-1 {
+//    background-color: map-get($parent-colors, 1);
+// }
+// .parent-color-2 {
+//    background-color: map-get($parent-colors, 2);
+// }
+// .parent-color-3 {
+//    background-color: map-get($parent-colors, 3);
+// }
+// .parent-color-4 {
+//    background-color: map-get($parent-colors, 4);
+// }
+
+.child-bg-color {
+   background-color: $child-bg-color;
 }
 
-.child-color-0 {
-   background-color: map-get($child-colors, 0);
+.item-icon-colors-0 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($child-colors, 4);
+      fill: map-get($level-text-colors, 4);
    }
    .this-item {
-      fill: map-get($child-colors, 0);
+      fill: map-get($level-text-colors, 0);
    }
    .child-item {
-      fill: map-get($child-colors, 1);
+      fill: map-get($level-text-colors, 1);
    }
 }
-.child-color-1 {
-   background-color: map-get($child-colors, 1);
+.item-icon-colors-1 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($child-colors, 0);
+      fill: map-get($level-text-colors, 0);
    }
    .this-item {
-      fill: map-get($child-colors, 1);
+      fill: map-get($level-text-colors, 1);
    }
    .child-item {
-      fill: map-get($child-colors, 2);
+      fill: map-get($level-text-colors, 2);
    }
 }
-.child-color-2 {
-   background-color: map-get($child-colors, 2);
+.item-icon-colors-2 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($child-colors, 1);
+      fill: map-get($level-text-colors, 1);
    }
    .this-item {
-      fill: map-get($child-colors, 2);
+      fill: map-get($level-text-colors, 2);
    }
    .child-item {
-      fill: map-get($child-colors, 3);
+      fill: map-get($level-text-colors, 3);
    }
 }
-.child-color-3 {
-   background-color: map-get($child-colors, 3);
+.item-icon-colors-3 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($child-colors, 2);
+      fill: map-get($level-text-colors, 2);
    }
    .this-item {
-      fill: map-get($child-colors, 3);
+      fill: map-get($level-text-colors, 3);
    }
    .child-item {
-      fill: map-get($child-colors, 4);
+      fill: map-get($level-text-colors, 4);
    }
 }
-.child-color-4 {
-   background-color: map-get($child-colors, 4);
+.item-icon-colors-4 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($child-colors, 3);
+      fill: map-get($level-text-colors, 3);
    }
    .this-item {
-      fill: map-get($child-colors, 4);
+      fill: map-get($level-text-colors, 4);
    }
    .child-item {
-      fill: map-get($child-colors, 0);
+      fill: map-get($level-text-colors, 0);
    }
+}
+
+.level-text-color-0 {
+   color: map-get($level-text-colors, 0);
+}
+.level-text-color-1 {
+   color: map-get($level-text-colors, 1);
+}
+.level-text-color-2 {
+   color: map-get($level-text-colors, 2);
+}
+.level-text-color-3 {
+   color: map-get($level-text-colors, 3);
+}
+.level-text-color-4 {
+   color: map-get($level-text-colors, 4);
 }
 
 .item-list {
@@ -268,17 +291,17 @@ body {
 //    margin-right: $item-card-spacing;
 // }
 
-// for text within an item card
-.item-card-text {
-   // this is to center the text vertically within the card
-   padding-top: 8px;
-   padding-bottom: 6px;
+// // for text within an item card
+// .item-card-text {
+//    // this is to center the text vertically within the card
+//    padding-top: 8px;
+//    padding-bottom: 6px;
 
-   // line-height: 0.9; // this works well with this font if multiple lines are needed
-   // font-size: 1.2rem;
+//    // line-height: 0.9; // this works well with this font if multiple lines are needed
+//    // font-size: 1.2rem;
 
-   color: rgba(255, 255, 255, 0.8);
-}
+//    color: rgba(255, 255, 255, 0.8);
+// }
 
 // style text for the packed / total items numbers
 .packed-counter {
@@ -416,7 +439,7 @@ h5 {
 // for the button link that goes up a level
 .up-level {
    font-size: 24px;
-   color: $darker-stuff;
+   // color: $darker-stuff;
 }
 
 .faint {
@@ -444,10 +467,13 @@ $iconWidth: 30px;
 
 .item-card-icon {
    width: 1.5rem;
-   // background-color: black;
-   // box-shadow: $pack-icon-shadow;
-   -webkit-filter: drop-shadow($pack-icon-shadow);
-   filter: drop-shadow($pack-icon-shadow);
+   // -webkit-filter: drop-shadow($pack-icon-shadow);
+   // filter: drop-shadow($pack-icon-shadow);
+}
+
+// vertically align item card text
+.item-card-text {
+   align-self: center;
 }
 
 // assign this class to the div around an inline icon
@@ -582,7 +608,7 @@ $iconWidth: 30px;
    background-color: transparent;
    border: 0px solid transparent;
    padding-left: 0;
-   color: rgba(0, 0, 0, 0.7);
+   // color: rgba(0, 0, 0, 0.7);
    text-transform: capitalize;
 }
 

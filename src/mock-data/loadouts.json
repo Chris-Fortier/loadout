@@ -862,34 +862,40 @@
          ]
       },
       {
-         "name": "Laptop Bag",
-         "id": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
-         "parentId": "e0364b00-f7fc-469c-ab82-8de3487bcc0b",
-         "isPacked": false,
+         "name": "Day at Punchcode",
          "items": [
+            { "name": "Lunch Bag" },
             {
-               "name": "MacBook Pro",
-               "id": "02e2af25-3989-40a6-847c-0fe95fa978a9",
-               "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
-               "isPacked": false
-            },
-            {
-               "name": "Wireless Keyboard",
-               "id": "2c57a159-ec44-4c69-b82f-fde23477608e",
-               "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
-               "isPacked": false
-            },
-            {
-               "name": "Wireless Mouse",
-               "id": "",
-               "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
-               "isPacked": false
-            },
-            {
-               "name": "USB/Monitor Hub",
-               "id": "",
-               "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
-               "isPacked": false
+               "name": "Laptop Bag",
+               "id": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+               "parentId": "e0364b00-f7fc-469c-ab82-8de3487bcc0b",
+               "isPacked": false,
+               "items": [
+                  {
+                     "name": "MacBook Pro",
+                     "id": "02e2af25-3989-40a6-847c-0fe95fa978a9",
+                     "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+                     "isPacked": false
+                  },
+                  {
+                     "name": "Wireless Keyboard",
+                     "id": "2c57a159-ec44-4c69-b82f-fde23477608e",
+                     "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+                     "isPacked": false
+                  },
+                  {
+                     "name": "Wireless Mouse",
+                     "id": "",
+                     "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+                     "isPacked": false
+                  },
+                  {
+                     "name": "USB/Monitor Hub",
+                     "id": "",
+                     "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
+                     "isPacked": false
+                  }
+               ]
             }
          ]
       }

@@ -38,7 +38,7 @@ class ItemList extends React.Component {
       if (props.currentLoadout.gear.length === 0) {
          axios
             .get(
-               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/gear.json"
+               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/loadouts.json"
             )
             .then((res) => {
                // handle success

@@ -84,7 +84,7 @@ class ItemCard extends React.Component {
                {item.isPacked && (
                   <span
                      className={
-                        "icon icon-clickable item-card-icon item-icon-colors-" +
+                        "icon clickable item-card-icon item-icon-colors-" +
                         String(item.level % LEVEL_COLORS)
                      }
                   >
@@ -94,7 +94,7 @@ class ItemCard extends React.Component {
                {!item.isPacked && item.numPackedChildren >= item.numChildren && (
                   <span
                      className={
-                        "icon icon-clickable item-card-icon item-icon-colors-" +
+                        "icon clickable item-card-icon item-icon-colors-" +
                         String(item.level % LEVEL_COLORS)
                      }
                   >
@@ -111,14 +111,14 @@ class ItemCard extends React.Component {
                      <NotReadyToPackIcon />
                   </span>
                )}
-               &nbsp;&nbsp;
+
                <span
                   className={
                      "flex-fill item-card-text level-text-color-" +
                      String(item.level % LEVEL_COLORS)
                   }
                >
-                  {item.name}
+                  <span className="clickable">&nbsp;&nbsp;{item.name}</span>
                </span>
                {item.hasOwnProperty("items") && (
                   <>
@@ -164,7 +164,7 @@ class ItemCard extends React.Component {
                                  ); // move to current path with the subitem index added on
                               }}
                               className={
-                                 "icon icon-clickable item-card-icon item-icon-colors-" +
+                                 "icon clickable item-card-icon item-icon-colors-" +
                                  String(item.level % LEVEL_COLORS)
                               }
                            >
@@ -182,7 +182,7 @@ class ItemCard extends React.Component {
                                  ); // move to current path with the subitem index added on
                               }}
                               className={
-                                 "icon icon-clickable item-card-icon item-icon-colors-" +
+                                 "icon clickable item-card-icon item-icon-colors-" +
                                  String(item.level % LEVEL_COLORS)
                               }
                            >

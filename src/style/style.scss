@@ -505,8 +505,11 @@ $iconWidth: 30px;
    margin-top: 5px;
 }
 
-// assign this class to the div around an inline icon
-.icon-clickable:not(.disabled) {
+// assign this class to anything that is clickable
+.clickable:not(.disabled),
+.navigation-link:not(.disabled),
+.primary-action-button:not(.disabled),
+.danger-action-button:not(.disabled) {
    // width: $iconWidth;
    // display: inline-block;
    // border: none;
@@ -618,10 +621,10 @@ $iconWidth: 30px;
 .button:last-child {
    margin-bottom: 0;
 }
-.button:not(.disabled) {
-   cursor: pointer;
-   // color: red;
-}
+// .button:not(.disabled) {
+//    cursor: pointer;
+//    // color: red;
+// }
 
 .navigation-link {
    // padding: 0;

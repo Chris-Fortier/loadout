@@ -151,7 +151,7 @@ class LoadoutSharing extends React.Component {
                                                 </td>
                                                 <td>
                                                    <button
-                                                      className="icon-clickable icon"
+                                                      className="clickable icon"
                                                       id={
                                                          "delete-shared-user-" +
                                                          1

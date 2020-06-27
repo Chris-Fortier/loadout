@@ -867,7 +867,9 @@
          "items": [
             {
                "name": "Lunch Bag",
-               "id": "885ab2a1-989f-450e-abaa-a2add23da58b"
+               "id": "885ab2a1-989f-450e-abaa-a2add23da58b",
+               "parentId": "e0364b00-f7fc-469c-ab82-8de3487bcc0b",
+               "isPacked": false
             },
             {
                "name": "Laptop Bag",
@@ -889,13 +891,13 @@
                   },
                   {
                      "name": "Wireless Mouse",
-                     "id": "",
+                     "id": "12294188-1746-4729-b09c-0680d953cf03",
                      "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
                      "isPacked": false
                   },
                   {
                      "name": "USB/Monitor Hub",
-                     "id": "",
+                     "id": "a04224b9-e2bd-47c4-bc05-a16362013fd3",
                      "parentId": "42dbc71c-5d87-4c7e-980e-46c107ba2635",
                      "isPacked": false
                   }

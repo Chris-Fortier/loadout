@@ -111,7 +111,7 @@ class ItemCard extends React.Component {
                      <NotReadyToPackIcon />
                   </span>
                )}
-               &nbsp;
+               &nbsp;&nbsp;
                <span
                   className={
                      "flex-fill item-card-text level-text-color-" +
@@ -137,7 +137,7 @@ class ItemCard extends React.Component {
                            { disabled: item.isPacked }
                         )}
                      >
-                        {item.contentSummaryText}&nbsp;
+                        {item.contentSummaryText}&nbsp;&nbsp;
                      </span>
 
                      {/* <span className="icon right">

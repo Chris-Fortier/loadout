@@ -183,7 +183,7 @@ class AccountSettings extends React.Component {
                            {/* <div className="button"> */}
                            <Link
                               className="button navigation-link"
-                              to="/loadout-list"
+                              to="/loadout"
                            >
                               Back to Loadouts
                            </Link>

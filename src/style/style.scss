@@ -259,10 +259,7 @@ body {
    border-radius: 6px; // make more noticable
    margin-bottom: $item-card-spacing; // space between item cards
 
-   padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
-   padding-bottom: 0; // remove the padding inside the card as it will be controlled by the contents
-   padding-left: 6px; // still want padding on the sides
-   padding-right: 6px; // still want padding on the sides
+   padding: 5px;
 
    line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 24px;
@@ -273,6 +270,28 @@ body {
    // background-color: gray; // troubleshooting default color
 
    // box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.23);
+   box-shadow: $item-card-shadow;
+
+   // remove margin when a button is inside of an item card
+   .button {
+      margin: 0;
+   }
+}
+
+.item-card-edit {
+   // border-radius: 0.25rem; // Bootstrap default
+   border-radius: 6px; // make more noticable
+   margin-bottom: $item-card-spacing; // space between item cards
+
+   padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
+   padding-bottom: 0; // remove the padding inside the card as it will be controlled by the contents
+   padding-left: 6px; // still want padding on the sides
+   padding-right: 6px; // still want padding on the sides
+
+   line-height: 0.9; // this works well with this font if multiple lines are needed
+   font-size: 24px;
+   text-transform: capitalize; // makes first letter of each word uppercase
+
    box-shadow: $item-card-shadow;
 
    // remove margin when a button is inside of an item card
@@ -465,8 +484,9 @@ $iconWidth: 30px;
    }
 }
 
+// use to enlarge item card icons (1rem is no change)
 .item-card-icon {
-   width: 1.5rem;
+   width: 1.25rem;
    // -webkit-filter: drop-shadow($pack-icon-shadow);
    // filter: drop-shadow($pack-icon-shadow);
 }

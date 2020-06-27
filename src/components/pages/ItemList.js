@@ -465,7 +465,7 @@ class ItemList extends React.Component {
                                  onClick={() => {
                                     this.exitLoadout();
                                  }}
-                                 to="/loadout-list"
+                                 to="/loadout"
                               >
                                  <div className="icon left">
                                     <IconArrowThinLeftCircle />

@@ -41,7 +41,8 @@ class ItemCardEdit extends React.Component {
       return (
          <div
             className={
-               "card item-card child-color-" + String(item.level % LEVEL_COLORS)
+               "card item-card-edit child-color-" +
+               String(item.level % LEVEL_COLORS)
             }
          >
             <div className="d-flex">

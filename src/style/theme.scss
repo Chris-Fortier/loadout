@@ -131,8 +131,8 @@ $level-colors: (
       // 4: #947b61,
       // blue-teal to brown 3
       0: #6c859f,
-   1: #5c8f8f,
-   2: #748d5a,
+   1: #5f8e92,
+   2: #798b58,
    3: #898456,
    4: #957b62
 );
@@ -382,13 +382,18 @@ $item-card-spacing: 12px; // space between the item cards
 // common rules
 
 // shadows
-
 $item-card-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
 $button-shadow: 0 3px 3px rgba(0, 0, 0, 0.23);
 $inner-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.23);
 $pack-icon-shadow: 0 0 2px rgba(0, 0, 0, 1);
 
+// spacing
 $space-between-button-rows: 9px;
 $space-between-sections: 16px;
 $card-section-padding: 9px;
+
 $outline-style: 1px solid rgba(0, 0, 0, 0.5);
+
+// font colors
+$light-text-color: rgba(255, 255, 255, 0.8);
+$dark-text-color: rgba(0, 0, 0, 0.8);

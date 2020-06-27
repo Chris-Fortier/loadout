@@ -62,7 +62,10 @@ class ItemCard extends React.Component {
             className={classnames(
                "card item-card",
                UI_APPEARANCE === "light" && "child-bg-light",
-               UI_APPEARANCE === "dark" && "child-bg-dark"
+               UI_APPEARANCE === "dark" && "child-bg-dark",
+               UI_APPEARANCE === "colors" &&
+                  "card item-card child-color-" +
+                     String(item.level % LEVEL_COLORS)
             )}
          >
             {/* <div className="float-left"> */}
@@ -93,6 +96,7 @@ class ItemCard extends React.Component {
                      "icon item-card-icon",
                      (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
                         "item-icon-colors-" + String(item.level % LEVEL_COLORS),
+                     UI_APPEARANCE === "colors" && "item-icon-colors",
                      {
                         clickable: item.numPackedChildren === item.numChildren,
                         disabled: item.numPackedChildren < item.numChildren,
@@ -114,7 +118,8 @@ class ItemCard extends React.Component {
                   className={classnames(
                      "flex-fill item-card-text",
                      (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
-                        "level-text-color-" + String(item.level % LEVEL_COLORS)
+                        "level-text-color-" + String(item.level % LEVEL_COLORS),
+                     UI_APPEARANCE === "colors" && "light-text-color"
                   )}
                >
                   <span
@@ -143,6 +148,7 @@ class ItemCard extends React.Component {
                               UI_APPEARANCE === "dark") &&
                               "level-text-color-" +
                                  String((item.level + 1) % LEVEL_COLORS),
+                           UI_APPEARANCE === "colors" && "dark-text-color",
                            { disabled: item.isPacked }
                         )}
                      >
@@ -156,6 +162,7 @@ class ItemCard extends React.Component {
                               UI_APPEARANCE === "dark") &&
                               "item-icon-colors-" +
                                  String(item.level % LEVEL_COLORS),
+                           UI_APPEARANCE === "colors" && "item-icon-colors",
                            {
                               clickable: !item.isPacked,
                               disabled: item.isPacked,

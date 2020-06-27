@@ -424,7 +424,11 @@ class ItemList extends React.Component {
                className={classnames(
                   "item-list",
                   UI_APPEARANCE === "light" && "parent-bg-light",
-                  UI_APPEARANCE === "dark" && "parent-bg-dark"
+                  UI_APPEARANCE === "dark" && "parent-bg-dark",
+                  UI_APPEARANCE === "colors" &&
+                     level !== 0 &&
+                     "parent-color-" + String((level - 1) % LEVEL_COLORS),
+                  UI_APPEARANCE === "colors" && level === 0 && "parent-color-0"
                )}
             >
                <div className="container-fluid item-cards-container scroll-fix">
@@ -437,7 +441,12 @@ class ItemList extends React.Component {
                                  (UI_APPEARANCE === "light" ||
                                     UI_APPEARANCE === "dark") &&
                                     "level-text-color-" +
-                                       String((level - 1) % LEVEL_COLORS),
+                                       String(
+                                          (level + LEVEL_COLORS - 1) %
+                                             LEVEL_COLORS
+                                       ),
+                                 UI_APPEARANCE === "colors" &&
+                                    "light-text-color",
                                  {
                                     hidden: this.state.isEditMode,
                                  }
@@ -474,7 +483,10 @@ class ItemList extends React.Component {
                                  "this-bg-light",
                               level !== 0 &&
                                  UI_APPEARANCE === "dark" &&
-                                 "this-bg-dark"
+                                 "this-bg-dark",
+                              level !== 0 &&
+                                 UI_APPEARANCE === "colors" &&
+                                 "level-color-" + String(level % LEVEL_COLORS)
                            )}
                         >
                            <div className={level !== 0 && "card-header"}>
@@ -489,7 +501,9 @@ class ItemList extends React.Component {
                                                    "level-text-color-" +
                                                       String(
                                                          level % LEVEL_COLORS
-                                                      )
+                                                      ),
+                                                UI_APPEARANCE === "colors" &&
+                                                   "dark-text-color"
                                              )}
                                           >
                                              {currentItem.name}
@@ -505,7 +519,9 @@ class ItemList extends React.Component {
                                                       String(
                                                          (level + 1) %
                                                             LEVEL_COLORS
-                                                      )
+                                                      ),
+                                                UI_APPEARANCE === "colors" &&
+                                                   "light-text-color"
                                              )}
                                           >
                                              {currentItem.contentSummaryText}

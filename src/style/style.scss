@@ -37,21 +37,21 @@ html {
 }
 
 // colors for gear cards
-// .level-color-0 {
-//    background-color: map-get($level-colors, 0);
-// }
-// .level-color-1 {
-//    background-color: map-get($level-colors, 1);
-// }
-// .level-color-2 {
-//    background-color: map-get($level-colors, 2);
-// }
-// .level-color-3 {
-//    background-color: map-get($level-colors, 3);
-// }
-// .level-color-4 {
-//    background-color: map-get($level-colors, 4);
-// }
+.level-color-0 {
+   background-color: map-get($level-colors, 0);
+}
+.level-color-1 {
+   background-color: map-get($level-colors, 1);
+}
+.level-color-2 {
+   background-color: map-get($level-colors, 2);
+}
+.level-color-3 {
+   background-color: map-get($level-colors, 3);
+}
+.level-color-4 {
+   background-color: map-get($level-colors, 4);
+}
 
 .parent-bg-light {
    background-color: $parent-bg-light;
@@ -60,27 +60,56 @@ html {
    background-color: $parent-bg-dark;
 }
 
-// .parent-color-0 {
-//    background-color: map-get($parent-colors, 0);
-// }
-// .parent-color-1 {
-//    background-color: map-get($parent-colors, 1);
-// }
-// .parent-color-2 {
-//    background-color: map-get($parent-colors, 2);
-// }
-// .parent-color-3 {
-//    background-color: map-get($parent-colors, 3);
-// }
-// .parent-color-4 {
-//    background-color: map-get($parent-colors, 4);
-// }
+.parent-color-0 {
+   background-color: map-get($parent-colors, 0);
+}
+.parent-color-1 {
+   background-color: map-get($parent-colors, 1);
+}
+.parent-color-2 {
+   background-color: map-get($parent-colors, 2);
+}
+.parent-color-3 {
+   background-color: map-get($parent-colors, 3);
+}
+.parent-color-4 {
+   background-color: map-get($parent-colors, 4);
+}
 
 .child-bg-light {
    background-color: $child-bg-light;
 }
 .child-bg-dark {
    background-color: $child-bg-dark;
+}
+
+.child-color-0 {
+   background-color: map-get($child-colors, 0);
+}
+.child-color-1 {
+   background-color: map-get($child-colors, 1);
+}
+.child-color-2 {
+   background-color: map-get($child-colors, 2);
+}
+.child-color-3 {
+   background-color: map-get($child-colors, 3);
+}
+.child-color-4 {
+   background-color: map-get($child-colors, 4);
+}
+
+// when using "color" ui appearance, this is for the packed icons
+.item-icon-colors {
+   .parent-item {
+      fill: $dark-text-color;
+   }
+   .this-item {
+      fill: $light-text-color;
+   }
+   .child-item {
+      fill: $dark-text-color;
+   }
 }
 
 .item-icon-colors-0 {
@@ -158,6 +187,13 @@ html {
 }
 .level-text-color-4 {
    color: map-get($level-text-colors, 4);
+}
+
+.light-text-color {
+   color: $light-text-color;
+}
+.dark-text-color {
+   color: $dark-text-color;
 }
 
 .item-list {

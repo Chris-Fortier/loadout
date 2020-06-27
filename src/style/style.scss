@@ -64,18 +64,68 @@ html {
 
 .child-color-0 {
    background-color: map-get($child-colors, 0);
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($child-colors, 4);
+   }
+   .this-item {
+      fill: map-get($child-colors, 0);
+   }
+   .child-item {
+      fill: map-get($child-colors, 1);
+   }
 }
 .child-color-1 {
    background-color: map-get($child-colors, 1);
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($child-colors, 0);
+   }
+   .this-item {
+      fill: map-get($child-colors, 1);
+   }
+   .child-item {
+      fill: map-get($child-colors, 2);
+   }
 }
 .child-color-2 {
    background-color: map-get($child-colors, 2);
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($child-colors, 1);
+   }
+   .this-item {
+      fill: map-get($child-colors, 2);
+   }
+   .child-item {
+      fill: map-get($child-colors, 3);
+   }
 }
 .child-color-3 {
    background-color: map-get($child-colors, 3);
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($child-colors, 2);
+   }
+   .this-item {
+      fill: map-get($child-colors, 3);
+   }
+   .child-item {
+      fill: map-get($child-colors, 4);
+   }
 }
 .child-color-4 {
    background-color: map-get($child-colors, 4);
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($child-colors, 3);
+   }
+   .this-item {
+      fill: map-get($child-colors, 4);
+   }
+   .child-item {
+      fill: map-get($child-colors, 0);
+   }
 }
 
 .item-list {
@@ -379,6 +429,8 @@ $iconWidth: 30px;
 .icon {
    width: 1em; //$iconWidth;
 
+   align-self: center;
+
    // margin-top: -4px;
 
    .primary {
@@ -388,6 +440,14 @@ $iconWidth: 30px;
    .secondary {
       fill: rgba(0, 0, 0, 0.75);
    }
+}
+
+.item-card-icon {
+   width: 1.5rem;
+   // background-color: black;
+   // box-shadow: $pack-icon-shadow;
+   -webkit-filter: drop-shadow($pack-icon-shadow);
+   filter: drop-shadow($pack-icon-shadow);
 }
 
 // assign this class to the div around an inline icon
@@ -400,13 +460,19 @@ $iconWidth: 30px;
 }
 
 // assign this class to the div around an inline icon
-.icon-clickable {
+.icon-clickable:not(.disabled) {
    // width: $iconWidth;
-   display: inline-block;
-   border: none;
+   // display: inline-block;
+   // border: none;
    cursor: pointer;
-   background-color: transparent;
-   padding: 0;
+   // background-color: transparent;
+   // padding: 0;
+}
+
+// style for disabled icon buttons
+.icon-disabled {
+   pointer-events: fill !important;
+   cursor: not-allowed;
 }
 
 // assign this class to the div around the text input assuming it has 3 icons on the same line

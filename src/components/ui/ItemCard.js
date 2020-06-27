@@ -5,6 +5,13 @@ import actions from "../../store/actions";
 import { LEVEL_COLORS } from "../../utils/helpers";
 import classnames from "classnames";
 import { IconArrowThinRightCircle } from "../../icons/icons.js";
+import {
+   PackedIcon,
+   ReadyToPackIcon,
+   NotReadyToPackIcon,
+   ChildrenUnpackedIcon,
+   ChildrenPackedIcon,
+} from "../../icons/loadout-icons.js";
 
 class ItemCard extends React.Component {
    // move page to a different item
@@ -58,7 +65,7 @@ class ItemCard extends React.Component {
          >
             {/* <div className="float-left"> */}
             <div className="d-flex">
-               <span
+               {/* <span
                   className={classnames(
                      "custom-control custom-checkbox packed-checkbox-container",
                      { faint: packedBoxIsFaint }
@@ -77,27 +84,63 @@ class ItemCard extends React.Component {
                      className="custom-control-label"
                      htmlFor={"packed-checkbox-" + item.index}
                   ></label>
-               </span>
+               </span> */}
+               {item.isPacked && (
+                  <span className="icon icon-clickable item-card-icon">
+                     <PackedIcon />
+                  </span>
+               )}
+               {!item.isPacked && item.numPackedChildren >= item.numChildren && (
+                  <span className="icon icon-clickable item-card-icon">
+                     <ReadyToPackIcon />
+                  </span>
+               )}
+               {!item.isPacked && item.numPackedChildren < item.numChildren && (
+                  <span className="icon icon-disabled item-card-icon">
+                     <NotReadyToPackIcon />
+                  </span>
+               )}
+               &nbsp;
                <span className="flex-fill item-card-text">{item.name}</span>
                {item.hasOwnProperty("items") && (
-                  <span
-                     onClick={(e) => {
-                        this.movePageToDifferentItem(
-                           this.props.currentLoadout.itemIndexPath.concat([
-                              item.index,
-                           ])
-                        ); // move to current path with the subitem index added on
-                     }}
-                     className={classnames(
-                        "item-card-text button navigation-link packed-counter",
-                        { disabled: counterIsFaint }
-                     )}
-                  >
-                     {item.contentSummaryText}
-                     <span className="icon right">
-                        <IconArrowThinRightCircle />
+                  <>
+                     <span
+                        onClick={(e) => {
+                           this.movePageToDifferentItem(
+                              this.props.currentLoadout.itemIndexPath.concat([
+                                 item.index,
+                              ])
+                           ); // move to current path with the subitem index added on
+                        }}
+                        className={classnames(
+                           "item-card-text button navigation-link packed-counter",
+                           { disabled: counterIsFaint }
+                        )}
+                     >
+                        {item.contentSummaryText}
                      </span>
-                  </span>
+                     &nbsp;
+                     {/* <span className="icon right">
+                        <IconArrowThinRightCircle />
+                     </span> */}
+                     {item.isPacked && (
+                        <span className="icon icon-disabled item-card-icon">
+                           <ChildrenPackedIcon />
+                        </span>
+                     )}
+                     {!item.isPacked &&
+                        item.numPackedChildren >= item.numChildren && (
+                           <span className="icon icon-clickable item-card-icon">
+                              <ChildrenPackedIcon />
+                           </span>
+                        )}
+                     {!item.isPacked &&
+                        item.numPackedChildren < item.numChildren && (
+                           <span className="icon icon-clickable item-card-icon">
+                              <ChildrenUnpackedIcon />
+                           </span>
+                        )}
+                  </>
                )}
             </div>
          </div>

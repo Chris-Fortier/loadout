@@ -60,6 +60,7 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 const LEVEL_COLORS = 5; // the amount of level colors there are
 const MAX_ITEM_NAME_LENGTH = 30; // the maximum length of characters for an item name
 const MOVE_UPDOWN = false; // whether or not to have up and down buttons in edit mode
+const SUBITEM_DISPLAY_MODE = "numUnpackedChildren"; // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants" or "numUnpackedChildren"
 const UI_APPEARANCE = "colors"; // ui appearance mode, "light", "dark", "colors"
 
 export {
@@ -72,5 +73,6 @@ export {
    LEVEL_COLORS,
    MAX_ITEM_NAME_LENGTH,
    MOVE_UPDOWN,
+   SUBITEM_DISPLAY_MODE,
    UI_APPEARANCE,
 };

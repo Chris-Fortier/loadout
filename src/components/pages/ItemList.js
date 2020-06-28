@@ -19,6 +19,7 @@ import {
    // MOVE_UPDOWN,
    MAX_ITEM_NAME_LENGTH,
    LEVEL_COLORS,
+   SUBITEM_DISPLAY_MODE,
    UI_APPEARANCE,
 } from "../../utils/helpers";
 import classnames from "classnames";
@@ -64,14 +65,12 @@ class ItemList extends React.Component {
          isPackedOnBottom: false,
          isEditMode: false,
          isShowingUnpackConfirmation: false,
-
-         subItemDisplayMode: "numUnpackedChildren",
-         // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants" or "numUnpackedChildren"
       };
    }
 
    // methods happen here, such as what happens when you click on a button
 
+   // TODO: duplicated code, how can I put this in a module?
    // this goes through all of an item's descendants and sets derived variables and other stuff
    processItemAndDescendants(item, level = null) {
       let nextLevel = level;
@@ -126,12 +125,10 @@ class ItemList extends React.Component {
       item.numUnpackedChildren = item.numChildren - item.numPackedChildren;
 
       // generate the text that would be displayed to summarize the packed status of the contents of this item
-      if (
-         this.state.subItemDisplayMode === "packedChildrenOutOfTotalChildren"
-      ) {
+      if (SUBITEM_DISPLAY_MODE === "packedChildrenOutOfTotalChildren") {
          item.contentSummaryText =
             item.numPackedChildren + " / " + item.numChildren;
-      } else if (this.state.subItemDisplayMode === "numUnpackedDescendants") {
+      } else if (SUBITEM_DISPLAY_MODE === "numUnpackedDescendants") {
          if (item.numUnpackedDescendants > 0) {
             item.contentSummaryText = item.numUnpackedDescendants + " left";
          } else if (!item.isPacked) {
@@ -139,7 +136,7 @@ class ItemList extends React.Component {
          } else {
             item.contentSummaryText = "";
          }
-      } else if (this.state.subItemDisplayMode === "numUnpackedChildren") {
+      } else if (SUBITEM_DISPLAY_MODE === "numUnpackedChildren") {
          if (item.numUnpackedChildren > 0) {
             item.contentSummaryText = item.numUnpackedChildren + " left";
          } else if (!item.isPacked) {
@@ -169,6 +166,7 @@ class ItemList extends React.Component {
 
       this.forceUpdate();
    }
+   // end duplicated code
 
    // roll out a dialog for unpacking an item's contents
    rolloutUnpackConfirmation() {

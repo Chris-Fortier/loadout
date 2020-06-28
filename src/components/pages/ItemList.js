@@ -61,7 +61,7 @@ class ItemList extends React.Component {
 
       this.state = {
          isShowingPacked: true,
-         isPackedOnBottom: true,
+         isPackedOnBottom: false,
          isEditMode: false,
          isShowingUnpackConfirmation: false,
 

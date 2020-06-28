@@ -793,7 +793,8 @@ $iconWidth: 30px;
 // disable annoying selection of text on certain kinds of elements that the user might click on
 // https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
 label,
-.button {
+.button,
+.clickable {
    -webkit-touch-callout: none; /* iOS Safari */
    -webkit-user-select: none; /* Safari */
    -khtml-user-select: none; /* Konqueror HTML */

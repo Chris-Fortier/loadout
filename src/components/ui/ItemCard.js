@@ -30,23 +30,52 @@ class ItemCard extends React.Component {
    }
 
    // toggle the packed status of this item
-   toggleIsPacked() {
-      if (
-         !this.props.item.isPacked &&
-         this.props.item.numPackedChildren === this.props.item.numChildren
-      ) {
-         console.log("packing " + this.props.item.name);
-      } else if (this.props.item.isPacked) {
-         console.log("unpacking " + this.props.item.name);
-      }
+   toggleIsPacked(itemIndexPath) {
+      console.log("toggleIsPacked()...");
+      // if (
+      //    !this.props.item.isPacked &&
+      //    this.props.item.numPackedChildren === this.props.item.numChildren
+      // ) {
+      //    console.log("packing " + this.props.item.name);
+      // } else if (this.props.item.isPacked) {
+      //    console.log("unpacking " + this.props.item.name);
+      // }
 
       // this.hideUnpackConfirmation();
+
+      // only toggle packed if all its descendants are packed
+      if (this.props.item.numPackedChildren === this.props.item.numChildren) {
+         // copyOfGear.lastChange = "test hello";
+         console.log("itemIndexPath:", itemIndexPath);
+
+         // get the actual item I want to change based on the index path
+         let copyOfGear = this.props.currentLoadout.gear;
+         let currentItem = copyOfGear;
+         for (let i in itemIndexPath) {
+            currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
+         }
+         console.log("name of target item:", currentItem.name);
+
+         // copyOfGear.items[0].items[1].isPacked = !copyOfGear.items[0].items[1]
+         //    .isPacked;
+         currentItem.isPacked = !currentItem.isPacked;
+
+         // put the data back into the store
+         this.props.dispatch({
+            type: actions.STORE_CURRENT_LOADOUT,
+            payload: copyOfGear,
+         });
+      }
    }
 
    render() {
       let counterIsFaint = true;
       let packedBoxIsFaint = false;
       const item = this.props.item; // this is to simplify code below
+
+      let thisItemPath = this.props.currentLoadout.itemIndexPath.concat([
+         item.index,
+      ]); // stores the complete index path to the item referred to on this item card
 
       // do this if this item has subitems
       if (item.hasOwnProperty("items")) {
@@ -102,6 +131,9 @@ class ItemCard extends React.Component {
                         disabled: item.numPackedChildren < item.numChildren,
                      }
                   )}
+                  onClick={(e) => {
+                     this.toggleIsPacked(thisItemPath);
+                  }}
                >
                   {item.isPacked && <PackedIcon />}
                   {!item.isPacked &&
@@ -127,6 +159,9 @@ class ItemCard extends React.Component {
                         clickable: item.numPackedChildren === item.numChildren,
                         disabled: item.numPackedChildren < item.numChildren,
                      })}
+                     onClick={(e) => {
+                        this.toggleIsPacked(thisItemPath);
+                     }}
                   >
                      &nbsp;&nbsp;{item.name}
                   </span>
@@ -136,11 +171,7 @@ class ItemCard extends React.Component {
                      <span
                         onClick={(e) => {
                            !item.isPacked &&
-                              this.movePageToDifferentItem(
-                                 this.props.currentLoadout.itemIndexPath.concat(
-                                    [item.index]
-                                 )
-                              ); // move to current path with the subitem index added on
+                              this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                         className={classnames(
                            "button navigation-link item-card-text",
@@ -170,11 +201,7 @@ class ItemCard extends React.Component {
                         )}
                         onClick={(e) => {
                            !item.isPacked &&
-                              this.movePageToDifferentItem(
-                                 this.props.currentLoadout.itemIndexPath.concat(
-                                    [item.index]
-                                 )
-                              ); // move to current path with the subitem index added on
+                              this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                      >
                         {item.isPacked && <ChildrenPackedIcon />}

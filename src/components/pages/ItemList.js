@@ -46,10 +46,10 @@ class ItemList extends React.Component {
                // handle success
                // res is shorthand for response
                console.log(res);
-               props.dispatch({
-                  type: actions.STORE_CURRENT_LOADOUT,
-                  payload: res.data,
-               }); // dispatching an action
+               // props.dispatch({
+               //    type: actions.STORE_CURRENT_LOADOUT,
+               //    payload: res.data,
+               // }); // dispatching an action
                processAllItems(res.data); // initial processing of items that creates derived properties
                // res.data is the data from the response
             })
@@ -310,10 +310,10 @@ class ItemList extends React.Component {
       }
 
       // put the data back into the store
-      this.props.dispatch({
-         type: actions.STORE_CURRENT_LOADOUT,
-         payload: copyOfGear,
-      });
+      // this.props.dispatch({
+      //    type: actions.STORE_CURRENT_LOADOUT,
+      //    payload: copyOfGear,
+      // });
 
       processAllItems(this.props.currentLoadout.gear);
    }

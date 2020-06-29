@@ -66,10 +66,10 @@ class ItemCard extends React.Component {
          currentItem.isPacked = !currentItem.isPacked;
 
          // put the data back into the store
-         this.props.dispatch({
-            type: actions.STORE_CURRENT_LOADOUT,
-            payload: copyOfGear,
-         });
+         // this.props.dispatch({
+         //    type: actions.STORE_CURRENT_LOADOUT,
+         //    payload: copyOfGear,
+         // });
 
          processAllItems(this.props.currentLoadout.gear);
       }

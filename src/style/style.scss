@@ -377,7 +377,9 @@ body {
 
    margin-top: $item-card-spacing/2; // for space between card sections and buttons
    margin-bottom: $item-card-spacing/2; // for space between card sections and buttons
-   // display: inline-block;
+
+   display: inline-block; // make it so multiple cards appear on the same row in larger widths
+   width: 100%; // base size in small widths
 }
 .item-card:first-child {
    margin-top: 0;

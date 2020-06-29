@@ -238,30 +238,43 @@ class ItemList extends React.Component {
    }
 
    confirmUnpackDescendants() {
-      this.unpackDescendants(this.getItemFromStore()); // unpack all descendants of the current item
+      this.unpackDescendants(this.props.currentLoadout.itemIndexPath); // unpack all descendants of the current item
+
+      // put the data back into the store
+      this.props.dispatch({
+         type: actions.STORE_CURRENT_LOADOUT,
+         payload: this.props.currentLoadout.gear,
+      });
+
+      this.processAllItems();
+
       this.hideUnpackConfirmation(); // close the message
    }
 
    confirmUnpackChildren() {
-      this.unpackChildren(this.getItemFromStore()); // unpack all descendants of the current item
+      this.unpackChildren(this.props.currentLoadout.itemIndexPath); // unpack all descendants of the current item
       this.hideUnpackConfirmation(); // close the message
    }
 
-   // // show the unpack all confirmation
-   // showUnpackConfirmation() {
-   //    this.setState({ isShowingUnpackConfirmation: true });
-   // }
+   // show the unpack all confirmation
+   showUnpackConfirmation() {
+      this.setState({ isShowingUnpackConfirmation: true });
+      // console.log("window.scrollHeight:", window.scrollHeight);
+      // window.scrollTop = window.scrollHeight; // sets focus to the top of the page
+   }
 
-   // // hide the unpack all confirmation
-   // hideUnpackConfirmation() {
-   //    this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
-   // }
+   // hide the unpack all confirmation
+   hideUnpackConfirmation() {
+      this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
+   }
 
    // hide the unpack all confirmation
    toggleUnpackRollout() {
-      this.setState({
-         isShowingUnpackConfirmation: !this.state.isShowingUnpackConfirmation,
-      }); // hide the unpack menu if it's open
+      if (this.state.isShowingUnpackConfirmation) {
+         this.hideUnpackConfirmation();
+      } else if (!this.state.isShowingUnpackConfirmation) {
+         this.showUnpackConfirmation();
+      }
    }
 
    // return the current item from state based on an itemIndexPath
@@ -321,8 +334,8 @@ class ItemList extends React.Component {
    }
 
    // this unpacks all a given item's children and all their descendants
-   unpackDescendants(item) {
-      console.log("Unpacking the descendants of " + item.name);
+   unpackDescendants(itemIndexPath) {
+      console.log("unpackDescendants()...");
       // console.log("unpacking", item.name);
       // for (let i in item.items) {
       //    item.items[i].isPacked = false;
@@ -332,17 +345,65 @@ class ItemList extends React.Component {
       //    }
       // }
       // this.setState({ currentItem: item });
+
+      console.log("itemIndexPath", itemIndexPath);
+
+      // get the actual item I want to change based on the index path
+      let copyOfGear = this.props.currentLoadout.gear;
+      let currentItem = copyOfGear;
+      for (let i in itemIndexPath) {
+         currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
+      }
+      console.log("name of target item:", currentItem.name);
+
+      // copyOfGear.items[0].items[1].isPacked = !copyOfGear.items[0].items[1]
+      //    .isPacked;
+      for (let childIndex in currentItem.items) {
+         currentItem.items[childIndex].isPacked = false;
+         if (currentItem.items[childIndex].hasOwnProperty("items")) {
+            // unpack all this item's items and so on
+            // console.log("childIndex:", childIndex);
+            // console.log("itemIndexPath:", itemIndexPath);
+            // const newItemIndexPath = itemIndexPath.push(childIndex);
+            // console.log("newItemIndexPath:", newItemIndexPath);
+            this.unpackDescendants([...itemIndexPath, childIndex]);
+         }
+      }
    }
 
    // this unpacks all a given item's children
-   unpackChildren(item) {
-      console.log("Unpacking the children of " + item.name);
+   unpackChildren(itemIndexPath) {
+      console.log("unpackChildren()...");
+      console.log("itemIndexPath", itemIndexPath);
+      // console.log("Unpacking the children of " + item.name);
       // the item parameter is the item that we are unpacking all the children of
       // console.log("unpacking", item.name);
       // for (let i in item.items) {
       //    item.items[i].isPacked = false;
       // }
       // this.setState({ currentItem: item });
+
+      // get the actual item I want to change based on the index path
+      let copyOfGear = this.props.currentLoadout.gear;
+      let currentItem = copyOfGear;
+      for (let i in itemIndexPath) {
+         currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
+      }
+      console.log("name of target item:", currentItem.name);
+
+      // copyOfGear.items[0].items[1].isPacked = !copyOfGear.items[0].items[1]
+      //    .isPacked;
+      for (let childIndex in currentItem.items) {
+         currentItem.items[childIndex].isPacked = false;
+      }
+
+      // put the data back into the store
+      this.props.dispatch({
+         type: actions.STORE_CURRENT_LOADOUT,
+         payload: copyOfGear,
+      });
+
+      this.processAllItems();
    }
 
    // sets the name of the current item (the item which the entire page is currently the focus of)
@@ -361,11 +422,11 @@ class ItemList extends React.Component {
 
       let displayedItems = []; // initialize a new list for displayed items
 
-      // displayedItems = orderBy(items, "name", "asc"); // sort the items by name
-      displayedItems = items;
+      displayedItems = orderBy(items, "name", "asc"); // sort the items by name
+      // displayedItems = items;
 
       // order by which items have the most unpacked subitems
-      displayedItems = orderBy(displayedItems, "numUnpackedDescendants", "asc");
+      // displayedItems = orderBy(displayedItems, "numUnpackedDescendants", "asc");
 
       // sort the items by packed status if desired, with packed items on bottom
       if (this.state.isPackedOnBottom) {
@@ -379,6 +440,7 @@ class ItemList extends React.Component {
          ); // keep only the unpacked items
       }
 
+      console.log("displayedItems:", displayedItems);
       // render each sub item
 
       if (this.state.isEditMode) {

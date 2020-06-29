@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../ui/Header";
 import orderBy from "lodash/orderBy";
 import {
-   // IconEdit,
+   IconEdit,
    // IconCog,
    // IconAddCircle,
    // IconArrowThickUpCircle,
@@ -464,7 +464,14 @@ class ItemList extends React.Component {
                                     ); // move to current path with the last part removed to go up a level
                                  }}
                               >
-                                 <div className="icon left">
+                                 <div
+                                    className={classnames(
+                                       "icon left",
+                                       UI_APPEARANCE === "colors" &&
+                                          "icon-light",
+                                       UI_APPEARANCE !== "colors" && "icon"
+                                    )}
+                                 >
                                     <IconArrowThinLeftCircle />
                                  </div>
                                  Back to {currentItem.parentName}
@@ -557,36 +564,9 @@ class ItemList extends React.Component {
 
                               <div className="row">
                                  <div className="col">
-                                    {!this.state.isEditMode && level !== 0 && (
-                                       <>
-                                          <div
-                                             className={classnames(
-                                                "card-section",
-                                                {
-                                                   disabled:
-                                                      currentItem.numPackedDescendants ===
-                                                      0,
-                                                }
-                                             )}
-                                          >
-                                             <span
-                                                className="button navigation-link w-100"
-                                                onClick={() =>
-                                                   this.toggleUnpackRollout()
-                                                }
-                                             >
-                                                Unpack...
-                                             </span>
-                                             {this.state
-                                                .isShowingUnpackConfirmation &&
-                                                this.rolloutUnpackConfirmation()}
-                                          </div>
-                                       </>
-                                    )}
-
-                                    {this.state.isEditMode && (
+                                    {level === 1 && (
                                        <Link
-                                          className="up-level navigation-link"
+                                          className="button navigation-link dark-text-color d-block"
                                           to="/loadout-sharing"
                                        >
                                           <div className="icon left">
@@ -596,29 +576,19 @@ class ItemList extends React.Component {
                                        </Link>
                                     )}
 
-                                    <div className="custom-control custom-switch float-right">
-                                       <input
-                                          type="checkbox"
-                                          className="custom-control-input display-switch-label"
-                                          id={
-                                             "edit-mode-switch" +
-                                             currentItem.name
-                                          }
-                                          checked={this.state.isEditMode}
-                                          onChange={(e) => {
+                                    {level > 0 && (
+                                       <div
+                                          className="button navigation-link dark-text-color d-block"
+                                          onClick={(e) => {
                                              this.toggleEditMode(e);
                                           }}
-                                       />
-                                       <label
-                                          className="custom-control-label display-switch-label"
-                                          htmlFor={
-                                             "edit-mode-switch" +
-                                             currentItem.name
-                                          }
                                        >
-                                          Edit Mode
-                                       </label>
-                                    </div>
+                                          <div className="icon left">
+                                             <IconEdit />
+                                          </div>
+                                          Edit Loadout
+                                       </div>
+                                    )}
                                  </div>
                               </div>
                            </div>
@@ -628,6 +598,29 @@ class ItemList extends React.Component {
                                     {this.renderContainingItems(currentItem)}
                                  </div>
                               </div>
+                              {!this.state.isEditMode && level !== 0 && (
+                                 <>
+                                    <div
+                                       className={classnames("card-section", {
+                                          disabled:
+                                             currentItem.numPackedDescendants ===
+                                             0,
+                                       })}
+                                    >
+                                       <span
+                                          className="button navigation-link w-100"
+                                          onClick={() =>
+                                             this.toggleUnpackRollout()
+                                          }
+                                       >
+                                          Unpack...
+                                       </span>
+                                       {this.state
+                                          .isShowingUnpackConfirmation &&
+                                          this.rolloutUnpackConfirmation()}
+                                    </div>
+                                 </>
+                              )}
                            </div>
                         </div>
                      </div>

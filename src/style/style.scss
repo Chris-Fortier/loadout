@@ -285,6 +285,10 @@ body {
 
    // background-color: rgba(0, 0, 0, 0.03)
    background-color: rgba(0, 0, 0, 0.06); // make more noticable
+
+   h4 {
+      margin-top: 0; // cancels the margin on top of an h4 if its in a card header
+   }
 }
 
 // .rootPaddingFix {
@@ -351,7 +355,7 @@ body {
    // border-radius: 0.25rem; // Bootstrap default
    border: 2px solid rgba(0, 0, 0, 0.25);
    border-radius: 6px; // make more noticable
-   margin-bottom: $item-card-spacing; // space between item cards
+   // margin-bottom: $item-card-spacing; // space between item cards
 
    padding: 5px;
 
@@ -370,6 +374,16 @@ body {
    .button {
       margin: 0;
    }
+
+   margin-top: $item-card-spacing/2; // for space between card sections and buttons
+   margin-bottom: $item-card-spacing/2; // for space between card sections and buttons
+   // display: inline-block;
+}
+.item-card:first-child {
+   margin-top: 0;
+}
+.item-card:last-child {
+   margin-bottom: 0;
 }
 
 // for loadout level cards
@@ -467,7 +481,7 @@ body {
    .card-header,
    .card-body {
       padding: $item-card-spacing;
-      padding-bottom: 0px;
+      // padding-bottom: 0px;
    }
 }
 
@@ -526,6 +540,7 @@ h4 {
    text-transform: capitalize; // makes first letter of each word uppercase
    color: rgba(255, 255, 255, 0.8);
    line-height: 0.9; // makes the title tighter if it used multiple lines
+   margin-top: 0.5em;
 }
 
 // this is for the titles of the landing page cards
@@ -592,6 +607,21 @@ $iconWidth: 30px;
 
    .secondary {
       fill: rgba(0, 0, 0, 0.75);
+   }
+}
+
+// size and color of icons
+.icon-light {
+   width: 1em; //$iconWidth;
+
+   align-self: center;
+
+   .primary {
+      fill: rgba(255, 255, 255, 0.25);
+   }
+
+   .secondary {
+      fill: rgba(255, 255, 255, 0.75);
    }
 }
 
@@ -673,8 +703,8 @@ $iconWidth: 30px;
 // }
 
 .card-section {
-   margin-top: $space-between-sections; // for space between card sections and buttons
-   margin-bottom: $space-between-sections; // for space between card sections and buttons
+   margin-top: $space-between-sections/2; // for space between card sections and buttons
+   margin-bottom: $space-between-sections/2; // for space between card sections and buttons
    border: $outline-style;
    background: none;
    padding: $card-section-padding;
@@ -690,8 +720,8 @@ $iconWidth: 30px;
 }
 
 .my-input {
-   margin-top: $space-between-button-rows; // for space between card sections and buttons
-   margin-bottom: $space-between-button-rows; // for space between card sections and buttons
+   margin-top: $space-between-button-rows/2; // for space between card sections and buttons
+   margin-bottom: $space-between-button-rows/2; // for space between card sections and buttons
    background-color: rgba(255, 255, 255, 0.75);
    width: 100%;
    padding: 6px;
@@ -722,8 +752,8 @@ $iconWidth: 30px;
 
 // common to all my buttons
 .button {
-   margin-top: $space-between-button-rows; // for space between card sections and buttons
-   margin-bottom: $space-between-button-rows; // for space between card sections and buttons
+   margin-top: $space-between-button-rows/2; // for space between card sections and buttons
+   margin-bottom: $space-between-button-rows/2; // for space between card sections and buttons
    display: inline-block;
 }
 .button:first-child {

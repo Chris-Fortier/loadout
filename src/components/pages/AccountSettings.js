@@ -65,7 +65,7 @@ class AccountSettings extends React.Component {
                            <h5>chris@gmail.com</h5>
                            <div className="card-section">
                               <span
-                                 className="button navigation-link"
+                                 className="button navigation-link w-100"
                                  onClick={() => this.toggleEmailRollout()}
                               >
                                  Change Your Email
@@ -109,7 +109,7 @@ class AccountSettings extends React.Component {
                            </div>
                            <div className="card-section">
                               <span
-                                 className="button navigation-link"
+                                 className="button navigation-link w-100"
                                  onClick={() => this.togglePasswordRollout()}
                               >
                                  Change Your Password
@@ -154,7 +154,7 @@ class AccountSettings extends React.Component {
                            </div>
                            <div className="card-section">
                               <span
-                                 className="button navigation-link"
+                                 className="button navigation-link w-100"
                                  onClick={() => this.toggleDeleteRollout()}
                               >
                                  Delete Your Account

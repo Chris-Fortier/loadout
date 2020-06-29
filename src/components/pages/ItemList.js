@@ -570,7 +570,7 @@ class ItemList extends React.Component {
                                              )}
                                           >
                                              <span
-                                                className="button navigation-link"
+                                                className="button navigation-link w-100"
                                                 onClick={() =>
                                                    this.toggleUnpackRollout()
                                                 }

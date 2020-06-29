@@ -91,8 +91,14 @@ html {
 .child-bg-light {
    background-color: $child-bg-light;
 }
+.child-bg-light-packed {
+   background-color: $child-bg-light-packed;
+}
 .child-bg-dark {
    background-color: $child-bg-dark;
+}
+.child-bg-dark-packed {
+   background-color: $child-bg-dark-packed;
 }
 
 .child-color-0 {
@@ -115,6 +121,28 @@ html {
 }
 .child-color-6 {
    background-color: map-get($child-colors, 6);
+}
+
+.packed-color-0 {
+   background-color: map-get($packed-colors, 0);
+}
+.packed-color-1 {
+   background-color: map-get($packed-colors, 1);
+}
+.packed-color-2 {
+   background-color: map-get($packed-colors, 2);
+}
+.packed-color-3 {
+   background-color: map-get($packed-colors, 3);
+}
+.packed-color-4 {
+   background-color: map-get($packed-colors, 4);
+}
+.packed-color-5 {
+   background-color: map-get($packed-colors, 5);
+}
+.packed-color-6 {
+   background-color: map-get($packed-colors, 6);
 }
 
 // when using "color" ui appearance, this is for the packed icons

@@ -196,11 +196,30 @@ class ItemCard extends React.Component {
             className={classnames(
                level > 1 && "item-card",
                level <= 1 && "loadout-card",
-               UI_APPEARANCE === "light" && level > 1 && "child-bg-light",
-               UI_APPEARANCE === "dark" && level > 1 && "child-bg-dark",
+               UI_APPEARANCE === "light" &&
+                  level > 1 &&
+                  !item.isPacked &&
+                  "child-bg-light",
+               UI_APPEARANCE === "light" &&
+                  level > 1 &&
+                  item.isPacked &&
+                  "child-bg-light-packed",
+               UI_APPEARANCE === "dark" &&
+                  level > 1 &&
+                  !item.isPacked &&
+                  "child-bg-dark",
+               UI_APPEARANCE === "dark" &&
+                  level > 1 &&
+                  item.isPacked &&
+                  "child-bg-dark-packed",
                UI_APPEARANCE === "colors" &&
                   level > 1 &&
-                  "child-color-" + String(level % LEVEL_COLORS)
+                  !item.isPacked &&
+                  "child-color-" + String(level % LEVEL_COLORS),
+               UI_APPEARANCE === "colors" &&
+                  level > 1 &&
+                  item.isPacked &&
+                  "packed-color-" + String(level % LEVEL_COLORS)
             )}
             id={"item-card-" + item.index}
          >

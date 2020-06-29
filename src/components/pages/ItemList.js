@@ -514,7 +514,7 @@ class ItemList extends React.Component {
                                              {currentItem.name}
                                           </h4>
                                        </div>
-                                       {level > 1 && (
+                                       {level > 0 && (
                                           <div className="col">
                                              <h4
                                                 className={classnames(

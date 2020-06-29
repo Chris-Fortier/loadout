@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // a React element for linking
+// import { Link } from "react-router-dom"; // a React element for linking
 import classnames from "classnames";
 import {
    // IconEdit,
@@ -13,7 +13,7 @@ import {
    // IconTrash,
    // IconChevronDown,
    // IconChevronUp,
-   IconUserCouple,
+   // IconUserCouple,
 } from "../../icons/icons.js";
 
 export default function StyleTester() {

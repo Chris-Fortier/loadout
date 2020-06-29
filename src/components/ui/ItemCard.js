@@ -8,7 +8,7 @@ import {
    UI_APPEARANCE,
 } from "../../utils/helpers";
 import classnames from "classnames";
-import { IconArrowThinRightCircle } from "../../icons/icons.js";
+// import { IconArrowThinRightCircle } from "../../icons/icons.js";
 import {
    PackedIcon,
    ReadyToPackIcon,
@@ -173,8 +173,8 @@ class ItemCard extends React.Component {
    }
 
    render() {
-      let counterIsFaint = true;
-      let packedBoxIsFaint = false;
+      // let counterIsFaint = true;
+      // let packedBoxIsFaint = false;
       const item = this.props.item; // this is to simplify code below
       let level = item.level;
 
@@ -183,13 +183,13 @@ class ItemCard extends React.Component {
       ]); // stores the complete index path to the item referred to on this item card
 
       // do this if this item has subitems
-      if (item.hasOwnProperty("items")) {
-         // this will make the checkboxes disabled for items that don't have all their containing items packed
-         if (item.numPackedChildren < item.numChildren) {
-            counterIsFaint = false;
-            packedBoxIsFaint = true;
-         }
-      }
+      // if (item.hasOwnProperty("items")) {
+      //    // this will make the checkboxes disabled for items that don't have all their containing items packed
+      //    if (item.numPackedChildren < item.numChildren) {
+      //       counterIsFaint = false;
+      //       packedBoxIsFaint = true;
+      //    }
+      // }
 
       return (
          <div

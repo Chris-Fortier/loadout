@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // a React element for linking
+// import { Link } from "react-router-dom"; // a React element for linking
 import { EMAIL_REGEX } from "../../utils/helpers";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";

@@ -95,7 +95,7 @@ export default function StyleTester() {
                            ); // move to current path with the last part removed to go up a level
                         }}
                      >
-                        <div className="icon left">
+                        <div className="icon-dark left">
                            <IconArrowThinLeftCircle />
                         </div>
                         Back to Page

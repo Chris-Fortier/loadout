@@ -228,7 +228,11 @@ class ItemList extends React.Component {
             )}
 
             <div
-               className="button navigation-link"
+               className={classnames(
+                  "button navigation-link",
+                  UI_APPEARANCE === "dark" && "light-text-color",
+                  UI_APPEARANCE !== "dark" && "dark-text-color"
+               )}
                onClick={() => this.toggleUnpackRollout()}
             >
                Cancel
@@ -315,6 +319,11 @@ class ItemList extends React.Component {
       this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
 
       window.scrollTo(0, 0); // sets focus to the top of the page
+   }
+
+   // open the loadout sharing settings (made this a function to avoid styling assosicated with Link)
+   gotoSharing() {
+      this.props.history.push("/loadout-sharing");
    }
 
    // toggle show packed items
@@ -528,10 +537,10 @@ class ItemList extends React.Component {
                               >
                                  <div
                                     className={classnames(
-                                       "icon left",
+                                       "icon-dark left",
                                        UI_APPEARANCE === "colors" &&
                                           "icon-light",
-                                       UI_APPEARANCE !== "colors" && "icon"
+                                       UI_APPEARANCE !== "colors" && "icon-dark"
                                     )}
                                  >
                                     <IconArrowThinLeftCircle />
@@ -548,7 +557,7 @@ class ItemList extends React.Component {
                            </div>
                         )} */}
 
-                        {/* <img src={iconEdit} className="icon" /> */}
+                        {/* <img src={iconEdit} className="icon-dark" /> */}
                         <div
                            className={classnames(
                               level > 1 && "card super-item-card",
@@ -627,25 +636,56 @@ class ItemList extends React.Component {
                               <div className="row">
                                  <div className="col">
                                     {level === 1 && (
-                                       <Link
-                                          className="button navigation-link dark-text-color d-block"
-                                          to="/loadout-sharing"
+                                       <div
+                                          className={classnames(
+                                             "button navigation-link d-block",
+                                             UI_APPEARANCE === "dark" &&
+                                                "light-text-color",
+                                             UI_APPEARANCE !== "dark" &&
+                                                "dark-text-color"
+                                          )}
+                                          // to="/loadout-sharing"
+                                          onClick={(e) => {
+                                             this.gotoSharing(e);
+                                          }}
                                        >
-                                          <div className="icon left">
+                                          <div
+                                             className={classnames(
+                                                "left",
+                                                UI_APPEARANCE === "dark" &&
+                                                   "icon-light",
+                                                UI_APPEARANCE !== "dark" &&
+                                                   "icon-dark"
+                                             )}
+                                          >
                                              <IconUserCouple />
                                           </div>
                                           Loadout Sharing Settings
-                                       </Link>
+                                       </div>
                                     )}
 
                                     {level > 0 && (
                                        <div
-                                          className="button navigation-link dark-text-color d-block"
+                                          className={classnames(
+                                             "button navigation-link d-block",
+                                             UI_APPEARANCE === "dark" &&
+                                                "light-text-color",
+                                             UI_APPEARANCE !== "dark" &&
+                                                "dark-text-color"
+                                          )}
                                           onClick={(e) => {
                                              this.toggleEditMode(e);
                                           }}
                                        >
-                                          <div className="icon left">
+                                          <div
+                                             className={classnames(
+                                                "left",
+                                                UI_APPEARANCE === "dark" &&
+                                                   "icon-light",
+                                                UI_APPEARANCE !== "dark" &&
+                                                   "icon-dark"
+                                             )}
+                                          >
                                              <IconEdit />
                                           </div>
                                           Edit Loadout
@@ -670,7 +710,13 @@ class ItemList extends React.Component {
                                        })}
                                     >
                                        <span
-                                          className="button navigation-link w-100"
+                                          className={classnames(
+                                             "button navigation-link w-100",
+                                             UI_APPEARANCE === "dark" &&
+                                                "light-text-color",
+                                             UI_APPEARANCE !== "dark" &&
+                                                "dark-text-color"
+                                          )}
                                           onClick={() =>
                                              this.toggleUnpackRollout()
                                           }

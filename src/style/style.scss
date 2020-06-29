@@ -624,7 +624,7 @@ h5 {
 $iconWidth: 30px;
 
 // size and color of icons
-.icon {
+.icon-dark {
    width: 1em; //$iconWidth;
 
    align-self: center;
@@ -647,11 +647,11 @@ $iconWidth: 30px;
    align-self: center;
 
    .primary {
-      fill: rgba(255, 255, 255, 0.25);
+      fill: $light-text-color;
    }
 
    .secondary {
-      fill: rgba(255, 255, 255, 0.75);
+      fill: $light-text-color-dim;
    }
 }
 
@@ -704,13 +704,15 @@ $iconWidth: 30px;
 // }
 
 // for icons at the right of the line
-.icon.right {
+.icon-dark.right,
+.icon-light.left {
    float: right;
    margin-left: 4px;
 }
 
 // for icons at the left of the line
-.icon.left {
+.icon-dark.left,
+.icon-light.left {
    float: left;
    margin-right: 4px;
 }

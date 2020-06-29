@@ -56,7 +56,7 @@ class ItemCardEdit extends React.Component {
                   />
                </span>
                <button
-                  className="clickable icon"
+                  className="clickable icon-dark"
                   id={"delete-item-" + item.index}
                   onClick={() => this.deleteItem(item.index)}
                >

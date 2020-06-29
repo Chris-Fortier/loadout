@@ -28,7 +28,7 @@ class LoadoutSharing extends React.Component {
                            className="up-level navigation-link"
                            to="/loadout"
                         >
-                           <div className="icon left">
+                           <div className="icon-dark left">
                               <IconArrowThinLeftCircle />
                            </div>
                            Back to Loadout
@@ -151,7 +151,7 @@ class LoadoutSharing extends React.Component {
                                                 </td>
                                                 <td>
                                                    <button
-                                                      className="clickable icon"
+                                                      className="clickable icon-dark"
                                                       id={
                                                          "delete-shared-user-" +
                                                          1

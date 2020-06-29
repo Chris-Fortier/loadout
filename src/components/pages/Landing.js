@@ -336,7 +336,7 @@ class Landing extends React.Component {
                   className="button navigation-link"
                   onClick={() => this.setNewAccountMode()}
                >
-                  <span className="icon left">
+                  <span className="icon-dark left">
                      <IconUserAdd />
                   </span>
                   &nbsp;Make a New Account
@@ -357,13 +357,13 @@ class Landing extends React.Component {
          <div className="card mb-3">
             <div className="card-body">
                <h5>
-                  <span className="icon left">
+                  <span className="icon-dark left">
                      <IconUserAdd />
                   </span>
                   Sign Up
                </h5>
                {/* <p>
-                  <span className="icon left">
+                  <span className="icon-dark left">
                      <IconUserAdd />
                   </span>
                   Make a New Account

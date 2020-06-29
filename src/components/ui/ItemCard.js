@@ -326,7 +326,7 @@ class ItemCard extends React.Component {
 
                      <span
                         className={classnames(
-                           "icon item-card-icon",
+                           "icon-dark item-card-icon",
                            (UI_APPEARANCE === "light" ||
                               UI_APPEARANCE === "dark") &&
                               "item-icon-colors-" +

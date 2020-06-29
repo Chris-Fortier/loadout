@@ -203,10 +203,34 @@
                            "isPacked": false,
                            "items": [
                               {
-                                 "name": "test",
+                                 "name": "test5",
                                  "id": "5e445ea5-003a-411e-bb40-f46d8a4ba950",
                                  "parentId": "b8a3f524-f2e2-490c-8bce-ffbb3ea846ff",
-                                 "isPacked": false
+                                 "isPacked": true,
+                                 "items": [
+                                    {
+                                       "name": "test6",
+                                       "id": "7c27fcaf-1bed-46c4-af34-860de2891dfb",
+                                       "parentId": "5e445ea5-003a-411e-bb40-f46d8a4ba950",
+                                       "isPacked": true,
+                                       "items": [
+                                          {
+                                             "name": "test7",
+                                             "id": "214f1ca1-67df-48fc-90e9-ab7df490edbb",
+                                             "parentId": "7c27fcaf-1bed-46c4-af34-860de2891dfb",
+                                             "isPacked": true,
+                                             "items": [
+                                                {
+                                                   "name": "test8",
+                                                   "id": "3ed618d2-d430-402b-8f37-9a9d5b6dc327",
+                                                   "parentId": "214f1ca1-67df-48fc-90e9-ab7df490edbb",
+                                                   "isPacked": true
+                                                }
+                                             ]
+                                          }
+                                       ]
+                                    }
+                                 ]
                               }
                            ]
                         },

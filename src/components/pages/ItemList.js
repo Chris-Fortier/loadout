@@ -148,10 +148,10 @@ class ItemList extends React.Component {
       this.unpackDescendants(this.props.currentLoadout.itemIndexPath); // unpack all descendants of the current item
 
       // put the data back into the store
-      this.props.dispatch({
-         type: actions.STORE_CURRENT_LOADOUT,
-         payload: this.props.currentLoadout.gear,
-      });
+      // this.props.dispatch({
+      //    type: actions.STORE_CURRENT_LOADOUT,
+      //    payload: this.props.currentLoadout.gear,
+      // });
 
       processAllItems(this.props.currentLoadout.gear);
 

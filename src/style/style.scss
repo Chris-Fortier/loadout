@@ -52,6 +52,12 @@ html {
 .level-color-4 {
    background-color: map-get($level-colors, 4);
 }
+.level-color-5 {
+   background-color: map-get($level-colors, 5);
+}
+.level-color-6 {
+   background-color: map-get($level-colors, 6);
+}
 
 .parent-bg-light {
    background-color: $parent-bg-light;
@@ -74,6 +80,12 @@ html {
 }
 .parent-color-4 {
    background-color: map-get($parent-colors, 4);
+}
+.parent-color-5 {
+   background-color: map-get($parent-colors, 5);
+}
+.parent-color-6 {
+   background-color: map-get($parent-colors, 6);
 }
 
 .child-bg-light {
@@ -98,6 +110,12 @@ html {
 .child-color-4 {
    background-color: map-get($child-colors, 4);
 }
+.child-color-5 {
+   background-color: map-get($child-colors, 5);
+}
+.child-color-6 {
+   background-color: map-get($child-colors, 6);
+}
 
 // when using "color" ui appearance, this is for the packed icons
 .item-icon-colors {
@@ -115,7 +133,7 @@ html {
 .item-icon-colors-0 {
    // colors for the packing icons
    .parent-item {
-      fill: map-get($level-text-colors, 4);
+      fill: map-get($level-text-colors, 6);
    }
    .this-item {
       fill: map-get($level-text-colors, 0);
@@ -169,6 +187,30 @@ html {
       fill: map-get($level-text-colors, 4);
    }
    .child-item {
+      fill: map-get($level-text-colors, 5);
+   }
+}
+.item-icon-colors-5 {
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($level-text-colors, 4);
+   }
+   .this-item {
+      fill: map-get($level-text-colors, 5);
+   }
+   .child-item {
+      fill: map-get($level-text-colors, 6);
+   }
+}
+.item-icon-colors-6 {
+   // colors for the packing icons
+   .parent-item {
+      fill: map-get($level-text-colors, 5);
+   }
+   .this-item {
+      fill: map-get($level-text-colors, 6);
+   }
+   .child-item {
       fill: map-get($level-text-colors, 0);
    }
 }
@@ -187,6 +229,12 @@ html {
 }
 .level-text-color-4 {
    color: map-get($level-text-colors, 4);
+}
+.level-text-color-5 {
+   color: map-get($level-text-colors, 5);
+}
+.level-text-color-6 {
+   color: map-get($level-text-colors, 6);
 }
 
 .light-text-color {

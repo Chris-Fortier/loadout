@@ -130,11 +130,13 @@ $level-colors: (
       // 3: #898356,
       // 4: #947b61,
       // blue-teal to brown 3
-      0: #6c859f,
-   1: #5f8e92,
-   2: #798b58,
-   3: #898456,
-   4: #957b62
+      0: #7081a3,
+   1: #5c8f8f,
+   2: #6e905d,
+   3: #838754,
+   4: #957b62,
+   5: #a37078,
+   6: #9270a3
 );
 
 $level-change: 12%; // how much each lighter or darker the parent and child levels are compared to the current level
@@ -146,6 +148,8 @@ $parent-colors: (
    2: lighten(map-get($level-colors, 2), $level-change),
    3: lighten(map-get($level-colors, 3), $level-change),
    4: lighten(map-get($level-colors, 4), $level-change),
+   5: lighten(map-get($level-colors, 5), $level-change),
+   6: lighten(map-get($level-colors, 6), $level-change),
 );
 
 $child-colors: (
@@ -154,6 +158,8 @@ $child-colors: (
    2: darken(map-get($level-colors, 2), $level-change),
    3: darken(map-get($level-colors, 3), $level-change),
    4: darken(map-get($level-colors, 4), $level-change),
+   5: darken(map-get($level-colors, 5), $level-change),
+   6: darken(map-get($level-colors, 6), $level-change),
 );
 
 $header-bg-color: darken(map-get($level-colors, 0), 40%);
@@ -174,11 +180,13 @@ $lighter-stuff: rgba(
 
 // colored text for light mode and dark mode
 $level-text-colors: (
-   0: #3372b3,
-   1: #128992,
-   2: #558101,
-   3: #7a6f01,
-   4: #9a591a,
+   0: #4969a9,
+   1: #238383,
+   2: #448424,
+   3: #6b7313,
+   4: #8d5c2d,
+   5: #a74757,
+   6: #8848a8,
 );
 
 // dark mode background colors

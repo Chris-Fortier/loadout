@@ -205,38 +205,34 @@ class ItemList extends React.Component {
 
       return (
          <div>
-            <button
-               className="text-button muted"
-               onClick={(e) => {
-                  this.hideUnpackConfirmation();
-               }}
-            >
-               Cancel Unpack
-            </button>
             {unpackChildrenText !== "" && (
-               <button
-                  className="text-button"
+               <div
+                  className="button primary-action-button"
                   onClick={(e) => {
                      this.confirmUnpackChildren();
                   }}
                >
                   {unpackChildrenText}
-               </button>
+               </div>
             )}
 
             {unpackDescendantsText !== "" && (
-               <>
-                  &nbsp;
-                  <button
-                     className="text-button"
-                     onClick={(e) => {
-                        this.confirmUnpackDescendants();
-                     }}
-                  >
-                     {unpackDescendantsText}
-                  </button>
-               </>
+               <div
+                  className="button primary-action-button"
+                  onClick={(e) => {
+                     this.confirmUnpackDescendants();
+                  }}
+               >
+                  {unpackDescendantsText}
+               </div>
             )}
+
+            <div
+               className="button navigation-link"
+               onClick={() => this.toggleUnpackRollout()}
+            >
+               Cancel
+            </div>
          </div>
       );
    }
@@ -251,14 +247,21 @@ class ItemList extends React.Component {
       this.hideUnpackConfirmation(); // close the message
    }
 
-   // show the unpack all confirmation
-   showUnpackConfirmation() {
-      this.setState({ isShowingUnpackConfirmation: true });
-   }
+   // // show the unpack all confirmation
+   // showUnpackConfirmation() {
+   //    this.setState({ isShowingUnpackConfirmation: true });
+   // }
+
+   // // hide the unpack all confirmation
+   // hideUnpackConfirmation() {
+   //    this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
+   // }
 
    // hide the unpack all confirmation
-   hideUnpackConfirmation() {
-      this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
+   toggleUnpackRollout() {
+      this.setState({
+         isShowingUnpackConfirmation: !this.state.isShowingUnpackConfirmation,
+      }); // hide the unpack menu if it's open
    }
 
    // return the current item from state based on an itemIndexPath
@@ -408,7 +411,7 @@ class ItemList extends React.Component {
 
       // this.props.item = currentItem; // set the props of item for this component to the current item
 
-      const level = currentItem.level;
+      let level = currentItem.level;
       // if (level !== 0) {
       //    // pageContentClasses = "card super-item-card this-bg-light";
       //    levelHeaderClasses = "card-header";
@@ -424,45 +427,49 @@ class ItemList extends React.Component {
                   UI_APPEARANCE === "light" && "parent-bg-light",
                   UI_APPEARANCE === "dark" && "parent-bg-dark",
                   UI_APPEARANCE === "colors" &&
-                     level !== 0 &&
-                     "parent-color-" + String((level - 1) % LEVEL_COLORS),
-                  UI_APPEARANCE === "colors" && level === 0 && "parent-color-0"
+                     level < 2 &&
+                     "parent-color-" + String(level % LEVEL_COLORS),
+                  UI_APPEARANCE === "colors" &&
+                     level >= 2 &&
+                     "parent-color-" + String((level - 1) % LEVEL_COLORS)
                )}
             >
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
                         <div>
-                           <span
-                              className={classnames(
-                                 "up-level button navigation-link",
-                                 (UI_APPEARANCE === "light" ||
-                                    UI_APPEARANCE === "dark") &&
-                                    "level-text-color-" +
-                                       String(
-                                          (level + LEVEL_COLORS - 1) %
-                                             LEVEL_COLORS
-                                       ),
-                                 UI_APPEARANCE === "colors" &&
-                                    "light-text-color",
-                                 {
-                                    hidden: this.state.isEditMode,
-                                 }
-                              )}
-                              onClick={(e) => {
-                                 this.movePageToDifferentItem(
-                                    this.props.currentLoadout.itemIndexPath.slice(
-                                       0,
-                                       -1
-                                    )
-                                 ); // move to current path with the last part removed to go up a level
-                              }}
-                           >
-                              <div className="icon left">
-                                 <IconArrowThinLeftCircle />
-                              </div>
-                              Back to {currentItem.parentName}
-                           </span>
+                           {level !== 0 && (
+                              <span
+                                 className={classnames(
+                                    "up-level button navigation-link",
+                                    (UI_APPEARANCE === "light" ||
+                                       UI_APPEARANCE === "dark") &&
+                                       "level-text-color-" +
+                                          String(
+                                             (level + LEVEL_COLORS - 1) %
+                                                LEVEL_COLORS
+                                          ),
+                                    UI_APPEARANCE === "colors" &&
+                                       "light-text-color",
+                                    {
+                                       hidden: this.state.isEditMode,
+                                    }
+                                 )}
+                                 onClick={(e) => {
+                                    this.movePageToDifferentItem(
+                                       this.props.currentLoadout.itemIndexPath.slice(
+                                          0,
+                                          -1
+                                       )
+                                    ); // move to current path with the last part removed to go up a level
+                                 }}
+                              >
+                                 <div className="icon left">
+                                    <IconArrowThinLeftCircle />
+                                 </div>
+                                 Back to {currentItem.parentName}
+                              </span>
+                           )}
                         </div>
 
                         {/* the following adds empty space above the super card in edit mode so it doesn't shift */}
@@ -475,19 +482,19 @@ class ItemList extends React.Component {
                         {/* <img src={iconEdit} className="icon" /> */}
                         <div
                            className={classnames(
-                              level !== 0 && "card super-item-card",
-                              level !== 0 &&
+                              level > 1 && "card super-item-card",
+                              level > 1 &&
                                  UI_APPEARANCE === "light" &&
                                  "this-bg-light",
-                              level !== 0 &&
+                              level > 1 &&
                                  UI_APPEARANCE === "dark" &&
                                  "this-bg-dark",
-                              level !== 0 &&
+                              level > 1 &&
                                  UI_APPEARANCE === "colors" &&
                                  "level-color-" + String(level % LEVEL_COLORS)
                            )}
                         >
-                           <div className={level !== 0 && "card-header"}>
+                           <div className={level > 1 && "card-header"}>
                               <div className="row">
                                  {!this.state.isEditMode && (
                                     <>
@@ -507,24 +514,27 @@ class ItemList extends React.Component {
                                              {currentItem.name}
                                           </h4>
                                        </div>
-                                       <div className="col">
-                                          <h4
-                                             className={classnames(
-                                                "float-right",
-                                                (UI_APPEARANCE === "light" ||
-                                                   UI_APPEARANCE === "dark") &&
-                                                   "level-text-color-" +
-                                                      String(
-                                                         (level + 1) %
-                                                            LEVEL_COLORS
-                                                      ),
-                                                UI_APPEARANCE === "colors" &&
-                                                   "light-text-color"
-                                             )}
-                                          >
-                                             {currentItem.contentSummaryText}
-                                          </h4>
-                                       </div>
+                                       {level > 1 && (
+                                          <div className="col">
+                                             <h4
+                                                className={classnames(
+                                                   "float-right",
+                                                   (UI_APPEARANCE === "light" ||
+                                                      UI_APPEARANCE ===
+                                                         "dark") &&
+                                                      "level-text-color-" +
+                                                         String(
+                                                            (level + 1) %
+                                                               LEVEL_COLORS
+                                                         ),
+                                                   UI_APPEARANCE === "colors" &&
+                                                      "light-text-color"
+                                                )}
+                                             >
+                                                {currentItem.contentSummaryText}
+                                             </h4>
+                                          </div>
+                                       )}
                                     </>
                                  )}
                                  {this.state.isEditMode && (
@@ -547,24 +557,30 @@ class ItemList extends React.Component {
 
                               <div className="row">
                                  <div className="col">
-                                    {!this.state.isEditMode && (
+                                    {!this.state.isEditMode && level !== 0 && (
                                        <>
-                                          {currentItem.numPackedDescendants >
-                                             0 &&
-                                             !this.state
-                                                .isShowingUnpackConfirmation && (
-                                                <button
-                                                   className="text-button muted"
-                                                   onClick={() => {
-                                                      this.showUnpackConfirmation();
-                                                   }}
-                                                >
-                                                   Unpack
-                                                </button>
+                                          <div
+                                             className={classnames(
+                                                "card-section",
+                                                {
+                                                   disabled:
+                                                      currentItem.numPackedDescendants ===
+                                                      0,
+                                                }
                                              )}
-                                          {this.state
-                                             .isShowingUnpackConfirmation &&
-                                             this.rolloutUnpackConfirmation()}
+                                          >
+                                             <span
+                                                className="button navigation-link"
+                                                onClick={() =>
+                                                   this.toggleUnpackRollout()
+                                                }
+                                             >
+                                                Unpack...
+                                             </span>
+                                             {this.state
+                                                .isShowingUnpackConfirmation &&
+                                                this.rolloutUnpackConfirmation()}
+                                          </div>
                                        </>
                                     )}
 
@@ -606,7 +622,7 @@ class ItemList extends React.Component {
                                  </div>
                               </div>
                            </div>
-                           <div className={level !== 0 && "card-body"}>
+                           <div className={level > 1 && "card-body"}>
                               <div className="row">
                                  <div className="col">
                                     {this.renderContainingItems(currentItem)}

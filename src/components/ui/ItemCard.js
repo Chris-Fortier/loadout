@@ -176,6 +176,7 @@ class ItemCard extends React.Component {
       let counterIsFaint = true;
       let packedBoxIsFaint = false;
       const item = this.props.item; // this is to simplify code below
+      let level = item.level;
 
       let thisItemPath = this.props.currentLoadout.itemIndexPath.concat([
          item.index,
@@ -193,83 +194,97 @@ class ItemCard extends React.Component {
       return (
          <div
             className={classnames(
-               "card item-card",
-               UI_APPEARANCE === "light" && "child-bg-light",
-               UI_APPEARANCE === "dark" && "child-bg-dark",
+               level > 1 && "item-card",
+               level <= 1 && "loadout-card",
+               UI_APPEARANCE === "light" && level > 1 && "child-bg-light",
+               UI_APPEARANCE === "dark" && level > 1 && "child-bg-dark",
                UI_APPEARANCE === "colors" &&
-                  "card item-card child-color-" +
-                     String(item.level % LEVEL_COLORS)
+                  level > 1 &&
+                  "child-color-" + String(level % LEVEL_COLORS)
             )}
+            id={"item-card-" + item.index}
          >
             {/* <div className="float-left"> */}
             <div className="d-flex">
-               {/* <span
-                  className={classnames(
-                     "custom-control custom-checkbox packed-checkbox-container",
-                     { faint: packedBoxIsFaint }
-                  )}
-               >
-                  <input
-                     className="custom-control-input"
-                     type="checkbox"
-                     id={"packed-checkbox-" + item.index}
-                     checked={item.isPacked}
-                     onChange={(e) => {
-                        this.toggleIsPacked(item.index);
-                     }}
-                  />
-                  <label
-                     className="custom-control-label"
-                     htmlFor={"packed-checkbox-" + item.index}
-                  ></label>
-               </span> */}
-
-               <span
-                  className={classnames(
-                     "icon item-card-icon",
-                     (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
-                        "item-icon-colors-" + String(item.level % LEVEL_COLORS),
-                     UI_APPEARANCE === "colors" && "item-icon-colors",
-                     {
-                        clickable: item.numPackedChildren === item.numChildren,
-                        disabled: item.numPackedChildren < item.numChildren,
-                     }
-                  )}
-                  onClick={(e) => {
-                     this.toggleIsPacked(thisItemPath);
-                  }}
-               >
-                  {item.isPacked && <PackedIcon />}
-                  {!item.isPacked &&
-                     item.numPackedChildren >= item.numChildren && (
-                        <ReadyToPackIcon />
-                     )}
-                  {!item.isPacked &&
-                     item.numPackedChildren < item.numChildren && (
-                        <NotReadyToPackIcon />
-                     )}
-               </span>
-
-               <span
-                  className={classnames(
-                     "flex-fill item-card-text",
-                     (UI_APPEARANCE === "light" || UI_APPEARANCE === "dark") &&
-                        "level-text-color-" + String(item.level % LEVEL_COLORS),
-                     UI_APPEARANCE === "colors" && "light-text-color"
-                  )}
-               >
+               {level <= 1 && (
                   <span
-                     className={classnames({
-                        clickable: item.numPackedChildren === item.numChildren,
-                        disabled: item.numPackedChildren < item.numChildren,
-                     })}
-                     onClick={(e) => {
-                        this.toggleIsPacked(thisItemPath);
-                     }}
+                     className={classnames(
+                        "flex-fill item-card-text",
+                        (UI_APPEARANCE === "light" ||
+                           UI_APPEARANCE === "dark") &&
+                           "level-text-color-" + String(level % LEVEL_COLORS),
+                        UI_APPEARANCE === "colors" && "dark-text-color"
+                     )}
                   >
-                     &nbsp;&nbsp;{item.name}
+                     <span
+                        className="navigation-link"
+                        onClick={(e) => {
+                           this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
+                        }}
+                     >
+                        {item.name}
+                     </span>
                   </span>
-               </span>
+               )}
+
+               {level > 1 && (
+                  <>
+                     <span
+                        className={classnames(
+                           "icon item-card-icon",
+                           (UI_APPEARANCE === "light" ||
+                              UI_APPEARANCE === "dark") &&
+                              "item-icon-colors-" +
+                                 String(level % LEVEL_COLORS),
+                           UI_APPEARANCE === "colors" && "item-icon-colors",
+                           {
+                              clickable:
+                                 item.numPackedChildren === item.numChildren,
+                              disabled:
+                                 item.numPackedChildren < item.numChildren,
+                           }
+                        )}
+                        onClick={(e) => {
+                           this.toggleIsPacked(thisItemPath);
+                        }}
+                     >
+                        {item.isPacked && <PackedIcon />}
+                        {!item.isPacked &&
+                           item.numPackedChildren >= item.numChildren && (
+                              <ReadyToPackIcon />
+                           )}
+                        {!item.isPacked &&
+                           item.numPackedChildren < item.numChildren && (
+                              <NotReadyToPackIcon />
+                           )}
+                     </span>
+                     <span
+                        className={classnames(
+                           "flex-fill item-card-text",
+                           (UI_APPEARANCE === "light" ||
+                              UI_APPEARANCE === "dark") &&
+                              "level-text-color-" +
+                                 String(level % LEVEL_COLORS),
+                           UI_APPEARANCE === "colors" && "light-text-color"
+                        )}
+                     >
+                        <span
+                           className={classnames({
+                              clickable:
+                                 item.numPackedChildren === item.numChildren,
+                              // disabled:
+                              //    item.numPackedChildren < item.numChildren,
+                           })}
+                           onClick={(e) => {
+                              this.toggleIsPacked(thisItemPath);
+                           }}
+                        >
+                           &nbsp;&nbsp;{item.name}
+                        </span>
+                     </span>
+                  </>
+               )}
+
                {item.hasOwnProperty("items") && (
                   <>
                      <span
@@ -282,7 +297,7 @@ class ItemCard extends React.Component {
                            (UI_APPEARANCE === "light" ||
                               UI_APPEARANCE === "dark") &&
                               "level-text-color-" +
-                                 String((item.level + 1) % LEVEL_COLORS),
+                                 String((level + 1) % LEVEL_COLORS),
                            UI_APPEARANCE === "colors" && "dark-text-color",
                            { disabled: item.isPacked }
                         )}
@@ -296,7 +311,7 @@ class ItemCard extends React.Component {
                            (UI_APPEARANCE === "light" ||
                               UI_APPEARANCE === "dark") &&
                               "item-icon-colors-" +
-                                 String(item.level % LEVEL_COLORS),
+                                 String(level % LEVEL_COLORS),
                            UI_APPEARANCE === "colors" && "item-icon-colors",
                            {
                               clickable: !item.isPacked,

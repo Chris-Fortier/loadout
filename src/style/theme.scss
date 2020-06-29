@@ -164,13 +164,20 @@ $child-colors: (
 );
 
 $packed-colors: (
-   0: darken(map-get($level-colors, 0), $level-change + $packed-change),
-   1: darken(map-get($level-colors, 1), $level-change + $packed-change),
-   2: darken(map-get($level-colors, 2), $level-change + $packed-change),
-   3: darken(map-get($level-colors, 3), $level-change + $packed-change),
-   4: darken(map-get($level-colors, 4), $level-change + $packed-change),
-   5: darken(map-get($level-colors, 5), $level-change + $packed-change),
-   6: darken(map-get($level-colors, 6), $level-change + $packed-change),
+   // 0: darken(map-get($level-colors, 0), $level-change + $packed-change),
+      // 1: darken(map-get($level-colors, 1), $level-change + $packed-change),
+      // 2: darken(map-get($level-colors, 2), $level-change + $packed-change),
+      // 3: darken(map-get($level-colors, 3), $level-change + $packed-change),
+      // 4: darken(map-get($level-colors, 4), $level-change + $packed-change),
+      // 5: darken(map-get($level-colors, 5), $level-change + $packed-change),
+      // 6: darken(map-get($level-colors, 6), $level-change + $packed-change),
+      0: transparentize(map-get($child-colors, 0), 0.5),
+   1: transparentize(map-get($child-colors, 1), 0.5),
+   2: transparentize(map-get($child-colors, 2), 0.5),
+   3: transparentize(map-get($child-colors, 3), 0.5),
+   4: transparentize(map-get($child-colors, 4), 0.5),
+   5: transparentize(map-get($child-colors, 5), 0.5),
+   6: transparentize(map-get($child-colors, 6), 0.5)
 );
 
 $header-bg-color: darken(map-get($level-colors, 0), 40%);
@@ -204,13 +211,13 @@ $level-text-colors: (
 $this-bg-dark: hsl(0, 0, 16);
 $parent-bg-dark: hsl(0, 0, 20);
 $child-bg-dark: hsl(0, 0, 12);
-$child-bg-dark-packed: hsl(0, 0, 9);
+$child-bg-dark-packed: hsla(0, 0, 12, 0.6);
 
 // light mode background colors
 $this-bg-light: hsl(0, 0, 80);
 $parent-bg-light: lighten($this-bg-light, 12%);
 $child-bg-light: darken($this-bg-light, 12%);
-$child-bg-light-packed: darken($this-bg-light, 24%);
+$child-bg-light-packed: hsla(0, 0, 72, 0.6);
 
 // SPACING
 

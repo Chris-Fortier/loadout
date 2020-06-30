@@ -1,6 +1,6 @@
 // file of small application-wide helpers
 
-const safelyParseJSON = (str) => {
+export const safelyParseJSON = (str) => {
    // this will prevent JSON parse from getting a syntax error and crashing your program
    try {
       JSON.parse(str);
@@ -10,7 +10,7 @@ const safelyParseJSON = (str) => {
    return JSON.parse(str);
 };
 
-const isObject = (value) => {
+export const isObject = (value) => {
    // this will check wheter or not this value is an object
    // returns true if the value is an object and is not null and is not an array
    return (
@@ -20,7 +20,7 @@ const isObject = (value) => {
    );
 };
 
-const convertDataType = (str) => {
+export const convertDataType = (str) => {
    // takes a string and interprets it into a different data type
 
    if (str === "undefined") return undefined;
@@ -39,7 +39,7 @@ const convertDataType = (str) => {
    // return str;
 };
 
-const toKebabCase = (str) => {
+export const toKebabCase = (str) => {
    // converts a string to kebab-case
    console.log("str", str);
    const lowerCase = str.toLowerCase();
@@ -49,30 +49,16 @@ const toKebabCase = (str) => {
    return splitArray.join("-");
 };
 
-function checkIsOver(num, limit) {
+export function checkIsOver(num, limit) {
    return num > limit;
 }
 
 // eslint-disable-next-line
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // app master preferences
-const LEVEL_COLORS = 7; // the amount of level colors there are
-const MAX_ITEM_NAME_LENGTH = 30; // the maximum length of characters for an item name
-const MOVE_UPDOWN = false; // whether or not to have up and down buttons in edit mode
-const SUBITEM_DISPLAY_MODE = "numUnpackedChildren"; // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants" or "numUnpackedChildren"
-const UI_APPEARANCE = "colors"; // ui appearance mode, "light", "dark", "colors"
-
-export {
-   isObject,
-   convertDataType,
-   safelyParseJSON,
-   toKebabCase,
-   checkIsOver,
-   EMAIL_REGEX,
-   LEVEL_COLORS,
-   MAX_ITEM_NAME_LENGTH,
-   MOVE_UPDOWN,
-   SUBITEM_DISPLAY_MODE,
-   UI_APPEARANCE,
-};
+export const LEVEL_COLORS = 7; // the amount of level colors there are
+export const MAX_ITEM_NAME_LENGTH = 30; // the maximum length of characters for an item name
+export const MOVE_UPDOWN = false; // whether or not to have up and down buttons in edit mode
+export const SUBITEM_DISPLAY_MODE = "numUnpackedChildren"; // subItemDisplayMode can be "packedChildrenOutOfTotalChildren" or "numUnpackedDescendants" or "numUnpackedChildren"
+export const UI_APPEARANCE = "colors"; // ui appearance mode, "light", "dark", "colors"

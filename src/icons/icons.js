@@ -1,6 +1,6 @@
 import React from "react";
 
-function IconAddCircle() {
+export function IconAddCircle() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ function IconAddCircle() {
    );
 }
 
-function IconArchive() {
+export function IconArchive() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ function IconArchive() {
    );
 }
 
-function IconArrowThickDownCircle() {
+export function IconArrowThickDownCircle() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ function IconArrowThickDownCircle() {
    );
 }
 
-function IconArrowThickUpCircle() {
+export function IconArrowThickUpCircle() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ function IconArrowThickUpCircle() {
    );
 }
 
-function IconArrowThinLeftCircle() {
+export function IconArrowThinLeftCircle() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ function IconArrowThinLeftCircle() {
    );
 }
 
-function IconArrowThinRightCircle() {
+export function IconArrowThinRightCircle() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ function IconArrowThinRightCircle() {
    );
 }
 
-function IconCheck() {
+export function IconCheck() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ function IconCheck() {
       </svg>
    );
 }
-function IconChevronDown() {
+export function IconChevronDown() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ function IconChevronDown() {
    );
 }
 
-function IconChevronUp() {
+export function IconChevronUp() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ function IconChevronUp() {
    );
 }
 
-function IconClose() {
+export function IconClose() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@ function IconClose() {
    );
 }
 
-function IconCog() {
+export function IconCog() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +180,7 @@ function IconCog() {
    );
 }
 
-function IconDoorEnter() {
+export function IconDoorEnter() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +199,7 @@ function IconDoorEnter() {
    );
 }
 
-function IconEdit() {
+export function IconEdit() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +222,7 @@ function IconEdit() {
    );
 }
 
-function IconFastForward() {
+export function IconFastForward() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +241,7 @@ function IconFastForward() {
    );
 }
 
-function IconFastRewind() {
+export function IconFastRewind() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +260,7 @@ function IconFastRewind() {
    );
 }
 
-function IconHome() {
+export function IconHome() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +279,7 @@ function IconHome() {
    );
 }
 
-function IconKey() {
+export function IconKey() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -298,7 +298,7 @@ function IconKey() {
    );
 }
 
-function IconTrash() {
+export function IconTrash() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +317,7 @@ function IconTrash() {
    );
 }
 
-function IconUserAdd() {
+export function IconUserAdd() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -333,7 +333,7 @@ function IconUserAdd() {
    );
 }
 
-function IconUserCheck() {
+export function IconUserCheck() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -349,7 +349,7 @@ function IconUserCheck() {
    );
 }
 
-function IconUserCouple() {
+export function IconUserCouple() {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -367,27 +367,3 @@ function IconUserCouple() {
       </svg>
    );
 }
-
-export {
-   IconAddCircle,
-   IconArchive,
-   IconArrowThickDownCircle,
-   IconArrowThickUpCircle,
-   IconArrowThinLeftCircle,
-   IconArrowThinRightCircle,
-   IconCheck,
-   IconChevronDown,
-   IconChevronUp,
-   IconClose,
-   IconCog,
-   IconDoorEnter,
-   IconEdit,
-   IconFastForward,
-   IconFastRewind,
-   IconHome,
-   IconKey,
-   IconTrash,
-   IconUserAdd,
-   IconUserCheck,
-   IconUserCouple,
-};

@@ -2,7 +2,7 @@ import React from "react";
 
 // these are my own icons
 
-function PackedIcon() {
+export function PackedIcon() {
    return (
       <svg viewBox="0 0 24 24">
          <path
@@ -14,7 +14,19 @@ function PackedIcon() {
    );
 }
 
-function ReadyToPackIcon() {
+export function PackedIcon2() {
+   return (
+      <svg viewBox="0 0 24 24">
+         <path
+            className="parent-item"
+            d="M 0,5 V 19 H 13.667969 L 16.220703,12.839844 14.373047,12.074219 12.332031,17 H 2 V 7 h 10.332031 l 2.041016,4.925781 1.847656,-0.765625 L 13.667969,5 Z"
+         />
+         <rect className="this-item" width="8" height="8" x="3" y="8" />
+      </svg>
+   );
+}
+
+export function ReadyToPackIcon() {
    return (
       <svg viewBox="0 0 24 24">
          <path
@@ -26,7 +38,7 @@ function ReadyToPackIcon() {
    );
 }
 
-function NotReadyToPackIcon() {
+export function NotReadyToPackIcon() {
    return (
       <svg viewBox="0 0 24 24">
          <path
@@ -37,7 +49,7 @@ function NotReadyToPackIcon() {
    );
 }
 
-function ChildrenUnpackedIcon() {
+export function ChildrenUnpackedIcon() {
    return (
       <svg viewBox="0 0 24 24">
          <path
@@ -51,7 +63,7 @@ function ChildrenUnpackedIcon() {
    );
 }
 
-function ChildrenPackedIcon() {
+export function ChildrenPackedIcon() {
    return (
       <svg viewBox="0 0 24 24">
          <path
@@ -64,10 +76,18 @@ function ChildrenPackedIcon() {
       </svg>
    );
 }
-export {
-   PackedIcon,
-   ReadyToPackIcon,
-   NotReadyToPackIcon,
-   ChildrenUnpackedIcon,
-   ChildrenPackedIcon,
-};
+
+export function ChildrenPackedIcon2() {
+   return (
+      <svg viewBox="0 0 24 24">
+         <path
+            className="this-item"
+            d="M 0,4.9999998 V 19 H 13.667969 L 16.220702,12.839844 14.373047,12.074219 12.332031,17 H 2 V 6.9999998 h 10.332031 l 2.041016,4.9257812 1.847655,-0.765625 -2.552733,-6.1601562 z"
+         />
+         <path
+            className="child-item"
+            d="M 3,12 H 5 V 8 h 4 v 2 h 2 v 4 H 7 v 2 H 3 Z"
+         />
+      </svg>
+   );
+}

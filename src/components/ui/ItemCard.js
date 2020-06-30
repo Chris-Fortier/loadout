@@ -10,11 +10,11 @@ import {
 import classnames from "classnames";
 // import { IconArrowThinRightCircle } from "../../icons/icons.js";
 import {
-   PackedIcon,
+   PackedIcon2,
    ReadyToPackIcon,
    NotReadyToPackIcon,
    ChildrenUnpackedIcon,
-   ChildrenPackedIcon,
+   ChildrenPackedIcon2,
 } from "../../icons/loadout-icons.js";
 import { processAllItems } from "../../utils/processItems";
 
@@ -170,7 +170,7 @@ class ItemCard extends React.Component {
                            this.toggleIsPacked(thisItemPath);
                         }}
                      >
-                        {item.isPacked && <PackedIcon />}
+                        {item.isPacked && <PackedIcon2 />}
                         {!item.isPacked &&
                            item.numPackedChildren >= item.numChildren && (
                               <ReadyToPackIcon />
@@ -245,10 +245,10 @@ class ItemCard extends React.Component {
                               this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                      >
-                        {item.isPacked && <ChildrenPackedIcon />}
+                        {item.isPacked && <ChildrenPackedIcon2 />}
                         {!item.isPacked &&
                            item.numPackedChildren >= item.numChildren && (
-                              <ChildrenPackedIcon />
+                              <ChildrenPackedIcon2 />
                            )}
                         {!item.isPacked &&
                            item.numPackedChildren < item.numChildren && (

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import actions from "../../store/actions";
 import {
    LEVEL_COLORS,
-   SUBITEM_DISPLAY_MODE,
+   // SUBITEM_DISPLAY_MODE,
    UI_APPEARANCE,
 } from "../../utils/helpers";
 import classnames from "classnames";
@@ -153,7 +153,7 @@ class ItemCard extends React.Component {
                   <>
                      <span
                         className={classnames(
-                           "icon item-card-icon",
+                           "item-card-icon",
                            (UI_APPEARANCE === "light" ||
                               UI_APPEARANCE === "dark") &&
                               "item-icon-colors-" +

@@ -19,7 +19,7 @@ import {
    // MOVE_UPDOWN,
    MAX_ITEM_NAME_LENGTH,
    LEVEL_COLORS,
-   SUBITEM_DISPLAY_MODE,
+   // SUBITEM_DISPLAY_MODE,
    UI_APPEARANCE,
 } from "../../utils/helpers";
 import classnames from "classnames";
@@ -175,7 +175,7 @@ class ItemList extends React.Component {
       this.setState({ isShowingUnpackConfirmation: false }); // hide the unpack menu if it's open
    }
 
-   // hide the unpack all confirmation
+   // toggle the unpack all confirmation
    toggleUnpackRollout() {
       if (this.state.isShowingUnpackConfirmation) {
          this.hideUnpackConfirmation();

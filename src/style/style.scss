@@ -435,13 +435,13 @@ body {
 
 .item-card-edit {
    // border-radius: 0.25rem; // Bootstrap default
+   border: 2px solid rgba(0, 0, 0, 0.25);
    border-radius: 6px; // make more noticable
-   margin-bottom: $item-card-spacing; // space between item cards
 
    padding-top: 0; // remove the padding inside the card as it will be controlled by the contents
    padding-bottom: 0; // remove the padding inside the card as it will be controlled by the contents
-   padding-left: 6px; // still want padding on the sides
-   padding-right: 6px; // still want padding on the sides
+   padding-left: 5px; // still want padding on the sides
+   padding-right: 5px; // still want padding on the sides
 
    line-height: 0.9; // this works well with this font if multiple lines are needed
    font-size: 24px;
@@ -453,6 +453,18 @@ body {
    .button {
       margin: 0;
    }
+
+   margin-top: $item-card-spacing/2; // for space between card sections and buttons
+   margin-bottom: $item-card-spacing/2; // for space between card sections and buttons
+
+   display: inline-block; // make it so multiple cards appear on the same row in larger widths
+   width: 100%; // base size in small widths
+}
+.item-card-edit:first-child {
+   margin-top: 0;
+}
+.item-card-edit:last-child {
+   margin-bottom: 0;
 }
 
 // this used if the screen is wide enough for two "columns" of item cards
@@ -949,13 +961,15 @@ label,
    }
 
    // set the width of each item card
-   .item-card {
+   .item-card,
+   .item-card-edit {
       display: inline-block; // make it so multiple cards appear on the same row
       width: calc(50% - 6px);
    }
 
    // puts a margin between the two item cards on the same "row"
-   .item-card:nth-child(odd) {
+   .item-card:nth-child(odd),
+   .item-card-edit:nth-child(odd) {
       margin-right: $item-card-spacing;
    }
 }

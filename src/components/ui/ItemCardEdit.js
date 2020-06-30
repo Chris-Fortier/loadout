@@ -5,6 +5,7 @@ import {
    MOVE_UPDOWN,
    MAX_ITEM_NAME_LENGTH,
    LEVEL_COLORS,
+   UI_APPEARANCE,
 } from "../../utils/helpers";
 // import classnames from "classnames";
 import {
@@ -14,8 +15,18 @@ import {
    IconChevronUp,
 } from "../../icons/icons.js";
 import { processAllItems } from "../../utils/processItems";
+import classnames from "classnames";
 
 class ItemCardEdit extends React.Component {
+   constructor(props) {
+      super(props); // boilerplate
+
+      // set default state values
+      this.state = {
+         isShowingDeleteConfirmation: false,
+      };
+   }
+
    // updates the displayed name field of one of the current item's subitems
    renameItem(e, itemIndexPath) {
       console.log("rename " + this.props.item.name + " to " + e.target.value);
@@ -43,6 +54,36 @@ class ItemCardEdit extends React.Component {
 
       // this must happen whenever something in the loadout changes
       processAllItems(this.props.currentLoadout.gear);
+   }
+
+   // toggle the delete confirmation
+   toggleDeleteRollout() {
+      console.log("this.state", this.state);
+      this.setState({
+         isShowingDeleteConfirmation: !this.state.isShowingDeleteConfirmation,
+      });
+   }
+
+   rolloutDeleteConfirmation(thisItemPath) {
+      return (
+         <>
+            <div
+               className="button primary-action-button"
+               onClick={(e) => {
+                  this.deleteItem(thisItemPath);
+               }}
+            >
+               Delete {this.props.item.name} and{" "}
+               {this.props.item.numDescendants} subitems
+            </div>
+            <div
+               className="button navigation-link"
+               onClick={() => this.toggleDeleteRollout()}
+            >
+               Cancel
+            </div>
+         </>
+      );
    }
 
    // deletes an item
@@ -85,41 +126,55 @@ class ItemCardEdit extends React.Component {
       ]); // stores the complete index path to the item referred to on this item card
 
       return (
-         <div
-            className={
-               "card item-card-edit child-color-" +
-               String(item.level % LEVEL_COLORS)
-            }
-         >
-            <div className="d-flex">
-               <span className="flex-fill">
-                  <input
-                     className="edit-name"
-                     id={"edit-name-input-" + item.index}
-                     defaultValue={item.name}
-                     onChange={(e) => this.renameItem(e, thisItemPath)}
-                     maxLength={MAX_ITEM_NAME_LENGTH}
-                  />
-               </span>
-               <button
-                  className="clickable icon-dark"
-                  id={"delete-item-" + item.index}
-                  onClick={() => this.deleteItem(thisItemPath)}
-               >
-                  <IconTrash />
-               </button>
-               {MOVE_UPDOWN && (
-                  <>
-                     <div className="icon-container">
-                        <IconChevronUp />
-                     </div>
-                     <div className="icon-container">
-                        <IconChevronDown />
-                     </div>
-                  </>
-               )}
+         <>
+            <div
+               className={
+                  "item-card-edit child-color-" +
+                  String(item.level % LEVEL_COLORS)
+               }
+            >
+               <div className="d-flex">
+                  <span className="flex-fill">
+                     <input
+                        className="edit-name"
+                        id={"edit-name-input-" + item.index}
+                        defaultValue={item.name}
+                        onChange={(e) => this.renameItem(e, thisItemPath)}
+                        maxLength={MAX_ITEM_NAME_LENGTH}
+                     />
+                  </span>
+
+                  <span
+                     className={classnames(
+                        "item-card-icon clickable",
+                        UI_APPEARANCE === "light" && "icon-dark",
+                        UI_APPEARANCE === "dark" && "icon-light",
+                        UI_APPEARANCE === "colors" && "icon-dark"
+                     )}
+                     // onClick={(e) => {
+                     //    this.deleteItem(thisItemPath);
+
+                     // }}
+                     onClick={() => this.toggleDeleteRollout()}
+                  >
+                     <IconTrash />
+                  </span>
+
+                  {MOVE_UPDOWN && (
+                     <>
+                        <div className="icon-container">
+                           <IconChevronUp />
+                        </div>
+                        <div className="icon-container">
+                           <IconChevronDown />
+                        </div>
+                     </>
+                  )}
+               </div>
+               {this.state.isShowingDeleteConfirmation &&
+                  this.rolloutDeleteConfirmation(thisItemPath)}
             </div>
-         </div>
+         </>
       );
    }
 }

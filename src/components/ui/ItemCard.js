@@ -10,7 +10,7 @@ import {
 import classnames from "classnames";
 // import { IconArrowThinRightCircle } from "../../icons/icons.js";
 import {
-   PackedIcon2,
+   PackedIcon,
    ReadyToPackIcon,
    NotReadyToPackIcon,
    ChildrenUnpackedIcon,
@@ -170,7 +170,7 @@ class ItemCard extends React.Component {
                            this.toggleIsPacked(thisItemPath);
                         }}
                      >
-                        {item.isPacked && <PackedIcon2 />}
+                        {item.isPacked && <PackedIcon />}
                         {!item.isPacked &&
                            item.numPackedChildren >= item.numChildren && (
                               <ReadyToPackIcon />

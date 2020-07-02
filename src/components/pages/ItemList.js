@@ -36,6 +36,7 @@ import {
    // getParentItemFromPath,
    renameItem,
    addItemTo,
+   addContainerTo,
 } from "../../utils/items";
 
 class ItemList extends React.Component {
@@ -633,18 +634,32 @@ class ItemList extends React.Component {
                                  </>
                               )}
                               {this.state.isEditMode && (
-                                 <div
-                                    className="button primary-action-button"
-                                    onClick={(e) => {
-                                       addItemTo(
-                                          this.props.currentLoadout.gear,
-                                          this.props.currentLoadout
-                                             .itemIndexPath
-                                       );
-                                    }}
-                                 >
-                                    Add Item Within {currentItem.name}
-                                 </div>
+                                 <>
+                                    <div
+                                       className="button primary-action-button"
+                                       onClick={(e) => {
+                                          addItemTo(
+                                             this.props.currentLoadout.gear,
+                                             this.props.currentLoadout
+                                                .itemIndexPath
+                                          );
+                                       }}
+                                    >
+                                       Add Item
+                                    </div>
+                                    <div
+                                       className="button primary-action-button"
+                                       onClick={(e) => {
+                                          addContainerTo(
+                                             this.props.currentLoadout.gear,
+                                             this.props.currentLoadout
+                                                .itemIndexPath
+                                          );
+                                       }}
+                                    >
+                                       Add Container
+                                    </div>
+                                 </>
                               )}
                            </div>
                         </div>

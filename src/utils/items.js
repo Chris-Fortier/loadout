@@ -56,6 +56,24 @@ export function addItemTo(gear, itemIndexPath) {
    processAllItems(gear);
 }
 
+// add an item that can contain other items
+export function addContainerTo(gear, itemIndexPath) {
+   // get the actual item I want to add an item inside
+   const currentItem = getItemFromPath(gear, itemIndexPath);
+
+   // meat of what this funtion does
+   currentItem.items.push({
+      name: "New Container",
+      id: getUuid(),
+      parentId: currentItem.id,
+      isPacked: false,
+      items: [], // having this lets it contain other items
+   }); // add a new item inside the current item
+
+   // this must happen whenever something in the loadout changes
+   processAllItems(gear);
+}
+
 // deletes an item
 export function deleteItem(gear, itemIndexPath) {
    // if (this.props.item.numDescendants > 0) {

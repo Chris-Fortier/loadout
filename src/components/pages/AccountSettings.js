@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // a React element for linking
+// import { Link } from "react-router-dom"; // a React element for linking
 // import { EMAIL_REGEX } from "../../utils/helpers";
 // import { v4 as getUuid } from "uuid";
 // import hash from "object-hash";
@@ -28,6 +28,11 @@ class AccountSettings extends React.Component {
          hasPasswordRollout: false,
          hasDeleteRollout: false,
       };
+   }
+
+   backToLoadout() {
+      this.props.history.push("/loadout");
+      window.scrollTo(0, 0); // sets focus to the top of the page
    }
 
    toggleEmailRollout() {
@@ -181,12 +186,13 @@ class AccountSettings extends React.Component {
                               )}
                            </div>
                            {/* <div className="button"> */}
-                           <Link
+                           <button
                               className="button navigation-link"
-                              to="/loadout"
+                              // to="/loadout"
+                              onClick={() => this.backToLoadout()}
                            >
-                              Back to Loadouts
-                           </Link>
+                              Back to Loadout
+                           </button>
                            {/* </div> */}
                            <div className="button primary-action-button">
                               Log Out

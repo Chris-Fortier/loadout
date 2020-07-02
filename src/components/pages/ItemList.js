@@ -30,6 +30,7 @@ import ItemCard from "../ui/ItemCard";
 import ItemCardEdit from "../ui/ItemCardEdit";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { processAllItems } from "../../utils/processItems";
+import movePageToDifferentItem from "../../utils/movePageToDifferentItem";
 
 class ItemList extends React.Component {
    constructor(props) {
@@ -209,19 +210,6 @@ class ItemList extends React.Component {
          type: actions.CLEAR_CURRENT_LOADOUT,
          payload: {},
       });
-   }
-
-   // move page to a different item
-   movePageToDifferentItem(itemIndexPath) {
-      console.log("movePageToDifferentItem()...itemIndexPath:", itemIndexPath);
-      this.props.dispatch({
-         type: actions.CHANGE_ITEM_INDEX_PATH,
-         payload: itemIndexPath,
-      });
-
-      this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
-
-      window.scrollTo(0, 0); // sets focus to the top of the page
    }
 
    // open the loadout sharing settings (made this a function to avoid styling assosicated with Link)
@@ -430,7 +418,7 @@ class ItemList extends React.Component {
                                     }
                                  )}
                                  onClick={(e) => {
-                                    this.movePageToDifferentItem(
+                                    movePageToDifferentItem(
                                        this.props.currentLoadout.itemIndexPath.slice(
                                           0,
                                           -1

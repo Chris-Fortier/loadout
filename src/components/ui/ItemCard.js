@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { connect } from "react-redux";
-import actions from "../../store/actions";
+// import actions from "../../store/actions";
 import {
    LEVEL_COLORS,
    // SUBITEM_DISPLAY_MODE,
@@ -17,23 +17,9 @@ import {
    ChildrenPackedIcon2,
 } from "../../icons/loadout-icons.js";
 import { processAllItems } from "../../utils/processItems";
+import movePageToDifferentItem from "../../utils/movePageToDifferentItem";
 
 class ItemCard extends React.Component {
-   // move page to a different item
-   movePageToDifferentItem(itemIndexPath) {
-      this.props.dispatch({
-         type: actions.CHANGE_ITEM_INDEX_PATH,
-         payload: itemIndexPath,
-      });
-
-      // this.setCurrentItem(itemIndexPath);
-
-      // this.setState({ isEditMode: false, isShowingUnpackConfirmation: false }); // get out of edit mode if the current item changes
-      // this.props.history.push("/loadout");
-
-      window.scrollTo(0, 0); // sets focus to the top of the page
-   }
-
    // toggle the packed status of this item
    toggleIsPacked(itemIndexPath) {
       console.log("toggleIsPacked()...");
@@ -141,7 +127,7 @@ class ItemCard extends React.Component {
                      <span
                         className="navigation-link"
                         onClick={(e) => {
-                           this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
+                           movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                      >
                         {item.name}
@@ -212,7 +198,7 @@ class ItemCard extends React.Component {
                      <span
                         onClick={(e) => {
                            !item.isPacked &&
-                              this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
+                              movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                         className={classnames(
                            "button navigation-link item-card-text",
@@ -242,7 +228,7 @@ class ItemCard extends React.Component {
                         )}
                         onClick={(e) => {
                            !item.isPacked &&
-                              this.movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
+                              movePageToDifferentItem(thisItemPath); // move to current path with the subitem index added on
                         }}
                      >
                         {item.isPacked && <ChildrenPackedIcon2 />}

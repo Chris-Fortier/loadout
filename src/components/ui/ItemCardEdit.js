@@ -16,6 +16,7 @@ import {
 } from "../../icons/icons.js";
 import { processAllItems } from "../../utils/processItems";
 import classnames from "classnames";
+import { getItemFromPath, getParentItemFromPath } from "../../utils/items";
 
 class ItemCardEdit extends React.Component {
    constructor(props) {
@@ -35,22 +36,13 @@ class ItemCardEdit extends React.Component {
       console.log("itemIndexPath:", itemIndexPath);
 
       // get the actual item I want to change based on the index path
-      // TODO duplicated in other functions
-      let copyOfGear = this.props.currentLoadout.gear;
-      let currentItem = copyOfGear;
-      for (let i in itemIndexPath) {
-         currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
-      }
-      console.log("name of target item:", currentItem.name);
+      const currentItem = getItemFromPath(
+         this.props.currentLoadout.gear,
+         itemIndexPath
+      );
 
-      // meet of what this funtion does
+      // meat of what this funtion does
       currentItem.name = e.target.value;
-
-      // put the data back into the store
-      // this.props.dispatch({
-      //    type: actions.STORE_CURRENT_LOADOUT,
-      //    payload: copyOfGear,
-      // });
 
       // this must happen whenever something in the loadout changes
       processAllItems(this.props.currentLoadout.gear);
@@ -103,16 +95,50 @@ class ItemCardEdit extends React.Component {
       console.log("itemIndexPath:", itemIndexPath);
 
       // get the parent item because that is the item that's items I want to delete from
-      let copyOfGear = this.props.currentLoadout.gear;
-      let parentItem = copyOfGear;
-      for (let i = 0; i < itemIndexPath.length - 1; i++) {
-         parentItem = parentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
-      }
-      const itemIndex = itemIndexPath[itemIndexPath.length - 1];
+      const parentItem = getParentItemFromPath(
+         this.props.currentLoadout.gear,
+         itemIndexPath
+      );
       console.log("name of parent item:", parentItem.name);
 
-      // meet of what this funtion does
+      const itemIndex = itemIndexPath[itemIndexPath.length - 1];
+
+      // meat of what this funtion does
       parentItem.items.splice(itemIndex, 1); // delete the item
+
+      // this must happen whenever something in the loadout changes
+      processAllItems(this.props.currentLoadout.gear);
+   }
+
+   // add an item
+   addItem(itemIndexPath) {
+      console.log("itemIndexPath:", itemIndexPath);
+
+      // get the actual item I want to add an item inside
+      // TODO this is duplicated code
+      // TODO duplicated in other functions
+
+      // let copyOfGear = this.props.currentLoadout.gear;
+      // let currentItem = copyOfGear;
+      // for (let i in itemIndexPath) {
+      //    currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
+      // }
+
+      // get the actual item I want to add an item inside
+      const currentItem = getItemFromPath(
+         this.props.currentLoadout.gear,
+         itemIndexPath
+      );
+
+      console.log("name of target item:", currentItem.name);
+
+      // meat of what this funtion does
+      currentItem.items.push({
+         name: "New Item",
+         id: "new uuid",
+         parentId: currentItem.id,
+         isPacked: false,
+      }); // add a new item inside the current item
 
       // this must happen whenever something in the loadout changes
       processAllItems(this.props.currentLoadout.gear);

@@ -592,7 +592,12 @@ class ItemList extends React.Component {
                                           >
                                              <IconEdit />
                                           </div>
-                                          Edit Loadout
+                                          {this.state.isEditMode && (
+                                             <>Done Editing</>
+                                          )}
+                                          {!this.state.isEditMode && (
+                                             <>Edit Loadout</>
+                                          )}
                                        </div>
                                     )}
                                  </div>

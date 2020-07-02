@@ -50,8 +50,13 @@ class ItemCardEdit extends React.Component {
                   deleteItem(this.props.currentLoadout.gear, thisItemPath);
                }}
             >
-               Delete {this.props.item.name} and{" "}
-               {this.props.item.numDescendants} subitems
+               Delete {this.props.item.name}
+               {this.props.item.numDescendants > 0 && (
+                  <>
+                     <br />
+                     and {this.props.item.numDescendants} subitems
+                  </>
+               )}
             </div>
             <div
                className="button navigation-link"

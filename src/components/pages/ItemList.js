@@ -35,6 +35,7 @@ import {
    // getItemFromPath,
    // getParentItemFromPath,
    renameItem,
+   addItemTo,
 } from "../../utils/items";
 
 class ItemList extends React.Component {
@@ -325,9 +326,9 @@ class ItemList extends React.Component {
 
       console.log("Rendering containing items of", parentItem.name);
 
-      let displayedItems = []; // initialize a new list for displayed items
+      let displayedItems = items; // initialize a new list for displayed items
 
-      displayedItems = orderBy(items, "name", "asc"); // sort the items by name
+      displayedItems = orderBy(displayedItems, "name", "asc"); // sort the items by name
       // displayedItems = items;
 
       // order by which items have the most unpacked subitems
@@ -630,6 +631,20 @@ class ItemList extends React.Component {
                                           this.rolloutUnpackConfirmation()}
                                     </div>
                                  </>
+                              )}
+                              {this.state.isEditMode && (
+                                 <div
+                                    className="button primary-action-button"
+                                    onClick={(e) => {
+                                       addItemTo(
+                                          this.props.currentLoadout.gear,
+                                          this.props.currentLoadout
+                                             .itemIndexPath
+                                       );
+                                    }}
+                                 >
+                                    Add Item Within {currentItem.name}
+                                 </div>
                               )}
                            </div>
                         </div>

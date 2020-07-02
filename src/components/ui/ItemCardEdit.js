@@ -14,12 +14,13 @@ import {
    IconChevronDown,
    IconChevronUp,
 } from "../../icons/icons.js";
-import { processAllItems } from "../../utils/processItems";
+// import { processAllItems } from "../../utils/processItems";
 import classnames from "classnames";
 import {
-   getItemFromPath,
-   getParentItemFromPath,
+   // getItemFromPath,
+   // getParentItemFromPath,
    renameItem,
+   deleteItem,
 } from "../../utils/items";
 
 class ItemCardEdit extends React.Component {
@@ -46,7 +47,7 @@ class ItemCardEdit extends React.Component {
             <div
                className="button primary-action-button"
                onClick={(e) => {
-                  this.deleteItem(thisItemPath);
+                  deleteItem(this.props.currentLoadout.gear, thisItemPath);
                }}
             >
                Delete {this.props.item.name} and{" "}
@@ -60,72 +61,6 @@ class ItemCardEdit extends React.Component {
             </div>
          </>
       );
-   }
-
-   // deletes an item
-   deleteItem(itemIndexPath) {
-      if (this.props.item.numDescendants > 0) {
-         console.log(
-            "Are you sure you want to delete " +
-               this.props.item.name +
-               " and its " +
-               this.props.item.numDescendants +
-               " subitems?"
-         );
-      } else {
-         console.log("deleting " + this.props.item.name);
-      }
-
-      console.log("itemIndexPath:", itemIndexPath);
-
-      // get the parent item because that is the item that's items I want to delete from
-      const parentItem = getParentItemFromPath(
-         this.props.currentLoadout.gear,
-         itemIndexPath
-      );
-      console.log("name of parent item:", parentItem.name);
-
-      const itemIndex = itemIndexPath[itemIndexPath.length - 1];
-
-      // meat of what this funtion does
-      parentItem.items.splice(itemIndex, 1); // delete the item
-
-      // this must happen whenever something in the loadout changes
-      processAllItems(this.props.currentLoadout.gear);
-   }
-
-   // add an item
-   addItem(itemIndexPath) {
-      console.log("itemIndexPath:", itemIndexPath);
-
-      // get the actual item I want to add an item inside
-      // TODO this is duplicated code
-      // TODO duplicated in other functions
-
-      // let copyOfGear = this.props.currentLoadout.gear;
-      // let currentItem = copyOfGear;
-      // for (let i in itemIndexPath) {
-      //    currentItem = currentItem.items[itemIndexPath[i]]; // go one lever deeper for each index in itemIndexPath
-      // }
-
-      // get the actual item I want to add an item inside
-      const currentItem = getItemFromPath(
-         this.props.currentLoadout.gear,
-         itemIndexPath
-      );
-
-      console.log("name of target item:", currentItem.name);
-
-      // meat of what this funtion does
-      currentItem.items.push({
-         name: "New Item",
-         id: "new uuid",
-         parentId: currentItem.id,
-         isPacked: false,
-      }); // add a new item inside the current item
-
-      // this must happen whenever something in the loadout changes
-      processAllItems(this.props.currentLoadout.gear);
    }
 
    render() {

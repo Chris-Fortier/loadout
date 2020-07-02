@@ -16,7 +16,11 @@ import {
 } from "../../icons/icons.js";
 import { processAllItems } from "../../utils/processItems";
 import classnames from "classnames";
-import { getItemFromPath, getParentItemFromPath } from "../../utils/items";
+import {
+   getItemFromPath,
+   getParentItemFromPath,
+   renameItem,
+} from "../../utils/items";
 
 class ItemCardEdit extends React.Component {
    constructor(props) {
@@ -26,26 +30,6 @@ class ItemCardEdit extends React.Component {
       this.state = {
          isShowingDeleteConfirmation: false,
       };
-   }
-
-   // updates the displayed name field of one of the current item's subitems
-   renameItem(e, itemIndexPath) {
-      console.log("rename " + this.props.item.name + " to " + e.target.value);
-
-      // copyOfGear.lastChange = "test hello";
-      console.log("itemIndexPath:", itemIndexPath);
-
-      // get the actual item I want to change based on the index path
-      const currentItem = getItemFromPath(
-         this.props.currentLoadout.gear,
-         itemIndexPath
-      );
-
-      // meat of what this funtion does
-      currentItem.name = e.target.value;
-
-      // this must happen whenever something in the loadout changes
-      processAllItems(this.props.currentLoadout.gear);
    }
 
    // toggle the delete confirmation
@@ -165,7 +149,13 @@ class ItemCardEdit extends React.Component {
                         className="edit-name"
                         id={"edit-name-input-" + item.index}
                         defaultValue={item.name}
-                        onChange={(e) => this.renameItem(e, thisItemPath)}
+                        onChange={(e) =>
+                           renameItem(
+                              this.props.currentLoadout.gear,
+                              thisItemPath,
+                              e.target.value
+                           )
+                        }
                         maxLength={MAX_ITEM_NAME_LENGTH}
                      />
                   </span>

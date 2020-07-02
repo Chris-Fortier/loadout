@@ -31,6 +31,11 @@ import ItemCardEdit from "../ui/ItemCardEdit";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { processAllItems } from "../../utils/processItems";
 import movePageToDifferentItem from "../../utils/movePageToDifferentItem";
+import {
+   // getItemFromPath,
+   // getParentItemFromPath,
+   renameItem,
+} from "../../utils/items";
 
 class ItemList extends React.Component {
    constructor(props) {
@@ -306,14 +311,14 @@ class ItemList extends React.Component {
       processAllItems(this.props.currentLoadout.gear);
    }
 
-   // sets the name of the current item (the item which the entire page is currently the focus of)
-   setCurrentItemName(e) {
-      const currentItem = this.getItemFromStore();
-      console.log("rename " + currentItem.name + " to " + e.target.value);
-      // let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
-      // itemDataCopy.name = e.target.value; // change the desired item's name to match input
-      // this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
-   }
+   // // sets the name of the current item (the item which the entire page is currently the focus of)
+   // setCurrentItemName(e) {
+   //    const currentItem = this.getItemFromStore();
+   //    console.log("rename " + currentItem.name + " to " + e.target.value);
+   //    // let itemDataCopy = this.state.currentItem; // copy itemsData from state to local
+   //    // itemDataCopy.name = e.target.value; // change the desired item's name to match input
+   //    // this.setState({ currentItem: itemDataCopy }); // makes it update the input that the user can see
+   // }
 
    renderContainingItems(parentItem) {
       const items = parentItem.items; // to simplify code below
@@ -514,7 +519,13 @@ class ItemList extends React.Component {
                                                 className="edit-name"
                                                 defaultValue={currentItem.name}
                                                 onChange={(e) =>
-                                                   this.setCurrentItemName(e)
+                                                   renameItem(
+                                                      this.props.currentLoadout
+                                                         .gear,
+                                                      this.props.currentLoadout
+                                                         .itemIndexPath,
+                                                      e.target.value
+                                                   )
                                                 }
                                                 maxLength={MAX_ITEM_NAME_LENGTH}
                                              />

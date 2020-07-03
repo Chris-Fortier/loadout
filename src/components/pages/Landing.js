@@ -2,7 +2,6 @@ import React from "react";
 // import { Link } from "react-router-dom"; // a React element for linking
 import { EMAIL_REGEX } from "../../utils/helpers";
 import { v4 as getUuid } from "uuid";
-import hash from "object-hash";
 import classnames from "classnames";
 import {
    IconUserAdd,
@@ -191,7 +190,7 @@ class Landing extends React.Component {
          const user = {
             id: getUuid(),
             email: emailInput,
-            password: hash(passwordInput),
+            password: passwordInput, // send the plain text password over secure connection, the server will hash it
             createdAt: Date.now(),
          };
 
@@ -260,7 +259,7 @@ class Landing extends React.Component {
          const user = {
             id: getUuid(),
             email: emailInput,
-            password: hash(passwordInput),
+            password: passwordInput, // send the plain text password over secure connection, the server will hash it
             createdAt: Date.now(),
          };
          console.log("created a new user object", user);

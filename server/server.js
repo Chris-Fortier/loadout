@@ -11,12 +11,29 @@ const connection = mysql.createConnection({
 connection.connect();
 
 // example query
-connection.query("SELECT 1 + 1 AS solution", (error, results, fields) => {
-   if (error) {
-      console.log(error);
-   } else {
-      console.log("The solution is: ", results[0].solution);
+// npm start in server folder will return objects from AWS RDS
+// npm start in project folder will run the client
+connection.query(
+   `
+   SELECT
+      users.email,
+      loadouts.name AS loadout_name
+   FROM
+      users
+   INNER JOIN
+      xref_user_loadouts ON user_id = users.id
+   INNER JOIN
+      loadouts ON loadouts.id = xref_user_loadouts.loadout_id
+   WHERE
+      users.id = '84fbbb78-b2a2-11ea-b3de-0242ac130004'
+   `,
+   (err, res, fields) => {
+      if (err) {
+         console.log("err", err);
+      } else {
+         console.log("res", res);
+      }
    }
-});
+);
 
-connection.end();
+connection.end(); // this stops the server, without this it will just keep running

@@ -1,18 +1,18 @@
-// The user loadouts resource
+// The loadout users resource
 const express = require("express");
 const router = express.Router();
 const db = require("../../db");
-const selectUserLoadouts = require("../../queries/selectUserLoadouts"); // change this
+const selectLoadoutUsers = require("../../queries/selectLoadoutUsers"); // change this
 
-// @route      GET api/v1/user-loadouts (http://localhost:3045/api/v1/user-loadouts)  // change this
+// @route      GET api/v1/loadout-users (http://localhost:3045/api/v1/loadout-users)  // change this
 // @desc       Get all user loadouts for a user
 // @access     Public
 router.get("/", (req, res) => {
    console.log(req.query);
-   const userId = req.query.userId; // put the query into some consts (destructoring es6)
+   const loadoutId = req.query.loadoutId; // put the query into some consts (destructoring es6)
 
    // change this
-   db.query(selectUserLoadouts(userId))
+   db.query(selectLoadoutUsers(loadoutId))
       .then((dbRes) => {
          // successful response
          // console.log(dbRes);

@@ -1,9 +1,13 @@
 // returns the loadouts that a given user has access to
+// test: http://localhost:3060/api/v1/user-loadouts/?userId=84fbbb78-b2a2-11ea-b3de-0242ac130004
 module.exports = function selectUserLoadouts(userId) {
    return `
       SELECT
          users.email,
-         loadouts.name AS loadout_name
+         loadouts.name AS loadout_name,
+         can_edit,
+         can_pack,
+         is_admin
       FROM
          users
       INNER JOIN

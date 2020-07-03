@@ -1,46 +1,12 @@
-require("dotenv").config();
-const mysql = require("mysql"); // import this package
-const selectUser = require("./queries/selectUser");
-const selectUserLoadouts = require("./queries/selectUserLoadouts");
-const { toJson, toSafeParse } = require("./utils/helpers");
+const express = require("express");
+const app = express();
 
-const connection = mysql.createConnection({
-   host: process.env.RDS_HOST,
-   user: process.env.RDS_USER,
-   password: process.env.RDS_PASSWORD,
-   database: "loadout_app", // the name of the database in MySQL
-});
+app.use("/api/v1/users", require("./api/v1/users")); // the route and then the file
+app.get("/", (req, res) => res.send("Hello World!"));
 
-connection.connect();
-
-// example query
-// npm start in server folder will return objects from AWS RDS
-// npm start in project folder will run the client
-
-// returns a user
-connection.query(
-   selectUser("mike@gmail.com", "18126E7BD3F84B3F3E4DF094DEF5B7DE"),
-   (err, res) => {
-      if (err) {
-         console.log("err", err);
-      } else {
-         const user = toSafeParse(toJson(res))[0]; // converts the response to a single user object
-         console.log(user);
-      }
-   }
+const port = process.env.PORT || 3060; // use the variable we have for the port or a default port of 3045
+app.listen(port, () =>
+   console.log(`Server running at listening at http://localhost:${port}`)
 );
 
-// // returns user loadouts for a given user
-// connection.query(
-//    selectUserLoadouts("84fbbb78-b2a2-11ea-b3de-0242ac130004"),
-//    (err, res) => {
-//       if (err) {
-//          console.log("err", err);
-//       } else {
-//          const user = toSafeParse(toJson(res)); // converts the response to a single user object
-//          console.log(user);
-//       }
-//    }
-// );
-
-connection.end(); // this stops the server, without this it will just keep running
+// go to http://localhost:3060/api/v1/users to see the user object

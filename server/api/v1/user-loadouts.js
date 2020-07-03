@@ -9,10 +9,12 @@ const selectUserLoadouts = require("../../queries/selectUserLoadouts"); // chang
 // @access     Public
 router.get("/", (req, res) => {
    console.log(req.query);
-   const userId = req.query.userId; // put the query into some consts (destructoring es6)
+   const userId = req.query.userId; // put the query into some consts
 
    // change this
-   db.query(selectUserLoadouts(userId))
+   // db.query(selectUserLoadouts(userId))
+   // https://www.npmjs.com/package/mysql#escaping-query-values
+   db.query(selectUserLoadouts, [userId]) // this syntax style prevents hackers
       .then((dbRes) => {
          // successful response
          // console.log(dbRes);

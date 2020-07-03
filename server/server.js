@@ -1,5 +1,8 @@
 require("dotenv").config();
 const mysql = require("mysql"); // import this package
+const selectUser = require("./queries/selectUser");
+const selectUserLoadouts = require("./queries/selectUserLoadouts");
+const { toJson, toSafeParse } = require("./utils/helpers");
 
 const connection = mysql.createConnection({
    host: process.env.RDS_HOST,
@@ -13,27 +16,31 @@ connection.connect();
 // example query
 // npm start in server folder will return objects from AWS RDS
 // npm start in project folder will run the client
+
+// returns a user
 connection.query(
-   `
-   SELECT
-      users.email,
-      loadouts.name AS loadout_name
-   FROM
-      users
-   INNER JOIN
-      xref_user_loadouts ON user_id = users.id
-   INNER JOIN
-      loadouts ON loadouts.id = xref_user_loadouts.loadout_id
-   WHERE
-      users.id = '84fbbb78-b2a2-11ea-b3de-0242ac130004'
-   `,
-   (err, res, fields) => {
+   selectUser("mike@gmail.com", "18126E7BD3F84B3F3E4DF094DEF5B7DE"),
+   (err, res) => {
       if (err) {
          console.log("err", err);
       } else {
-         console.log("res", res);
+         const user = toSafeParse(toJson(res))[0]; // converts the response to a single user object
+         console.log(user);
       }
    }
 );
+
+// // returns user loadouts for a given user
+// connection.query(
+//    selectUserLoadouts("84fbbb78-b2a2-11ea-b3de-0242ac130004"),
+//    (err, res) => {
+//       if (err) {
+//          console.log("err", err);
+//       } else {
+//          const user = toSafeParse(toJson(res)); // converts the response to a single user object
+//          console.log(user);
+//       }
+//    }
+// );
 
 connection.end(); // this stops the server, without this it will just keep running

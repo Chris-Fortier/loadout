@@ -15,11 +15,10 @@ class LoadoutCard extends React.Component {
          <Link className={"card item-card child-bg-color"} to="/loadout">
             <div className="d-flex">
                <span className="flex-fill level-text-color-1">
-                  {/* TODO: these names should have been changed to camelCase somewhere by now */}
-                  {loadout.loadout_name}
-                  {loadout.can_edit === 1 && <>&nbsp;E</>}
-                  {loadout.can_pack === 1 && <>&nbsp;P</>}
-                  {loadout.is_admin === 1 && <>&nbsp;A</>}
+                  {loadout.loadoutName}
+                  {loadout.canEdit === 1 && <>&nbsp;E</>}
+                  {loadout.canPack === 1 && <>&nbsp;P</>}
+                  {loadout.isAdmin === 1 && <>&nbsp;A</>}
                </span>
             </div>
          </Link>

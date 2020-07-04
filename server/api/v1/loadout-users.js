@@ -15,10 +15,36 @@ router.get("/", (req, res) => {
    // db.query(selectLoadoutUsers(loadoutId))
    // https://www.npmjs.com/package/mysql#escaping-query-values
    db.query(selectLoadoutUsers, [loadoutId]) // this syntax style prevents hackers
-      .then((dbRes) => {
+      .then((loadoutUsers) => {
          // successful response
-         // console.log(dbRes);
-         res.json(dbRes);
+         // console.log(loadoutUsers);
+
+         // we need to convert the names of our data from database-side snake_case to camelCase
+         // we can also use this to "shape the data" for the client
+         // this is where we can "shrink out payload", the data we sent to the client
+         // I suspect this is where I am going to convert flattened loadouts to nested
+         const camelCaseLoadoutUsers = loadoutUsers.map((loadoutUser) => {
+            // for every loadoutUser, return a new object
+            return {
+               // id: loadoutUser.id,
+               // imagery: loadoutUser.imagery,
+               // answer: loadoutUser.answer,
+               // userId: loadoutUser.user_id,
+               // createdAt: loadoutUser.created_at,
+               // nextAttemptAt: loadoutUser.next_attempt_at,
+               // lastAttemptAt: loadoutUser.last_attempt_at,
+               // totalSuccessfulAttempts: loadoutUser.total_successful_attempts,
+               // level: loadoutUser.level,
+
+               email: loadoutUser.email,
+               loadoutName: loadoutUser.loadout_name,
+               canEdit: loadoutUser.can_edit,
+               canPack: loadoutUser.can_pack,
+               isAdmin: loadoutUser.is_admin,
+            };
+         });
+
+         res.json(camelCaseLoadoutUsers);
       })
       .catch((err) => {
          // report error

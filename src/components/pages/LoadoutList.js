@@ -8,6 +8,14 @@ import { connect } from "react-redux";
 // import actions from "../../store/actions";
 import LoadoutCard from "../ui/LoadoutCard";
 // import ItemCardEdit from "../ui/ItemCardEdit";
+import {
+   // MOVE_UPDOWN,
+   // MAX_ITEM_NAME_LENGTH,
+   LEVEL_COLORS,
+   // SUBITEM_DISPLAY_MODE,
+   UI_APPEARANCE,
+} from "../../utils/helpers";
+import classnames from "classnames";
 import axios from "axios";
 
 class LoadoutList extends React.Component {
@@ -68,10 +76,24 @@ class LoadoutList extends React.Component {
    render() {
       console.log("Rendering page...");
 
+      const level = 0; // loudouts list page is always level 0
+
       return (
          <div>
             <Header />
-            <div className="item-list parent-bg-color">
+            <div
+               className={classnames(
+                  "item-list",
+                  UI_APPEARANCE === "light" && "parent-bg-light",
+                  UI_APPEARANCE === "dark" && "parent-bg-dark",
+                  UI_APPEARANCE === "colors" &&
+                     level < 2 &&
+                     "parent-color-" + String(level % LEVEL_COLORS),
+                  UI_APPEARANCE === "colors" &&
+                     level >= 2 &&
+                     "parent-color-" + String((level - 1) % LEVEL_COLORS)
+               )}
+            >
                <div className="container-fluid item-cards-container scroll-fix">
                   <div className="row">
                      <div className="col">
@@ -80,7 +102,18 @@ class LoadoutList extends React.Component {
                               <div className="row">
                                  <>
                                     <div className="col">
-                                       <h4>List of Loadouts</h4>
+                                       <h4
+                                          className={classnames(
+                                             (UI_APPEARANCE === "light" ||
+                                                UI_APPEARANCE === "dark") &&
+                                                "level-text-color-" +
+                                                   String(level % LEVEL_COLORS),
+                                             UI_APPEARANCE === "colors" &&
+                                                "dark-text-color"
+                                          )}
+                                       >
+                                          My Loadouts
+                                       </h4>
                                     </div>
                                  </>
                               </div>

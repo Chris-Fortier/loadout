@@ -4,14 +4,34 @@ import { connect } from "react-redux";
 import UserLoadoutSettings from "../ui/UserLoadoutSettings";
 import { IconArrowThinLeftCircle, IconTrash } from "../../icons/icons.js";
 import { Link } from "react-router-dom"; // a React element for linking
+import axios from "axios";
 
 class LoadoutSharing extends React.Component {
    constructor(props) {
       super(props); // boilerplate
 
+      axios
+         .get(
+            "/api/v1/loadout-users?loadoutId=42655170-7e10-4431-8d98-c2774f6414a4"
+         )
+         .then((res) => {
+            console.log("axios res", res);
+            // processAllItems(res.data); // initial processing of items that creates derived properties
+            const loadoutUsers = res.data;
+            this.setState({
+               loadoutUsers: loadoutUsers,
+            });
+         })
+         .catch((error) => {
+            // handle error
+            console.log("axios error", error);
+         });
+
       // set default state values
 
-      this.state = {};
+      this.state = {
+         loadoutUsers: [],
+      };
    }
 
    render() {
@@ -79,9 +99,14 @@ class LoadoutSharing extends React.Component {
                                              </tr>
                                           </thead>
                                           <tbody>
-                                             <UserLoadoutSettings id="1" />
-                                             <UserLoadoutSettings id="2" />
-                                             <UserLoadoutSettings id="3" />
+                                             {this.state.loadoutUsers.map(
+                                                (loadoutUser) => (
+                                                   <UserLoadoutSettings
+                                                      loadoutUser={loadoutUser}
+                                                      key={loadoutUser.id}
+                                                   />
+                                                )
+                                             )}
                                              <tr>
                                                 <th scope="row">
                                                    <input

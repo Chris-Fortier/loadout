@@ -41,6 +41,7 @@ router.get("/", (req, res) => {
                canEdit: loadoutUser.can_edit,
                canPack: loadoutUser.can_pack,
                isAdmin: loadoutUser.is_admin,
+               id: loadoutUser.id,
             };
          });
 

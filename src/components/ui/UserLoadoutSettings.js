@@ -11,41 +11,41 @@ class UserLoadoutSettings extends React.Component {
          <tr>
             <th scope="row">mike@gmail.com</th>
             <td>
-               <div class="custom-control custom-checkbox">
+               <div className="custom-control custom-checkbox">
                   <input
                      type="checkbox"
-                     class="custom-control-input"
+                     className="custom-control-input"
                      id={"can-edit-switch-" + this.props.id}
                   />
                   <label
-                     class="custom-control-label"
-                     for={"can-edit-switch-" + this.props.id}
+                     className="custom-control-label"
+                     htmlFor={"can-edit-switch-" + this.props.id}
                   ></label>
                </div>
             </td>
             <td>
-               <div class="custom-control custom-checkbox">
+               <div className="custom-control custom-checkbox">
                   <input
                      type="checkbox"
-                     class="custom-control-input"
+                     className="custom-control-input"
                      id={"can-pack-switch-" + this.props.id}
                   />
                   <label
-                     class="custom-control-label"
-                     for={"can-pack-switch-" + this.props.id}
+                     className="custom-control-label"
+                     htmlFor={"can-pack-switch-" + this.props.id}
                   ></label>
                </div>
             </td>
             <td>
-               <div class="custom-control custom-checkbox">
+               <div className="custom-control custom-checkbox">
                   <input
                      type="checkbox"
-                     class="custom-control-input"
+                     className="custom-control-input"
                      id={"admin-switch-" + this.props.id}
                   />
                   <label
-                     class="custom-control-label"
-                     for={"admin-switch-" + this.props.id}
+                     className="custom-control-label"
+                     htmlFor={"admin-switch-" + this.props.id}
                   ></label>
                </div>
             </td>

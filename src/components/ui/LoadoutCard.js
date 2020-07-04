@@ -12,9 +12,9 @@ import {
 } from "../../utils/helpers";
 import classnames from "classnames";
 import {
-   PackedIcon,
-   ReadyToPackIcon,
-   NotReadyToPackIcon,
+   // PackedIcon,
+   // ReadyToPackIcon,
+   // NotReadyToPackIcon,
    ChildrenUnpackedIcon,
    ChildrenPackedIcon2,
 } from "../../icons/loadout-icons.js";

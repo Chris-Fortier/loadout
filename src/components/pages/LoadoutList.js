@@ -71,6 +71,7 @@ class LoadoutList extends React.Component {
          isEditMode: false,
       };
    }
+
    // methods happen here, such as what happens when you click on a button
 
    render() {

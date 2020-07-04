@@ -43,7 +43,7 @@ class LoadoutSharing extends React.Component {
                                           <br />
                                           Sharing Settings
                                        </h4>
-                                       <table class="table">
+                                       <table className="table">
                                           <thead>
                                              <tr>
                                                 <th
@@ -93,18 +93,18 @@ class LoadoutSharing extends React.Component {
                                                    />
                                                 </th>
                                                 <td>
-                                                   <div class="custom-control custom-checkbox">
+                                                   <div className="custom-control custom-checkbox">
                                                       <input
                                                          type="checkbox"
-                                                         class="custom-control-input"
+                                                         className="custom-control-input"
                                                          id={
                                                             "can-edit-switch-" +
                                                             this.props.id
                                                          }
                                                       />
                                                       <label
-                                                         class="custom-control-label"
-                                                         for={
+                                                         className="custom-control-label"
+                                                         htmlFor={
                                                             "can-edit-switch-" +
                                                             this.props.id
                                                          }
@@ -112,18 +112,18 @@ class LoadoutSharing extends React.Component {
                                                    </div>
                                                 </td>
                                                 <td>
-                                                   <div class="custom-control custom-checkbox">
+                                                   <div className="custom-control custom-checkbox">
                                                       <input
                                                          type="checkbox"
-                                                         class="custom-control-input"
+                                                         className="custom-control-input"
                                                          id={
                                                             "can-pack-switch-" +
                                                             this.props.id
                                                          }
                                                       />
                                                       <label
-                                                         class="custom-control-label"
-                                                         for={
+                                                         className="custom-control-label"
+                                                         htmlFor={
                                                             "can-pack-switch-" +
                                                             this.props.id
                                                          }
@@ -131,18 +131,18 @@ class LoadoutSharing extends React.Component {
                                                    </div>
                                                 </td>
                                                 <td>
-                                                   <div class="custom-control custom-checkbox">
+                                                   <div className="custom-control custom-checkbox">
                                                       <input
                                                          type="checkbox"
-                                                         class="custom-control-input"
+                                                         className="custom-control-input"
                                                          id={
                                                             "admin-switch-" +
                                                             this.props.id
                                                          }
                                                       />
                                                       <label
-                                                         class="custom-control-label"
-                                                         for={
+                                                         className="custom-control-label"
+                                                         htmlFor={
                                                             "admin-switch-" +
                                                             this.props.id
                                                          }

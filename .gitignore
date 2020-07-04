@@ -28,3 +28,4 @@ yarn-error.log*
 # cjf server stuff
 server/.env
 server/node_modules
+server/otherscripts.txt

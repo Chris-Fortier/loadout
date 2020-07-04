@@ -47,8 +47,11 @@ class ItemList extends React.Component {
 
       if (props.currentLoadout.gear.length === 0) {
          axios
+            // .get(
+            //    "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/loadouts.json"
+            // )
             .get(
-               "https://raw.githubusercontent.com/Chris-Fortier/loadout/master/src/mock-data/loadouts.json"
+               "http://localhost:3060/api/v1/user-loadouts/?userId=84fbbb78-b2a2-11ea-b3de-0242ac130004"
             )
             .then((res) => {
                // handle success

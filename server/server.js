@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+var cors = require("cors");
+
+app.use(cors());
 
 // need one of these for every url route
 
